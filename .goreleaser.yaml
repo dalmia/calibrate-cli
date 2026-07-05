@@ -46,7 +46,7 @@ brews:
       owner: dalmia
       name: homebrew-tap
       branch: main
-    token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
+      token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
     homepage: "https://github.com/dalmia/calibrate-cli"
     description: "Calibrate Public API: Programmatic API for CI/automation, authenticated with an org-scoped API key. Pass your key in the `X-API-Key: sk_…` header."
     install: |

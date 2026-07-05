@@ -1,6 +1,6 @@
 # Calibrate CLI
 
-Command-line client for the [Calibrate](https://calibrate.artpark.ai) Cloud **API** — run and manage your AI evals from CI. This can be used by your coding agents like Claude Code/Codex to directly communicate with Calibrate without you having to navigate the UI. 
+Command-line client for [Calibrate](https://calibrate.artpark.ai), a framework for evaluating AI agents which lets you move from slow, manual testing to a fast, automated, and repeatable testing process for your entire agent stack. Use it to run and manage your evals from the terminal — including from coding agents like Claude Code or Codex — without navigating the UI.
 
 ## Install
 
@@ -8,67 +8,29 @@ Command-line client for the [Calibrate](https://calibrate.artpark.ai) Cloud **AP
 brew install dalmia/tap/calibrate
 ```
 
-## Authentication
+## Usage
 
-Create an org-scoped API key in Calibrate (**Settings → API keys**). Keys look like `sk_…`.
-
-Pass it on every command:
-
-```bash
-export CALIBRATE_API_KEY_AUTH="sk_your_key_here"   # or use the flag below
-calibrate --api-key-auth "$CALIBRATE_API_KEY_AUTH" agents list
-```
-
-Or store it interactively (keychain / config file):
+Log in once with your API key, which you can get from the [UI](https://calibrate.artpark.ai/workspace-settings?tab=api-keys):
 
 ```bash
 calibrate auth login
-calibrate whoami
 ```
 
-For a self-hosted backend, point at your server:
+Then run any command, for example:
 
 ```bash
-calibrate --server-url https://your-calibrate.example.com agents list
+calibrate agents list
 ```
 
-## Examples
+## Self-hosting
 
-**List agents in your org:**
+For self-hosted Calibrate deployments, set `CALIBRATE_SERVER_URL` to point the CLI at your API instance before running commands:
 
 ```bash
-calibrate --api-key-auth "$CALIBRATE_API_KEY_AUTH" agents list
+export CALIBRATE_SERVER_URL=https://calibrate.my-company.internal
 ```
 
-**Resolve agent names to UUIDs:**
-
-```bash
-calibrate --api-key-auth "$CALIBRATE_API_KEY_AUTH" \
-  agents resolve --names my-agent --names another-agent
-```
-
-**Run tests for an agent** (returns a `task_id` to poll):
-
-```bash
-calibrate --api-key-auth "$CALIBRATE_API_KEY_AUTH" \
-  agent-tests run --agent-uuid "<agent-uuid>"
-```
-
-**Poll until the run finishes:**
-
-```bash
-calibrate --api-key-auth "$CALIBRATE_API_KEY_AUTH" \
-  agent-tests get-run --task-id "<task-id>"
-```
-
-**JSON output** (useful in scripts):
-
-```bash
-calibrate --api-key-auth "$CALIBRATE_API_KEY_AUTH" \
-  -o json agents list | jq '.[0].name'
-```
-
-## More
+## Resources
 
 - `calibrate --help` — all commands
 - `calibrate explore` — interactive command browser

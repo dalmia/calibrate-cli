@@ -29,7 +29,7 @@ func (e *Type) IsExact() bool {
 	return false
 }
 
-type RoutersAgentToolsAgentResponse struct {
+type RoutersAgentTestsAgentResponse struct {
 	UUID      string                                            `json:"uuid"`
 	Name      string                                            `json:"name"`
 	Type      Type                                              `json:"type"`
@@ -38,53 +38,53 @@ type RoutersAgentToolsAgentResponse struct {
 	UpdatedAt string                                            `json:"updated_at"`
 }
 
-func (r RoutersAgentToolsAgentResponse) MarshalJSON() ([]byte, error) {
+func (r RoutersAgentTestsAgentResponse) MarshalJSON() ([]byte, error) {
 	return utils.MarshalJSON(r, "", false)
 }
 
-func (r *RoutersAgentToolsAgentResponse) UnmarshalJSON(data []byte) error {
+func (r *RoutersAgentTestsAgentResponse) UnmarshalJSON(data []byte) error {
 	if err := utils.UnmarshalJSON(data, &r, "", false, nil); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (r *RoutersAgentToolsAgentResponse) GetUUID() string {
+func (r *RoutersAgentTestsAgentResponse) GetUUID() string {
 	if r == nil {
 		return ""
 	}
 	return r.UUID
 }
 
-func (r *RoutersAgentToolsAgentResponse) GetName() string {
+func (r *RoutersAgentTestsAgentResponse) GetName() string {
 	if r == nil {
 		return ""
 	}
 	return r.Name
 }
 
-func (r *RoutersAgentToolsAgentResponse) GetType() Type {
+func (r *RoutersAgentTestsAgentResponse) GetType() Type {
 	if r == nil {
 		return Type("")
 	}
 	return r.Type
 }
 
-func (r *RoutersAgentToolsAgentResponse) GetConfig() optionalnullable.OptionalNullable[map[string]any] {
+func (r *RoutersAgentTestsAgentResponse) GetConfig() optionalnullable.OptionalNullable[map[string]any] {
 	if r == nil {
 		return nil
 	}
 	return r.Config
 }
 
-func (r *RoutersAgentToolsAgentResponse) GetCreatedAt() string {
+func (r *RoutersAgentTestsAgentResponse) GetCreatedAt() string {
 	if r == nil {
 		return ""
 	}
 	return r.CreatedAt
 }
 
-func (r *RoutersAgentToolsAgentResponse) GetUpdatedAt() string {
+func (r *RoutersAgentTestsAgentResponse) GetUpdatedAt() string {
 	if r == nil {
 		return ""
 	}

@@ -10,8 +10,8 @@
 #   wget -qO- https://raw.githubusercontent.com/dalmia/calibrate-cli/main/scripts/install.sh | bash
 #
 # Options:
-#   CLI_INSTALL_DIR - Installation directory (default: /usr/local/bin)
-#   CLI_VERSION     - Specific version to install (default: latest)
+#   CALIBRATE_INSTALL_DIR - Installation directory (default: /usr/local/bin)
+#   CALIBRATE_VERSION     - Specific version to install (default: latest)
 #
 
 set -e
@@ -20,7 +20,7 @@ set -e
 REPO="dalmia/calibrate-cli"
 DEFAULT_INSTALL_DIR="/usr/local/bin"
 USER_INSTALL_DIR="$HOME/.local/bin"
-VERSION="${CLI_VERSION:-latest}"
+VERSION="${CALIBRATE_VERSION:-latest}"
 BINARY_NAME="calibrate"
 
 # Colors for output
@@ -92,8 +92,8 @@ get_latest_version() {
 # Determine installation directory
 get_install_dir() {
     # If user specified a directory, use it
-    if [ -n "${CLI_INSTALL_DIR}" ]; then
-        echo "${CLI_INSTALL_DIR}"
+    if [ -n "${CALIBRATE_INSTALL_DIR}" ]; then
+        echo "${CALIBRATE_INSTALL_DIR}"
         return
     fi
 
@@ -175,7 +175,7 @@ install_cli() {
     if [ ! -d "$INSTALL_DIR" ]; then
         log_info "Creating installation directory: $INSTALL_DIR"
         mkdir -p "$INSTALL_DIR" || {
-            log_error "Failed to create $INSTALL_DIR. Try running with sudo or set CLI_INSTALL_DIR to a writable location."
+            log_error "Failed to create $INSTALL_DIR. Try running with sudo or set CALIBRATE_INSTALL_DIR to a writable location."
             exit 1
         }
     fi
@@ -191,7 +191,7 @@ install_cli() {
 
     log_info "Installing to $target_binary..."
     if ! mv "$source_binary" "$target_binary"; then
-        log_error "Failed to install to $INSTALL_DIR. Try running with sudo or set CLI_INSTALL_DIR to a writable location."
+        log_error "Failed to install to $INSTALL_DIR. Try running with sudo or set CALIBRATE_INSTALL_DIR to a writable location."
         exit 1
     fi
 

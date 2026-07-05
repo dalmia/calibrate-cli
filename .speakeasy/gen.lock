@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
-id: 3c090ce9-0b4f-46b3-a9fa-18d7d96c682a
+id: 7f9e2652-11a9-4eaa-8a10-1db1ef155474
 management:
-  docChecksum: 07c83d605bd21484cf80f622d6ad68e8
+  docChecksum: e984d5d4d77304798e0b2f69be78feba
   docVersion: 0.1.0
   speakeasyVersion: 1.788.1
   generationVersion: 2.915.1
-  releaseVersion: 0.0.6
-  configChecksum: 32f3fdb9643a150bd5c6f2f600b99b8b
+  releaseVersion: 0.0.7
+  configChecksum: be31de318893d1118d23d4a31e9ce02c
   repoURL: https://github.com/dalmia/calibrate-cli
   installationURL: https://github.com/dalmia/calibrate-cli
 persistentEdits:
-  generation_id: e757c132-3ee8-4112-9dbc-3d17c8ee8ff0
-  pristine_commit_hash: 8b91973b9b6e8db8537d5790620bce2dd3328836
-  pristine_tree_hash: 99226a3ec85840f5d77074c8161f67f10523d45d
+  generation_id: 9fefd14d-f003-4d37-941e-d4a69cda30c5
+  pristine_commit_hash: 8b91e25718a925f523dd32e2626e28210ff0d2b9
+  pristine_tree_hash: f397e0b26b17a329dfae635485df0d1f69217b6b
 features:
   cli:
     constsAndDefaults: 0.0.0
@@ -82,28 +82,28 @@ trackedFiles:
     pristine_git_object: aadc48e8d9ca68a0ec1290339c1c3c0bf9a8ad11
   internal/cli/auth.go:
     id: 5ae1b1dce495
-    last_write_checksum: sha1:2f2c87e5f9b78f492b3e52c9a10c41a3dd71ebcc
-    pristine_git_object: a6180c2e32ebf9bba074dcb3b3743a40eff2b6d3
+    last_write_checksum: sha1:1b93e46308d366c979e9a679bf5af075d3931408
+    pristine_git_object: 11722ad2620f2145bde6417bfdac85ee23bb2a41
   internal/cli/configure.go:
     id: 36d400bc4372
-    last_write_checksum: sha1:3844796fadf424bd2f206a119a490916a9ba6a13
-    pristine_git_object: 71ec883c1a528344f3abf2aeb9f2cc04ace8280e
+    last_write_checksum: sha1:ef3dbf42c0f055b86a7a077a743591e1513652c6
+    pristine_git_object: 713a32ba9404669e8d02c30d99c9da495116ff6d
   internal/cli/masking.go:
     id: dd6ad60ba8bc
     last_write_checksum: sha1:5a69fa055d628c1b8507cd123f3cd18309aa9a53
     pristine_git_object: 50ef7ee485832714bbbc1c86cb50b7bcc8eb92c7
   internal/cli/root.go:
     id: 239d55a0d6be
-    last_write_checksum: sha1:353333319337f95376dd8cd9a09db419262fd70b
-    pristine_git_object: c180c0b2720f85494c6f7f66aa6bf03970964878
+    last_write_checksum: sha1:76f849b91ceed718c0ff3e56cf37cddecd448c97
+    pristine_git_object: a048cbe5ba6c292835c8a04ea6cebabd8b8f9a7e
   internal/cli/version.go:
     id: 7b0665492f72
-    last_write_checksum: sha1:6e6b587eb46eb38738bb14bec290e86a3141eadb
-    pristine_git_object: bfbff6db293d6dd5a9bab0956937c8618c16fe03
+    last_write_checksum: sha1:0dbd327dd7f38d9c1adc02a504c54a7eee1c15d4
+    pristine_git_object: 64fcc23c51822b4e6e1667bc8352a8dce51a8945
   internal/cli/whoami.go:
     id: c1787f2298ec
-    last_write_checksum: sha1:e4f18fff7e20842f6b69a28b7714e6da5f7dd389
-    pristine_git_object: af5736ef2b34184f549f098be8332f80702e87a9
+    last_write_checksum: sha1:58afb45d777f297af4a64acf26a57c46e1b556db
+    pristine_git_object: e8f013542efc36f38dd00d18bf9df39c035c8dd8
   internal/client/client.go:
     id: 5898305eedad
     last_write_checksum: sha1:ae0e241acccab4f8a00c63a6db0f5c855d223a04
@@ -174,8 +174,8 @@ trackedFiles:
     pristine_git_object: e6a994416d0f527912d2d272e2583458f4fc9bcb
   internal/sdk/agents.go:
     id: 6877a89a77cc
-    last_write_checksum: sha1:64ebb3d87e513f4564bcdbd557399b4a84db63bf
-    pristine_git_object: bbbb2dfddee389a01443d9cdd2d2701f621a844d
+    last_write_checksum: sha1:6ab30db6673df0370c0a87f95b2ca7dd533296cf
+    pristine_git_object: 2f70db1244ec3b9fa8d04ea0e07743fa3b62de12
   internal/sdk/agenttests.go:
     id: 8f3c8303640f
     last_write_checksum: sha1:a955b29719af7d1ff5a72e0c26776f02602148d1
@@ -212,10 +212,10 @@ trackedFiles:
     id: 58aa419feb6e
     last_write_checksum: sha1:67a478fbe6fb80207c795d37aabe9e4247036fb2
     pristine_git_object: 461f455254621a2ac8c853d1c753c221889860ad
-  internal/sdk/models/components/routersagenttoolsagentresponse.go:
-    id: 972bd836c50d
-    last_write_checksum: sha1:003f53c0d64f85dd3052dade1293d8a11bcac3e0
-    pristine_git_object: 9ba02defbae12d1f20c9375a842cb4c0c7a461a2
+  internal/sdk/models/components/routersagenttestsagentresponse.go:
+    id: 47ea7f44b5ff
+    last_write_checksum: sha1:d9e4c7ba451aac5b1de8643c0d570b813cb6c96a
+    pristine_git_object: 4885f1aab63d3afb48c4cc008461a7dbdb76b415
   internal/sdk/models/components/runtestrequest.go:
     id: 13f782807601
     last_write_checksum: sha1:7335348d087faee48e2bea3a1304eed9de55aab2
@@ -254,8 +254,8 @@ trackedFiles:
     pristine_git_object: f77ee7d809abb4c9650dbe521b7e7876bec8f041
   internal/sdk/models/operations/listagentsagentsget.go:
     id: 8951a1240cec
-    last_write_checksum: sha1:b84cb57fc2a2a314137c65e4d8370ccfc6603691
-    pristine_git_object: 84b7f90861312a27f79f9cff43898fea09ff544d
+    last_write_checksum: sha1:44c8d5e7706d9d0b41ba407817b5b970c9a5a8bf
+    pristine_git_object: 69ea9e352ecf6ee7b6ee9ef0de3021f47a34d793
   internal/sdk/models/operations/options.go:
     id: 6d0d29414e00
     last_write_checksum: sha1:984a2dc75741f69de55083348d357a1adaf4591d
@@ -378,16 +378,16 @@ trackedFiles:
     pristine_git_object: 159a87ec97aba99e4edd132f69652e123434303e
   internal/usage/schema.go:
     id: 0f40f4612437
-    last_write_checksum: sha1:511ada6d80456b9cd027cdb3d584a62505f71934
-    pristine_git_object: 801363a4b7581d70d9938623fe7c3d652f1bbd5a
+    last_write_checksum: sha1:1f6464ff712653359ec6024a6a0ecea3b49d3079
+    pristine_git_object: 30fb22fca44138898fa0b33309d11e66ef8d4d03
   scripts/install.ps1:
     id: fee0853709e9
-    last_write_checksum: sha1:b6d53b0fb0b62b44322d4a5262f675f5b8bbd93f
-    pristine_git_object: e1907b19cf73380c917c2c0b25355d4d974c89f0
+    last_write_checksum: sha1:d8884365d7cfb218aac394e16a7d214a6f56b585
+    pristine_git_object: 289f39ce3cbf0193783040800de09414574891ba
   scripts/install.sh:
     id: 1f022802374d
-    last_write_checksum: sha1:25f13efd2346283d48b5aa4a7632e96acce6fe52
-    pristine_git_object: 3ea6959e0c426d9cb0d02d60485d966a6eec56ab
+    last_write_checksum: sha1:251481e4c99a942214bc0f54845f9bed07f9623f
+    pristine_git_object: 7dd44a2e38196c733af7b411f20f6c3a05fa66ad
 examples:
   resolve_agent_names_agents_resolve_post:
     speakeasy-default-resolve-agent-names-agents-resolve-post:

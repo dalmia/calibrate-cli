@@ -40,7 +40,7 @@ func NewRootCommand() (*cobra.Command, error) {
 			if usage.UsageRequested(cmd) {
 				return nil
 			}
-			if err := config.Init("calibrate", "CLI"); err != nil {
+			if err := config.Init("calibrate", "CALIBRATE"); err != nil {
 				return err
 			}
 			output.InitAgentMode(cmd)

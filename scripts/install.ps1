@@ -8,8 +8,8 @@
 #   Invoke-WebRequest -Uri https://raw.githubusercontent.com/dalmia/calibrate-cli/main/scripts/install.ps1 -UseBasicParsing | Invoke-Expression
 #
 # Options:
-#   $env:CLI_INSTALL_DIR - Installation directory (default: $env:LOCALAPPDATA\Programs\calibrate)
-#   $env:CLI_VERSION     - Specific version to install (default: latest)
+#   $env:CALIBRATE_INSTALL_DIR - Installation directory (default: $env:LOCALAPPDATA\Programs\calibrate)
+#   $env:CALIBRATE_VERSION     - Specific version to install (default: latest)
 #
 
 [CmdletBinding()]
@@ -21,8 +21,8 @@ $ErrorActionPreference = 'Stop'
 $Repo = "dalmia/calibrate-cli"
 $BinaryName = "calibrate.exe"
 $DefaultInstallDir = Join-Path $env:LOCALAPPDATA "Programs\calibrate"
-$InstallDir = if ($env:CLI_INSTALL_DIR) { $env:CLI_INSTALL_DIR } else { $DefaultInstallDir }
-$Version = if ($env:CLI_VERSION) { $env:CLI_VERSION } else { "latest" }
+$InstallDir = if ($env:CALIBRATE_INSTALL_DIR) { $env:CALIBRATE_INSTALL_DIR } else { $DefaultInstallDir }
+$Version = if ($env:CALIBRATE_VERSION) { $env:CALIBRATE_VERSION } else { "latest" }
 
 # Helper functions
 function Write-ColorOutput {

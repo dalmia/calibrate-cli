@@ -8,7 +8,7 @@ Display the currently configured settings and their sources.
 
 Sources are shown as:
   [flag]    - Set via command line flag
-  [env]     - Set via environment variable (CLI_*)
+  [env]     - Set via environment variable (CALIBRATE_*)
   [keyring] - Set via OS keychain (stored by login/configure command)
   [config]  - Set via config file (~/.config/calibrate/config.yaml)
   [unset]   - Not configured

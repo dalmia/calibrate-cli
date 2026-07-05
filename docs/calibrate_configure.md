@@ -8,8 +8,8 @@ Interactively configure authentication credentials and preferences for the CLI.
 Settings are stored in ~/.config/calibrate/config.yaml.
 Secret credentials are stored in the OS keychain when available.
 
-You can also set values via environment variables with the CLI_ prefix
-(e.g., CLI_API_KEY) or pass them as flags to individual commands.
+You can also set values via environment variables with the CALIBRATE_ prefix
+(e.g., CALIBRATE_API_KEY) or pass them as flags to individual commands.
 
 Priority: CLI flags > environment variables > OS keychain > config file
 

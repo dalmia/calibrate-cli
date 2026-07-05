@@ -32,7 +32,7 @@ generation:
     skipResponseBodyAssertions: false
   repoUrl: https://github.com/dalmia/calibrate-cli
 cli:
-  version: 0.0.6
+  version: 0.0.7
   additionalDependencies: {}
   cliName: calibrate
   distribution:
@@ -52,7 +52,7 @@ cli:
       publisherUrl: ""
       repositoryOwner: ""
   enableCustomCodeRegions: false
-  envVarPrefix: CLI
+  envVarPrefix: CALIBRATE
   generateRelease: true
   imports:
     option: openapi

@@ -1,27 +1,11 @@
 # Calibrate CLI
 
-Command-line client for the [Calibrate](https://calibrate.artpark.ai) **public API** — run agent tests and manage agents from CI or your terminal.
-
-> **Not** the offline evaluation engine. For local STT/TTS/LLM evals, install [`calibrate-agent`](https://pypi.org/project/calibrate-agent/) (`calibrate-agent` on the CLI).
+Command-line client for the [Calibrate](https://calibrate.artpark.ai) Cloud **API** — run and manage your AI evals from CI. This can be used by your coding agents like Claude Code/Codex to directly communicate with Calibrate without you having to navigate the UI. 
 
 ## Install
 
-**Homebrew** (after the tap is published):
-
 ```bash
 brew install dalmia/tap/calibrate
-```
-
-**Install script** (macOS / Linux, from GitHub Releases):
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/dalmia/calibrate-cli/main/scripts/install.sh | bash
-```
-
-**From source** (requires Go 1.25+):
-
-```bash
-go install github.com/dalmia/calibrate-cli/cmd/calibrate@latest
 ```
 
 ## Authentication

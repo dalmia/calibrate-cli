@@ -44,7 +44,7 @@ func runWhoamiCmd(cmd *cobra.Command, args []string) error {
 	fmt.Fprintln(out)
 	fmt.Fprintln(out, "Credentials:")
 
-	// Org-scoped API key. Create one under Settings → API keys.
+	// Workspace API key. Create one under Workspace settings → API keys.
 	{
 		value, source := config.ResolveSecurityCredential(cmd, "api-key-auth")
 		fmt.Fprintf(out, "  --%-25s [%-7s] %s\n", "api-key-auth", source, maskSecret(value))

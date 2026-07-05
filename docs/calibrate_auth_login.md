@@ -25,7 +25,7 @@ calibrate auth login [flags]
 
 ```
       --agent-mode             Enable structured errors and default TOON output for AI coding agents. Automatically enabled when a known agent environment is detected (CLAUDE_CODE, CURSOR_AGENT, etc.). Use --agent-mode=false to disable.
-      --api-key-auth string    Org-scoped API key. Create one under Settings → API keys.
+      --api-key-auth string    Workspace API key. Create one under Workspace settings → API keys.
       --color string           Control colored output: auto (color when output is a TTY), always, or never. Respects NO_COLOR and FORCE_COLOR env vars. (default "auto")
   -d, --debug                  Log request and response diagnostics to stderr
       --dry-run                Preview the request that would be sent without executing it (output to stderr)

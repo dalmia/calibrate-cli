@@ -47,6 +47,7 @@ func NewRootCommand() (*cobra.Command, error) {
 			return nil
 		},
 	}
+	rootCmd.CompletionOptions.HiddenDefaultCmd = true
 	if err := agents.InitAgentsRoot(rootCmd); err != nil {
 		return nil, fmt.Errorf("init agents: %w", err)
 	}
@@ -58,6 +59,12 @@ func NewRootCommand() (*cobra.Command, error) {
 	}
 	if err := initWhoamiCmd(rootCmd); err != nil {
 		return nil, fmt.Errorf("init whoami: %w", err)
+	}
+	if err := initLoginCmd(rootCmd); err != nil {
+		return nil, fmt.Errorf("init login: %w", err)
+	}
+	if err := initLogoutCmd(rootCmd); err != nil {
+		return nil, fmt.Errorf("init logout: %w", err)
 	}
 	if err := initVersionCmd(rootCmd); err != nil {
 		return nil, fmt.Errorf("init version: %w", err)
@@ -107,7 +114,7 @@ func NewRootCommand() (*cobra.Command, error) {
 			"Use --agent-mode=false to disable.")
 
 	// Global security flags
-	rootCmd.PersistentFlags().String("api-key-auth", "", "Org-scoped API key. Create one under Settings → API keys.")
+	rootCmd.PersistentFlags().String("api-key-auth", "", "Workspace API key. Create one under Workspace settings → API keys.")
 	_ = rootCmd.PersistentFlags().SetAnnotation("api-key-auth", "speakeasy:group", []string{"Authentication"})
 
 	// Annotate persistent flags for grouped help display

@@ -79,7 +79,7 @@ func runConfigureCmd(cmd *cobra.Command, args []string) error {
 		var groups []*huh.Group
 		securityFields := []huh.Field{
 			huh.NewInput().
-				Title("Org-scoped API key. Create one under Settings → API keys.").
+				Title("Workspace API key. Create one under Workspace settings → API keys.").
 				Description("--api-key-auth").
 				EchoMode(huh.EchoModePassword).
 				Placeholder(maskSecret(cfg.Security.ApiKeyAuth)).

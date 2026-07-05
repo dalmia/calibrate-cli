@@ -25,9 +25,10 @@ Subcommands:
   whoami  - Display current authentication status
   logout  - Clear all stored credentials`,
 	}
+	authCmd.Hidden = true
 	parent.AddCommand(authCmd)
 
-	authCmd.AddCommand(&cobra.Command{
+	loginCmd := &cobra.Command{
 		Use:   "login",
 		Short: "Interactively configure authentication credentials",
 		Long: `Interactively configure authentication credentials for calibrate.
@@ -37,9 +38,11 @@ with a config file fallback.
 All fields are optional — press Enter to skip any field you don't need.
 Use the configure command for both authentication and global parameters.`,
 		RunE: runAuthLoginCmd,
-	})
+	}
+	loginCmd.Hidden = true
+	authCmd.AddCommand(loginCmd)
 
-	authCmd.AddCommand(&cobra.Command{
+	whoamiCmd := &cobra.Command{
 		Use:   "whoami",
 		Short: "Display current authentication configuration",
 		Long: `Display the currently configured settings and their sources.
@@ -53,16 +56,20 @@ Sources are shown as:
 
 Credential values are masked for security.`,
 		RunE: runWhoamiCmd,
-	})
+	}
+	whoamiCmd.Hidden = true
+	authCmd.AddCommand(whoamiCmd)
 
-	authCmd.AddCommand(&cobra.Command{
+	logoutCmd := &cobra.Command{
 		Use:   "logout",
 		Short: "Clear all stored authentication credentials",
 		Long: `Clear all stored authentication credentials from both the OS keychain and config file.
 
-This removes all credentials previously set via auth login or configure.`,
+This removes all credentials previously set via login or configure.`,
 		RunE: runAuthLogoutCmd,
-	})
+	}
+	logoutCmd.Hidden = true
+	authCmd.AddCommand(logoutCmd)
 
 	return nil
 }
@@ -113,7 +120,7 @@ func runAuthLoginCmd(cmd *cobra.Command, args []string) error {
 
 		fields := []huh.Field{
 			huh.NewInput().
-				Title("Org-scoped API key. Create one under Settings → API keys.").
+				Title("Workspace API key. Create one under Workspace settings → API keys.").
 				Description("--api-key-auth").
 				EchoMode(huh.EchoModePassword).
 				Placeholder(maskSecret(cfg.Security.ApiKeyAuth)).

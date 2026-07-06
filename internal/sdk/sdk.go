@@ -19,7 +19,7 @@ import (
 // ServerList contains the list of servers available to the SDK
 var ServerList = []string{
 	// API
-	"https://pense-backend.artpark.ai",
+	"https://api.calibrate.artpark.ai",
 }
 
 // HTTPClient provides an interface for supplying the SDK with a custom HTTP client

@@ -9,6 +9,7 @@ import (
 )
 
 type GetAgentTestRunStatusAgentTestsRunTaskIDGetRequest struct {
+	// Test run to poll for status and results
 	TaskID   string                                    `pathParam:"style=simple,explode=false,name=task_id"`
 	XAPIKey  optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=X-API-Key"`
 	XOrgUUID optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=X-Org-UUID"`

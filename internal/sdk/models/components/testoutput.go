@@ -8,7 +8,9 @@ import (
 )
 
 type TestOutput struct {
-	Response  optionalnullable.OptionalNullable[string]           `json:"response,omitzero"`
+	// The agent's generated reply; null for tool-call-only cases
+	Response optionalnullable.OptionalNullable[string] `json:"response,omitzero"`
+	// Tool calls the agent generated; null when it made none
 	ToolCalls optionalnullable.OptionalNullable[[]ToolCallOutput] `json:"tool_calls,omitzero"`
 }
 

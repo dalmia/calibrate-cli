@@ -8,20 +8,33 @@ import (
 )
 
 type TestRunStatusResponse struct {
-	TaskID          string                                              `json:"task_id"`
-	Status          string                                              `json:"status"`
-	TotalTests      optionalnullable.OptionalNullable[int64]            `json:"total_tests,omitzero"`
-	Passed          optionalnullable.OptionalNullable[int64]            `json:"passed,omitzero"`
-	Failed          optionalnullable.OptionalNullable[int64]            `json:"failed,omitzero"`
-	LatencyMs       optionalnullable.OptionalNullable[map[string]any]   `json:"latency_ms,omitzero"`
-	Cost            optionalnullable.OptionalNullable[map[string]any]   `json:"cost,omitzero"`
-	TotalTokens     optionalnullable.OptionalNullable[map[string]any]   `json:"total_tokens,omitzero"`
-	Evaluators      optionalnullable.OptionalNullable[[]map[string]any] `json:"evaluators,omitzero"`
-	Results         optionalnullable.OptionalNullable[[]TestCaseResult] `json:"results,omitzero"`
-	ResultsS3Prefix optionalnullable.OptionalNullable[string]           `json:"results_s3_prefix,omitzero"`
-	Error           *bool                                               `default:"false" json:"error"`
-	IsPublic        *bool                                               `default:"false" json:"is_public"`
-	ShareToken      optionalnullable.OptionalNullable[string]           `json:"share_token,omitzero"`
+	// Test run job ID
+	TaskID string     `json:"task_id"`
+	Status TaskStatus `json:"status"`
+	// Total number of test cases; null until known
+	TotalTests optionalnullable.OptionalNullable[int64] `json:"total_tests,omitzero"`
+	// Number of test cases that passed; null until done
+	Passed optionalnullable.OptionalNullable[int64] `json:"passed,omitzero"`
+	// Number of test cases that failed; null until done
+	Failed optionalnullable.OptionalNullable[int64] `json:"failed,omitzero"`
+	// Aggregated response latency `{p50, p95, p99, count}` (ms; `p50` ≈ the old mean). Null for eval-only runs
+	LatencyMs optionalnullable.OptionalNullable[map[string]any] `json:"latency_ms,omitzero"`
+	// Aggregated cost `{mean, min, max, count}` (USD). Null when no case reported a cost (e.g. openai provider)
+	Cost optionalnullable.OptionalNullable[map[string]any] `json:"cost,omitzero"`
+	// Aggregated token usage `{mean, min, max, count}` (values are `Any` — `mean` may be fractional). Null when no case reported usage
+	TotalTokens optionalnullable.OptionalNullable[map[string]any] `json:"total_tokens,omitzero"`
+	// Top-level evaluator block (name/description/output_type/rubric) shared across every `judge_results` row, which references back via `evaluator_uuid` so the rubric isn't duplicated per case
+	Evaluators optionalnullable.OptionalNullable[[]map[string]any] `json:"evaluators,omitzero"`
+	// Per-test-case results; null until available
+	Results optionalnullable.OptionalNullable[[]TestCaseResult] `json:"results,omitzero"`
+	// S3 key prefix for the raw result artifacts; null until uploaded
+	ResultsS3Prefix optionalnullable.OptionalNullable[string] `json:"results_s3_prefix,omitzero"`
+	// True if the run failed
+	Error *bool `default:"false" json:"error"`
+	// Whether the run is shared publicly
+	IsPublic *bool `default:"false" json:"is_public"`
+	// Public share token; null unless the run is public
+	ShareToken optionalnullable.OptionalNullable[string] `json:"share_token,omitzero"`
 }
 
 func (t TestRunStatusResponse) MarshalJSON() ([]byte, error) {
@@ -42,9 +55,9 @@ func (t *TestRunStatusResponse) GetTaskID() string {
 	return t.TaskID
 }
 
-func (t *TestRunStatusResponse) GetStatus() string {
+func (t *TestRunStatusResponse) GetStatus() TaskStatus {
 	if t == nil {
-		return ""
+		return TaskStatus("")
 	}
 	return t.Status
 }

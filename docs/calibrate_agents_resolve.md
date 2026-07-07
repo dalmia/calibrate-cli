@@ -1,16 +1,10 @@
 ## calibrate agents resolve
 
-Resolve Agent Names
+Resolve agent names to IDs
 
 ### Synopsis
 
-Resolve a list of agent names to their UUIDs within the caller's org.
-
-Auth accepts either a JWT (frontend) or an `sk_` API key (programmatic
-clients) via `get_org_jwt_or_api_key`, so CI tooling can map human-friendly
-agent names to the UUIDs the run/poll endpoints expect. Agent names are
-unique per org, so each name resolves to at most one agent. Names with no
-matching (non-deleted) agent in the org are returned under `not_found`.
+Resolve agent names to their IDs.
 
 ```
 calibrate agents resolve [flags]
@@ -19,7 +13,7 @@ calibrate agents resolve [flags]
 ### Examples
 
 ```
-  calibrate agents resolve --names '[]'
+  calibrate agents resolve --names '["my-agent","support-bot"]'
 ```
 
 ### Options
@@ -27,7 +21,7 @@ calibrate agents resolve [flags]
 ```
       --body string         Request body as JSON (alternative to individual flags). Can also be provided via stdin.
   -h, --help                help for resolve
-  -n, --names stringArray   [required]
+  -n, --names stringArray   Agent names to resolve to IDs [required]
       --x-api-key string    string value
       --x-org-uuid string   string value
 ```

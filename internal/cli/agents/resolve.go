@@ -17,16 +17,16 @@ import (
 var resolveCmdMeta = []flagutil.FlagMeta{
 	{FlagName: "x-api-key", FieldPath: "XAPIKey", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `header:"style=simple,explode=false,name=X-API-Key"`, Description: "string value"},
 	{FlagName: "x-org-uuid", FieldPath: "XOrgUUID", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `header:"style=simple,explode=false,name=X-Org-UUID"`, Description: "string value"},
-	{FlagName: "names", Shorthand: "n", FieldPath: "Body.Names", Kind: flagutil.FlagKindStringArray, Required: true, Description: "[required]"},
+	{FlagName: "names", Shorthand: "n", FieldPath: "Body.Names", Kind: flagutil.FlagKindStringArray, Required: true, Description: "Agent names to resolve to IDs [required]"},
 }
 
 // initResolveCmd initializes the resolve command.
 func initResolveCmd(parent *cobra.Command) error {
 	var cmd = &cobra.Command{
 		Use:     "resolve",
-		Short:   "Resolve Agent Names",
-		Long:    "Resolve a list of agent names to their UUIDs within the caller's org.\n\nAuth accepts either a JWT (frontend) or an `sk_` API key (programmatic\nclients) via `get_org_jwt_or_api_key`, so CI tooling can map human-friendly\nagent names to the UUIDs the run/poll endpoints expect. Agent names are\nunique per org, so each name resolves to at most one agent. Names with no\nmatching (non-deleted) agent in the org are returned under `not_found`.",
-		Example: "  calibrate agents resolve --names '[]'",
+		Short:   "Resolve agent names to IDs",
+		Long:    "Resolve agent names to their IDs.",
+		Example: "  calibrate agents resolve --names '[\"my-agent\",\"support-bot\"]'",
 		RunE:    runResolveCmd,
 	}
 	flagutil.RegisterFlags(cmd, resolveCmdMeta)

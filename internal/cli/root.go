@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/dalmia/calibrate-cli/internal/cli/agents"
 	"github.com/dalmia/calibrate-cli/internal/cli/agenttests"
+	"github.com/dalmia/calibrate-cli/internal/cli/tests"
 	"github.com/dalmia/calibrate-cli/internal/config"
 	"github.com/dalmia/calibrate-cli/internal/explorer"
 	"github.com/dalmia/calibrate-cli/internal/output"
@@ -26,8 +27,8 @@ func NewRootCommand() (*cobra.Command, error) {
 	cobra.AddTemplateFunc("groupedGlobalFlagUsages", groupedGlobalFlagUsages)
 	rootCmd := &cobra.Command{
 		Use:           "calibrate",
-		Short:         "Calibrate Public API: Programmatic API for CI/automation, authenticated with an org-scoped API key",
-		Long:          "Calibrate Public API: Programmatic API for CI/automation, authenticated with an org-scoped API key. Pass your key in the `X-API-Key: sk_…` header.",
+		Short:         "Calibrate Public API: Programmatic API for CI/automation",
+		Long:          "Calibrate Public API: Programmatic API for CI/automation. Pass your key in the `X-API-Key` header.",
 		SilenceUsage:  true,
 		SilenceErrors: true,
 		RunE: func(cmd *cobra.Command, args []string) error {
@@ -50,6 +51,9 @@ func NewRootCommand() (*cobra.Command, error) {
 	rootCmd.CompletionOptions.HiddenDefaultCmd = true
 	if err := agents.InitAgentsRoot(rootCmd); err != nil {
 		return nil, fmt.Errorf("init agents: %w", err)
+	}
+	if err := tests.InitTestsRoot(rootCmd); err != nil {
+		return nil, fmt.Errorf("init tests: %w", err)
 	}
 	if err := agenttests.InitAgentTestsRoot(rootCmd); err != nil {
 		return nil, fmt.Errorf("init agent-tests: %w", err)

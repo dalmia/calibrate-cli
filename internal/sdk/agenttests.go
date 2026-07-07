@@ -30,16 +30,8 @@ func newAgentTests(rootSDK *SDK, sdkConfig config.SDKConfiguration, hooks *hooks
 	}
 }
 
-// Run Agent Test
-// Run one or more tests for an agent.
-//
-// This starts a background task that runs the calibrate LLM tests command
-// with the agent's config and the combined test cases from all specified tests.
-//
-// Returns a task ID that can be used to poll for status and results.
-//
-// Auth: requires either a JWT (frontend) or an `sk_` API key. The agent
-// must belong to the caller's org or this 404s.
+// Run agent tests
+// Run tests for an agent as a background job.
 func (s *AgentTests) Run(ctx context.Context, request operations.RunAgentTestAgentTestsAgentAgentUUIDRunPostRequest, opts ...operations.Option) (*operations.RunAgentTestAgentTestsAgentAgentUUIDRunPostResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -154,12 +146,12 @@ func (s *AgentTests) Run(ctx context.Context, request operations.RunAgentTestAge
 					return nil, err
 				}
 
-				var out components.TaskCreateResponse
+				var out components.AgentTestRunCreateResponse
 				if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 					return nil, err
 				}
 
-				res.TaskCreateResponse = &out
+				res.AgentTestRunCreateResponse = &out
 			}
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -217,25 +209,8 @@ func (s *AgentTests) Run(ctx context.Context, request operations.RunAgentTestAge
 
 }
 
-// RunBatch - Run Tests Batch
-// Run every linked test for a set of agents, one “llm-unit-test“ job per agent.
-//
-// Scope is driven by the optional “agent_names“ payload:
-//
-//   - **Provided (non-empty)** — run only those agents. Names are unique per org
-//     and **all are validated up front**: if any doesn't resolve to a
-//     (non-deleted) agent in the caller's org, the call 404s with the offending
-//     names and NO jobs are created.
-//   - **Omitted / null / empty** — run every agent in the caller's org.
-//
-// For each selected agent, its linked tests are launched as one job. Agents
-// with no linked tests or an unverified connection are reported under
-// “skipped“ instead of failing the batch. Subject to the normal per-org
-// concurrency queue, so over-limit jobs come back “queued“.
-//
-// Auth accepts a JWT (frontend) or an `sk_` API key (programmatic clients).
-// Returns one “runs“ entry per launched agent with “agent_name“,
-// “agent_uuid“, “task_id“, and “status“.
+// RunBatch - Run agent tests in batch
+// Run agent tests for every agent in your workspace, or for a selected set.
 func (s *AgentTests) RunBatch(ctx context.Context, request *operations.RunTestsBatchAgentTestsRunPostRequest, opts ...operations.Option) (*operations.RunTestsBatchAgentTestsRunPostResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -413,15 +388,8 @@ func (s *AgentTests) RunBatch(ctx context.Context, request *operations.RunTestsB
 
 }
 
-// GetRun - Get Agent Test Run Status
-// Get the status of an agent test run.
-//
-// Requires either a JWT (frontend) or an `sk_` API key, plus org
-// ownership of the run. Unauthenticated access to a completed run is only
-// possible once it is made public, via the share-token endpoint in the public
-// router.
-//
-// Returns the current status and, if done, the test results.
+// GetRun - Get test run status
+// Get the status and results of a test run.
 func (s *AgentTests) GetRun(ctx context.Context, request operations.GetAgentTestRunStatusAgentTestsRunTaskIDGetRequest, opts ...operations.Option) (*operations.GetAgentTestRunStatusAgentTestsRunTaskIDGetResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{

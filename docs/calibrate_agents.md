@@ -37,6 +37,9 @@ calibrate agents [flags]
 
 ### SEE ALSO
 
-* [calibrate](calibrate.md)	 - Calibrate Public API: Programmatic API for CI/automation, authenticated with an org-scoped API key
-* [calibrate agents list](calibrate_agents_list.md)	 - List Agents
-* [calibrate agents resolve](calibrate_agents_resolve.md)	 - Resolve Agent Names
+* [calibrate](calibrate.md)	 - Calibrate Public API: Programmatic API for CI/automation
+* [calibrate agents create](calibrate_agents_create.md)	 - Create agent
+* [calibrate agents get](calibrate_agents_get.md)	 - Get agent
+* [calibrate agents list](calibrate_agents_list.md)	 - List agents
+* [calibrate agents resolve](calibrate_agents_resolve.md)	 - Resolve agent names to IDs
+* [calibrate agents update](calibrate_agents_update.md)	 - Update agent

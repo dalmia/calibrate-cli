@@ -1,15 +1,10 @@
 ## calibrate agents list
 
-List Agents
+List agents
 
 ### Synopsis
 
-List all agents for the caller's current org.
-
-Auth accepts either a JWT (frontend) or an `sk_` API key (programmatic
-clients) via `get_org_jwt_or_api_key`, so CI tooling can enumerate every
-agent UUID in the org without knowing names up front (the run/poll and
-`/resolve` endpoints accept the same key).
+List all agents in your workspace.
 
 ```
 calibrate agents list [flags]

@@ -3,10 +3,13 @@
 package components
 
 type BatchTestRun struct {
+	// Name of the agent
 	AgentName string `json:"agent_name"`
+	// ID of the agent that was run
 	AgentUUID string `json:"agent_uuid"`
-	TaskID    string `json:"task_id"`
-	Status    string `json:"status"`
+	// Test run job ID. Poll for status and results
+	TaskID string     `json:"task_id"`
+	Status TaskStatus `json:"status"`
 }
 
 func (b *BatchTestRun) GetAgentName() string {
@@ -30,9 +33,9 @@ func (b *BatchTestRun) GetTaskID() string {
 	return b.TaskID
 }
 
-func (b *BatchTestRun) GetStatus() string {
+func (b *BatchTestRun) GetStatus() TaskStatus {
 	if b == nil {
-		return ""
+		return TaskStatus("")
 	}
 	return b.Status
 }

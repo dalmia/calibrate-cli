@@ -48,10 +48,11 @@ func Float64(f float64) *float64 { return &f }
 // Pointer provides a helper function to return a pointer to a type
 func Pointer[T any](v T) *T { return &v }
 
-// SDK - Calibrate Public API: Programmatic API for CI/automation, authenticated with an org-scoped API key. Pass your key in the `X-API-Key: sk_…` header.
+// SDK - Calibrate Public API: Programmatic API for CI/automation. Pass your key in the `X-API-Key` header.
 type SDK struct {
 	SDKVersion string
 	Agents     *Agents
+	Tests      *Tests
 	AgentTests *AgentTests
 
 	sdkConfiguration config.SDKConfiguration
@@ -147,6 +148,7 @@ func New(opts ...SDKOption) *SDK {
 	sdk.sdkConfiguration = sdk.hooks.SDKInit(sdk.sdkConfiguration)
 
 	sdk.Agents = newAgents(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.Tests = newTests(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.AgentTests = newAgentTests(sdk, sdk.sdkConfiguration, sdk.hooks)
 
 	return sdk

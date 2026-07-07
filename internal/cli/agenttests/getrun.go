@@ -15,7 +15,7 @@ import (
 )
 
 var getRunCmdMeta = []flagutil.FlagMeta{
-	{FlagName: "task-id", Shorthand: "t", FieldPath: "TaskID", Kind: flagutil.FlagKindString, Required: true, Description: "[required]"},
+	{FlagName: "task-id", Shorthand: "t", FieldPath: "TaskID", Kind: flagutil.FlagKindString, Required: true, Description: "Test run to poll for status and results [required]"},
 	{FlagName: "x-api-key", FieldPath: "XAPIKey", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `header:"style=simple,explode=false,name=X-API-Key"`, Description: "string value"},
 	{FlagName: "x-org-uuid", FieldPath: "XOrgUUID", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `header:"style=simple,explode=false,name=X-Org-UUID"`, Description: "string value"},
 }
@@ -24,9 +24,9 @@ var getRunCmdMeta = []flagutil.FlagMeta{
 func initGetRunCmd(parent *cobra.Command) error {
 	var cmd = &cobra.Command{
 		Use:     "get-run",
-		Short:   "Get Agent Test Run Status",
-		Long:    "Get the status of an agent test run.\n\nRequires either a JWT (frontend) or an `sk_` API key, plus org\nownership of the run. Unauthenticated access to a completed run is only\npossible once it is made public, via the share-token endpoint in the public\nrouter.\n\nReturns the current status and, if done, the test results.",
-		Example: "  calibrate agent-tests get-run --task-id <id>",
+		Short:   "Get test run status",
+		Long:    "Get the status and results of a test run.",
+		Example: "  calibrate agent-tests get-run --task-id a3b2c1d0-e5f4-3210-abcd-ef1234567890",
 		RunE:    runGetRunCmd,
 		Aliases: []string{"gr"},
 	}

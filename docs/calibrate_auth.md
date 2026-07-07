@@ -38,7 +38,7 @@ Subcommands:
 
 ### SEE ALSO
 
-* [calibrate](calibrate.md)	 - Calibrate Public API: Programmatic API for CI/automation, authenticated with an org-scoped API key
+* [calibrate](calibrate.md)	 - Calibrate Public API: Programmatic API for CI/automation
 * [calibrate auth login](calibrate_auth_login.md)	 - Interactively configure authentication credentials
 * [calibrate auth logout](calibrate_auth_logout.md)	 - Clear all stored authentication credentials
 * [calibrate auth whoami](calibrate_auth_whoami.md)	 - Display current authentication configuration

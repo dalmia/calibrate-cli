@@ -30,7 +30,7 @@ func (l *ListAgentsAgentsGetRequest) GetXOrgUUID() optionalnullable.OptionalNull
 type ListAgentsAgentsGetResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// Successful Response
-	ResponseListAgentsAgentsGet []components.RoutersAgentTestsAgentResponse
+	ResponseListAgentsAgentsGet []components.RoutersAgentsAgentResponse
 }
 
 func (l ListAgentsAgentsGetResponse) MarshalJSON() ([]byte, error) {
@@ -51,7 +51,7 @@ func (l *ListAgentsAgentsGetResponse) GetHTTPMeta() components.HTTPMetadata {
 	return l.HTTPMeta
 }
 
-func (l *ListAgentsAgentsGetResponse) GetResponseListAgentsAgentsGet() []components.RoutersAgentTestsAgentResponse {
+func (l *ListAgentsAgentsGetResponse) GetResponseListAgentsAgentsGet() []components.RoutersAgentsAgentResponse {
 	if l == nil {
 		return nil
 	}

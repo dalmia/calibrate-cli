@@ -3,9 +3,12 @@
 package components
 
 type BatchTestSkip struct {
+	// Name of the skipped agent
 	AgentName string `json:"agent_name"`
+	// ID of the skipped agent
 	AgentUUID string `json:"agent_uuid"`
-	Reason    string `json:"reason"`
+	// Why this agent was not run
+	Reason string `json:"reason"`
 }
 
 func (b *BatchTestSkip) GetAgentName() string {

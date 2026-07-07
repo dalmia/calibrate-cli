@@ -48,7 +48,7 @@ brews:
       branch: main
       token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
     homepage: "https://github.com/dalmia/calibrate-cli"
-    description: "Calibrate Public API: Programmatic API for CI/automation, authenticated with an org-scoped API key. Pass your key in the `X-API-Key: sk_…` header."
+    description: "Calibrate Public API: Programmatic API for CI/automation. Pass your key in the `X-API-Key` header."
     install: |
       bin.install "calibrate"
 

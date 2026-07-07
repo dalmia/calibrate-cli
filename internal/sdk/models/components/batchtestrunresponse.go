@@ -7,7 +7,9 @@ import (
 )
 
 type BatchTestRunResponse struct {
-	Runs    []BatchTestRun  `json:"runs"`
+	// Test runs that were launched
+	Runs []BatchTestRun `json:"runs"`
+	// Agents that were skipped instead of failing the batch
 	Skipped []BatchTestSkip `json:"skipped,omitzero"`
 }
 

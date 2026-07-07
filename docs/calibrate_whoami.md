@@ -46,4 +46,4 @@ calibrate whoami [flags]
 
 ### SEE ALSO
 
-* [calibrate](calibrate.md)	 - Calibrate Public API: Programmatic API for CI/automation, authenticated with an org-scoped API key
+* [calibrate](calibrate.md)	 - Calibrate Public API: Programmatic API for CI/automation

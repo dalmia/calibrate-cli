@@ -1,10 +1,10 @@
 ## calibrate
 
-Calibrate Public API: Programmatic API for CI/automation, authenticated with an org-scoped API key
+Calibrate Public API: Programmatic API for CI/automation
 
 ### Synopsis
 
-Calibrate Public API: Programmatic API for CI/automation, authenticated with an org-scoped API key. Pass your key in the `X-API-Key: sk_…` header.
+Calibrate Public API: Programmatic API for CI/automation. Pass your key in the `X-API-Key` header.
 
 ```
 calibrate [flags]
@@ -37,5 +37,6 @@ calibrate [flags]
 * [calibrate auth](calibrate_auth.md)	 - Manage authentication credentials
 * [calibrate configure](calibrate_configure.md)	 - Configure authentication credentials and preferences
 * [calibrate explore](calibrate_explore.md)	 - Interactively browse and run commands
+* [calibrate tests](calibrate_tests.md)	 - Operations for tests
 * [calibrate version](calibrate_version.md)	 - Print the CLI version
 * [calibrate whoami](calibrate_whoami.md)	 - Display current authentication configuration

@@ -23,8 +23,8 @@ var listCmdMeta = []flagutil.FlagMeta{
 func initListCmd(parent *cobra.Command) error {
 	var cmd = &cobra.Command{
 		Use:     "list",
-		Short:   "List Agents",
-		Long:    "List all agents for the caller's current org.\n\nAuth accepts either a JWT (frontend) or an `sk_` API key (programmatic\nclients) via `get_org_jwt_or_api_key`, so CI tooling can enumerate every\nagent UUID in the org without knowing names up front (the run/poll and\n`/resolve` endpoints accept the same key).",
+		Short:   "List agents",
+		Long:    "List all agents in your workspace.",
 		Example: "  calibrate agents list",
 		RunE:    runListCmd,
 	}

@@ -7,36 +7,18 @@ import (
 	"github.com/dalmia/calibrate-cli/internal/sdk/sdkinternal/utils"
 )
 
-// JudgeResult - One evaluator's verdict for a response-type test case.
-//
-// Per-row data only — anything constant across rows for the same evaluator
-// (name, description, output_type, output_config, scale_min/max) lives on
-// the response-level `evaluators[]` block; look it up by `evaluator_uuid`.
-//
-// `evaluator_uuid` is None for legacy runs that pre-date the evaluator-
-// snapshot capture or when the evaluator can't be resolved from the
-// snapshot.
-//
-// Exactly one of `match` (binary) / `score` (rating) is set per entry;
-// both are None for tool-call tests, but tool-call tests don't carry
-// `judge_results`.
-//
-// `variable_values` are the {{var}} substitutions used for this evaluator
-// on this test case, frozen from `test_evaluators.variable_values` at
-// submission time — stays on the row because it varies per test case.
-//
-// `value_name` is the human-readable label for `match`/`score` resolved
-// against the rubric the run actually used (snapshot's
-// `output_config.scale.name`). Falls back to `Correct`/`Wrong` for binary
-// or the stringified score for rating when the snapshot lacks named
-// scale entries (e.g. legacy runs captured before the rubric was
-// snapshotted).
 type JudgeResult struct {
-	EvaluatorUUID  optionalnullable.OptionalNullable[string]         `json:"evaluator_uuid,omitzero"`
-	Reasoning      optionalnullable.OptionalNullable[string]         `json:"reasoning,omitzero"`
-	Match          optionalnullable.OptionalNullable[bool]           `json:"match,omitzero"`
-	Score          optionalnullable.OptionalNullable[float64]        `json:"score,omitzero"`
-	ValueName      optionalnullable.OptionalNullable[string]         `json:"value_name,omitzero"`
+	// ID of the evaluator that produced this verdict; null for legacy runs or when the evaluator can't be resolved from the snapshot
+	EvaluatorUUID optionalnullable.OptionalNullable[string] `json:"evaluator_uuid,omitzero"`
+	// Judge's rationale for this verdict
+	Reasoning optionalnullable.OptionalNullable[string] `json:"reasoning,omitzero"`
+	// Binary evaluator pass/fail. **Set only for binary evaluators** (else null; `score` is set instead)
+	Match optionalnullable.OptionalNullable[bool] `json:"match,omitzero"`
+	// Rating evaluator numeric score. **Set only for rating evaluators** (else null; `match` is set instead)
+	Score optionalnullable.OptionalNullable[float64] `json:"score,omitzero"`
+	// Human-readable label for `match`/`score` resolved against the run's rubric. Falls back to `Correct`/`Wrong` (binary) or the stringified score (rating) when the snapshot lacks named scale entries
+	ValueName optionalnullable.OptionalNullable[string] `json:"value_name,omitzero"`
+	// `{{var}}` substitutions used for this evaluator on this test case, frozen at submission time; null when none
 	VariableValues optionalnullable.OptionalNullable[map[string]any] `json:"variable_values,omitzero"`
 }
 

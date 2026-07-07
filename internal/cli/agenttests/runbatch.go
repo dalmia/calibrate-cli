@@ -24,8 +24,8 @@ var runBatchCmdMeta = []flagutil.FlagMeta{
 func initRunBatchCmd(parent *cobra.Command) error {
 	var cmd = &cobra.Command{
 		Use:     "run-batch",
-		Short:   "Run Tests Batch",
-		Long:    "Run every linked test for a set of agents, one ``llm-unit-test`` job per agent.\n\nScope is driven by the optional ``agent_names`` payload:\n\n- **Provided (non-empty)** — run only those agents. Names are unique per org\n  and **all are validated up front**: if any doesn't resolve to a\n  (non-deleted) agent in the caller's org, the call 404s with the offending\n  names and NO jobs are created.\n- **Omitted / null / empty** — run every agent in the caller's org.\n\nFor each selected agent, its linked tests are launched as one job. Agents\nwith no linked tests or an unverified connection are reported under\n``skipped`` instead of failing the batch. Subject to the normal per-org\nconcurrency queue, so over-limit jobs come back ``queued``.\n\nAuth accepts a JWT (frontend) or an `sk_` API key (programmatic clients).\nReturns one ``runs`` entry per launched agent with ``agent_name``,\n``agent_uuid``, ``task_id``, and ``status``.",
+		Short:   "Run agent tests in batch",
+		Long:    "Run agent tests for every agent in your workspace, or for a selected set.",
 		Example: "  calibrate agent-tests run-batch",
 		RunE:    runRunBatchCmd,
 		Aliases: []string{"rb"},

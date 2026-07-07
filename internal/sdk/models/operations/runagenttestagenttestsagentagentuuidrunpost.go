@@ -9,6 +9,7 @@ import (
 )
 
 type RunAgentTestAgentTestsAgentAgentUUIDRunPostRequest struct {
+	// The agent to test. Must be in your workspace.
 	AgentUUID string                                    `pathParam:"style=simple,explode=false,name=agent_uuid"`
 	XAPIKey   optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=X-API-Key"`
 	XOrgUUID  optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=X-Org-UUID"`
@@ -46,7 +47,7 @@ func (r *RunAgentTestAgentTestsAgentAgentUUIDRunPostRequest) GetBody() component
 type RunAgentTestAgentTestsAgentAgentUUIDRunPostResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// Successful Response
-	TaskCreateResponse *components.TaskCreateResponse
+	AgentTestRunCreateResponse *components.AgentTestRunCreateResponse
 }
 
 func (r RunAgentTestAgentTestsAgentAgentUUIDRunPostResponse) MarshalJSON() ([]byte, error) {
@@ -67,9 +68,9 @@ func (r *RunAgentTestAgentTestsAgentAgentUUIDRunPostResponse) GetHTTPMeta() comp
 	return r.HTTPMeta
 }
 
-func (r *RunAgentTestAgentTestsAgentAgentUUIDRunPostResponse) GetTaskCreateResponse() *components.TaskCreateResponse {
+func (r *RunAgentTestAgentTestsAgentAgentUUIDRunPostResponse) GetAgentTestRunCreateResponse() *components.AgentTestRunCreateResponse {
 	if r == nil {
 		return nil
 	}
-	return r.TaskCreateResponse
+	return r.AgentTestRunCreateResponse
 }

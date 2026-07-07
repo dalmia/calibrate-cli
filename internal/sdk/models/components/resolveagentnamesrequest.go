@@ -3,6 +3,7 @@
 package components
 
 type ResolveAgentNamesRequest struct {
+	// Agent names to resolve to IDs
 	Names []string `json:"names"`
 }
 

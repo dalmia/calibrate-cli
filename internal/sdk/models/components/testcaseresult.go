@@ -7,17 +7,25 @@ import (
 	"github.com/dalmia/calibrate-cli/internal/sdk/sdkinternal/utils"
 )
 
-// TestCaseResult - Result for a single test case matching calibrate results.json structure
 type TestCaseResult struct {
-	TestCaseID   optionalnullable.OptionalNullable[string]         `json:"test_case_id,omitzero"`
-	Name         optionalnullable.OptionalNullable[string]         `json:"name,omitzero"`
-	Passed       optionalnullable.OptionalNullable[bool]           `json:"passed,omitzero"`
-	Reasoning    optionalnullable.OptionalNullable[string]         `json:"reasoning,omitzero"`
-	Output       optionalnullable.OptionalNullable[TestOutput]     `json:"output,omitzero"`
-	TestCase     optionalnullable.OptionalNullable[map[string]any] `json:"test_case,omitzero"`
-	JudgeResults optionalnullable.OptionalNullable[[]JudgeResult]  `json:"judge_results,omitzero"`
-	LatencyMs    optionalnullable.OptionalNullable[float64]        `json:"latency_ms,omitzero"`
-	Cost         optionalnullable.OptionalNullable[float64]        `json:"cost,omitzero"`
+	// Identifier of the test case within the run
+	TestCaseID optionalnullable.OptionalNullable[string] `json:"test_case_id,omitzero"`
+	// Test name; present during in-progress and done states
+	Name optionalnullable.OptionalNullable[string] `json:"name,omitzero"`
+	// Whether the case passed. Present only when done
+	Passed optionalnullable.OptionalNullable[bool] `json:"passed,omitzero"`
+	// LLM judge reasoning or deterministic tool-call diff; null for passing tool-call tests
+	Reasoning optionalnullable.OptionalNullable[string] `json:"reasoning,omitzero"`
+	// The agent's output for this case. Present only when done
+	Output optionalnullable.OptionalNullable[TestOutput] `json:"output,omitzero"`
+	// The input test case definition. Present only when done
+	TestCase optionalnullable.OptionalNullable[map[string]any] `json:"test_case,omitzero"`
+	// Per-evaluator verdicts for response/conversation tests; null for tool-call tests or in-progress rows
+	JudgeResults optionalnullable.OptionalNullable[[]JudgeResult] `json:"judge_results,omitzero"`
+	// Response-generation latency in ms for the agent under test (not the judge). Present only for live runs; null for in-progress and eval-only runs. Float, since external agents may self-report a fractional value
+	LatencyMs optionalnullable.OptionalNullable[float64] `json:"latency_ms,omitzero"`
+	// Per-case cost in USD, lifted from calibrate's nested `output.cost`. Null when the provider/agent reports none (e.g. `--provider openai`)
+	Cost optionalnullable.OptionalNullable[float64] `json:"cost,omitzero"`
 }
 
 func (t TestCaseResult) MarshalJSON() ([]byte, error) {

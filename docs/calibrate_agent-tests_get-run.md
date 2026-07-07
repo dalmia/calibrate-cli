@@ -1,17 +1,10 @@
 ## calibrate agent-tests get-run
 
-Get Agent Test Run Status
+Get test run status
 
 ### Synopsis
 
-Get the status of an agent test run.
-
-Requires either a JWT (frontend) or an `sk_` API key, plus org
-ownership of the run. Unauthenticated access to a completed run is only
-possible once it is made public, via the share-token endpoint in the public
-router.
-
-Returns the current status and, if done, the test results.
+Get the status and results of a test run.
 
 ```
 calibrate agent-tests get-run [flags]
@@ -20,14 +13,14 @@ calibrate agent-tests get-run [flags]
 ### Examples
 
 ```
-  calibrate agent-tests get-run --task-id <id>
+  calibrate agent-tests get-run --task-id a3b2c1d0-e5f4-3210-abcd-ef1234567890
 ```
 
 ### Options
 
 ```
   -h, --help                help for get-run
-  -t, --task-id string      [required]
+  -t, --task-id string      Test run to poll for status and results [required]
       --x-api-key string    string value
       --x-org-uuid string   string value
 ```

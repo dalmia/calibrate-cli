@@ -8,6 +8,7 @@ import (
 )
 
 type BatchRunRequest struct {
+	// Agents to run. Omit to run every agent in your workspace
 	AgentNames optionalnullable.OptionalNullable[[]string] `json:"agent_names,omitzero"`
 }
 

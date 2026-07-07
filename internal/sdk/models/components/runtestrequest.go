@@ -8,6 +8,7 @@ import (
 )
 
 type RunTestRequest struct {
+	// Tests to run. Omit to run all tests linked to the agent
 	TestUuids optionalnullable.OptionalNullable[[]string] `json:"test_uuids,omitzero"`
 }
 

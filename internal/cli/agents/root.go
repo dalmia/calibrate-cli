@@ -24,7 +24,19 @@ func InitAgentsRoot(parent *cobra.Command) error {
 		return err
 	}
 
+	if err := initCreateCmd(AgentsCmd); err != nil {
+		return err
+	}
+
 	if err := initListCmd(AgentsCmd); err != nil {
+		return err
+	}
+
+	if err := initGetCmd(AgentsCmd); err != nil {
+		return err
+	}
+
+	if err := initUpdateCmd(AgentsCmd); err != nil {
 		return err
 	}
 

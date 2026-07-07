@@ -3,8 +3,10 @@
 package components
 
 type ResolveAgentNamesResponse struct {
+	// Map of name to agent ID for each name that matched
 	Resolved map[string]string `json:"resolved"`
-	NotFound []string          `json:"not_found"`
+	// Names with no matching agent in your workspace
+	NotFound []string `json:"not_found"`
 }
 
 func (r *ResolveAgentNamesResponse) GetResolved() map[string]string {

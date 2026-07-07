@@ -15,19 +15,19 @@ import (
 )
 
 var runCmdMeta = []flagutil.FlagMeta{
-	{FlagName: "agent-uuid", Shorthand: "a", FieldPath: "AgentUUID", Kind: flagutil.FlagKindString, Required: true, Description: "[required]"},
+	{FlagName: "agent-uuid", Shorthand: "a", FieldPath: "AgentUUID", Kind: flagutil.FlagKindString, Required: true, Description: "The agent to test. Must be in your workspace. [required]"},
 	{FlagName: "x-api-key", FieldPath: "XAPIKey", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `header:"style=simple,explode=false,name=X-API-Key"`, Description: "string value"},
 	{FlagName: "x-org-uuid", FieldPath: "XOrgUUID", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `header:"style=simple,explode=false,name=X-Org-UUID"`, Description: "string value"},
-	{FlagName: "test-uuids", Shorthand: "t", FieldPath: "Body.TestUuids", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"test_uuids,omitempty"`, Description: "list of values"},
+	{FlagName: "test-uuids", Shorthand: "t", FieldPath: "Body.TestUuids", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"test_uuids,omitempty"`, Description: "Tests to run. Omit to run all tests linked to the agent"},
 }
 
 // initRunCmd initializes the run command.
 func initRunCmd(parent *cobra.Command) error {
 	var cmd = &cobra.Command{
 		Use:     "run",
-		Short:   "Run Agent Test",
-		Long:    "Run one or more tests for an agent.\n\nThis starts a background task that runs the calibrate LLM tests command\nwith the agent's config and the combined test cases from all specified tests.\n\nReturns a task ID that can be used to poll for status and results.\n\nAuth: requires either a JWT (frontend) or an `sk_` API key. The agent\nmust belong to the caller's org or this 404s.",
-		Example: "  calibrate agent-tests run --agent-uuid <id>",
+		Short:   "Run agent tests",
+		Long:    "Run tests for an agent as a background job.",
+		Example: "  calibrate agent-tests run --agent-uuid f47ac10b-58cc-4372-a567-0e02b2c3d479",
 		RunE:    runRunCmd,
 	}
 	flagutil.RegisterFlags(cmd, runCmdMeta)

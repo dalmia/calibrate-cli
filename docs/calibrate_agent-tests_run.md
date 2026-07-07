@@ -1,18 +1,10 @@
 ## calibrate agent-tests run
 
-Run Agent Test
+Run agent tests
 
 ### Synopsis
 
-Run one or more tests for an agent.
-
-This starts a background task that runs the calibrate LLM tests command
-with the agent's config and the combined test cases from all specified tests.
-
-Returns a task ID that can be used to poll for status and results.
-
-Auth: requires either a JWT (frontend) or an `sk_` API key. The agent
-must belong to the caller's org or this 404s.
+Run tests for an agent as a background job.
 
 ```
 calibrate agent-tests run [flags]
@@ -21,16 +13,16 @@ calibrate agent-tests run [flags]
 ### Examples
 
 ```
-  calibrate agent-tests run --agent-uuid <id>
+  calibrate agent-tests run --agent-uuid f47ac10b-58cc-4372-a567-0e02b2c3d479
 ```
 
 ### Options
 
 ```
-  -a, --agent-uuid string   [required]
+  -a, --agent-uuid string   The agent to test. Must be in your workspace. [required]
       --body string         Request body as JSON (alternative to individual flags). Can also be provided via stdin.
   -h, --help                help for run
-  -t, --test-uuids string   list of values
+  -t, --test-uuids string   Tests to run. Omit to run all tests linked to the agent
       --x-api-key string    string value
       --x-org-uuid string   string value
 ```

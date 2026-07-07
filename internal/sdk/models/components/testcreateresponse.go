@@ -5,7 +5,7 @@ package components
 type TestCreateResponse struct {
 	// ID of the newly created test
 	UUID string `json:"uuid"`
-	// Human-readable confirmation message
+	// Confirmation message
 	Message string `json:"message"`
 }
 

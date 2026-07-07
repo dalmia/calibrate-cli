@@ -24,7 +24,7 @@ func initListCmd(parent *cobra.Command) error {
 	var cmd = &cobra.Command{
 		Use:     "list",
 		Short:   "List agents",
-		Long:    "List all agents in your workspace.",
+		Long:    "Get the list of all your agents",
 		Example: "  calibrate agents list",
 		RunE:    runListCmd,
 	}

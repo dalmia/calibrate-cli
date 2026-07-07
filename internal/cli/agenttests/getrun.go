@@ -25,7 +25,7 @@ func initGetRunCmd(parent *cobra.Command) error {
 	var cmd = &cobra.Command{
 		Use:     "get-run",
 		Short:   "Get test run status",
-		Long:    "Get the status and results of a test run.",
+		Long:    "Poll a test run for its status and evaluation results",
 		Example: "  calibrate agent-tests get-run --task-id a3b2c1d0-e5f4-3210-abcd-ef1234567890",
 		RunE:    runGetRunCmd,
 		Aliases: []string{"gr"},

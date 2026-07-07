@@ -4,7 +4,7 @@ List tests
 
 ### Synopsis
 
-List all tests for your workspace, each with its linked evaluators.
+List all the test cases for your agents
 
 ```
 calibrate tests list [flags]

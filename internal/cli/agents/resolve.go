@@ -25,7 +25,7 @@ func initResolveCmd(parent *cobra.Command) error {
 	var cmd = &cobra.Command{
 		Use:     "resolve",
 		Short:   "Resolve agent names to IDs",
-		Long:    "Resolve agent names to their IDs.",
+		Long:    "Get the IDs for your agents by their names",
 		Example: "  calibrate agents resolve --names '[\"my-agent\",\"support-bot\"]'",
 		RunE:    runResolveCmd,
 	}

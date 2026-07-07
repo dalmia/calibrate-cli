@@ -4,7 +4,7 @@ Get agent
 
 ### Synopsis
 
-Get an agent in your workspace.
+Get one agent by its ID
 
 ```
 calibrate agents get [flags]
@@ -19,7 +19,7 @@ calibrate agents get [flags]
 ### Options
 
 ```
-  -a, --agent-uuid string   The agent to retrieve. Must be in your workspace. [required]
+  -a, --agent-uuid string   The agent to retrieve. [required]
   -h, --help                help for get
       --x-api-key string    string value
       --x-org-uuid string   string value

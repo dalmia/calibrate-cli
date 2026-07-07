@@ -17,9 +17,9 @@ import (
 var createCmdMeta = []flagutil.FlagMeta{
 	{FlagName: "x-api-key", FieldPath: "XAPIKey", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `header:"style=simple,explode=false,name=X-API-Key"`, Description: "string value"},
 	{FlagName: "x-org-uuid", FieldPath: "XOrgUUID", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `header:"style=simple,explode=false,name=X-Org-UUID"`, Description: "string value"},
-	{FlagName: "name", Shorthand: "n", FieldPath: "Body.Name", Kind: flagutil.FlagKindString, Required: true, Description: "Human-readable agent name, unique within the workspace [required]"},
-	{FlagName: "type", Shorthand: "t", FieldPath: "Body.Type", Kind: flagutil.FlagKindEnum, Optional: true, HasDefault: true, DefaultStr: "agent", EnumValues: []string{"agent", "connection"}, Description: "`agent` applies managed defaults deep-merged under any supplied `config`; `connection` stores the config you supply as-is (must eventually contain `agent_url`) (options: agent, connection)"},
-	{FlagName: "config-param", Shorthand: "c", FieldPath: "Body.Config", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"config,omitempty"`, Description: "Behavioral config (system_prompt, llm, stt, tts, settings, …). Deep-merged over defaults for `type=agent`; stored as-is for `type=connection`. Omit for `type=agent` to use defaults"},
+	{FlagName: "name", Shorthand: "n", FieldPath: "Body.Name", Kind: flagutil.FlagKindString, Required: true, Description: "Agent name, unique within the workspace [required]"},
+	{FlagName: "type", Shorthand: "t", FieldPath: "Body.Type", Kind: flagutil.FlagKindEnum, Optional: true, HasDefault: true, DefaultStr: "agent", EnumValues: []string{"agent", "connection"}, Description: "- `agent`: built inside Calibrate\n- `connection`: your existing agent connected to Calibrate (options: agent, connection)"},
+	{FlagName: "config-param", Shorthand: "c", FieldPath: "Body.Config", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"config,omitempty"`, Description: "Agent behavioral config. The keys depend on `type`.\n\n**`type=agent`** (built inside Calibrate):\n- `system_prompt` (string): the agent's instructions\n- `llm.model` (string): `provider/model`, e.g. `openai/gpt-4.1` or `google/gemini-2.5-flash`\n- `stt.provider` (string): `deepgram`, `openai`, `cartesia`, `elevenlabs`, `google`, `sarvam`, or `smallest`\n- `tts.provider` (string): `cartesia`, `openai`, `google`, `elevenlabs`, `sarvam`, or `smallest`\n- `settings.agent_speaks_first` (bool), `settings.max_assistant_turns` (int)\n- `system_tools.end_call` (bool, optional): let the agent end the call\n- `data_extraction_fields` (array, optional): `[{name, type, description, required}]`\n\n```json\n{\n  \"system_prompt\": \"You are a helpful support agent.\",\n  \"llm\": {\"model\": \"openai/gpt-4.1\"},\n  \"stt\": {\"provider\": \"deepgram\"},\n  \"tts\": {\"provider\": \"elevenlabs\"},\n  \"settings\": {\"agent_speaks_first\": true, \"max_assistant_turns\": 50}\n}\n```\n\n**`type=connection`** (your own HTTP endpoint):\n- `agent_url` (string, required): public HTTPS endpoint the agent is called at\n- `agent_headers` (object, optional): headers sent on each request, e.g. auth\n- `benchmark_provider` (string, optional): `openrouter` (default), `openai`, `google`, `anthropic`, `meta-llama`, `mistralai`, `deepseek`, `x-ai`, `cohere`, `qwen`, or `ai21`\n\n```json\n{\n  \"agent_url\": \"https://api.example.com/agent\",\n  \"agent_headers\": {\"Authorization\": \"Bearer <token>\"},\n  \"benchmark_provider\": \"openrouter\"\n}\n```\n\nFor `type=agent`, omitted keys inherit managed defaults (omit `config` entirely to use all defaults). For `type=connection`, `config` is stored as-is and must contain `agent_url`."},
 }
 
 // initCreateCmd initializes the create command.
@@ -27,7 +27,7 @@ func initCreateCmd(parent *cobra.Command) error {
 	var cmd = &cobra.Command{
 		Use:     "create",
 		Short:   "Create agent",
-		Long:    "Create a new agent in your workspace. For `type=agent`, defaults are deep-merged with any config you supply.",
+		Long:    "Create an agent to test inside Calibrate or connect your existing agent to Calibrate",
 		Example: "  calibrate agents create --name <value>",
 		RunE:    runCreateCmd,
 	}

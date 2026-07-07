@@ -7,7 +7,11 @@ import (
 	"github.com/dalmia/calibrate-cli/internal/sdk/sdkinternal/utils"
 )
 
-// RoutersTestsTestResponseType - Test kind
+// RoutersTestsTestResponseType - What the test judges:
+//
+// - `response`: judges the generated reply
+// - `tool_call`: diffs the generated tool calls
+// - `conversation`: judges the full conversation
 type RoutersTestsTestResponseType string
 
 const (
@@ -32,17 +36,21 @@ func (e *RoutersTestsTestResponseType) IsExact() bool {
 }
 
 type RoutersTestsTestResponse struct {
-	// Test ID
+	// Unique ID for the test
 	UUID string `json:"uuid"`
-	// Human-readable test name
+	// Name of the test
 	Name string `json:"name"`
-	// Test kind
+	// What the test judges:
+	//
+	// - `response`: judges the generated reply
+	// - `tool_call`: diffs the generated tool calls
+	// - `conversation`: judges the full conversation
 	Type RoutersTestsTestResponseType `json:"type"`
-	// Calibrate test config (`history`, `evaluation`, optional `settings`)
+	// Config for the test (`history`, `evaluation`, optional `settings`)
 	Config optionalnullable.OptionalNullable[map[string]any] `json:"config,omitzero"`
-	// Creation timestamp (ISO 8601 UTC)
+	// Timestamp when the test was created (ISO 8601 UTC)
 	CreatedAt string `json:"created_at"`
-	// Last-update timestamp (ISO 8601 UTC)
+	// Timestamp when the test was last updated (ISO 8601 UTC)
 	UpdatedAt string `json:"updated_at"`
 	// Linked evaluators, resolved to their current live version at read time
 	Evaluators []map[string]any `json:"evaluators,omitzero"`

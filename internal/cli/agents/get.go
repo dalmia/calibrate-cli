@@ -15,7 +15,7 @@ import (
 )
 
 var getCmdMeta = []flagutil.FlagMeta{
-	{FlagName: "agent-uuid", Shorthand: "a", FieldPath: "AgentUUID", Kind: flagutil.FlagKindString, Required: true, Description: "The agent to retrieve. Must be in your workspace. [required]"},
+	{FlagName: "agent-uuid", Shorthand: "a", FieldPath: "AgentUUID", Kind: flagutil.FlagKindString, Required: true, Description: "The agent to retrieve. [required]"},
 	{FlagName: "x-api-key", FieldPath: "XAPIKey", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `header:"style=simple,explode=false,name=X-API-Key"`, Description: "string value"},
 	{FlagName: "x-org-uuid", FieldPath: "XOrgUUID", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `header:"style=simple,explode=false,name=X-Org-UUID"`, Description: "string value"},
 }
@@ -25,7 +25,7 @@ func initGetCmd(parent *cobra.Command) error {
 	var cmd = &cobra.Command{
 		Use:     "get",
 		Short:   "Get agent",
-		Long:    "Get an agent in your workspace.",
+		Long:    "Get one agent by its ID",
 		Example: "  calibrate agents get --agent-uuid f47ac10b-58cc-4372-a567-0e02b2c3d479",
 		RunE:    runGetCmd,
 	}

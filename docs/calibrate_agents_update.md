@@ -4,7 +4,7 @@ Update agent
 
 ### Synopsis
 
-Update an agent's name and/or config. Changing `agent_url` or `agent_headers` resets connection and benchmark verification flags.
+Update an agent's configuration
 
 ```
 calibrate agents update [flags]
@@ -19,15 +19,49 @@ calibrate agents update [flags]
 ### Options
 
 ```
-  -a, --agent-uuid string                         The agent to update. Must be in your workspace. [required]
-  -b, --benchmark-models-verified string          Directly set the per-model benchmark verification map inside config. Omit to leave it untouched
-      --body string                               Request body as JSON (alternative to individual flags). Can also be provided via stdin.
-      --config-param agent_url                    Replacement config, stored as-is (no deep-merge on update). Changing agent_url or `agent_headers` resets all connection/benchmark verification flags. Omit to leave config unchanged
-      --connection-verified connection_verified   Directly set the connection_verified flag inside config. Omit to leave it untouched
-  -h, --help                                      help for update
-  -n, --name string                               New agent name. Omit to leave the name unchanged
-      --x-api-key string                          string value
-      --x-org-uuid string                         string value
+  -a, --agent-uuid string   The agent to update. [required]
+      --body string         Request body as JSON (alternative to individual flags). Can also be provided via stdin.
+  -c, --config-param type   Agent behavioral config. The keys depend on type.
+                            
+                            **`type=agent`** (built inside Calibrate):
+                            - `system_prompt` (string): the agent's instructions
+                            - `llm.model` (string): `provider/model`, e.g. `openai/gpt-4.1` or `google/gemini-2.5-flash`
+                            - `stt.provider` (string): `deepgram`, `openai`, `cartesia`, `elevenlabs`, `google`, `sarvam`, or `smallest`
+                            - `tts.provider` (string): `cartesia`, `openai`, `google`, `elevenlabs`, `sarvam`, or `smallest`
+                            - `settings.agent_speaks_first` (bool), `settings.max_assistant_turns` (int)
+                            - `system_tools.end_call` (bool, optional): let the agent end the call
+                            - `data_extraction_fields` (array, optional): `[{name, type, description, required}]`
+                            
+                            ```json
+                            {
+                              "system_prompt": "You are a helpful support agent.",
+                              "llm": {"model": "openai/gpt-4.1"},
+                              "stt": {"provider": "deepgram"},
+                              "tts": {"provider": "elevenlabs"},
+                              "settings": {"agent_speaks_first": true, "max_assistant_turns": 50}
+                            }
+                            ```
+                            
+                            **`type=connection`** (your own HTTP endpoint):
+                            - `agent_url` (string, required): public HTTPS endpoint the agent is called at
+                            - `agent_headers` (object, optional): headers sent on each request, e.g. auth
+                            - `benchmark_provider` (string, optional): `openrouter` (default), `openai`, `google`, `anthropic`, `meta-llama`, `mistralai`, `deepseek`, `x-ai`, `cohere`, `qwen`, or `ai21`
+                            
+                            ```json
+                            {
+                              "agent_url": "https://api.example.com/agent",
+                              "agent_headers": {"Authorization": "Bearer <token>"},
+                              "benchmark_provider": "openrouter"
+                            }
+                            ```
+                            
+                            Replaces the stored config. Omit to leave unchanged.
+                            
+                            For `type=connection`, changing `agent_url` or `agent_headers` resets the connection and benchmark verification flags.
+  -h, --help                help for update
+  -n, --name string         New agent name. Omit to leave the name unchanged
+      --x-api-key string    string value
+      --x-org-uuid string   string value
 ```
 
 ### Options inherited from parent commands

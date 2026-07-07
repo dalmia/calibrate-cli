@@ -9,7 +9,13 @@ import (
 	"github.com/dalmia/calibrate-cli/internal/sdk/sdkinternal/utils"
 )
 
-// BulkTestUploadType - Test kind applied to every item in the batch
+// BulkTestUploadType - What the test judges:
+//
+// - `response`: judges the generated reply
+// - `tool_call`: diffs the generated tool calls
+// - `conversation`: judges the full conversation
+//
+// Applied to every test in the batch.
 type BulkTestUploadType string
 
 const (
@@ -40,7 +46,13 @@ func (e *BulkTestUploadType) UnmarshalJSON(data []byte) error {
 }
 
 type BulkTestUpload struct {
-	// Test kind applied to every item in the batch
+	// What the test judges:
+	//
+	// - `response`: judges the generated reply
+	// - `tool_call`: diffs the generated tool calls
+	// - `conversation`: judges the full conversation
+	//
+	// Applied to every test in the batch.
 	Type BulkTestUploadType `json:"type"`
 	// Test items to create (non-empty, max 500 per request, names unique within the batch)
 	Tests []BulkTestItem `json:"tests"`

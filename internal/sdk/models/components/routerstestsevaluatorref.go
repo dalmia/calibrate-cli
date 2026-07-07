@@ -10,7 +10,7 @@ import (
 type RoutersTestsEvaluatorRef struct {
 	// Evaluator to attach to the test
 	EvaluatorUUID string `json:"evaluator_uuid"`
-	// Values for the evaluator's `{{placeholder}}` variables, pinned per-test on the pivot. Omit to inherit the evaluator version's defaults
+	// Values for the evaluator's `{{placeholder}}` variables, pinned per test. Omit to inherit the evaluator version's defaults
 	VariableValues optionalnullable.OptionalNullable[map[string]any] `json:"variable_values,omitzero"`
 }
 

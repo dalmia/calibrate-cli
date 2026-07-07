@@ -4,7 +4,7 @@ Resolve agent names to IDs
 
 ### Synopsis
 
-Resolve agent names to their IDs.
+Get the IDs for your agents by their names
 
 ```
 calibrate agents resolve [flags]

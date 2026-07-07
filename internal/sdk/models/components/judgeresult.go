@@ -8,17 +8,17 @@ import (
 )
 
 type JudgeResult struct {
-	// ID of the evaluator that produced this verdict; null for legacy runs or when the evaluator can't be resolved from the snapshot
+	// ID of the evaluator that produced this verdict
 	EvaluatorUUID optionalnullable.OptionalNullable[string] `json:"evaluator_uuid,omitzero"`
 	// Judge's rationale for this verdict
 	Reasoning optionalnullable.OptionalNullable[string] `json:"reasoning,omitzero"`
-	// Binary evaluator pass/fail. **Set only for binary evaluators** (else null; `score` is set instead)
+	// Pass/fail verdict, for binary evaluators
 	Match optionalnullable.OptionalNullable[bool] `json:"match,omitzero"`
-	// Rating evaluator numeric score. **Set only for rating evaluators** (else null; `match` is set instead)
+	// Numeric score, for rating evaluators
 	Score optionalnullable.OptionalNullable[float64] `json:"score,omitzero"`
-	// Human-readable label for `match`/`score` resolved against the run's rubric. Falls back to `Correct`/`Wrong` (binary) or the stringified score (rating) when the snapshot lacks named scale entries
+	// Readable label for the verdict, from the run's rubric
 	ValueName optionalnullable.OptionalNullable[string] `json:"value_name,omitzero"`
-	// `{{var}}` substitutions used for this evaluator on this test case, frozen at submission time; null when none
+	// `{{var}}` substitutions used for this evaluator on this test case
 	VariableValues optionalnullable.OptionalNullable[map[string]any] `json:"variable_values,omitzero"`
 }
 

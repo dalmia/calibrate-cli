@@ -10,12 +10,44 @@ import (
 type AgentUpdate struct {
 	// New agent name. Omit to leave the name unchanged
 	Name optionalnullable.OptionalNullable[string] `json:"name,omitzero"`
-	// Replacement config, stored as-is (no deep-merge on update). Changing `agent_url` or `agent_headers` resets all connection/benchmark verification flags. Omit to leave config unchanged
+	// Agent behavioral config. The keys depend on `type`.
+	//
+	// **`type=agent`** (built inside Calibrate):
+	// - `system_prompt` (string): the agent's instructions
+	// - `llm.model` (string): `provider/model`, e.g. `openai/gpt-4.1` or `google/gemini-2.5-flash`
+	// - `stt.provider` (string): `deepgram`, `openai`, `cartesia`, `elevenlabs`, `google`, `sarvam`, or `smallest`
+	// - `tts.provider` (string): `cartesia`, `openai`, `google`, `elevenlabs`, `sarvam`, or `smallest`
+	// - `settings.agent_speaks_first` (bool), `settings.max_assistant_turns` (int)
+	// - `system_tools.end_call` (bool, optional): let the agent end the call
+	// - `data_extraction_fields` (array, optional): `[{name, type, description, required}]`
+	//
+	// ```json
+	// {
+	//   "system_prompt": "You are a helpful support agent.",
+	//   "llm": {"model": "openai/gpt-4.1"},
+	//   "stt": {"provider": "deepgram"},
+	//   "tts": {"provider": "elevenlabs"},
+	//   "settings": {"agent_speaks_first": true, "max_assistant_turns": 50}
+	// }
+	// ```
+	//
+	// **`type=connection`** (your own HTTP endpoint):
+	// - `agent_url` (string, required): public HTTPS endpoint the agent is called at
+	// - `agent_headers` (object, optional): headers sent on each request, e.g. auth
+	// - `benchmark_provider` (string, optional): `openrouter` (default), `openai`, `google`, `anthropic`, `meta-llama`, `mistralai`, `deepseek`, `x-ai`, `cohere`, `qwen`, or `ai21`
+	//
+	// ```json
+	// {
+	//   "agent_url": "https://api.example.com/agent",
+	//   "agent_headers": {"Authorization": "Bearer <token>"},
+	//   "benchmark_provider": "openrouter"
+	// }
+	// ```
+	//
+	// Replaces the stored config. Omit to leave unchanged.
+	//
+	// For `type=connection`, changing `agent_url` or `agent_headers` resets the connection and benchmark verification flags.
 	Config optionalnullable.OptionalNullable[map[string]any] `json:"config,omitzero"`
-	// Directly set the `connection_verified` flag inside config. Omit to leave it untouched
-	ConnectionVerified optionalnullable.OptionalNullable[bool] `json:"connection_verified,omitzero"`
-	// Directly set the per-model benchmark verification map inside config. Omit to leave it untouched
-	BenchmarkModelsVerified optionalnullable.OptionalNullable[map[string]any] `json:"benchmark_models_verified,omitzero"`
 }
 
 func (a AgentUpdate) MarshalJSON() ([]byte, error) {
@@ -41,18 +73,4 @@ func (a *AgentUpdate) GetConfig() optionalnullable.OptionalNullable[map[string]a
 		return nil
 	}
 	return a.Config
-}
-
-func (a *AgentUpdate) GetConnectionVerified() optionalnullable.OptionalNullable[bool] {
-	if a == nil {
-		return nil
-	}
-	return a.ConnectionVerified
-}
-
-func (a *AgentUpdate) GetBenchmarkModelsVerified() optionalnullable.OptionalNullable[map[string]any] {
-	if a == nil {
-		return nil
-	}
-	return a.BenchmarkModelsVerified
 }

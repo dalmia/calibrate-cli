@@ -9,7 +9,7 @@ import (
 )
 
 type GetAgentEndpointAgentsAgentUUIDGetRequest struct {
-	// The agent to retrieve. Must be in your workspace.
+	// The agent to retrieve.
 	AgentUUID string                                    `pathParam:"style=simple,explode=false,name=agent_uuid"`
 	XAPIKey   optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=X-API-Key"`
 	XOrgUUID  optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=X-Org-UUID"`

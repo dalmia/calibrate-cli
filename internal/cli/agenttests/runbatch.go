@@ -25,7 +25,7 @@ func initRunBatchCmd(parent *cobra.Command) error {
 	var cmd = &cobra.Command{
 		Use:     "run-batch",
 		Short:   "Run agent tests in batch",
-		Long:    "Run agent tests for every agent in your workspace, or for a selected set.",
+		Long:    "Run agent tests for every agent, or for a selected set",
 		Example: "  calibrate agent-tests run-batch",
 		RunE:    runRunBatchCmd,
 		Aliases: []string{"rb"},

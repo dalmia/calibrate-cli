@@ -9,7 +9,11 @@ import (
 	"github.com/dalmia/calibrate-cli/internal/sdk/sdkinternal/utils"
 )
 
-// TestCreateType - Test kind (immutable after creation): `response` judges the generated reply, `tool_call` diffs generated tool calls, `conversation` judges the full conversation
+// TestCreateType - What the test judges:
+//
+// - `response`: judges the generated reply
+// - `tool_call`: diffs the generated tool calls
+// - `conversation`: judges the full conversation
 type TestCreateType string
 
 const (
@@ -40,13 +44,64 @@ func (e *TestCreateType) UnmarshalJSON(data []byte) error {
 }
 
 type TestCreate struct {
-	// Human-readable test name, unique within the workspace
+	// Name of the test, unique within the workspace
 	Name string `json:"name"`
-	// Test kind (immutable after creation): `response` judges the generated reply, `tool_call` diffs generated tool calls, `conversation` judges the full conversation
+	// What the test judges:
+	//
+	// - `response`: judges the generated reply
+	// - `tool_call`: diffs the generated tool calls
+	// - `conversation`: judges the full conversation
 	Type TestCreateType `json:"type"`
-	// Calibrate test config (`history`, `evaluation`, optional `settings`). Omit to create an empty shell to fill in later
+	// The calibrate test config. Three top-level keys.
+	//
+	// - `history` (array, required): the conversation up to the agent's turn. Each item is `{role, content}` with `role` one of `user`, `assistant`, `tool`. A `tool` message also carries `tool_call_id` and `name`.
+	// - `evaluation` (object, required): `{type, ...}`, where `type` matches the test's `type` (below).
+	// - `settings` (object, optional): e.g. `{"language": "en"}`.
+	//
+	// `evaluation` by test type:
+	// - `response`: judge the agent's reply, graded by the linked evaluators. `{"type": "response"}`
+	// - `conversation`: append the reply and judge the whole conversation. `{"type": "conversation"}`
+	// - `tool_call`: diff the agent's tool calls against expected ones. Add `tool_calls`, a list of `{tool, arguments, accept_any_arguments?}`.
+	//
+	// For `tool_call`, each expected argument value is one of:
+	// - `{"match_type": "exact", "value": <any>}`: must equal `value`
+	// - `{"match_type": "llm_judge", "criteria": "..."}`: judged against the criteria
+	// - `{"match_type": "any"}`: any value, only checks the argument was passed
+	//
+	// `response` / `conversation` example:
+	// ```json
+	// {
+	//   "history": [{"role": "user", "content": "What is your return policy?"}],
+	//   "evaluation": {"type": "response"},
+	//   "settings": {"language": "en"}
+	// }
+	// ```
+	//
+	// `tool_call` example:
+	// ```json
+	// {
+	//   "history": [{"role": "user", "content": "Book room 101 for tomorrow"}],
+	//   "evaluation": {
+	//     "type": "tool_call",
+	//     "tool_calls": [
+	//       {
+	//         "tool": "book_room",
+	//         "arguments": {
+	//           "room": {"match_type": "exact", "value": "101"},
+	//           "date": {"match_type": "llm_judge", "criteria": "tomorrow's date"}
+	//         },
+	//         "accept_any_arguments": false
+	//       }
+	//     ]
+	//   }
+	// }
+	// ```
+	//
+	// Evaluators are linked via the separate `evaluators` field, not inside `config`.
+	//
+	// Omit to create the test with no config and fill it in later via update.
 	Config optionalnullable.OptionalNullable[map[string]any] `json:"config,omitzero"`
-	// Evaluators to link. **Required (>=1) for `type=conversation`** (no fallback judge). Omit for `response`/`tool_call` to link none
+	// Evaluators to link. Used by `response` and `conversation` tests
 	Evaluators optionalnullable.OptionalNullable[[]RoutersTestsEvaluatorRef] `json:"evaluators,omitzero"`
 }
 

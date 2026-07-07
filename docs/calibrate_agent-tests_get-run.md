@@ -4,7 +4,7 @@ Get test run status
 
 ### Synopsis
 
-Get the status and results of a test run.
+Poll a test run for its status and evaluation results
 
 ```
 calibrate agent-tests get-run [flags]

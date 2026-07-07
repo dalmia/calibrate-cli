@@ -4,7 +4,7 @@ Bulk create tests
 
 ### Synopsis
 
-Create many tests of one type in a single call, optionally linking them to agents.
+Create many test cases at once and link them to your agents
 
 ```
 calibrate tests bulk-create [flags]
@@ -13,7 +13,7 @@ calibrate tests bulk-create [flags]
 ### Examples
 
 ```
-  calibrate tests bulk-create --type tool_call --tests '[{"name":"<value>","conversation_history":[{"role":"assistant"}],"evaluators":[{"evaluator_uuid":"f47ac10b-58cc-4372-a567-0e02b2c3d479"}]}]'
+  calibrate tests bulk-create --type tool_call --tests '[{"name":"<value>","conversation_history":[{"role":"tool"}],"evaluators":[{"evaluator_uuid":"f47ac10b-58cc-4372-a567-0e02b2c3d479"}]}]'
 ```
 
 ### Options
@@ -24,7 +24,13 @@ calibrate tests bulk-create [flags]
   -h, --help                                help for bulk-create
   -l, --language config.settings.language   Language written to each test's config.settings.language. Omit to leave unset
       --tests string                        Test items to create (non-empty, max 500 per request, names unique within the batch) [required]
-      --type string                         Test kind applied to every item in the batch (options: response, tool_call, conversation) [required]
+      --type response                       What the test judges:
+                                            
+                                            - response: judges the generated reply
+                                            - `tool_call`: diffs the generated tool calls
+                                            - `conversation`: judges the full conversation
+                                            
+                                            Applied to every test in the batch. (options: response, tool_call, conversation) [required]
       --x-api-key string                    string value
       --x-org-uuid string                   string value
 ```

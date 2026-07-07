@@ -7,7 +7,8 @@ import (
 	"github.com/dalmia/calibrate-cli/internal/sdk/sdkinternal/utils"
 )
 
-// RoutersAgentsAgentResponseType - `agent` (managed defaults) or `connection` (your own endpoint)
+// RoutersAgentsAgentResponseType - - `agent`: built inside Calibrate
+// - `connection`: your existing agent connected to Calibrate
 type RoutersAgentsAgentResponseType string
 
 const (
@@ -33,9 +34,10 @@ func (e *RoutersAgentsAgentResponseType) IsExact() bool {
 type RoutersAgentsAgentResponse struct {
 	// ID of the agent
 	UUID string `json:"uuid"`
-	// Human-readable name of the agent
+	// Name of the agent
 	Name string `json:"name"`
-	// `agent` (managed defaults) or `connection` (your own endpoint)
+	// - `agent`: built inside Calibrate
+	// - `connection`: your existing agent connected to Calibrate
 	Type RoutersAgentsAgentResponseType `json:"type"`
 	// Agent configuration
 	Config optionalnullable.OptionalNullable[map[string]any] `json:"config,omitzero"`

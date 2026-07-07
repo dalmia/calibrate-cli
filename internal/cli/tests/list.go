@@ -24,7 +24,7 @@ func initListCmd(parent *cobra.Command) error {
 	var cmd = &cobra.Command{
 		Use:     "list",
 		Short:   "List tests",
-		Long:    "List all tests for your workspace, each with its linked evaluators.",
+		Long:    "List all the test cases for your agents",
 		Example: "  calibrate tests list",
 		RunE:    runListCmd,
 	}

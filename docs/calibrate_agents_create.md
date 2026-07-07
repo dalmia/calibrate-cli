@@ -4,7 +4,7 @@ Create agent
 
 ### Synopsis
 
-Create a new agent in your workspace. For `type=agent`, defaults are deep-merged with any config you supply.
+Create an agent to test inside Calibrate or connect your existing agent to Calibrate
 
 ```
 calibrate agents create [flags]
@@ -19,13 +19,48 @@ calibrate agents create [flags]
 ### Options
 
 ```
-      --body string               Request body as JSON (alternative to individual flags). Can also be provided via stdin.
-  -c, --config-param type=agent   Behavioral config (system_prompt, llm, stt, tts, settings, …). Deep-merged over defaults for type=agent; stored as-is for `type=connection`. Omit for `type=agent` to use defaults
-  -h, --help                      help for create
-  -n, --name string               Human-readable agent name, unique within the workspace [required]
-  -t, --type agent                agent applies managed defaults deep-merged under any supplied `config`; `connection` stores the config you supply as-is (must eventually contain `agent_url`) (options: agent, connection) (default "agent")
-      --x-api-key string          string value
-      --x-org-uuid string         string value
+      --body string         Request body as JSON (alternative to individual flags). Can also be provided via stdin.
+  -c, --config-param type   Agent behavioral config. The keys depend on type.
+                            
+                            **`type=agent`** (built inside Calibrate):
+                            - `system_prompt` (string): the agent's instructions
+                            - `llm.model` (string): `provider/model`, e.g. `openai/gpt-4.1` or `google/gemini-2.5-flash`
+                            - `stt.provider` (string): `deepgram`, `openai`, `cartesia`, `elevenlabs`, `google`, `sarvam`, or `smallest`
+                            - `tts.provider` (string): `cartesia`, `openai`, `google`, `elevenlabs`, `sarvam`, or `smallest`
+                            - `settings.agent_speaks_first` (bool), `settings.max_assistant_turns` (int)
+                            - `system_tools.end_call` (bool, optional): let the agent end the call
+                            - `data_extraction_fields` (array, optional): `[{name, type, description, required}]`
+                            
+                            ```json
+                            {
+                              "system_prompt": "You are a helpful support agent.",
+                              "llm": {"model": "openai/gpt-4.1"},
+                              "stt": {"provider": "deepgram"},
+                              "tts": {"provider": "elevenlabs"},
+                              "settings": {"agent_speaks_first": true, "max_assistant_turns": 50}
+                            }
+                            ```
+                            
+                            **`type=connection`** (your own HTTP endpoint):
+                            - `agent_url` (string, required): public HTTPS endpoint the agent is called at
+                            - `agent_headers` (object, optional): headers sent on each request, e.g. auth
+                            - `benchmark_provider` (string, optional): `openrouter` (default), `openai`, `google`, `anthropic`, `meta-llama`, `mistralai`, `deepseek`, `x-ai`, `cohere`, `qwen`, or `ai21`
+                            
+                            ```json
+                            {
+                              "agent_url": "https://api.example.com/agent",
+                              "agent_headers": {"Authorization": "Bearer <token>"},
+                              "benchmark_provider": "openrouter"
+                            }
+                            ```
+                            
+                            For `type=agent`, omitted keys inherit managed defaults (omit `config` entirely to use all defaults). For `type=connection`, `config` is stored as-is and must contain `agent_url`.
+  -h, --help                help for create
+  -n, --name string         Agent name, unique within the workspace [required]
+  -t, --type agent          - agent: built inside Calibrate
+                            - `connection`: your existing agent connected to Calibrate (options: agent, connection) (default "agent")
+      --x-api-key string    string value
+      --x-org-uuid string   string value
 ```
 
 ### Options inherited from parent commands

@@ -4,7 +4,7 @@ Run agent tests in batch
 
 ### Synopsis
 
-Run agent tests for every agent in your workspace, or for a selected set.
+Run agent tests for every agent, or for a selected set
 
 ```
 calibrate agent-tests run-batch [flags]

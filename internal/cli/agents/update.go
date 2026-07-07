@@ -15,13 +15,11 @@ import (
 )
 
 var updateCmdMeta = []flagutil.FlagMeta{
-	{FlagName: "agent-uuid", Shorthand: "a", FieldPath: "AgentUUID", Kind: flagutil.FlagKindString, Required: true, Description: "The agent to update. Must be in your workspace. [required]"},
+	{FlagName: "agent-uuid", Shorthand: "a", FieldPath: "AgentUUID", Kind: flagutil.FlagKindString, Required: true, Description: "The agent to update. [required]"},
 	{FlagName: "x-api-key", FieldPath: "XAPIKey", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `header:"style=simple,explode=false,name=X-API-Key"`, Description: "string value"},
 	{FlagName: "x-org-uuid", FieldPath: "XOrgUUID", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `header:"style=simple,explode=false,name=X-Org-UUID"`, Description: "string value"},
 	{FlagName: "name", Shorthand: "n", FieldPath: "Body.Name", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"name,omitempty"`, Description: "New agent name. Omit to leave the name unchanged"},
-	{FlagName: "config-param", FieldPath: "Body.Config", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"config,omitempty"`, Description: "Replacement config, stored as-is (no deep-merge on update). Changing `agent_url` or `agent_headers` resets all connection/benchmark verification flags. Omit to leave config unchanged"},
-	{FlagName: "connection-verified", FieldPath: "Body.ConnectionVerified", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"connection_verified,omitempty"`, Description: "Directly set the `connection_verified` flag inside config. Omit to leave it untouched"},
-	{FlagName: "benchmark-models-verified", Shorthand: "b", FieldPath: "Body.BenchmarkModelsVerified", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"benchmark_models_verified,omitempty"`, Description: "Directly set the per-model benchmark verification map inside config. Omit to leave it untouched"},
+	{FlagName: "config-param", Shorthand: "c", FieldPath: "Body.Config", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"config,omitempty"`, Description: "Agent behavioral config. The keys depend on `type`.\n\n**`type=agent`** (built inside Calibrate):\n- `system_prompt` (string): the agent's instructions\n- `llm.model` (string): `provider/model`, e.g. `openai/gpt-4.1` or `google/gemini-2.5-flash`\n- `stt.provider` (string): `deepgram`, `openai`, `cartesia`, `elevenlabs`, `google`, `sarvam`, or `smallest`\n- `tts.provider` (string): `cartesia`, `openai`, `google`, `elevenlabs`, `sarvam`, or `smallest`\n- `settings.agent_speaks_first` (bool), `settings.max_assistant_turns` (int)\n- `system_tools.end_call` (bool, optional): let the agent end the call\n- `data_extraction_fields` (array, optional): `[{name, type, description, required}]`\n\n```json\n{\n  \"system_prompt\": \"You are a helpful support agent.\",\n  \"llm\": {\"model\": \"openai/gpt-4.1\"},\n  \"stt\": {\"provider\": \"deepgram\"},\n  \"tts\": {\"provider\": \"elevenlabs\"},\n  \"settings\": {\"agent_speaks_first\": true, \"max_assistant_turns\": 50}\n}\n```\n\n**`type=connection`** (your own HTTP endpoint):\n- `agent_url` (string, required): public HTTPS endpoint the agent is called at\n- `agent_headers` (object, optional): headers sent on each request, e.g. auth\n- `benchmark_provider` (string, optional): `openrouter` (default), `openai`, `google`, `anthropic`, `meta-llama`, `mistralai`, `deepseek`, `x-ai`, `cohere`, `qwen`, or `ai21`\n\n```json\n{\n  \"agent_url\": \"https://api.example.com/agent\",\n  \"agent_headers\": {\"Authorization\": \"Bearer <token>\"},\n  \"benchmark_provider\": \"openrouter\"\n}\n```\n\nReplaces the stored config. Omit to leave unchanged.\n\nFor `type=connection`, changing `agent_url` or `agent_headers` resets the connection and benchmark verification flags."},
 }
 
 // initUpdateCmd initializes the update command.
@@ -29,7 +27,7 @@ func initUpdateCmd(parent *cobra.Command) error {
 	var cmd = &cobra.Command{
 		Use:     "update",
 		Short:   "Update agent",
-		Long:    "Update an agent's name and/or config. Changing `agent_url` or `agent_headers` resets connection and benchmark verification flags.",
+		Long:    "Update an agent's configuration",
 		Example: "  calibrate agents update --agent-uuid f47ac10b-58cc-4372-a567-0e02b2c3d479",
 		RunE:    runUpdateCmd,
 	}

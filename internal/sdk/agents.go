@@ -31,7 +31,7 @@ func newAgents(rootSDK *SDK, sdkConfig config.SDKConfiguration, hooks *hooks.Hoo
 }
 
 // Resolve agent names to IDs
-// Resolve agent names to their IDs.
+// Get the IDs for your agents by their names
 func (s *Agents) Resolve(ctx context.Context, request operations.ResolveAgentNamesAgentsResolvePostRequest, opts ...operations.Option) (*operations.ResolveAgentNamesAgentsResolvePostResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -210,7 +210,7 @@ func (s *Agents) Resolve(ctx context.Context, request operations.ResolveAgentNam
 }
 
 // Create agent
-// Create a new agent in your workspace. For `type=agent`, defaults are deep-merged with any config you supply.
+// Create an agent to test inside Calibrate or connect your existing agent to Calibrate
 func (s *Agents) Create(ctx context.Context, request operations.CreateAgentEndpointAgentsPostRequest, opts ...operations.Option) (*operations.CreateAgentEndpointAgentsPostResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -389,7 +389,7 @@ func (s *Agents) Create(ctx context.Context, request operations.CreateAgentEndpo
 }
 
 // List agents
-// List all agents in your workspace.
+// Get the list of all your agents
 func (s *Agents) List(ctx context.Context, request *operations.ListAgentsAgentsGetRequest, opts ...operations.Option) (*operations.ListAgentsAgentsGetResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -561,7 +561,7 @@ func (s *Agents) List(ctx context.Context, request *operations.ListAgentsAgentsG
 }
 
 // Get agent
-// Get an agent in your workspace.
+// Get one agent by its ID
 func (s *Agents) Get(ctx context.Context, request operations.GetAgentEndpointAgentsAgentUUIDGetRequest, opts ...operations.Option) (*operations.GetAgentEndpointAgentsAgentUUIDGetResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -733,7 +733,7 @@ func (s *Agents) Get(ctx context.Context, request operations.GetAgentEndpointAge
 }
 
 // Update agent
-// Update an agent's name and/or config. Changing `agent_url` or `agent_headers` resets connection and benchmark verification flags.
+// Update an agent's configuration
 func (s *Agents) Update(ctx context.Context, request operations.UpdateAgentEndpointAgentsAgentUUIDPutRequest, opts ...operations.Option) (*operations.UpdateAgentEndpointAgentsAgentUUIDPutResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{

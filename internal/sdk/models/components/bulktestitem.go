@@ -8,11 +8,11 @@ import (
 )
 
 type BulkTestItem struct {
-	// Test name, unique within the batch
+	// Name of the test, unique within the workspace and within the batch
 	Name string `json:"name"`
 	// Ordered messages ending at the user turn the agent should answer (must be non-empty)
 	ConversationHistory []ChatMessage `json:"conversation_history"`
-	// Evaluators to link. **Required for `response`/`conversation` batches**
+	// Evaluators to link. Used by `response` and `conversation` tests
 	Evaluators optionalnullable.OptionalNullable[[]RoutersTestsEvaluatorRef] `json:"evaluators,omitzero"`
 	// Expected tool calls. **Required for `tool_call` batches**
 	ToolCalls optionalnullable.OptionalNullable[[]ExpectedToolCall] `json:"tool_calls,omitzero"`

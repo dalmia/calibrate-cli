@@ -5,7 +5,7 @@ package components
 type AgentCreateResponse struct {
 	// ID of the newly created agent
 	UUID string `json:"uuid"`
-	// Human-readable confirmation message
+	// Confirmation message
 	Message string `json:"message"`
 }
 

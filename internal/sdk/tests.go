@@ -31,7 +31,7 @@ func newTests(rootSDK *SDK, sdkConfig config.SDKConfiguration, hooks *hooks.Hook
 }
 
 // BulkCreate - Bulk create tests
-// Create many tests of one type in a single call, optionally linking them to agents.
+// Create many test cases at once and link them to your agents
 func (s *Tests) BulkCreate(ctx context.Context, request operations.BulkUploadTestsTestsBulkPostRequest, opts ...operations.Option) (*operations.BulkUploadTestsTestsBulkPostResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -210,7 +210,7 @@ func (s *Tests) BulkCreate(ctx context.Context, request operations.BulkUploadTes
 }
 
 // Create test
-// Create a test in your workspace.
+// Create a test that runs your agent against a conversation and evaluates its answer quality or the tools it calls
 func (s *Tests) Create(ctx context.Context, request operations.CreateTestEndpointTestsPostRequest, opts ...operations.Option) (*operations.CreateTestEndpointTestsPostResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -389,7 +389,7 @@ func (s *Tests) Create(ctx context.Context, request operations.CreateTestEndpoin
 }
 
 // List tests
-// List all tests for your workspace, each with its linked evaluators.
+// List all the test cases for your agents
 func (s *Tests) List(ctx context.Context, request *operations.ListTestsTestsGetRequest, opts ...operations.Option) (*operations.ListTestsTestsGetResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -561,7 +561,7 @@ func (s *Tests) List(ctx context.Context, request *operations.ListTestsTestsGetR
 }
 
 // Get test
-// Get a test by ID, including its linked evaluators.
+// Get an agent test case by its ID
 func (s *Tests) Get(ctx context.Context, request operations.GetTestEndpointTestsTestUUIDGetRequest, opts ...operations.Option) (*operations.GetTestEndpointTestsTestUUIDGetResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -733,7 +733,7 @@ func (s *Tests) Get(ctx context.Context, request operations.GetTestEndpointTests
 }
 
 // Update test
-// Update a test's name, config, and/or evaluator links.
+// Update an agent test case
 func (s *Tests) Update(ctx context.Context, request operations.UpdateTestEndpointTestsTestUUIDPutRequest, opts ...operations.Option) (*operations.UpdateTestEndpointTestsTestUUIDPutResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{

@@ -13,7 +13,6 @@ import (
 type Role string
 
 const (
-	RoleSystem    Role = "system"
 	RoleUser      Role = "user"
 	RoleAssistant Role = "assistant"
 	RoleTool      Role = "tool"
@@ -28,8 +27,6 @@ func (e *Role) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	switch v {
-	case "system":
-		fallthrough
 	case "user":
 		fallthrough
 	case "assistant":

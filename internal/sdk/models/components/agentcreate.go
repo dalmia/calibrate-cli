@@ -9,7 +9,8 @@ import (
 	"github.com/dalmia/calibrate-cli/internal/sdk/sdkinternal/utils"
 )
 
-// AgentCreateType - `agent` applies managed defaults deep-merged under any supplied `config`; `connection` stores the config you supply as-is (must eventually contain `agent_url`)
+// AgentCreateType - - `agent`: built inside Calibrate
+// - `connection`: your existing agent connected to Calibrate
 type AgentCreateType string
 
 const (
@@ -37,11 +38,46 @@ func (e *AgentCreateType) UnmarshalJSON(data []byte) error {
 }
 
 type AgentCreate struct {
-	// Human-readable agent name, unique within the workspace
+	// Agent name, unique within the workspace
 	Name string `json:"name"`
-	// `agent` applies managed defaults deep-merged under any supplied `config`; `connection` stores the config you supply as-is (must eventually contain `agent_url`)
+	// - `agent`: built inside Calibrate
+	// - `connection`: your existing agent connected to Calibrate
 	Type *AgentCreateType `default:"agent" json:"type"`
-	// Behavioral config (system_prompt, llm, stt, tts, settings, …). Deep-merged over defaults for `type=agent`; stored as-is for `type=connection`. Omit for `type=agent` to use defaults
+	// Agent behavioral config. The keys depend on `type`.
+	//
+	// **`type=agent`** (built inside Calibrate):
+	// - `system_prompt` (string): the agent's instructions
+	// - `llm.model` (string): `provider/model`, e.g. `openai/gpt-4.1` or `google/gemini-2.5-flash`
+	// - `stt.provider` (string): `deepgram`, `openai`, `cartesia`, `elevenlabs`, `google`, `sarvam`, or `smallest`
+	// - `tts.provider` (string): `cartesia`, `openai`, `google`, `elevenlabs`, `sarvam`, or `smallest`
+	// - `settings.agent_speaks_first` (bool), `settings.max_assistant_turns` (int)
+	// - `system_tools.end_call` (bool, optional): let the agent end the call
+	// - `data_extraction_fields` (array, optional): `[{name, type, description, required}]`
+	//
+	// ```json
+	// {
+	//   "system_prompt": "You are a helpful support agent.",
+	//   "llm": {"model": "openai/gpt-4.1"},
+	//   "stt": {"provider": "deepgram"},
+	//   "tts": {"provider": "elevenlabs"},
+	//   "settings": {"agent_speaks_first": true, "max_assistant_turns": 50}
+	// }
+	// ```
+	//
+	// **`type=connection`** (your own HTTP endpoint):
+	// - `agent_url` (string, required): public HTTPS endpoint the agent is called at
+	// - `agent_headers` (object, optional): headers sent on each request, e.g. auth
+	// - `benchmark_provider` (string, optional): `openrouter` (default), `openai`, `google`, `anthropic`, `meta-llama`, `mistralai`, `deepseek`, `x-ai`, `cohere`, `qwen`, or `ai21`
+	//
+	// ```json
+	// {
+	//   "agent_url": "https://api.example.com/agent",
+	//   "agent_headers": {"Authorization": "Bearer <token>"},
+	//   "benchmark_provider": "openrouter"
+	// }
+	// ```
+	//
+	// For `type=agent`, omitted keys inherit managed defaults (omit `config` entirely to use all defaults). For `type=connection`, `config` is stored as-is and must contain `agent_url`.
 	Config optionalnullable.OptionalNullable[map[string]any] `json:"config,omitzero"`
 }
 

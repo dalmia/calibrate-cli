@@ -8,23 +8,23 @@ import (
 )
 
 type TestCaseResult struct {
-	// Identifier of the test case within the run
+	// ID of the test case within the run
 	TestCaseID optionalnullable.OptionalNullable[string] `json:"test_case_id,omitzero"`
-	// Test name; present during in-progress and done states
+	// Name of the test
 	Name optionalnullable.OptionalNullable[string] `json:"name,omitzero"`
 	// Whether the case passed. Present only when done
 	Passed optionalnullable.OptionalNullable[bool] `json:"passed,omitzero"`
-	// LLM judge reasoning or deterministic tool-call diff; null for passing tool-call tests
+	// Judge reasoning, or the tool-call diff for tool-call tests
 	Reasoning optionalnullable.OptionalNullable[string] `json:"reasoning,omitzero"`
 	// The agent's output for this case. Present only when done
 	Output optionalnullable.OptionalNullable[TestOutput] `json:"output,omitzero"`
 	// The input test case definition. Present only when done
 	TestCase optionalnullable.OptionalNullable[map[string]any] `json:"test_case,omitzero"`
-	// Per-evaluator verdicts for response/conversation tests; null for tool-call tests or in-progress rows
+	// One verdict per evaluator, for response and conversation tests. Null for tool-call tests or rows still running
 	JudgeResults optionalnullable.OptionalNullable[[]JudgeResult] `json:"judge_results,omitzero"`
-	// Response-generation latency in ms for the agent under test (not the judge). Present only for live runs; null for in-progress and eval-only runs. Float, since external agents may self-report a fractional value
+	// Response latency in milliseconds for the agent under test
 	LatencyMs optionalnullable.OptionalNullable[float64] `json:"latency_ms,omitzero"`
-	// Per-case cost in USD, lifted from calibrate's nested `output.cost`. Null when the provider/agent reports none (e.g. `--provider openai`)
+	// Cost of this case in USD
 	Cost optionalnullable.OptionalNullable[float64] `json:"cost,omitzero"`
 }
 

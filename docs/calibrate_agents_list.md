@@ -4,7 +4,7 @@ List agents
 
 ### Synopsis
 
-List all agents in your workspace.
+Get the list of all your agents
 
 ```
 calibrate agents list [flags]

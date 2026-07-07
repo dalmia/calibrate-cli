@@ -10,9 +10,9 @@ import (
 type ToolCallOutput struct {
 	// Name of the tool the agent called
 	Tool string `json:"tool"`
-	// Arguments the agent passed to the tool; null if none
+	// Arguments the agent passed to the tool. Null if none
 	Arguments optionalnullable.OptionalNullable[map[string]any] `json:"arguments,omitzero"`
-	// Tool execution result (any JSON value). Present only for agent-connection tests where the external agent runs the tool and echoes its return value; null for calibrate-agent mode (tools are declared, never executed) or agents that don't echo it
+	// Tool execution result (any JSON value). Present only when the agent runs the tool and returns its result
 	Output optionalnullable.OptionalNullable[any] `json:"output,omitzero"`
 }
 

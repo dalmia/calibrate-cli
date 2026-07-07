@@ -15,7 +15,7 @@ import (
 )
 
 var runCmdMeta = []flagutil.FlagMeta{
-	{FlagName: "agent-uuid", Shorthand: "a", FieldPath: "AgentUUID", Kind: flagutil.FlagKindString, Required: true, Description: "The agent to test. Must be in your workspace. [required]"},
+	{FlagName: "agent-uuid", Shorthand: "a", FieldPath: "AgentUUID", Kind: flagutil.FlagKindString, Required: true, Description: "The agent to test. [required]"},
 	{FlagName: "x-api-key", FieldPath: "XAPIKey", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `header:"style=simple,explode=false,name=X-API-Key"`, Description: "string value"},
 	{FlagName: "x-org-uuid", FieldPath: "XOrgUUID", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `header:"style=simple,explode=false,name=X-Org-UUID"`, Description: "string value"},
 	{FlagName: "test-uuids", Shorthand: "t", FieldPath: "Body.TestUuids", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"test_uuids,omitempty"`, Description: "Tests to run. Omit to run all tests linked to the agent"},
@@ -26,7 +26,7 @@ func initRunCmd(parent *cobra.Command) error {
 	var cmd = &cobra.Command{
 		Use:     "run",
 		Short:   "Run agent tests",
-		Long:    "Run tests for an agent as a background job.",
+		Long:    "Run an agent's linked tests as a background job, returning a task ID to poll",
 		Example: "  calibrate agent-tests run --agent-uuid f47ac10b-58cc-4372-a567-0e02b2c3d479",
 		RunE:    runRunCmd,
 	}

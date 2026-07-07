@@ -25,7 +25,7 @@ func initGetCmd(parent *cobra.Command) error {
 	var cmd = &cobra.Command{
 		Use:     "get",
 		Short:   "Get test",
-		Long:    "Get a test by ID, including its linked evaluators.",
+		Long:    "Get an agent test case by its ID",
 		Example: "  calibrate tests get --test-uuid b1c2d3e4-f5a6-7890-bcde-f12345678901",
 		RunE:    runGetCmd,
 	}

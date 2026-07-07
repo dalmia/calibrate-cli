@@ -12,7 +12,7 @@ type BulkTestUploadResponse struct {
 	Uuids []string `json:"uuids"`
 	// Number of tests created
 	Count int64 `json:"count"`
-	// Human-readable confirmation message
+	// Confirmation message
 	Message string `json:"message"`
 	// Non-fatal issues (e.g. agents some tests couldn't link to). Null when there were none
 	Warnings optionalnullable.OptionalNullable[[]string] `json:"warnings,omitzero"`

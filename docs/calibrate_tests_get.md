@@ -4,7 +4,7 @@ Get test
 
 ### Synopsis
 
-Get a test by ID, including its linked evaluators.
+Get an agent test case by its ID
 
 ```
 calibrate tests get [flags]

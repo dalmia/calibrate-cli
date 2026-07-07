@@ -31,7 +31,7 @@ func newAgentTests(rootSDK *SDK, sdkConfig config.SDKConfiguration, hooks *hooks
 }
 
 // Run agent tests
-// Run tests for an agent as a background job.
+// Run an agent's linked tests as a background job, returning a task ID to poll
 func (s *AgentTests) Run(ctx context.Context, request operations.RunAgentTestAgentTestsAgentAgentUUIDRunPostRequest, opts ...operations.Option) (*operations.RunAgentTestAgentTestsAgentAgentUUIDRunPostResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -210,7 +210,7 @@ func (s *AgentTests) Run(ctx context.Context, request operations.RunAgentTestAge
 }
 
 // RunBatch - Run agent tests in batch
-// Run agent tests for every agent in your workspace, or for a selected set.
+// Run agent tests for every agent, or for a selected set
 func (s *AgentTests) RunBatch(ctx context.Context, request *operations.RunTestsBatchAgentTestsRunPostRequest, opts ...operations.Option) (*operations.RunTestsBatchAgentTestsRunPostResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -389,7 +389,7 @@ func (s *AgentTests) RunBatch(ctx context.Context, request *operations.RunTestsB
 }
 
 // GetRun - Get test run status
-// Get the status and results of a test run.
+// Poll a test run for its status and evaluation results
 func (s *AgentTests) GetRun(ctx context.Context, request operations.GetAgentTestRunStatusAgentTestsRunTaskIDGetRequest, opts ...operations.Option) (*operations.GetAgentTestRunStatusAgentTestsRunTaskIDGetResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{

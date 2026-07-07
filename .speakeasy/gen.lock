@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
-id: 74b75432-2023-4f23-9faa-0177a38f4533
+id: 9261a51a-8622-4473-bd4a-c672535b22bc
 management:
-  docChecksum: e66d8f09171456e28f120f85b6943095
+  docChecksum: 1accd6180661de933220be9d9fd2d708
   docVersion: 0.1.0
   speakeasyVersion: 1.788.1
   generationVersion: 2.915.1
-  releaseVersion: 0.0.10
-  configChecksum: 82a5416a8d53da23755f29df85814099
+  releaseVersion: 0.0.11
+  configChecksum: f4e652c9e86d404189be3b95a75e8880
   repoURL: https://github.com/dalmia/calibrate-cli
   installationURL: https://github.com/dalmia/calibrate-cli
 persistentEdits:
-  generation_id: 19d4beb7-2409-4d0a-b519-c8a3af4fe6f6
-  pristine_commit_hash: dc3a62b05a3f26d174b65c250551be13bd2767c0
-  pristine_tree_hash: f0faaaa61c3df6f8d04b483a5ce641cbce470e0e
+  generation_id: 1e8fa41c-74d4-4eef-b712-546b05390f97
+  pristine_commit_hash: 64e1ad2505abddb8723335055f34dc09421da95b
+  pristine_tree_hash: 3bbfde4bd2bfdf53d330cfe0dc596e13064c3abc
 features:
   cli:
     constsAndDefaults: 0.0.0
@@ -134,8 +134,8 @@ trackedFiles:
     pristine_git_object: 23bc3c00fac93ab27a4a3de0bd12581c35c8b68f
   internal/cli/version.go:
     id: 7b0665492f72
-    last_write_checksum: sha1:23373689cdce24a9e45a41ca107fa18bf5fb98d5
-    pristine_git_object: b9eb8e7001e8fb5ac39a819bac26c1a02b16d1c4
+    last_write_checksum: sha1:4d797af0fc734151b3daac456570e0e59be9068d
+    pristine_git_object: 4dbcf324433ac362fd2421e8339b5407fb6380d9
   internal/cli/whoami.go:
     id: c1787f2298ec
     last_write_checksum: sha1:58afb45d777f297af4a64acf26a57c46e1b556db
@@ -226,8 +226,8 @@ trackedFiles:
     pristine_git_object: ecf5299844b584f0462e58517a5f51c1da3c8d44
   internal/sdk/models/components/agenttestruncreateresponse.go:
     id: 40b27e0977c0
-    last_write_checksum: sha1:604f04edd16c1ca24dc3fc51351dcb20521fbc17
-    pristine_git_object: a3cd6120eeec0ad40521246ac74ed39ee05190ab
+    last_write_checksum: sha1:1e5b928f604eea18bffeb8d8f8151ee6c05c8b72
+    pristine_git_object: 394d9a1b9244bf8270c47acaccaf8083fa06255a
   internal/sdk/models/components/agentupdate.go:
     id: fab8f64fedc2
     last_write_checksum: sha1:81d63f282c9c358974bc558dea32a439c9e9123a
@@ -238,8 +238,8 @@ trackedFiles:
     pristine_git_object: b42000090545594b00101d6b027a53cca4a94f7f
   internal/sdk/models/components/batchtestrun.go:
     id: 55595317161d
-    last_write_checksum: sha1:6ccc33f494b133e1e86755b97e22a17e77eda4ae
-    pristine_git_object: f2941bba40c15061fe869b3eefa247af0a7d4c74
+    last_write_checksum: sha1:84d10458f1a0bc690c2270ead67793800f238c52
+    pristine_git_object: 3a435f51ecaf2597d0497cab826fd7f886e6c549
   internal/sdk/models/components/batchtestrunresponse.go:
     id: 98cac8d2a3b7
     last_write_checksum: sha1:01451452261f0587f23914a4c85d894151338c99
@@ -294,8 +294,8 @@ trackedFiles:
     pristine_git_object: 0d0b2f40a911d5a114ea1f57d0ae9747adb40405
   internal/sdk/models/components/routersteststestresponse.go:
     id: 5b2f221ebe85
-    last_write_checksum: sha1:a583c17c28dce620d9b4c236147efd0b317bf1c6
-    pristine_git_object: c3cc7c2811d4be200bcb8c8d66bb68a311962d03
+    last_write_checksum: sha1:8af54ae567e0b91d5ea9af86e07a868bf323776a
+    pristine_git_object: 5a3b7ff0bbdb50f25c86559fbad5c17e5eab7686
   internal/sdk/models/components/runtestrequest.go:
     id: 13f782807601
     last_write_checksum: sha1:f6b2020cce5a38fdb8ae3c4324f0a11744851aa8
@@ -506,8 +506,8 @@ trackedFiles:
     pristine_git_object: 159a87ec97aba99e4edd132f69652e123434303e
   internal/usage/schema.go:
     id: 0f40f4612437
-    last_write_checksum: sha1:2da49f900dc886a866bccecca2afd1898edb3ee7
-    pristine_git_object: 6a280f718ad577525f10660f503d093a7d443dd6
+    last_write_checksum: sha1:6e810f25e2db0772c4760f048c022f0f2506a234
+    pristine_git_object: 8dbd89a90014bc3e3175c030c1dd2a2a0e57bd20
   scripts/install.ps1:
     id: fee0853709e9
     last_write_checksum: sha1:d8884365d7cfb218aac394e16a7d214a6f56b585
@@ -620,7 +620,7 @@ examples:
         application/json: {"test_uuids": ["b1c2d3e4-f5a6-7890-bcde-f12345678901"]}
       responses:
         "200":
-          application/json: {"task_id": "a3b2c1d0-e5f4-3210-abcd-ef1234567890", "status": "in_progress"}
+          application/json: {"task_id": "a3b2c1d0-e5f4-3210-abcd-ef1234567890", "status": "queued"}
         "422":
           application/json: {}
   run_tests_batch_agent_tests_run_post:

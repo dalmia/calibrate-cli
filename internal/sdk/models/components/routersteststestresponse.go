@@ -7,7 +7,7 @@ import (
 	"github.com/dalmia/calibrate-cli/internal/sdk/sdkinternal/utils"
 )
 
-// RoutersTestsTestResponseType - Test kind: `response`, `tool_call`, or `conversation`
+// RoutersTestsTestResponseType - Test kind
 type RoutersTestsTestResponseType string
 
 const (
@@ -36,7 +36,7 @@ type RoutersTestsTestResponse struct {
 	UUID string `json:"uuid"`
 	// Human-readable test name
 	Name string `json:"name"`
-	// Test kind: `response`, `tool_call`, or `conversation`
+	// Test kind
 	Type RoutersTestsTestResponseType `json:"type"`
 	// Calibrate test config (`history`, `evaluation`, optional `settings`)
 	Config optionalnullable.OptionalNullable[map[string]any] `json:"config,omitzero"`

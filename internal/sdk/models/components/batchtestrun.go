@@ -2,14 +2,38 @@
 
 package components
 
+// BatchTestRunStatus - Initial status of the test run
+type BatchTestRunStatus string
+
+const (
+	BatchTestRunStatusQueued     BatchTestRunStatus = "queued"
+	BatchTestRunStatusInProgress BatchTestRunStatus = "in_progress"
+)
+
+func (e BatchTestRunStatus) ToPointer() *BatchTestRunStatus {
+	return &e
+}
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *BatchTestRunStatus) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "queued", "in_progress":
+			return true
+		}
+	}
+	return false
+}
+
 type BatchTestRun struct {
 	// Name of the agent
 	AgentName string `json:"agent_name"`
 	// ID of the agent that was run
 	AgentUUID string `json:"agent_uuid"`
 	// Test run job ID. Poll for status and results
-	TaskID string     `json:"task_id"`
-	Status TaskStatus `json:"status"`
+	TaskID string `json:"task_id"`
+	// Initial status of the test run
+	Status BatchTestRunStatus `json:"status"`
 }
 
 func (b *BatchTestRun) GetAgentName() string {
@@ -33,9 +57,9 @@ func (b *BatchTestRun) GetTaskID() string {
 	return b.TaskID
 }
 
-func (b *BatchTestRun) GetStatus() TaskStatus {
+func (b *BatchTestRun) GetStatus() BatchTestRunStatus {
 	if b == nil {
-		return TaskStatus("")
+		return BatchTestRunStatus("")
 	}
 	return b.Status
 }

@@ -2,10 +2,34 @@
 
 package components
 
+// AgentTestRunCreateResponseStatus - Current status of the test run
+type AgentTestRunCreateResponseStatus string
+
+const (
+	AgentTestRunCreateResponseStatusQueued     AgentTestRunCreateResponseStatus = "queued"
+	AgentTestRunCreateResponseStatusInProgress AgentTestRunCreateResponseStatus = "in_progress"
+)
+
+func (e AgentTestRunCreateResponseStatus) ToPointer() *AgentTestRunCreateResponseStatus {
+	return &e
+}
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *AgentTestRunCreateResponseStatus) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "queued", "in_progress":
+			return true
+		}
+	}
+	return false
+}
+
 type AgentTestRunCreateResponse struct {
 	// Test run job ID. Poll for status and results
-	TaskID string     `json:"task_id"`
-	Status TaskStatus `json:"status"`
+	TaskID string `json:"task_id"`
+	// Current status of the test run
+	Status AgentTestRunCreateResponseStatus `json:"status"`
 }
 
 func (a *AgentTestRunCreateResponse) GetTaskID() string {
@@ -15,9 +39,9 @@ func (a *AgentTestRunCreateResponse) GetTaskID() string {
 	return a.TaskID
 }
 
-func (a *AgentTestRunCreateResponse) GetStatus() TaskStatus {
+func (a *AgentTestRunCreateResponse) GetStatus() AgentTestRunCreateResponseStatus {
 	if a == nil {
-		return TaskStatus("")
+		return AgentTestRunCreateResponseStatus("")
 	}
 	return a.Status
 }

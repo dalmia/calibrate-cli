@@ -2,7 +2,7 @@
 
 package components
 
-// AgentTestRunCreateResponseStatus - Current status of the test run
+// AgentTestRunCreateResponseStatus - Current status of the run
 type AgentTestRunCreateResponseStatus string
 
 const (
@@ -26,9 +26,9 @@ func (e *AgentTestRunCreateResponseStatus) IsExact() bool {
 }
 
 type AgentTestRunCreateResponse struct {
-	// Test run job ID. Poll for status and results
+	// Test run job ID. Poll it for status and results
 	TaskID string `json:"task_id"`
-	// Current status of the test run
+	// Current status of the run
 	Status AgentTestRunCreateResponseStatus `json:"status"`
 }
 

@@ -9,10 +9,9 @@ import (
 )
 
 type UpdateAgentEndpointAgentsAgentUUIDPutRequest struct {
-	// The agent to update.
+	// The agent to update
 	AgentUUID string                                    `pathParam:"style=simple,explode=false,name=agent_uuid"`
 	XAPIKey   optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=X-API-Key"`
-	XOrgUUID  optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=X-Org-UUID"`
 	Body      components.AgentUpdate                    `request:"mediaType=application/json"`
 }
 
@@ -28,13 +27,6 @@ func (u *UpdateAgentEndpointAgentsAgentUUIDPutRequest) GetXAPIKey() optionalnull
 		return nil
 	}
 	return u.XAPIKey
-}
-
-func (u *UpdateAgentEndpointAgentsAgentUUIDPutRequest) GetXOrgUUID() optionalnullable.OptionalNullable[string] {
-	if u == nil {
-		return nil
-	}
-	return u.XOrgUUID
 }
 
 func (u *UpdateAgentEndpointAgentsAgentUUIDPutRequest) GetBody() components.AgentUpdate {

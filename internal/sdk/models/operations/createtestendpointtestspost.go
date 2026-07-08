@@ -9,9 +9,8 @@ import (
 )
 
 type CreateTestEndpointTestsPostRequest struct {
-	XAPIKey  optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=X-API-Key"`
-	XOrgUUID optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=X-Org-UUID"`
-	Body     components.TestCreate                     `request:"mediaType=application/json"`
+	XAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=X-API-Key"`
+	Body    components.TestCreate                     `request:"mediaType=application/json"`
 }
 
 func (c *CreateTestEndpointTestsPostRequest) GetXAPIKey() optionalnullable.OptionalNullable[string] {
@@ -19,13 +18,6 @@ func (c *CreateTestEndpointTestsPostRequest) GetXAPIKey() optionalnullable.Optio
 		return nil
 	}
 	return c.XAPIKey
-}
-
-func (c *CreateTestEndpointTestsPostRequest) GetXOrgUUID() optionalnullable.OptionalNullable[string] {
-	if c == nil {
-		return nil
-	}
-	return c.XOrgUUID
 }
 
 func (c *CreateTestEndpointTestsPostRequest) GetBody() components.TestCreate {

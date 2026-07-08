@@ -13,26 +13,26 @@ calibrate tests bulk-create [flags]
 ### Examples
 
 ```
-  calibrate tests bulk-create --type tool_call --tests '[{"name":"<value>","conversation_history":[{"role":"tool"}],"evaluators":[{"evaluator_uuid":"f47ac10b-58cc-4372-a567-0e02b2c3d479"}]}]'
+  calibrate tests bulk-create --type tool_call --tests '[{"name":"<value>","conversation_history":[{"role":"tool"}],"evaluators":[{"evaluator_uuid":"f47ac10b-58cc-4372-a567-0e02b2c3d479","variable_values":{"criteria":"The reply must cite the refund window"} }]}]'
 ```
 
 ### Options
 
 ```
-  -a, --agent-uuids string                  Agents (IDs) to link every created test to. Omit to link none
+  -a, --agent-uuids string                  IDs of agents to link every created test to. Omit to link none
       --body string                         Request body as JSON (alternative to individual flags). Can also be provided via stdin.
   -h, --help                                help for bulk-create
   -l, --language config.settings.language   Language written to each test's config.settings.language. Omit to leave unset
-      --tests string                        Test items to create (non-empty, max 500 per request, names unique within the batch) [required]
+      --tests string                        Test items to create, at most 500 per request, with names unique within the batch [required]
       --type response                       What the test judges:
                                             
                                             - response: judges the generated reply
                                             - `tool_call`: diffs the generated tool calls
                                             - `conversation`: judges the full conversation
                                             
-                                            Applied to every test in the batch. (options: response, tool_call, conversation) [required]
-      --x-api-key string                    string value
-      --x-org-uuid string                   string value
+                                            
+                                            Applied to every test in the batch (options: response, tool_call, conversation) [required]
+  -x, --x-api-key string                    string value
 ```
 
 ### Options inherited from parent commands

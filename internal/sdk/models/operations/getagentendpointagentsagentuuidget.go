@@ -9,10 +9,9 @@ import (
 )
 
 type GetAgentEndpointAgentsAgentUUIDGetRequest struct {
-	// The agent to retrieve.
+	// The agent to retrieve
 	AgentUUID string                                    `pathParam:"style=simple,explode=false,name=agent_uuid"`
 	XAPIKey   optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=X-API-Key"`
-	XOrgUUID  optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=X-Org-UUID"`
 }
 
 func (g *GetAgentEndpointAgentsAgentUUIDGetRequest) GetAgentUUID() string {
@@ -27,13 +26,6 @@ func (g *GetAgentEndpointAgentsAgentUUIDGetRequest) GetXAPIKey() optionalnullabl
 		return nil
 	}
 	return g.XAPIKey
-}
-
-func (g *GetAgentEndpointAgentsAgentUUIDGetRequest) GetXOrgUUID() optionalnullable.OptionalNullable[string] {
-	if g == nil {
-		return nil
-	}
-	return g.XOrgUUID
 }
 
 type GetAgentEndpointAgentsAgentUUIDGetResponse struct {

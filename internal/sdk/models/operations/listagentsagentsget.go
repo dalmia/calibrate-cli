@@ -9,8 +9,7 @@ import (
 )
 
 type ListAgentsAgentsGetRequest struct {
-	XAPIKey  optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=X-API-Key"`
-	XOrgUUID optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=X-Org-UUID"`
+	XAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=X-API-Key"`
 }
 
 func (l *ListAgentsAgentsGetRequest) GetXAPIKey() optionalnullable.OptionalNullable[string] {
@@ -18,13 +17,6 @@ func (l *ListAgentsAgentsGetRequest) GetXAPIKey() optionalnullable.OptionalNulla
 		return nil
 	}
 	return l.XAPIKey
-}
-
-func (l *ListAgentsAgentsGetRequest) GetXOrgUUID() optionalnullable.OptionalNullable[string] {
-	if l == nil {
-		return nil
-	}
-	return l.XOrgUUID
 }
 
 type ListAgentsAgentsGetResponse struct {

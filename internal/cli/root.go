@@ -6,6 +6,8 @@ import (
 	"fmt"
 	"github.com/dalmia/calibrate-cli/internal/cli/agents"
 	"github.com/dalmia/calibrate-cli/internal/cli/agenttests"
+	"github.com/dalmia/calibrate-cli/internal/cli/annotationtasks"
+	"github.com/dalmia/calibrate-cli/internal/cli/evaluators"
 	"github.com/dalmia/calibrate-cli/internal/cli/tests"
 	"github.com/dalmia/calibrate-cli/internal/config"
 	"github.com/dalmia/calibrate-cli/internal/explorer"
@@ -57,6 +59,12 @@ func NewRootCommand() (*cobra.Command, error) {
 	}
 	if err := agenttests.InitAgentTestsRoot(rootCmd); err != nil {
 		return nil, fmt.Errorf("init agent-tests: %w", err)
+	}
+	if err := evaluators.InitEvaluatorsRoot(rootCmd); err != nil {
+		return nil, fmt.Errorf("init evaluators: %w", err)
+	}
+	if err := annotationtasks.InitAnnotationTasksRoot(rootCmd); err != nil {
+		return nil, fmt.Errorf("init annotation-tasks: %w", err)
 	}
 	if err := initConfigureCmd(rootCmd); err != nil {
 		return nil, fmt.Errorf("init configure: %w", err)

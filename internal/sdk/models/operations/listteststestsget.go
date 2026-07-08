@@ -9,8 +9,7 @@ import (
 )
 
 type ListTestsTestsGetRequest struct {
-	XAPIKey  optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=X-API-Key"`
-	XOrgUUID optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=X-Org-UUID"`
+	XAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=X-API-Key"`
 }
 
 func (l *ListTestsTestsGetRequest) GetXAPIKey() optionalnullable.OptionalNullable[string] {
@@ -18,13 +17,6 @@ func (l *ListTestsTestsGetRequest) GetXAPIKey() optionalnullable.OptionalNullabl
 		return nil
 	}
 	return l.XAPIKey
-}
-
-func (l *ListTestsTestsGetRequest) GetXOrgUUID() optionalnullable.OptionalNullable[string] {
-	if l == nil {
-		return nil
-	}
-	return l.XOrgUUID
 }
 
 type ListTestsTestsGetResponse struct {

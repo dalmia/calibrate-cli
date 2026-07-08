@@ -15,7 +15,7 @@ import (
 // - `tool_call`: diffs the generated tool calls
 // - `conversation`: judges the full conversation
 //
-// Applied to every test in the batch.
+// Applied to every test in the batch
 type BulkTestUploadType string
 
 const (
@@ -52,11 +52,12 @@ type BulkTestUpload struct {
 	// - `tool_call`: diffs the generated tool calls
 	// - `conversation`: judges the full conversation
 	//
-	// Applied to every test in the batch.
+	//
+	// Applied to every test in the batch
 	Type BulkTestUploadType `json:"type"`
-	// Test items to create (non-empty, max 500 per request, names unique within the batch)
+	// Test items to create, at most 500 per request, with names unique within the batch
 	Tests []BulkTestItem `json:"tests"`
-	// Agents (IDs) to link every created test to. Omit to link none
+	// IDs of agents to link every created test to. Omit to link none
 	AgentUuids optionalnullable.OptionalNullable[[]string] `json:"agent_uuids,omitzero"`
 	// Language written to each test's `config.settings.language`. Omit to leave unset
 	Language optionalnullable.OptionalNullable[string] `json:"language,omitzero"`

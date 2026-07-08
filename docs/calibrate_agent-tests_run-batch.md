@@ -4,7 +4,7 @@ Run agent tests in batch
 
 ### Synopsis
 
-Run agent tests for every agent, or for a selected set
+Run agent tests for every agent, or for a selected set.
 
 ```
 calibrate agent-tests run-batch [flags]
@@ -22,8 +22,7 @@ calibrate agent-tests run-batch [flags]
       --body string         Request body as JSON (alternative to individual flags). Can also be provided via stdin.
   -b, --body-param string   JSON object
   -h, --help                help for run-batch
-      --x-api-key string    string value
-      --x-org-uuid string   string value
+  -x, --x-api-key string    string value
 ```
 
 ### Options inherited from parent commands

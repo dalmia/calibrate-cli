@@ -47,13 +47,14 @@ type TestUpdate struct {
 	// - `tool_call`: diffs the generated tool calls
 	// - `conversation`: judges the full conversation
 	//
-	// Immutable. Omit, or send the existing value. A different value is rejected (400).
+	//
+	// Immutable. Omit it, or send the current value
 	Type optionalnullable.OptionalNullable[TestUpdateType] `json:"type,omitzero"`
 	// The calibrate test config. Three top-level keys.
 	//
-	// - `history` (array, required): the conversation up to the agent's turn. Each item is `{role, content}` with `role` one of `user`, `assistant`, `tool`. A `tool` message also carries `tool_call_id` and `name`.
-	// - `evaluation` (object, required): `{type, ...}`, where `type` matches the test's `type` (below).
-	// - `settings` (object, optional): e.g. `{"language": "en"}`.
+	// - `history`: the required conversation up to the agent's turn. Each item is `{role, content}` with `role` one of `user`, `assistant`, `tool`. A `tool` message also carries `tool_call_id` and `name`.
+	// - `evaluation`: the required `{type, ...}`, where `type` matches the test's `type` below.
+	// - `settings`: an optional object, e.g. `{"language": "en"}`.
 	//
 	// `evaluation` by test type:
 	// - `response`: judge the agent's reply, graded by the linked evaluators. `{"type": "response"}`
@@ -96,7 +97,7 @@ type TestUpdate struct {
 	//
 	// Evaluators are linked via the separate `evaluators` field, not inside `config`.
 	//
-	// Replaces the stored config. Omit to leave unchanged.
+	// Replaces the stored config. Omit to leave unchanged
 	Config optionalnullable.OptionalNullable[map[string]any] `json:"config,omitzero"`
 	// New evaluator links for the test. Omit to leave unchanged. An empty list clears them, except on `conversation` tests, which must keep at least one
 	Evaluators optionalnullable.OptionalNullable[[]RoutersTestsEvaluatorRef] `json:"evaluators,omitzero"`

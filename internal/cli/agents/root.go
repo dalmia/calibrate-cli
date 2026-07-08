@@ -20,6 +20,10 @@ func InitAgentsRoot(parent *cobra.Command) error {
 		},
 	}
 
+	if err := initVerifyConnectionCmd(AgentsCmd); err != nil {
+		return err
+	}
+
 	if err := initResolveCmd(AgentsCmd); err != nil {
 		return err
 	}

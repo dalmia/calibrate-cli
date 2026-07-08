@@ -45,12 +45,13 @@ type RoutersTestsTestResponse struct {
 	// - `response`: judges the generated reply
 	// - `tool_call`: diffs the generated tool calls
 	// - `conversation`: judges the full conversation
+	//
 	Type RoutersTestsTestResponseType `json:"type"`
-	// Config for the test (`history`, `evaluation`, optional `settings`)
+	// The stored config: `history`, `evaluation`, and an optional `settings`
 	Config optionalnullable.OptionalNullable[map[string]any] `json:"config,omitzero"`
-	// Timestamp when the test was created (ISO 8601 UTC)
+	// When the test was created (ISO 8601 UTC)
 	CreatedAt string `json:"created_at"`
-	// Timestamp when the test was last updated (ISO 8601 UTC)
+	// When the test was last updated (ISO 8601 UTC)
 	UpdatedAt string `json:"updated_at"`
 	// Linked evaluators, resolved to their current live version at read time
 	Evaluators []map[string]any `json:"evaluators,omitzero"`

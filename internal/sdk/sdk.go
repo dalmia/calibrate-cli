@@ -50,10 +50,12 @@ func Pointer[T any](v T) *T { return &v }
 
 // SDK - Calibrate Public API: Programmatic API for CI/automation. Pass your key in the `X-API-Key` header.
 type SDK struct {
-	SDKVersion string
-	Agents     *Agents
-	Tests      *Tests
-	AgentTests *AgentTests
+	SDKVersion      string
+	Agents          *Agents
+	Tests           *Tests
+	AgentTests      *AgentTests
+	Evaluators      *Evaluators
+	AnnotationTasks *AnnotationTasks
 
 	sdkConfiguration config.SDKConfiguration
 	hooks            *hooks.Hooks
@@ -150,6 +152,8 @@ func New(opts ...SDKOption) *SDK {
 	sdk.Agents = newAgents(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Tests = newTests(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.AgentTests = newAgentTests(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.Evaluators = newEvaluators(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.AnnotationTasks = newAnnotationTasks(sdk, sdk.sdkConfiguration, sdk.hooks)
 
 	return sdk
 }

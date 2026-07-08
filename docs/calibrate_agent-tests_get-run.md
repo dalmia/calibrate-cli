@@ -4,7 +4,7 @@ Get test run status
 
 ### Synopsis
 
-Poll a test run for its status and evaluation results
+Poll a test run for its status and evaluation results.
 
 ```
 calibrate agent-tests get-run [flags]
@@ -19,10 +19,9 @@ calibrate agent-tests get-run [flags]
 ### Options
 
 ```
-  -h, --help                help for get-run
-  -t, --task-id string      Test run to poll for status and results [required]
-      --x-api-key string    string value
-      --x-org-uuid string   string value
+  -h, --help               help for get-run
+  -t, --task-id string     Test run to poll for status and results [required]
+  -x, --x-api-key string   string value
 ```
 
 ### Options inherited from parent commands

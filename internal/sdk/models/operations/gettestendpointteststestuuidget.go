@@ -12,7 +12,6 @@ type GetTestEndpointTestsTestUUIDGetRequest struct {
 	// Test to retrieve
 	TestUUID string                                    `pathParam:"style=simple,explode=false,name=test_uuid"`
 	XAPIKey  optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=X-API-Key"`
-	XOrgUUID optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=X-Org-UUID"`
 }
 
 func (g *GetTestEndpointTestsTestUUIDGetRequest) GetTestUUID() string {
@@ -27,13 +26,6 @@ func (g *GetTestEndpointTestsTestUUIDGetRequest) GetXAPIKey() optionalnullable.O
 		return nil
 	}
 	return g.XAPIKey
-}
-
-func (g *GetTestEndpointTestsTestUUIDGetRequest) GetXOrgUUID() optionalnullable.OptionalNullable[string] {
-	if g == nil {
-		return nil
-	}
-	return g.XOrgUUID
 }
 
 type GetTestEndpointTestsTestUUIDGetResponse struct {

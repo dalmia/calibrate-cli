@@ -34,8 +34,10 @@ calibrate [flags]
 
 * [calibrate agent-tests](calibrate_agent-tests.md)	 - Operations for agent-tests
 * [calibrate agents](calibrate_agents.md)	 - Operations for agents
+* [calibrate annotation-tasks](calibrate_annotation-tasks.md)	 - Operations for annotation-tasks
 * [calibrate auth](calibrate_auth.md)	 - Manage authentication credentials
 * [calibrate configure](calibrate_configure.md)	 - Configure authentication credentials and preferences
+* [calibrate evaluators](calibrate_evaluators.md)	 - Operations for evaluators
 * [calibrate explore](calibrate_explore.md)	 - Interactively browse and run commands
 * [calibrate tests](calibrate_tests.md)	 - Operations for tests
 * [calibrate version](calibrate_version.md)	 - Print the CLI version

@@ -22,9 +22,9 @@ calibrate tests create [flags]
       --body string            Request body as JSON (alternative to individual flags). Can also be provided via stdin.
   -c, --config-param history   The calibrate test config. Three top-level keys.
                                
-                               - history (array, required): the conversation up to the agent's turn. Each item is `{role, content}` with `role` one of `user`, `assistant`, `tool`. A `tool` message also carries `tool_call_id` and `name`.
-                               - `evaluation` (object, required): `{type, ...}`, where `type` matches the test's `type` (below).
-                               - `settings` (object, optional): e.g. `{"language": "en"}`.
+                               - history: the required conversation up to the agent's turn. Each item is `{role, content}` with `role` one of `user`, `assistant`, `tool`. A `tool` message also carries `tool_call_id` and `name`.
+                               - `evaluation`: the required `{type, ...}`, where `type` matches the test's `type` below.
+                               - `settings`: an optional object, e.g. `{"language": "en"}`.
                                
                                `evaluation` by test type:
                                - `response`: judge the agent's reply, graded by the linked evaluators. `{"type": "response"}`
@@ -67,7 +67,7 @@ calibrate tests create [flags]
                                
                                Evaluators are linked via the separate `evaluators` field, not inside `config`.
                                
-                               Omit to create the test with no config and fill it in later via update.
+                               Omit to create the test with no config and fill it in later via update
   -e, --evaluators response    Evaluators to link. Used by response and `conversation` tests
   -h, --help                   help for create
   -n, --name string            Name of the test, unique within the workspace [required]
@@ -75,9 +75,9 @@ calibrate tests create [flags]
                                
                                - response: judges the generated reply
                                - `tool_call`: diffs the generated tool calls
-                               - `conversation`: judges the full conversation (options: response, tool_call, conversation) [required]
-      --x-api-key string       string value
-      --x-org-uuid string      string value
+                               - `conversation`: judges the full conversation
+                                (options: response, tool_call, conversation) [required]
+  -x, --x-api-key string       string value
 ```
 
 ### Options inherited from parent commands

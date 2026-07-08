@@ -2,7 +2,7 @@
 
 package components
 
-// BatchTestRunStatus - Initial status of the test run
+// BatchTestRunStatus - Current status of the run
 type BatchTestRunStatus string
 
 const (
@@ -30,9 +30,9 @@ type BatchTestRun struct {
 	AgentName string `json:"agent_name"`
 	// ID of the agent that was run
 	AgentUUID string `json:"agent_uuid"`
-	// Test run job ID. Poll for status and results
+	// Test run job ID. Poll it for status and results
 	TaskID string `json:"task_id"`
-	// Initial status of the test run
+	// Current status of the run
 	Status BatchTestRunStatus `json:"status"`
 }
 

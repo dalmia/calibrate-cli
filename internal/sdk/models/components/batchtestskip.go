@@ -2,13 +2,40 @@
 
 package components
 
+// Reason - Why this agent was not run:
+// - `no_linked_tests`: the agent has no tests linked
+// - `connection_not_verified`: the agent's connection is not verified
+type Reason string
+
+const (
+	ReasonNoLinkedTests         Reason = "no_linked_tests"
+	ReasonConnectionNotVerified Reason = "connection_not_verified"
+)
+
+func (e Reason) ToPointer() *Reason {
+	return &e
+}
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *Reason) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "no_linked_tests", "connection_not_verified":
+			return true
+		}
+	}
+	return false
+}
+
 type BatchTestSkip struct {
 	// Name of the skipped agent
 	AgentName string `json:"agent_name"`
 	// ID of the skipped agent
 	AgentUUID string `json:"agent_uuid"`
-	// Why this agent was not run
-	Reason string `json:"reason"`
+	// Why this agent was not run:
+	// - `no_linked_tests`: the agent has no tests linked
+	// - `connection_not_verified`: the agent's connection is not verified
+	Reason Reason `json:"reason"`
 }
 
 func (b *BatchTestSkip) GetAgentName() string {
@@ -25,9 +52,9 @@ func (b *BatchTestSkip) GetAgentUUID() string {
 	return b.AgentUUID
 }
 
-func (b *BatchTestSkip) GetReason() string {
+func (b *BatchTestSkip) GetReason() Reason {
 	if b == nil {
-		return ""
+		return Reason("")
 	}
 	return b.Reason
 }

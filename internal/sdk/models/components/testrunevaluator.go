@@ -7,19 +7,19 @@ import (
 	"github.com/dalmia/calibrate-cli/internal/sdk/sdkinternal/utils"
 )
 
-type OutputType string
+type TestRunEvaluatorOutputType string
 
 const (
-	OutputTypeBinary OutputType = "binary"
-	OutputTypeRating OutputType = "rating"
+	TestRunEvaluatorOutputTypeBinary TestRunEvaluatorOutputType = "binary"
+	TestRunEvaluatorOutputTypeRating TestRunEvaluatorOutputType = "rating"
 )
 
-func (e OutputType) ToPointer() *OutputType {
+func (e TestRunEvaluatorOutputType) ToPointer() *TestRunEvaluatorOutputType {
 	return &e
 }
 
 // IsExact returns true if the value matches a known enum value, false otherwise.
-func (e *OutputType) IsExact() bool {
+func (e *TestRunEvaluatorOutputType) IsExact() bool {
 	if e != nil {
 		switch *e {
 		case "binary", "rating":
@@ -36,15 +36,17 @@ type TestRunEvaluator struct {
 	Name optionalnullable.OptionalNullable[string] `json:"name,omitzero"`
 	// What the evaluator checks
 	Description optionalnullable.OptionalNullable[string] `json:"description,omitzero"`
-	// Verdict shape: pass/fail or a numeric rating
-	OutputType optionalnullable.OptionalNullable[OutputType] `json:"output_type,omitzero"`
-	// Rubric: the scale values, labels, and colors a verdict maps to
+	// The shape of the verdict:
+	// - `binary`: a pass/fail verdict
+	// - `rating`: a numeric score
+	OutputType optionalnullable.OptionalNullable[TestRunEvaluatorOutputType] `json:"output_type,omitzero"`
+	// The rubric: the scale values, labels, and colors a verdict maps to
 	OutputConfig optionalnullable.OptionalNullable[map[string]any] `json:"output_config,omitzero"`
-	// Lowest rating value. Set for rating evaluators
+	// Lowest value on a rating scale
 	ScaleMin optionalnullable.OptionalNullable[float64] `json:"scale_min,omitzero"`
-	// Highest rating value. Set for rating evaluators
+	// Highest value on a rating scale
 	ScaleMax optionalnullable.OptionalNullable[float64] `json:"scale_max,omitzero"`
-	// Evaluator version this run used
+	// The evaluator version this run used
 	VersionNumber optionalnullable.OptionalNullable[int64] `json:"version_number,omitzero"`
 }
 
@@ -80,7 +82,7 @@ func (t *TestRunEvaluator) GetDescription() optionalnullable.OptionalNullable[st
 	return t.Description
 }
 
-func (t *TestRunEvaluator) GetOutputType() optionalnullable.OptionalNullable[OutputType] {
+func (t *TestRunEvaluator) GetOutputType() optionalnullable.OptionalNullable[TestRunEvaluatorOutputType] {
 	if t == nil {
 		return nil
 	}

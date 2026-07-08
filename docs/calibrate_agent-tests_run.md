@@ -4,7 +4,7 @@ Run agent tests
 
 ### Synopsis
 
-Run an agent's linked tests as a background job, returning a task ID to poll
+Run an agent's linked tests as a background job, returning a task ID to poll.
 
 ```
 calibrate agent-tests run [flags]
@@ -19,12 +19,11 @@ calibrate agent-tests run [flags]
 ### Options
 
 ```
-  -a, --agent-uuid string   The agent to test. [required]
+  -a, --agent-uuid string   Agent to test [required]
       --body string         Request body as JSON (alternative to individual flags). Can also be provided via stdin.
   -h, --help                help for run
   -t, --test-uuids string   Tests to run. Omit to run all tests linked to the agent
-      --x-api-key string    string value
-      --x-org-uuid string   string value
+  -x, --x-api-key string    string value
 ```
 
 ### Options inherited from parent commands

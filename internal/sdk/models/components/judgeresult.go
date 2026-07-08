@@ -10,15 +10,15 @@ import (
 type JudgeResult struct {
 	// ID of the evaluator that produced this verdict
 	EvaluatorUUID optionalnullable.OptionalNullable[string] `json:"evaluator_uuid,omitzero"`
-	// Judge's rationale for this verdict
+	// The judge's rationale for this verdict
 	Reasoning optionalnullable.OptionalNullable[string] `json:"reasoning,omitzero"`
-	// Pass/fail verdict, for binary evaluators
+	// Pass/fail verdict, set for binary evaluators
 	Match optionalnullable.OptionalNullable[bool] `json:"match,omitzero"`
-	// Numeric score, for rating evaluators
+	// Numeric score, set for rating evaluators
 	Score optionalnullable.OptionalNullable[float64] `json:"score,omitzero"`
-	// Readable label for the verdict, from the run's rubric
+	// Readable label for the verdict, taken from the run's rubric
 	ValueName optionalnullable.OptionalNullable[string] `json:"value_name,omitzero"`
-	// `{{var}}` substitutions used for this evaluator on this test case
+	// Values filled into the evaluator prompt's `{{variable}}` placeholders for this test case, keyed by variable name
 	VariableValues optionalnullable.OptionalNullable[map[string]any] `json:"variable_values,omitzero"`
 }
 

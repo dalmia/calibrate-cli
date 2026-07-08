@@ -9,10 +9,9 @@ import (
 )
 
 type RunAgentTestAgentTestsAgentAgentUUIDRunPostRequest struct {
-	// The agent to test.
+	// Agent to test
 	AgentUUID string                                    `pathParam:"style=simple,explode=false,name=agent_uuid"`
 	XAPIKey   optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=X-API-Key"`
-	XOrgUUID  optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=X-Org-UUID"`
 	Body      components.RunTestRequest                 `request:"mediaType=application/json"`
 }
 
@@ -28,13 +27,6 @@ func (r *RunAgentTestAgentTestsAgentAgentUUIDRunPostRequest) GetXAPIKey() option
 		return nil
 	}
 	return r.XAPIKey
-}
-
-func (r *RunAgentTestAgentTestsAgentAgentUUIDRunPostRequest) GetXOrgUUID() optionalnullable.OptionalNullable[string] {
-	if r == nil {
-		return nil
-	}
-	return r.XOrgUUID
 }
 
 func (r *RunAgentTestAgentTestsAgentAgentUUIDRunPostRequest) GetBody() components.RunTestRequest {

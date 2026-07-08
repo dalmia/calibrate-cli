@@ -11,27 +11,27 @@ type TestRunStatusResponse struct {
 	// Test run job ID
 	TaskID string     `json:"task_id"`
 	Status TaskStatus `json:"status"`
-	// Total number of test cases. Null until known
+	// Total number of test cases
 	TotalTests optionalnullable.OptionalNullable[int64] `json:"total_tests,omitzero"`
-	// Number of test cases that passed. Null until done
+	// Number of test cases that passed
 	Passed optionalnullable.OptionalNullable[int64] `json:"passed,omitzero"`
-	// Number of test cases that failed. Null until done
+	// Number of test cases that failed
 	Failed optionalnullable.OptionalNullable[int64] `json:"failed,omitzero"`
-	// Aggregated response latency in milliseconds: `{p50, p95, p99, count}`
+	// Aggregated response latency in milliseconds, as `{p50, p95, p99, count}`
 	LatencyMs optionalnullable.OptionalNullable[map[string]any] `json:"latency_ms,omitzero"`
-	// Aggregated cost `{mean, min, max, count}` (USD)
+	// Aggregated cost as `{mean, min, max, count}` (USD)
 	Cost optionalnullable.OptionalNullable[map[string]any] `json:"cost,omitzero"`
-	// Aggregated token usage `{mean, min, max, count}`
+	// Aggregated token usage as `{mean, min, max, count}`
 	TotalTokens optionalnullable.OptionalNullable[map[string]any] `json:"total_tokens,omitzero"`
 	// The evaluators used in this run. Each verdict in `judge_results` links to one of these by `evaluator_uuid`
 	Evaluators optionalnullable.OptionalNullable[[]TestRunEvaluator] `json:"evaluators,omitzero"`
-	// Results for each test case. Null until available
+	// Results for each test case
 	Results optionalnullable.OptionalNullable[[]TestCaseResult] `json:"results,omitzero"`
 	// True if the run failed
 	Error *bool `default:"false" json:"error"`
 	// Whether the run is shared publicly
 	IsPublic *bool `default:"false" json:"is_public"`
-	// Public share token. Null unless the run is public
+	// Token for building the public share URL
 	ShareToken optionalnullable.OptionalNullable[string] `json:"share_token,omitzero"`
 }
 

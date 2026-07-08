@@ -15,8 +15,7 @@ import (
 )
 
 var listCmdMeta = []flagutil.FlagMeta{
-	{FlagName: "x-api-key", FieldPath: "XAPIKey", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `header:"style=simple,explode=false,name=X-API-Key"`, Description: "string value"},
-	{FlagName: "x-org-uuid", FieldPath: "XOrgUUID", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `header:"style=simple,explode=false,name=X-Org-UUID"`, Description: "string value"},
+	{FlagName: "x-api-key", Shorthand: "x", FieldPath: "XAPIKey", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `header:"style=simple,explode=false,name=X-API-Key"`, Description: "string value"},
 }
 
 // initListCmd initializes the list command.

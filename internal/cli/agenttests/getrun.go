@@ -16,8 +16,7 @@ import (
 
 var getRunCmdMeta = []flagutil.FlagMeta{
 	{FlagName: "task-id", Shorthand: "t", FieldPath: "TaskID", Kind: flagutil.FlagKindString, Required: true, Description: "Test run to poll for status and results [required]"},
-	{FlagName: "x-api-key", FieldPath: "XAPIKey", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `header:"style=simple,explode=false,name=X-API-Key"`, Description: "string value"},
-	{FlagName: "x-org-uuid", FieldPath: "XOrgUUID", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `header:"style=simple,explode=false,name=X-Org-UUID"`, Description: "string value"},
+	{FlagName: "x-api-key", Shorthand: "x", FieldPath: "XAPIKey", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `header:"style=simple,explode=false,name=X-API-Key"`, Description: "string value"},
 }
 
 // initGetRunCmd initializes the get-run command.
@@ -25,7 +24,7 @@ func initGetRunCmd(parent *cobra.Command) error {
 	var cmd = &cobra.Command{
 		Use:     "get-run",
 		Short:   "Get test run status",
-		Long:    "Poll a test run for its status and evaluation results",
+		Long:    "Poll a test run for its status and evaluation results.",
 		Example: "  calibrate agent-tests get-run --task-id a3b2c1d0-e5f4-3210-abcd-ef1234567890",
 		RunE:    runGetRunCmd,
 		Aliases: []string{"gr"},

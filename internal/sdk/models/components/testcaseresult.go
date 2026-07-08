@@ -12,19 +12,19 @@ type TestCaseResult struct {
 	TestCaseID optionalnullable.OptionalNullable[string] `json:"test_case_id,omitzero"`
 	// Name of the test
 	Name optionalnullable.OptionalNullable[string] `json:"name,omitzero"`
-	// Whether the case passed. Present only when done
+	// Whether the case passed
 	Passed optionalnullable.OptionalNullable[bool] `json:"passed,omitzero"`
-	// Judge reasoning, or the tool-call diff for tool-call tests
+	// The judge's reasoning, or the tool-call diff for a tool-call test
 	Reasoning optionalnullable.OptionalNullable[string] `json:"reasoning,omitzero"`
-	// The agent's output for this case. Present only when done
+	// The agent's output for this case
 	Output optionalnullable.OptionalNullable[TestOutput] `json:"output,omitzero"`
-	// The input test case definition. Present only when done
+	// The test case definition that was run
 	TestCase optionalnullable.OptionalNullable[map[string]any] `json:"test_case,omitzero"`
-	// One verdict per evaluator, for response and conversation tests. Null for tool-call tests or rows still running
+	// One verdict for each evaluator
 	JudgeResults optionalnullable.OptionalNullable[[]JudgeResult] `json:"judge_results,omitzero"`
-	// Response latency in milliseconds for the agent under test
+	// How long the agent took to respond, in milliseconds
 	LatencyMs optionalnullable.OptionalNullable[float64] `json:"latency_ms,omitzero"`
-	// Cost of this case in USD
+	// Cost of this case (USD)
 	Cost optionalnullable.OptionalNullable[float64] `json:"cost,omitzero"`
 }
 

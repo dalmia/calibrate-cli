@@ -10,9 +10,8 @@ import (
 
 type GetAgentTestRunStatusAgentTestsRunTaskIDGetRequest struct {
 	// Test run to poll for status and results
-	TaskID   string                                    `pathParam:"style=simple,explode=false,name=task_id"`
-	XAPIKey  optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=X-API-Key"`
-	XOrgUUID optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=X-Org-UUID"`
+	TaskID  string                                    `pathParam:"style=simple,explode=false,name=task_id"`
+	XAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=X-API-Key"`
 }
 
 func (g *GetAgentTestRunStatusAgentTestsRunTaskIDGetRequest) GetTaskID() string {
@@ -27,13 +26,6 @@ func (g *GetAgentTestRunStatusAgentTestsRunTaskIDGetRequest) GetXAPIKey() option
 		return nil
 	}
 	return g.XAPIKey
-}
-
-func (g *GetAgentTestRunStatusAgentTestsRunTaskIDGetRequest) GetXOrgUUID() optionalnullable.OptionalNullable[string] {
-	if g == nil {
-		return nil
-	}
-	return g.XOrgUUID
 }
 
 type GetAgentTestRunStatusAgentTestsRunTaskIDGetResponse struct {

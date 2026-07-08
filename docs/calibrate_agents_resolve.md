@@ -22,8 +22,7 @@ calibrate agents resolve [flags]
       --body string         Request body as JSON (alternative to individual flags). Can also be provided via stdin.
   -h, --help                help for resolve
   -n, --names stringArray   Agent names to resolve to IDs [required]
-      --x-api-key string    string value
-      --x-org-uuid string   string value
+  -x, --x-api-key string    string value
 ```
 
 ### Options inherited from parent commands

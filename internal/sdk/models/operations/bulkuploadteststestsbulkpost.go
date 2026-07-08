@@ -9,9 +9,8 @@ import (
 )
 
 type BulkUploadTestsTestsBulkPostRequest struct {
-	XAPIKey  optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=X-API-Key"`
-	XOrgUUID optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=X-Org-UUID"`
-	Body     components.BulkTestUpload                 `request:"mediaType=application/json"`
+	XAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=X-API-Key"`
+	Body    components.BulkTestUpload                 `request:"mediaType=application/json"`
 }
 
 func (b *BulkUploadTestsTestsBulkPostRequest) GetXAPIKey() optionalnullable.OptionalNullable[string] {
@@ -19,13 +18,6 @@ func (b *BulkUploadTestsTestsBulkPostRequest) GetXAPIKey() optionalnullable.Opti
 		return nil
 	}
 	return b.XAPIKey
-}
-
-func (b *BulkUploadTestsTestsBulkPostRequest) GetXOrgUUID() optionalnullable.OptionalNullable[string] {
-	if b == nil {
-		return nil
-	}
-	return b.XOrgUUID
 }
 
 func (b *BulkUploadTestsTestsBulkPostRequest) GetBody() components.BulkTestUpload {

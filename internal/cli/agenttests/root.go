@@ -21,6 +21,18 @@ func InitAgentTestsRoot(parent *cobra.Command) error {
 		Aliases: []string{"at"},
 	}
 
+	if err := initLinkCmd(AgentTestsCmd); err != nil {
+		return err
+	}
+
+	if err := initListForAgentCmd(AgentTestsCmd); err != nil {
+		return err
+	}
+
+	if err := initListRunsForAgentCmd(AgentTestsCmd); err != nil {
+		return err
+	}
+
 	if err := initRunCmd(AgentTestsCmd); err != nil {
 		return err
 	}
@@ -30,6 +42,14 @@ func InitAgentTestsRoot(parent *cobra.Command) error {
 	}
 
 	if err := initGetRunCmd(AgentTestsCmd); err != nil {
+		return err
+	}
+
+	if err := initBenchmarkCmd(AgentTestsCmd); err != nil {
+		return err
+	}
+
+	if err := initGetBenchmarkCmd(AgentTestsCmd); err != nil {
 		return err
 	}
 

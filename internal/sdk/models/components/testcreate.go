@@ -51,12 +51,13 @@ type TestCreate struct {
 	// - `response`: judges the generated reply
 	// - `tool_call`: diffs the generated tool calls
 	// - `conversation`: judges the full conversation
+	//
 	Type TestCreateType `json:"type"`
 	// The calibrate test config. Three top-level keys.
 	//
-	// - `history` (array, required): the conversation up to the agent's turn. Each item is `{role, content}` with `role` one of `user`, `assistant`, `tool`. A `tool` message also carries `tool_call_id` and `name`.
-	// - `evaluation` (object, required): `{type, ...}`, where `type` matches the test's `type` (below).
-	// - `settings` (object, optional): e.g. `{"language": "en"}`.
+	// - `history`: the required conversation up to the agent's turn. Each item is `{role, content}` with `role` one of `user`, `assistant`, `tool`. A `tool` message also carries `tool_call_id` and `name`.
+	// - `evaluation`: the required `{type, ...}`, where `type` matches the test's `type` below.
+	// - `settings`: an optional object, e.g. `{"language": "en"}`.
 	//
 	// `evaluation` by test type:
 	// - `response`: judge the agent's reply, graded by the linked evaluators. `{"type": "response"}`
@@ -99,7 +100,7 @@ type TestCreate struct {
 	//
 	// Evaluators are linked via the separate `evaluators` field, not inside `config`.
 	//
-	// Omit to create the test with no config and fill it in later via update.
+	// Omit to create the test with no config and fill it in later via update
 	Config optionalnullable.OptionalNullable[map[string]any] `json:"config,omitzero"`
 	// Evaluators to link. Used by `response` and `conversation` tests
 	Evaluators optionalnullable.OptionalNullable[[]RoutersTestsEvaluatorRef] `json:"evaluators,omitzero"`

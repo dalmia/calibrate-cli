@@ -19,10 +19,9 @@ calibrate agents get [flags]
 ### Options
 
 ```
-  -a, --agent-uuid string   The agent to retrieve. [required]
+  -a, --agent-uuid string   The agent to retrieve [required]
   -h, --help                help for get
-      --x-api-key string    string value
-      --x-org-uuid string   string value
+  -x, --x-api-key string    string value
 ```
 
 ### Options inherited from parent commands

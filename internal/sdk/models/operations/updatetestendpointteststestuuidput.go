@@ -12,7 +12,6 @@ type UpdateTestEndpointTestsTestUUIDPutRequest struct {
 	// Test to update
 	TestUUID string                                    `pathParam:"style=simple,explode=false,name=test_uuid"`
 	XAPIKey  optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=X-API-Key"`
-	XOrgUUID optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=X-Org-UUID"`
 	Body     components.TestUpdate                     `request:"mediaType=application/json"`
 }
 
@@ -28,13 +27,6 @@ func (u *UpdateTestEndpointTestsTestUUIDPutRequest) GetXAPIKey() optionalnullabl
 		return nil
 	}
 	return u.XAPIKey
-}
-
-func (u *UpdateTestEndpointTestsTestUUIDPutRequest) GetXOrgUUID() optionalnullable.OptionalNullable[string] {
-	if u == nil {
-		return nil
-	}
-	return u.XOrgUUID
 }
 
 func (u *UpdateTestEndpointTestsTestUUIDPutRequest) GetBody() components.TestUpdate {

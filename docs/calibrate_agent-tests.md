@@ -38,6 +38,11 @@ calibrate agent-tests [flags]
 ### SEE ALSO
 
 * [calibrate](calibrate.md)	 - Calibrate Public API: Programmatic API for CI/automation
+* [calibrate agent-tests benchmark](calibrate_agent-tests_benchmark.md)	 - Run agent benchmark
+* [calibrate agent-tests get-benchmark](calibrate_agent-tests_get-benchmark.md)	 - Get benchmark status
 * [calibrate agent-tests get-run](calibrate_agent-tests_get-run.md)	 - Get test run status
+* [calibrate agent-tests link](calibrate_agent-tests_link.md)	 - Link tests to agent
+* [calibrate agent-tests list-for-agent](calibrate_agent-tests_list-for-agent.md)	 - List tests for agent
+* [calibrate agent-tests list-runs-for-agent](calibrate_agent-tests_list-runs-for-agent.md)	 - List test runs for agent
 * [calibrate agent-tests run](calibrate_agent-tests_run.md)	 - Run agent tests
 * [calibrate agent-tests run-batch](calibrate_agent-tests_run-batch.md)	 - Run agent tests in batch

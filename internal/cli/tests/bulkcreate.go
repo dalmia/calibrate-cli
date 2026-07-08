@@ -15,11 +15,10 @@ import (
 )
 
 var bulkCreateCmdMeta = []flagutil.FlagMeta{
-	{FlagName: "x-api-key", FieldPath: "XAPIKey", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `header:"style=simple,explode=false,name=X-API-Key"`, Description: "string value"},
-	{FlagName: "x-org-uuid", FieldPath: "XOrgUUID", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `header:"style=simple,explode=false,name=X-Org-UUID"`, Description: "string value"},
-	{FlagName: "type", FieldPath: "Body.Type", Kind: flagutil.FlagKindEnum, Required: true, EnumValues: []string{"response", "tool_call", "conversation"}, Description: "What the test judges:\n\n- `response`: judges the generated reply\n- `tool_call`: diffs the generated tool calls\n- `conversation`: judges the full conversation\n\nApplied to every test in the batch. (options: response, tool_call, conversation) [required]"},
-	{FlagName: "tests", FieldPath: "Body.Tests", Kind: flagutil.FlagKindJSON, Required: true, Annotations: `json:"tests"`, Description: "Test items to create (non-empty, max 500 per request, names unique within the batch) [required]"},
-	{FlagName: "agent-uuids", Shorthand: "a", FieldPath: "Body.AgentUuids", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"agent_uuids,omitempty"`, Description: "Agents (IDs) to link every created test to. Omit to link none"},
+	{FlagName: "x-api-key", Shorthand: "x", FieldPath: "XAPIKey", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `header:"style=simple,explode=false,name=X-API-Key"`, Description: "string value"},
+	{FlagName: "type", FieldPath: "Body.Type", Kind: flagutil.FlagKindEnum, Required: true, EnumValues: []string{"response", "tool_call", "conversation"}, Description: "What the test judges:\n\n- `response`: judges the generated reply\n- `tool_call`: diffs the generated tool calls\n- `conversation`: judges the full conversation\n\n\nApplied to every test in the batch (options: response, tool_call, conversation) [required]"},
+	{FlagName: "tests", FieldPath: "Body.Tests", Kind: flagutil.FlagKindJSON, Required: true, Annotations: `json:"tests"`, Description: "Test items to create, at most 500 per request, with names unique within the batch [required]"},
+	{FlagName: "agent-uuids", Shorthand: "a", FieldPath: "Body.AgentUuids", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"agent_uuids,omitempty"`, Description: "IDs of agents to link every created test to. Omit to link none"},
 	{FlagName: "language", Shorthand: "l", FieldPath: "Body.Language", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"language,omitempty"`, Description: "Language written to each test's `config.settings.language`. Omit to leave unset"},
 }
 
@@ -29,7 +28,7 @@ func initBulkCreateCmd(parent *cobra.Command) error {
 		Use:     "bulk-create",
 		Short:   "Bulk create tests",
 		Long:    "Create many test cases at once and link them to your agents",
-		Example: "  calibrate tests bulk-create --type tool_call --tests '[{\"name\":\"<value>\",\"conversation_history\":[{\"role\":\"tool\"}],\"evaluators\":[{\"evaluator_uuid\":\"f47ac10b-58cc-4372-a567-0e02b2c3d479\"}]}]'",
+		Example: "  calibrate tests bulk-create --type tool_call --tests '[{\"name\":\"<value>\",\"conversation_history\":[{\"role\":\"tool\"}],\"evaluators\":[{\"evaluator_uuid\":\"f47ac10b-58cc-4372-a567-0e02b2c3d479\",\"variable_values\":{\"criteria\":\"The reply must cite the refund window\"} }]}]'",
 		RunE:    runBulkCreateCmd,
 		Aliases: []string{"bc"},
 	}

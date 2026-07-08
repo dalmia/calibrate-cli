@@ -14,7 +14,7 @@ type BulkTestUploadResponse struct {
 	Count int64 `json:"count"`
 	// Confirmation message
 	Message string `json:"message"`
-	// Non-fatal issues (e.g. agents some tests couldn't link to). Null when there were none
+	// Non-fatal issues, such as agents some tests could not be linked to
 	Warnings optionalnullable.OptionalNullable[[]string] `json:"warnings,omitzero"`
 }
 

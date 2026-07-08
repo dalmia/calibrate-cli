@@ -16,8 +16,7 @@ import (
 
 var getCmdMeta = []flagutil.FlagMeta{
 	{FlagName: "test-uuid", Shorthand: "t", FieldPath: "TestUUID", Kind: flagutil.FlagKindString, Required: true, Description: "Test to retrieve [required]"},
-	{FlagName: "x-api-key", FieldPath: "XAPIKey", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `header:"style=simple,explode=false,name=X-API-Key"`, Description: "string value"},
-	{FlagName: "x-org-uuid", FieldPath: "XOrgUUID", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `header:"style=simple,explode=false,name=X-Org-UUID"`, Description: "string value"},
+	{FlagName: "x-api-key", Shorthand: "x", FieldPath: "XAPIKey", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `header:"style=simple,explode=false,name=X-API-Key"`, Description: "string value"},
 }
 
 // initGetCmd initializes the get command.

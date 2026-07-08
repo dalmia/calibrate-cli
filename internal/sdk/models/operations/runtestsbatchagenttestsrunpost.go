@@ -9,9 +9,8 @@ import (
 )
 
 type RunTestsBatchAgentTestsRunPostRequest struct {
-	XAPIKey  optionalnullable.OptionalNullable[string]                     `header:"style=simple,explode=false,name=X-API-Key"`
-	XOrgUUID optionalnullable.OptionalNullable[string]                     `header:"style=simple,explode=false,name=X-Org-UUID"`
-	Body     optionalnullable.OptionalNullable[components.BatchRunRequest] `request:"mediaType=application/json"`
+	XAPIKey optionalnullable.OptionalNullable[string]                     `header:"style=simple,explode=false,name=X-API-Key"`
+	Body    optionalnullable.OptionalNullable[components.BatchRunRequest] `request:"mediaType=application/json"`
 }
 
 func (r RunTestsBatchAgentTestsRunPostRequest) MarshalJSON() ([]byte, error) {
@@ -30,13 +29,6 @@ func (r *RunTestsBatchAgentTestsRunPostRequest) GetXAPIKey() optionalnullable.Op
 		return nil
 	}
 	return r.XAPIKey
-}
-
-func (r *RunTestsBatchAgentTestsRunPostRequest) GetXOrgUUID() optionalnullable.OptionalNullable[string] {
-	if r == nil {
-		return nil
-	}
-	return r.XOrgUUID
 }
 
 func (r *RunTestsBatchAgentTestsRunPostRequest) GetBody() optionalnullable.OptionalNullable[components.BatchRunRequest] {

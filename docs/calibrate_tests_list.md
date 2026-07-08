@@ -19,9 +19,8 @@ calibrate tests list [flags]
 ### Options
 
 ```
-  -h, --help                help for list
-      --x-api-key string    string value
-      --x-org-uuid string   string value
+  -h, --help               help for list
+  -x, --x-api-key string   string value
 ```
 
 ### Options inherited from parent commands

@@ -9,9 +9,8 @@ import (
 )
 
 type ResolveAgentNamesAgentsResolvePostRequest struct {
-	XAPIKey  optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=X-API-Key"`
-	XOrgUUID optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=X-Org-UUID"`
-	Body     components.ResolveAgentNamesRequest       `request:"mediaType=application/json"`
+	XAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=X-API-Key"`
+	Body    components.ResolveAgentNamesRequest       `request:"mediaType=application/json"`
 }
 
 func (r *ResolveAgentNamesAgentsResolvePostRequest) GetXAPIKey() optionalnullable.OptionalNullable[string] {
@@ -19,13 +18,6 @@ func (r *ResolveAgentNamesAgentsResolvePostRequest) GetXAPIKey() optionalnullabl
 		return nil
 	}
 	return r.XAPIKey
-}
-
-func (r *ResolveAgentNamesAgentsResolvePostRequest) GetXOrgUUID() optionalnullable.OptionalNullable[string] {
-	if r == nil {
-		return nil
-	}
-	return r.XOrgUUID
 }
 
 func (r *ResolveAgentNamesAgentsResolvePostRequest) GetBody() components.ResolveAgentNamesRequest {

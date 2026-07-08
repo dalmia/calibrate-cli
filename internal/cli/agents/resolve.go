@@ -15,8 +15,7 @@ import (
 )
 
 var resolveCmdMeta = []flagutil.FlagMeta{
-	{FlagName: "x-api-key", FieldPath: "XAPIKey", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `header:"style=simple,explode=false,name=X-API-Key"`, Description: "string value"},
-	{FlagName: "x-org-uuid", FieldPath: "XOrgUUID", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `header:"style=simple,explode=false,name=X-Org-UUID"`, Description: "string value"},
+	{FlagName: "x-api-key", Shorthand: "x", FieldPath: "XAPIKey", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `header:"style=simple,explode=false,name=X-API-Key"`, Description: "string value"},
 	{FlagName: "names", Shorthand: "n", FieldPath: "Body.Names", Kind: flagutil.FlagKindStringArray, Required: true, Description: "Agent names to resolve to IDs [required]"},
 }
 

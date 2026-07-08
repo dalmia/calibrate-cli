@@ -22,14 +22,14 @@ calibrate agents create [flags]
       --body string         Request body as JSON (alternative to individual flags). Can also be provided via stdin.
   -c, --config-param type   Agent behavioral config. The keys depend on type.
                             
-                            **`type=agent`** (built inside Calibrate):
-                            - `system_prompt` (string): the agent's instructions
-                            - `llm.model` (string): `provider/model`, e.g. `openai/gpt-4.1` or `google/gemini-2.5-flash`
-                            - `stt.provider` (string): `deepgram`, `openai`, `cartesia`, `elevenlabs`, `google`, `sarvam`, or `smallest`
-                            - `tts.provider` (string): `cartesia`, `openai`, `google`, `elevenlabs`, `sarvam`, or `smallest`
-                            - `settings.agent_speaks_first` (bool), `settings.max_assistant_turns` (int)
-                            - `system_tools.end_call` (bool, optional): let the agent end the call
-                            - `data_extraction_fields` (array, optional): `[{name, type, description, required}]`
+                            **`type=agent`**, built inside Calibrate:
+                            - `system_prompt`: the agent's instructions
+                            - `llm.model`: `provider/model`, e.g. `openai/gpt-4.1` or `google/gemini-2.5-flash`
+                            - `stt.provider`: `deepgram`, `openai`, `cartesia`, `elevenlabs`, `google`, `sarvam`, or `smallest`
+                            - `tts.provider`: `cartesia`, `openai`, `google`, `elevenlabs`, `sarvam`, or `smallest`
+                            - `settings.agent_speaks_first`, `settings.max_assistant_turns`
+                            - `system_tools.end_call`: let the agent end the call
+                            - `data_extraction_fields`: `[{name, type, description, required}]`
                             
                             ```json
                             {
@@ -41,10 +41,10 @@ calibrate agents create [flags]
                             }
                             ```
                             
-                            **`type=connection`** (your own HTTP endpoint):
-                            - `agent_url` (string, required): public HTTPS endpoint the agent is called at
-                            - `agent_headers` (object, optional): headers sent on each request, e.g. auth
-                            - `benchmark_provider` (string, optional): `openrouter` (default), `openai`, `google`, `anthropic`, `meta-llama`, `mistralai`, `deepseek`, `x-ai`, `cohere`, `qwen`, or `ai21`
+                            **`type=connection`**, your own HTTP endpoint:
+                            - `agent_url`: public HTTP(S) endpoint your agent is called at
+                            - `agent_headers`: headers sent on each request, e.g. auth
+                            - `benchmark_provider`: `openrouter` by default. Other values: `openai`, `google`, `anthropic`, `meta-llama`, `mistralai`, `deepseek`, `x-ai`, `cohere`, `qwen`, or `ai21`
                             
                             ```json
                             {
@@ -54,13 +54,12 @@ calibrate agents create [flags]
                             }
                             ```
                             
-                            For `type=agent`, omitted keys inherit managed defaults (omit `config` entirely to use all defaults). For `type=connection`, `config` is stored as-is and must contain `agent_url`.
+                            For `type=agent`, omitted keys inherit managed defaults. Omit `config` entirely to use all defaults. For `type=connection`, `config` is stored as-is and must contain `agent_url`
   -h, --help                help for create
   -n, --name string         Agent name, unique within the workspace [required]
   -t, --type agent          - agent: built inside Calibrate
                             - `connection`: your existing agent connected to Calibrate (options: agent, connection) (default "agent")
-      --x-api-key string    string value
-      --x-org-uuid string   string value
+  -x, --x-api-key string    string value
 ```
 
 ### Options inherited from parent commands

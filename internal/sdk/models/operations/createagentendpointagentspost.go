@@ -9,9 +9,8 @@ import (
 )
 
 type CreateAgentEndpointAgentsPostRequest struct {
-	XAPIKey  optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=X-API-Key"`
-	XOrgUUID optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=X-Org-UUID"`
-	Body     components.AgentCreate                    `request:"mediaType=application/json"`
+	XAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=X-API-Key"`
+	Body    components.AgentCreate                    `request:"mediaType=application/json"`
 }
 
 func (c *CreateAgentEndpointAgentsPostRequest) GetXAPIKey() optionalnullable.OptionalNullable[string] {
@@ -19,13 +18,6 @@ func (c *CreateAgentEndpointAgentsPostRequest) GetXAPIKey() optionalnullable.Opt
 		return nil
 	}
 	return c.XAPIKey
-}
-
-func (c *CreateAgentEndpointAgentsPostRequest) GetXOrgUUID() optionalnullable.OptionalNullable[string] {
-	if c == nil {
-		return nil
-	}
-	return c.XOrgUUID
 }
 
 func (c *CreateAgentEndpointAgentsPostRequest) GetBody() components.AgentCreate {

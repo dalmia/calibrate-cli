@@ -19,10 +19,9 @@ calibrate tests get [flags]
 ### Options
 
 ```
-  -h, --help                help for get
-  -t, --test-uuid string    Test to retrieve [required]
-      --x-api-key string    string value
-      --x-org-uuid string   string value
+  -h, --help               help for get
+  -t, --test-uuid string   Test to retrieve [required]
+  -x, --x-api-key string   string value
 ```
 
 ### Options inherited from parent commands

@@ -43,3 +43,4 @@ calibrate agents [flags]
 * [calibrate agents list](calibrate_agents_list.md)	 - List agents
 * [calibrate agents resolve](calibrate_agents_resolve.md)	 - Resolve agent names to IDs
 * [calibrate agents update](calibrate_agents_update.md)	 - Update agent
+* [calibrate agents verify-connection](calibrate_agents_verify-connection.md)	 - Verify agent connection

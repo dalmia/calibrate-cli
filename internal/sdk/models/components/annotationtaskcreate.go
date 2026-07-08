@@ -11,7 +11,6 @@ import (
 
 // AnnotationTaskCreateType - Task type. Determines the shape of each item's payload.
 // - `stt`: judge a transcript on its own
-// - `tts`: judge synthesized speech output
 // - `llm`: judge one response with its conversation history
 // - `llm-general`: judge a standalone `input -> output` pair
 // - `conversation`: judge a full conversation
@@ -19,7 +18,6 @@ type AnnotationTaskCreateType string
 
 const (
 	AnnotationTaskCreateTypeStt          AnnotationTaskCreateType = "stt"
-	AnnotationTaskCreateTypeTts          AnnotationTaskCreateType = "tts"
 	AnnotationTaskCreateTypeLlm          AnnotationTaskCreateType = "llm"
 	AnnotationTaskCreateTypeLlmGeneral   AnnotationTaskCreateType = "llm-general"
 	AnnotationTaskCreateTypeConversation AnnotationTaskCreateType = "conversation"
@@ -35,8 +33,6 @@ func (e *AnnotationTaskCreateType) UnmarshalJSON(data []byte) error {
 	}
 	switch v {
 	case "stt":
-		fallthrough
-	case "tts":
 		fallthrough
 	case "llm":
 		fallthrough
@@ -55,7 +51,6 @@ type AnnotationTaskCreate struct {
 	Name string `json:"name"`
 	// Task type. Determines the shape of each item's payload.
 	// - `stt`: judge a transcript on its own
-	// - `tts`: judge synthesized speech output
 	// - `llm`: judge one response with its conversation history
 	// - `llm-general`: judge a standalone `input -> output` pair
 	// - `conversation`: judge a full conversation

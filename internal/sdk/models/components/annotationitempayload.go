@@ -8,7 +8,14 @@ import (
 )
 
 type AnnotationItemPayload struct {
-	// The item's payload. Its shape depends on the task `type`. `payload['name']` is **required** for every type and must be unique within the task
+	// The item's payload. `name` is required and unique within the task for every type. The other fields depend on the task `type`:
+	//
+	// - `stt`: `name`, `reference_transcript`, `predicted_transcript`
+	// - `llm`: `name`, `chat_history` (list of `{role, content}` turns ending at the user turn), `agent_response` (the reply to judge), optional `evaluator_variables`
+	// - `llm-general`: `name`, `input`, `output`, optional `evaluator_variables`
+	// - `conversation`: `name`, `transcript` (list of `{role, content}` turns), optional `evaluator_variables`
+	//
+	// `evaluator_variables` maps an evaluator ID to that evaluator's `{{variable}}` values for this item
 	Payload any `json:"payload"`
 	// Human annotations to seed, keyed by evaluator ID. Each evaluator ID must be linked to the task. Put the judgement in `value`, a bool for binary or a number for rating, with optional `reasoning`. Requires `annotator_id`
 	Annotations optionalnullable.OptionalNullable[map[string]any] `json:"annotations,omitzero"`

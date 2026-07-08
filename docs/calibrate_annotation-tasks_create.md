@@ -26,10 +26,9 @@ calibrate annotation-tasks create [flags]
   -n, --name string            Task name, unique within your workspace [required]
   -t, --type stt               Task type. Determines the shape of each item's payload.
                                - stt: judge a transcript on its own
-                               - `tts`: judge synthesized speech output
                                - `llm`: judge one response with its conversation history
                                - `llm-general`: judge a standalone `input -> output` pair
-                               - `conversation`: judge a full conversation (options: stt, tts, llm, llm-general, conversation) [required]
+                               - `conversation`: judge a full conversation (options: stt, llm, llm-general, conversation) [required]
   -x, --x-api-key string       string value
 ```
 

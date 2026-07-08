@@ -11,7 +11,6 @@ type TaskType string
 
 const (
 	TaskTypeStt          TaskType = "stt"
-	TaskTypeTts          TaskType = "tts"
 	TaskTypeLlm          TaskType = "llm"
 	TaskTypeLlmGeneral   TaskType = "llm-general"
 	TaskTypeConversation TaskType = "conversation"
@@ -25,7 +24,7 @@ func (e TaskType) ToPointer() *TaskType {
 func (e *TaskType) IsExact() bool {
 	if e != nil {
 		switch *e {
-		case "stt", "tts", "llm", "llm-general", "conversation":
+		case "stt", "llm", "llm-general", "conversation":
 			return true
 		}
 	}

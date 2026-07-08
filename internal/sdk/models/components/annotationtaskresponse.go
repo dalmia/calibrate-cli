@@ -9,7 +9,6 @@ import (
 
 // AnnotationTaskResponseType - Task type. Determines the shape of each item's payload.
 // - `stt`: judge a transcript on its own
-// - `tts`: judge synthesized speech output
 // - `llm`: judge one response with its conversation history
 // - `llm-general`: judge a standalone `input -> output` pair
 // - `conversation`: judge a full conversation
@@ -17,7 +16,6 @@ type AnnotationTaskResponseType string
 
 const (
 	AnnotationTaskResponseTypeStt          AnnotationTaskResponseType = "stt"
-	AnnotationTaskResponseTypeTts          AnnotationTaskResponseType = "tts"
 	AnnotationTaskResponseTypeLlm          AnnotationTaskResponseType = "llm"
 	AnnotationTaskResponseTypeLlmGeneral   AnnotationTaskResponseType = "llm-general"
 	AnnotationTaskResponseTypeConversation AnnotationTaskResponseType = "conversation"
@@ -31,7 +29,7 @@ func (e AnnotationTaskResponseType) ToPointer() *AnnotationTaskResponseType {
 func (e *AnnotationTaskResponseType) IsExact() bool {
 	if e != nil {
 		switch *e {
-		case "stt", "tts", "llm", "llm-general", "conversation":
+		case "stt", "llm", "llm-general", "conversation":
 			return true
 		}
 	}
@@ -45,7 +43,6 @@ type AnnotationTaskResponse struct {
 	Name string `json:"name"`
 	// Task type. Determines the shape of each item's payload.
 	// - `stt`: judge a transcript on its own
-	// - `tts`: judge synthesized speech output
 	// - `llm`: judge one response with its conversation history
 	// - `llm-general`: judge a standalone `input -> output` pair
 	// - `conversation`: judge a full conversation

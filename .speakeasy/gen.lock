@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
-id: e23e615d-606f-4a8a-be5c-14a88bf5d178
+id: 1c9fd62c-e415-4c58-820f-679f8dca3b1f
 management:
-  docChecksum: a37d0a0a2f3f0b8054cb417e9e92ba17
+  docChecksum: ff8bf8cc3ee8d1601ba9e19567da7425
   docVersion: 0.1.0
   speakeasyVersion: 1.788.1
   generationVersion: 2.915.1
-  releaseVersion: 0.0.12
-  configChecksum: 0797b752469b8671c7c3cb19ce026385
+  releaseVersion: 0.0.13
+  configChecksum: eda84f4c29147449dab1858a9c185289
   repoURL: https://github.com/dalmia/calibrate-cli
   installationURL: https://github.com/dalmia/calibrate-cli
 persistentEdits:
-  generation_id: 8d3ac347-1bb2-429e-8b7d-0c401feb9833
-  pristine_commit_hash: 24f6b241ff85d7f4b5c8ceda704b07105f634243
-  pristine_tree_hash: efd6e9d8b00acd7322f8fb527ed8631e6571b804
+  generation_id: 9c4754e4-2751-4608-9458-712939594277
+  pristine_commit_hash: 5e2f45036e332ad14bd683f2db308177aaf5f5f1
+  pristine_tree_hash: 151a87c7c74787275a16da01207ef818c6aa947f
 features:
   cli:
     constsAndDefaults: 0.0.0
@@ -134,8 +134,8 @@ trackedFiles:
     pristine_git_object: 3b7253288f0ea1e109e28d08a822403ef1475090
   internal/cli/version.go:
     id: 7b0665492f72
-    last_write_checksum: sha1:9106c4574f30f3cf682d73f6c7694ec5691f9711
-    pristine_git_object: 413c1d1f7e88404c12afbb19e6a95fb08d9d0e53
+    last_write_checksum: sha1:51c55b7b2ea2986f8447d57a48105ed2693e346e
+    pristine_git_object: ef101ffc7fb59db3ad4b1c58ecd639aac85b3f8d
   internal/cli/whoami.go:
     id: c1787f2298ec
     last_write_checksum: sha1:58afb45d777f297af4a64acf26a57c46e1b556db
@@ -510,8 +510,8 @@ trackedFiles:
     pristine_git_object: 159a87ec97aba99e4edd132f69652e123434303e
   internal/usage/schema.go:
     id: 0f40f4612437
-    last_write_checksum: sha1:cf3a6b93d9232b091785bc8ed34f176290f775f2
-    pristine_git_object: a4cd6b5812ece4a26de6467b0d11ec7b1ea6c4ab
+    last_write_checksum: sha1:26918fb4b6375337c4e0ee3620baff9d098901e6
+    pristine_git_object: fca91d85df7dd14ade83a00ff5e038b37bf8f272
   scripts/install.ps1:
     id: fee0853709e9
     last_write_checksum: sha1:d8884365d7cfb218aac394e16a7d214a6f56b585

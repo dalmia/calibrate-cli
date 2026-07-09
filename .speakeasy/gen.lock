@@ -1,7 +1,7 @@
 lockVersion: 2.0.0
-id: 2066ced4-b7b1-4807-a0e5-6e5eb0bf6b4d
+id: 47d68996-4216-4139-8820-580bd7c6d279
 management:
-  docChecksum: 0f1fd903e0dc73aaec29afc7e81848a2
+  docChecksum: 629b4b2ec596f1c3e9fb00712a24e427
   docVersion: 0.1.0
   speakeasyVersion: 1.788.1
   generationVersion: 2.915.1
@@ -10,9 +10,9 @@ management:
   repoURL: https://github.com/dalmia/calibrate-cli
   installationURL: https://github.com/dalmia/calibrate-cli
 persistentEdits:
-  generation_id: 39bd535d-aa66-42b1-8ac8-2c6ec36b4057
-  pristine_commit_hash: 16dbd6fc03707d05b5d67d81e557354734b15eb8
-  pristine_tree_hash: 02a770e62ba9273df6a265e3ae9cd8febe63fddc
+  generation_id: 60ceef12-b61b-4d77-a5ba-699445557171
+  pristine_commit_hash: cf8d7f8de8c00e019d78eff6551f3c5c12efa261
+  pristine_tree_hash: c307eb3e41861defdb6fb0cb940c340461f4b923
 features:
   cli:
     additionalProperties: 0.0.0
@@ -123,8 +123,8 @@ trackedFiles:
     pristine_git_object: eb4112fa8d074c6370152ac7203597b821e7581e
   internal/cli/annotationtasks/create.go:
     id: 73f8eec4084f
-    last_write_checksum: sha1:8a0bb73f408fb8da3e2d95b2e239cf8610494bd0
-    pristine_git_object: 52b7a5768fb5cdcc3d29b318f6e27a0d035f41ec
+    last_write_checksum: sha1:15956e08b02ae1158705361e30448527ac430f41
+    pristine_git_object: 0780ea45b3e676865b8b91a57455540587f68e77
   internal/cli/annotationtasks/createevaluatorrun.go:
     id: 31470082f889
     last_write_checksum: sha1:a2b1174c2d9bb30e4a874143b72467aa72996689
@@ -351,20 +351,20 @@ trackedFiles:
     pristine_git_object: 6b04342bba7987e8d42bdff413cd92b32fce68aa
   internal/sdk/models/components/annotationitempayload.go:
     id: aae92e2a8aa2
-    last_write_checksum: sha1:932849bb18f9cf9717956363c972f39e0f94771c
-    pristine_git_object: db1ddd19a8b67041c83bf2849d81eb2ecf5fb970
+    last_write_checksum: sha1:801e1f6f1816b7bbea53b8bfe7d8e0a698261b2c
+    pristine_git_object: 43554e511056efd1bf9d1fe561b0d12842a7bb8b
   internal/sdk/models/components/annotationtaskcreate.go:
     id: 12b646559358
-    last_write_checksum: sha1:11513f87701e3a20350b8476eba7b9a2549b7037
-    pristine_git_object: 810e276d584b935cf4d07f58e1a692c496a7580c
+    last_write_checksum: sha1:596e9dc391f37916f745fa28a981aa2921855c49
+    pristine_git_object: 8a02ea549b9f3279b0eba2403fa6a76085a71b9e
   internal/sdk/models/components/annotationtaskcreateresponse.go:
     id: 41f145035448
     last_write_checksum: sha1:c9c34ed4adcd43d3900b83b369e6775b00590886
     pristine_git_object: d2d9ec6c6dc840e539e2bf2d54751c2ed36d426d
   internal/sdk/models/components/annotationtaskresponse.go:
     id: 1f5816190adf
-    last_write_checksum: sha1:4dd67b04b469e7cd05d9f25c5be95ce0d3f9ebc5
-    pristine_git_object: 5ee6ab44d50c1066e5417ffdf5037e8aa04d77cf
+    last_write_checksum: sha1:f1ad34b74a0cbce8744af9cb8b8e412c3eca5a5f
+    pristine_git_object: 945e63fdf4432f75d5f4cfdbf1e6fa594922de02
   internal/sdk/models/components/batchrunrequest.go:
     id: 6c5a8455bc86
     last_write_checksum: sha1:9c04f51573605900eaff356255583741b0875ed6
@@ -551,8 +551,8 @@ trackedFiles:
     pristine_git_object: 374b9b8cb84ad8a6191ab3961288dada608d0553
   internal/sdk/models/components/tasksummaryresponse.go:
     id: 82d61ed81f62
-    last_write_checksum: sha1:eeac621af446459d155a556d4eacb71aca18fff9
-    pristine_git_object: fb0a3026114969e5599e5915d08f13a7b7d95f32
+    last_write_checksum: sha1:186d8ac2c84d39822a74956c096b9cb00ae77f37
+    pristine_git_object: aed633f6ba37f95cee4c61bb90ad75930b02148c
   internal/sdk/models/components/testcaseresult.go:
     id: aae0e621c85a
     last_write_checksum: sha1:d53e0706786603a6c506a26c5f0b1f25e6b82d07
@@ -847,8 +847,8 @@ trackedFiles:
     pristine_git_object: 159a87ec97aba99e4edd132f69652e123434303e
   internal/usage/schema.go:
     id: 0f40f4612437
-    last_write_checksum: sha1:61f2ffa26bc12aaed7a65fd24298bfc99f5e5727
-    pristine_git_object: 00e9823caf681ad1087c4abc298f016587064611
+    last_write_checksum: sha1:3644457ff91631d47401a40ef556d1ed06a4652f
+    pristine_git_object: 78a759345dc3f6562afb4a4459147d3b954035f5
   scripts/install.ps1:
     id: fee0853709e9
     last_write_checksum: sha1:d8884365d7cfb218aac394e16a7d214a6f56b585
@@ -1100,7 +1100,7 @@ examples:
     speakeasy-default-list-annotation-tasks-annotation-tasks-get:
       responses:
         "200":
-          application/json: [{"uuid": "f47ac10b-58cc-4372-a567-0e02b2c3d479", "name": "<value>", "type": "tts", "created_at": "1721181753106", "updated_at": "1735638976273"}]
+          application/json: [{"uuid": "f47ac10b-58cc-4372-a567-0e02b2c3d479", "name": "<value>", "type": "llm", "created_at": "1721181753106", "updated_at": "1735638976273"}]
         "422":
           application/json: {}
   get_annotation_task_endpoint_annotation_tasks__task_uuid__get:

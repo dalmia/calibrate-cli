@@ -44,26 +44,22 @@ type AgentTestRunListItem struct {
 	Type AgentTestRunListItemType `json:"type"`
 	// When the run was last updated (ISO 8601 UTC)
 	UpdatedAt string `json:"updated_at"`
-	// The evaluators used in this run. Each verdict in `judge_results` links to one of these by `evaluator_uuid`
-	Evaluators optionalnullable.OptionalNullable[[]TestRunEvaluator] `json:"evaluators,omitzero"`
 	// Total number of test cases
 	TotalTests optionalnullable.OptionalNullable[int64] `json:"total_tests,omitzero"`
 	// Number of test cases that passed
 	Passed optionalnullable.OptionalNullable[int64] `json:"passed,omitzero"`
 	// Number of test cases that failed
 	Failed optionalnullable.OptionalNullable[int64] `json:"failed,omitzero"`
-	// Results for each test case
-	Results optionalnullable.OptionalNullable[[]TestCaseResult] `json:"results,omitzero"`
+	// Flat pass/fail summary for each test case (fetch the run detail for full results)
+	Results optionalnullable.OptionalNullable[[]TestRunCaseSummary] `json:"results,omitzero"`
 	// Aggregated latency in milliseconds, as `{p50, p95, p99, count}`
 	LatencyMs optionalnullable.OptionalNullable[map[string]any] `json:"latency_ms,omitzero"`
 	// Aggregated cost as `{mean, min, max, count}` (USD)
 	Cost optionalnullable.OptionalNullable[map[string]any] `json:"cost,omitzero"`
 	// Aggregated token usage as `{mean, min, max, count}`
 	TotalTokens optionalnullable.OptionalNullable[map[string]any] `json:"total_tokens,omitzero"`
-	// Results for each model in a benchmark run
-	ModelResults optionalnullable.OptionalNullable[[]ModelResult] `json:"model_results,omitzero"`
-	// Leaderboard comparing the models, one row per model. Columns vary by benchmark: a `model` column plus pass/fail counts, latency, cost, and one score column per evaluator, keyed by evaluator name
-	LeaderboardSummary optionalnullable.OptionalNullable[[]map[string]any] `json:"leaderboard_summary,omitzero"`
+	// Flat summary for each model in a benchmark run (fetch the benchmark detail for full results)
+	ModelResults optionalnullable.OptionalNullable[[]ModelRunSummary] `json:"model_results,omitzero"`
 	// True if the run failed
 	Error *bool `default:"false" json:"error"`
 	// Whether the run is shared publicly
@@ -118,13 +114,6 @@ func (a *AgentTestRunListItem) GetUpdatedAt() string {
 	return a.UpdatedAt
 }
 
-func (a *AgentTestRunListItem) GetEvaluators() optionalnullable.OptionalNullable[[]TestRunEvaluator] {
-	if a == nil {
-		return nil
-	}
-	return a.Evaluators
-}
-
 func (a *AgentTestRunListItem) GetTotalTests() optionalnullable.OptionalNullable[int64] {
 	if a == nil {
 		return nil
@@ -146,7 +135,7 @@ func (a *AgentTestRunListItem) GetFailed() optionalnullable.OptionalNullable[int
 	return a.Failed
 }
 
-func (a *AgentTestRunListItem) GetResults() optionalnullable.OptionalNullable[[]TestCaseResult] {
+func (a *AgentTestRunListItem) GetResults() optionalnullable.OptionalNullable[[]TestRunCaseSummary] {
 	if a == nil {
 		return nil
 	}
@@ -174,18 +163,11 @@ func (a *AgentTestRunListItem) GetTotalTokens() optionalnullable.OptionalNullabl
 	return a.TotalTokens
 }
 
-func (a *AgentTestRunListItem) GetModelResults() optionalnullable.OptionalNullable[[]ModelResult] {
+func (a *AgentTestRunListItem) GetModelResults() optionalnullable.OptionalNullable[[]ModelRunSummary] {
 	if a == nil {
 		return nil
 	}
 	return a.ModelResults
-}
-
-func (a *AgentTestRunListItem) GetLeaderboardSummary() optionalnullable.OptionalNullable[[]map[string]any] {
-	if a == nil {
-		return nil
-	}
-	return a.LeaderboardSummary
 }
 
 func (a *AgentTestRunListItem) GetError() *bool {

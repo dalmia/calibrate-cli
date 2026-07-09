@@ -39,7 +39,7 @@ func (u *UpdateTestEndpointTestsTestUUIDPutRequest) GetBody() components.TestUpd
 type UpdateTestEndpointTestsTestUUIDPutResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// Successful Response
-	RoutersTestsTestResponse *components.RoutersTestsTestResponse
+	TestResponse *components.TestResponse
 }
 
 func (u UpdateTestEndpointTestsTestUUIDPutResponse) MarshalJSON() ([]byte, error) {
@@ -60,9 +60,9 @@ func (u *UpdateTestEndpointTestsTestUUIDPutResponse) GetHTTPMeta() components.HT
 	return u.HTTPMeta
 }
 
-func (u *UpdateTestEndpointTestsTestUUIDPutResponse) GetRoutersTestsTestResponse() *components.RoutersTestsTestResponse {
+func (u *UpdateTestEndpointTestsTestUUIDPutResponse) GetTestResponse() *components.TestResponse {
 	if u == nil {
 		return nil
 	}
-	return u.RoutersTestsTestResponse
+	return u.TestResponse
 }

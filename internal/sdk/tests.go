@@ -497,7 +497,7 @@ func (s *Tests) List(ctx context.Context, request *operations.ListTestsTestsGetR
 					return nil, err
 				}
 
-				var out []components.RoutersTestsTestResponse
+				var out []components.TestListResponse
 				if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 					return nil, err
 				}
@@ -669,12 +669,12 @@ func (s *Tests) Get(ctx context.Context, request operations.GetTestEndpointTests
 					return nil, err
 				}
 
-				var out components.RoutersTestsTestResponse
+				var out components.TestResponse
 				if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 					return nil, err
 				}
 
-				res.RoutersTestsTestResponse = &out
+				res.TestResponse = &out
 			}
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -848,12 +848,12 @@ func (s *Tests) Update(ctx context.Context, request operations.UpdateTestEndpoin
 					return nil, err
 				}
 
-				var out components.RoutersTestsTestResponse
+				var out components.TestResponse
 				if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 					return nil, err
 				}
 
-				res.RoutersTestsTestResponse = &out
+				res.TestResponse = &out
 			}
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)

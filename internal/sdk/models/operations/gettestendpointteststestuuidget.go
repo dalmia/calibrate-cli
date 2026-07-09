@@ -31,7 +31,7 @@ func (g *GetTestEndpointTestsTestUUIDGetRequest) GetXAPIKey() optionalnullable.O
 type GetTestEndpointTestsTestUUIDGetResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// Successful Response
-	RoutersTestsTestResponse *components.RoutersTestsTestResponse
+	TestResponse *components.TestResponse
 }
 
 func (g GetTestEndpointTestsTestUUIDGetResponse) MarshalJSON() ([]byte, error) {
@@ -52,9 +52,9 @@ func (g *GetTestEndpointTestsTestUUIDGetResponse) GetHTTPMeta() components.HTTPM
 	return g.HTTPMeta
 }
 
-func (g *GetTestEndpointTestsTestUUIDGetResponse) GetRoutersTestsTestResponse() *components.RoutersTestsTestResponse {
+func (g *GetTestEndpointTestsTestUUIDGetResponse) GetTestResponse() *components.TestResponse {
 	if g == nil {
 		return nil
 	}
-	return g.RoutersTestsTestResponse
+	return g.TestResponse
 }

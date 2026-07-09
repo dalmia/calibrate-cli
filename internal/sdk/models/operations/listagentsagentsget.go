@@ -22,7 +22,7 @@ func (l *ListAgentsAgentsGetRequest) GetXAPIKey() optionalnullable.OptionalNulla
 type ListAgentsAgentsGetResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// Successful Response
-	ResponseListAgentsAgentsGet []components.RoutersAgentsAgentResponse
+	ResponseListAgentsAgentsGet []components.AgentSummary
 }
 
 func (l ListAgentsAgentsGetResponse) MarshalJSON() ([]byte, error) {
@@ -43,7 +43,7 @@ func (l *ListAgentsAgentsGetResponse) GetHTTPMeta() components.HTTPMetadata {
 	return l.HTTPMeta
 }
 
-func (l *ListAgentsAgentsGetResponse) GetResponseListAgentsAgentsGet() []components.RoutersAgentsAgentResponse {
+func (l *ListAgentsAgentsGetResponse) GetResponseListAgentsAgentsGet() []components.AgentSummary {
 	if l == nil {
 		return nil
 	}

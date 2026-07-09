@@ -318,7 +318,7 @@ func (s *AgentTests) ListForAgent(ctx context.Context, request operations.GetAge
 					return nil, err
 				}
 
-				var out []components.RoutersAgentTestsTestResponse
+				var out []components.TestListResponse
 				if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 					return nil, err
 				}

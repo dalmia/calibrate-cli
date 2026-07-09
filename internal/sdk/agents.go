@@ -676,7 +676,7 @@ func (s *Agents) List(ctx context.Context, request *operations.ListAgentsAgentsG
 					return nil, err
 				}
 
-				var out []components.RoutersAgentsAgentResponse
+				var out []components.AgentSummary
 				if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 					return nil, err
 				}

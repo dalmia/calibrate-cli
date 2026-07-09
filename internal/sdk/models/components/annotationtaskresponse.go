@@ -53,7 +53,7 @@ type AnnotationTaskResponse struct {
 	CreatedAt string `json:"created_at"`
 	// When the task was last updated (ISO 8601 UTC)
 	UpdatedAt string `json:"updated_at"`
-	// The evaluators linked to this task, in display order, each with its live version's rubric
+	// The evaluators linked to this task, in display order. Fetching one task by ID enriches each with its live version's rubric. Listing tasks returns lightweight metadata (uuid, name, type, position) only
 	Evaluators []map[string]any `json:"evaluators,omitzero"`
 	// Number of items in the task
 	ItemCount optionalnullable.OptionalNullable[int64] `json:"item_count,omitzero"`

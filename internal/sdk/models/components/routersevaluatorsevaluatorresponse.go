@@ -130,7 +130,7 @@ type RoutersEvaluatorsEvaluatorResponse struct {
 	// When the evaluator was last updated (ISO 8601 UTC)
 	UpdatedAt string `json:"updated_at"`
 	// The version that is currently live
-	LiveVersion optionalnullable.OptionalNullable[EvaluatorVersionResponse] `json:"live_version,omitzero"`
+	LiveVersion optionalnullable.OptionalNullable[EvaluatorLiveVersionSummary] `json:"live_version,omitzero"`
 }
 
 func (r RoutersEvaluatorsEvaluatorResponse) MarshalJSON() ([]byte, error) {
@@ -221,7 +221,7 @@ func (r *RoutersEvaluatorsEvaluatorResponse) GetUpdatedAt() string {
 	return r.UpdatedAt
 }
 
-func (r *RoutersEvaluatorsEvaluatorResponse) GetLiveVersion() optionalnullable.OptionalNullable[EvaluatorVersionResponse] {
+func (r *RoutersEvaluatorsEvaluatorResponse) GetLiveVersion() optionalnullable.OptionalNullable[EvaluatorLiveVersionSummary] {
 	if r == nil {
 		return nil
 	}

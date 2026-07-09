@@ -31,7 +31,7 @@ func (g *GetAgentTestsEndpointAgentTestsAgentAgentUUIDTestsGetRequest) GetXAPIKe
 type GetAgentTestsEndpointAgentTestsAgentAgentUUIDTestsGetResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// Successful Response
-	ResponseGetAgentTestsEndpointAgentTestsAgentAgentUUIDTestsGet []components.RoutersAgentTestsTestResponse
+	ResponseGetAgentTestsEndpointAgentTestsAgentAgentUUIDTestsGet []components.TestListResponse
 }
 
 func (g GetAgentTestsEndpointAgentTestsAgentAgentUUIDTestsGetResponse) MarshalJSON() ([]byte, error) {
@@ -52,7 +52,7 @@ func (g *GetAgentTestsEndpointAgentTestsAgentAgentUUIDTestsGetResponse) GetHTTPM
 	return g.HTTPMeta
 }
 
-func (g *GetAgentTestsEndpointAgentTestsAgentAgentUUIDTestsGetResponse) GetResponseGetAgentTestsEndpointAgentTestsAgentAgentUUIDTestsGet() []components.RoutersAgentTestsTestResponse {
+func (g *GetAgentTestsEndpointAgentTestsAgentAgentUUIDTestsGetResponse) GetResponseGetAgentTestsEndpointAgentTestsAgentAgentUUIDTestsGet() []components.TestListResponse {
 	if g == nil {
 		return nil
 	}

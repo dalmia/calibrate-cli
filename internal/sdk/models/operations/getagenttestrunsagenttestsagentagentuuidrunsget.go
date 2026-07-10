@@ -3,15 +3,69 @@
 package operations
 
 import (
+	"encoding/json"
+	"fmt"
 	"github.com/dalmia/calibrate-cli/internal/sdk/models/components"
 	"github.com/dalmia/calibrate-cli/internal/sdk/optionalnullable"
 	"github.com/dalmia/calibrate-cli/internal/sdk/sdkinternal/utils"
 )
 
+// Type - Filter by run type. Omit to return both:
+// - `llm-unit-test`: single runs of an agent's tests
+// - `llm-benchmark`: multi-model comparisons
+type Type string
+
+const (
+	TypeLlmUnitTest  Type = "llm-unit-test"
+	TypeLlmBenchmark Type = "llm-benchmark"
+)
+
+func (e Type) ToPointer() *Type {
+	return &e
+}
+func (e *Type) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "llm-unit-test":
+		fallthrough
+	case "llm-benchmark":
+		*e = Type(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for Type: %v", v)
+	}
+}
+
 type GetAgentTestRunsAgentTestsAgentAgentUUIDRunsGetRequest struct {
 	// Agent whose test runs to list
-	AgentUUID string                                    `pathParam:"style=simple,explode=false,name=agent_uuid"`
-	XAPIKey   optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=X-API-Key"`
+	AgentUUID string `pathParam:"style=simple,explode=false,name=agent_uuid"`
+	// Filter by run type. Omit to return both:
+	// - `llm-unit-test`: single runs of an agent's tests
+	// - `llm-benchmark`: multi-model comparisons
+	Type optionalnullable.OptionalNullable[Type] `queryParam:"style=form,explode=true,name=type"`
+	// Filter by run status. Omit for all statuses
+	Status optionalnullable.OptionalNullable[components.TaskStatus] `queryParam:"style=form,explode=true,name=status"`
+	// Filter by whether the run has any failing test case or model. `true` returns only runs with failures (or errors), `false` only clean runs. Omit for both
+	HasFailures optionalnullable.OptionalNullable[bool] `queryParam:"style=form,explode=true,name=has_failures"`
+	// Maximum number of items to return. Omit for no limit (all items)
+	Limit optionalnullable.OptionalNullable[int64] `queryParam:"style=form,explode=true,name=limit"`
+	// Number of items to skip before returning results
+	Offset  *int64                                    `default:"0" queryParam:"style=form,explode=true,name=offset"`
+	XAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=X-API-Key"`
+}
+
+func (g GetAgentTestRunsAgentTestsAgentAgentUUIDRunsGetRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(g, "", false)
+}
+
+func (g *GetAgentTestRunsAgentTestsAgentAgentUUIDRunsGetRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &g, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (g *GetAgentTestRunsAgentTestsAgentAgentUUIDRunsGetRequest) GetAgentUUID() string {
@@ -19,6 +73,41 @@ func (g *GetAgentTestRunsAgentTestsAgentAgentUUIDRunsGetRequest) GetAgentUUID() 
 		return ""
 	}
 	return g.AgentUUID
+}
+
+func (g *GetAgentTestRunsAgentTestsAgentAgentUUIDRunsGetRequest) GetType() optionalnullable.OptionalNullable[Type] {
+	if g == nil {
+		return nil
+	}
+	return g.Type
+}
+
+func (g *GetAgentTestRunsAgentTestsAgentAgentUUIDRunsGetRequest) GetStatus() optionalnullable.OptionalNullable[components.TaskStatus] {
+	if g == nil {
+		return nil
+	}
+	return g.Status
+}
+
+func (g *GetAgentTestRunsAgentTestsAgentAgentUUIDRunsGetRequest) GetHasFailures() optionalnullable.OptionalNullable[bool] {
+	if g == nil {
+		return nil
+	}
+	return g.HasFailures
+}
+
+func (g *GetAgentTestRunsAgentTestsAgentAgentUUIDRunsGetRequest) GetLimit() optionalnullable.OptionalNullable[int64] {
+	if g == nil {
+		return nil
+	}
+	return g.Limit
+}
+
+func (g *GetAgentTestRunsAgentTestsAgentAgentUUIDRunsGetRequest) GetOffset() *int64 {
+	if g == nil {
+		return nil
+	}
+	return g.Offset
 }
 
 func (g *GetAgentTestRunsAgentTestsAgentAgentUUIDRunsGetRequest) GetXAPIKey() optionalnullable.OptionalNullable[string] {
@@ -31,7 +120,7 @@ func (g *GetAgentTestRunsAgentTestsAgentAgentUUIDRunsGetRequest) GetXAPIKey() op
 type GetAgentTestRunsAgentTestsAgentAgentUUIDRunsGetResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// Successful Response
-	AgentTestRunsResponse *components.AgentTestRunsResponse
+	PaginatedResponseAgentTestRunListItem *components.PaginatedResponseAgentTestRunListItem
 }
 
 func (g GetAgentTestRunsAgentTestsAgentAgentUUIDRunsGetResponse) MarshalJSON() ([]byte, error) {
@@ -52,9 +141,9 @@ func (g *GetAgentTestRunsAgentTestsAgentAgentUUIDRunsGetResponse) GetHTTPMeta() 
 	return g.HTTPMeta
 }
 
-func (g *GetAgentTestRunsAgentTestsAgentAgentUUIDRunsGetResponse) GetAgentTestRunsResponse() *components.AgentTestRunsResponse {
+func (g *GetAgentTestRunsAgentTestsAgentAgentUUIDRunsGetResponse) GetPaginatedResponseAgentTestRunListItem() *components.PaginatedResponseAgentTestRunListItem {
 	if g == nil {
 		return nil
 	}
-	return g.AgentTestRunsResponse
+	return g.PaginatedResponseAgentTestRunListItem
 }

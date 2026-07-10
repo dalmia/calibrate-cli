@@ -443,6 +443,10 @@ func (s *Tests) List(ctx context.Context, request *operations.ListTestsTestsGetR
 
 	utils.PopulateHeaders(ctx, req, request, nil)
 
+	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
+		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
 	}
@@ -497,12 +501,12 @@ func (s *Tests) List(ctx context.Context, request *operations.ListTestsTestsGetR
 					return nil, err
 				}
 
-				var out []components.TestListResponse
+				var out components.PaginatedResponseTestListResponse
 				if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 					return nil, err
 				}
 
-				res.ResponseListTestsTestsGet = out
+				res.PaginatedResponseTestListResponse = &out
 			}
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)

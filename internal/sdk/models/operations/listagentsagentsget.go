@@ -9,7 +9,45 @@ import (
 )
 
 type ListAgentsAgentsGetRequest struct {
+	// Case-insensitive substring search on `name`. Blank is a no-op
+	Q optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=q"`
+	// Maximum number of items to return. Omit for no limit (all items)
+	Limit optionalnullable.OptionalNullable[int64] `queryParam:"style=form,explode=true,name=limit"`
+	// Number of items to skip before returning results
+	Offset  *int64                                    `default:"0" queryParam:"style=form,explode=true,name=offset"`
 	XAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=X-API-Key"`
+}
+
+func (l ListAgentsAgentsGetRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(l, "", false)
+}
+
+func (l *ListAgentsAgentsGetRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &l, "", false, nil); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (l *ListAgentsAgentsGetRequest) GetQ() optionalnullable.OptionalNullable[string] {
+	if l == nil {
+		return nil
+	}
+	return l.Q
+}
+
+func (l *ListAgentsAgentsGetRequest) GetLimit() optionalnullable.OptionalNullable[int64] {
+	if l == nil {
+		return nil
+	}
+	return l.Limit
+}
+
+func (l *ListAgentsAgentsGetRequest) GetOffset() *int64 {
+	if l == nil {
+		return nil
+	}
+	return l.Offset
 }
 
 func (l *ListAgentsAgentsGetRequest) GetXAPIKey() optionalnullable.OptionalNullable[string] {
@@ -22,7 +60,7 @@ func (l *ListAgentsAgentsGetRequest) GetXAPIKey() optionalnullable.OptionalNulla
 type ListAgentsAgentsGetResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// Successful Response
-	ResponseListAgentsAgentsGet []components.AgentSummary
+	PaginatedResponseAgentSummary *components.PaginatedResponseAgentSummary
 }
 
 func (l ListAgentsAgentsGetResponse) MarshalJSON() ([]byte, error) {
@@ -43,9 +81,9 @@ func (l *ListAgentsAgentsGetResponse) GetHTTPMeta() components.HTTPMetadata {
 	return l.HTTPMeta
 }
 
-func (l *ListAgentsAgentsGetResponse) GetResponseListAgentsAgentsGet() []components.AgentSummary {
+func (l *ListAgentsAgentsGetResponse) GetPaginatedResponseAgentSummary() *components.PaginatedResponseAgentSummary {
 	if l == nil {
 		return nil
 	}
-	return l.ResponseListAgentsAgentsGet
+	return l.PaginatedResponseAgentSummary
 }

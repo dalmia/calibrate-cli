@@ -16,6 +16,9 @@ import (
 
 var listForAgentCmdMeta = []flagutil.FlagMeta{
 	{FlagName: "agent-uuid", Shorthand: "a", FieldPath: "AgentUUID", Kind: flagutil.FlagKindString, Required: true, Description: "Agent whose linked tests to list [required]"},
+	{FlagName: "q", FieldPath: "Q", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `queryParam:"style=form,explode=true,name=q"`, Description: "Case-insensitive substring search on `name`. Blank is a no-op"},
+	{FlagName: "limit", Shorthand: "l", FieldPath: "Limit", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `queryParam:"style=form,explode=true,name=limit"`, Description: "Maximum number of items to return. Omit for no limit (all items)"},
+	{FlagName: "offset", FieldPath: "Offset", Kind: flagutil.FlagKindInt64, Optional: true, HasDefault: true, Description: "Number of items to skip before returning results"},
 	{FlagName: "x-api-key", Shorthand: "x", FieldPath: "XAPIKey", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `header:"style=simple,explode=false,name=X-API-Key"`, Description: "string value"},
 }
 

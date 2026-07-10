@@ -322,12 +322,12 @@ func (s *Evaluators) List(ctx context.Context, request *operations.ListEvaluator
 					return nil, err
 				}
 
-				var out []components.RoutersEvaluatorsEvaluatorResponse
+				var out components.PaginatedResponseEvaluatorResponse
 				if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 					return nil, err
 				}
 
-				res.ResponseListEvaluatorsEvaluatorsGet = out
+				res.PaginatedResponseEvaluatorResponse = &out
 			}
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)

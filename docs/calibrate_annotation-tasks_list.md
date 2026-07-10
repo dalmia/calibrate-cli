@@ -20,6 +20,9 @@ calibrate annotation-tasks list [flags]
 
 ```
   -h, --help               help for list
+  -l, --limit string       Maximum number of items to return. Omit for no limit (all items)
+      --offset int         Number of items to skip before returning results
+      --q name             Case-insensitive substring search on name. Blank is a no-op
   -x, --x-api-key string   string value
 ```
 

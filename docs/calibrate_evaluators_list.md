@@ -23,6 +23,9 @@ calibrate evaluators list [flags]
   -e, --evaluator-type string   Filter by what the evaluator judges. Omit for all types (options: tts, stt, llm, llm-general, conversation)
   -h, --help                    help for list
   -i, --include-defaults true   When true, include the built-in default evaluators alongside the ones you created (default true)
+  -l, --limit string            Maximum number of items to return. Omit for no limit (all items)
+      --offset int              Number of items to skip before returning results
+      --q name                  Case-insensitive substring search on name. Blank is a no-op
   -x, --x-api-key string        string value
 ```
 

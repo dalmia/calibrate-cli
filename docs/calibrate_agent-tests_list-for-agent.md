@@ -21,6 +21,9 @@ calibrate agent-tests list-for-agent [flags]
 ```
   -a, --agent-uuid string   Agent whose linked tests to list [required]
   -h, --help                help for list-for-agent
+  -l, --limit string        Maximum number of items to return. Omit for no limit (all items)
+      --offset int          Number of items to skip before returning results
+      --q name              Case-insensitive substring search on name. Blank is a no-op
   -x, --x-api-key string    string value
 ```
 

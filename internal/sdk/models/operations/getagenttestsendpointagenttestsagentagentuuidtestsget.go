@@ -10,8 +10,25 @@ import (
 
 type GetAgentTestsEndpointAgentTestsAgentAgentUUIDTestsGetRequest struct {
 	// Agent whose linked tests to list
-	AgentUUID string                                    `pathParam:"style=simple,explode=false,name=agent_uuid"`
-	XAPIKey   optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=X-API-Key"`
+	AgentUUID string `pathParam:"style=simple,explode=false,name=agent_uuid"`
+	// Case-insensitive substring search on `name`. Blank is a no-op
+	Q optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=q"`
+	// Maximum number of items to return. Omit for no limit (all items)
+	Limit optionalnullable.OptionalNullable[int64] `queryParam:"style=form,explode=true,name=limit"`
+	// Number of items to skip before returning results
+	Offset  *int64                                    `default:"0" queryParam:"style=form,explode=true,name=offset"`
+	XAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=X-API-Key"`
+}
+
+func (g GetAgentTestsEndpointAgentTestsAgentAgentUUIDTestsGetRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(g, "", false)
+}
+
+func (g *GetAgentTestsEndpointAgentTestsAgentAgentUUIDTestsGetRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &g, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (g *GetAgentTestsEndpointAgentTestsAgentAgentUUIDTestsGetRequest) GetAgentUUID() string {
@@ -19,6 +36,27 @@ func (g *GetAgentTestsEndpointAgentTestsAgentAgentUUIDTestsGetRequest) GetAgentU
 		return ""
 	}
 	return g.AgentUUID
+}
+
+func (g *GetAgentTestsEndpointAgentTestsAgentAgentUUIDTestsGetRequest) GetQ() optionalnullable.OptionalNullable[string] {
+	if g == nil {
+		return nil
+	}
+	return g.Q
+}
+
+func (g *GetAgentTestsEndpointAgentTestsAgentAgentUUIDTestsGetRequest) GetLimit() optionalnullable.OptionalNullable[int64] {
+	if g == nil {
+		return nil
+	}
+	return g.Limit
+}
+
+func (g *GetAgentTestsEndpointAgentTestsAgentAgentUUIDTestsGetRequest) GetOffset() *int64 {
+	if g == nil {
+		return nil
+	}
+	return g.Offset
 }
 
 func (g *GetAgentTestsEndpointAgentTestsAgentAgentUUIDTestsGetRequest) GetXAPIKey() optionalnullable.OptionalNullable[string] {
@@ -31,7 +69,7 @@ func (g *GetAgentTestsEndpointAgentTestsAgentAgentUUIDTestsGetRequest) GetXAPIKe
 type GetAgentTestsEndpointAgentTestsAgentAgentUUIDTestsGetResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// Successful Response
-	ResponseGetAgentTestsEndpointAgentTestsAgentAgentUUIDTestsGet []components.TestListResponse
+	PaginatedResponseTestListResponse *components.PaginatedResponseTestListResponse
 }
 
 func (g GetAgentTestsEndpointAgentTestsAgentAgentUUIDTestsGetResponse) MarshalJSON() ([]byte, error) {
@@ -52,9 +90,9 @@ func (g *GetAgentTestsEndpointAgentTestsAgentAgentUUIDTestsGetResponse) GetHTTPM
 	return g.HTTPMeta
 }
 
-func (g *GetAgentTestsEndpointAgentTestsAgentAgentUUIDTestsGetResponse) GetResponseGetAgentTestsEndpointAgentTestsAgentAgentUUIDTestsGet() []components.TestListResponse {
+func (g *GetAgentTestsEndpointAgentTestsAgentAgentUUIDTestsGetResponse) GetPaginatedResponseTestListResponse() *components.PaginatedResponseTestListResponse {
 	if g == nil {
 		return nil
 	}
-	return g.ResponseGetAgentTestsEndpointAgentTestsAgentAgentUUIDTestsGet
+	return g.PaginatedResponseTestListResponse
 }

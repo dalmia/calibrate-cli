@@ -18,6 +18,9 @@ var listCmdMeta = []flagutil.FlagMeta{
 	{FlagName: "evaluator-type", Shorthand: "e", FieldPath: "EvaluatorType", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `queryParam:"style=form,explode=true,name=evaluator_type"`, Description: "Filter by what the evaluator judges. Omit for all types (options: tts, stt, llm, llm-general, conversation)"},
 	{FlagName: "data-type", FieldPath: "DataType", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `queryParam:"style=form,explode=true,name=data_type"`, Description: "Filter by modality. Omit for all (options: text, audio)"},
 	{FlagName: "include-defaults", Shorthand: "i", FieldPath: "IncludeDefaults", Kind: flagutil.FlagKindBool, Optional: true, HasDefault: true, DefaultBool: true, Description: "When `true`, include the built-in default evaluators alongside the ones you created"},
+	{FlagName: "q", FieldPath: "Q", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `queryParam:"style=form,explode=true,name=q"`, Description: "Case-insensitive substring search on `name`. Blank is a no-op"},
+	{FlagName: "limit", Shorthand: "l", FieldPath: "Limit", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `queryParam:"style=form,explode=true,name=limit"`, Description: "Maximum number of items to return. Omit for no limit (all items)"},
+	{FlagName: "offset", FieldPath: "Offset", Kind: flagutil.FlagKindInt64, Optional: true, HasDefault: true, Description: "Number of items to skip before returning results"},
 	{FlagName: "x-api-key", Shorthand: "x", FieldPath: "XAPIKey", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `header:"style=simple,explode=false,name=X-API-Key"`, Description: "string value"},
 }
 

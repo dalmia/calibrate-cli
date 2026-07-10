@@ -9,7 +9,45 @@ import (
 )
 
 type ListTestsTestsGetRequest struct {
+	// Case-insensitive substring search on `name`. Blank is a no-op
+	Q optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=q"`
+	// Maximum number of items to return. Omit for no limit (all items)
+	Limit optionalnullable.OptionalNullable[int64] `queryParam:"style=form,explode=true,name=limit"`
+	// Number of items to skip before returning results
+	Offset  *int64                                    `default:"0" queryParam:"style=form,explode=true,name=offset"`
 	XAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=X-API-Key"`
+}
+
+func (l ListTestsTestsGetRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(l, "", false)
+}
+
+func (l *ListTestsTestsGetRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &l, "", false, nil); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (l *ListTestsTestsGetRequest) GetQ() optionalnullable.OptionalNullable[string] {
+	if l == nil {
+		return nil
+	}
+	return l.Q
+}
+
+func (l *ListTestsTestsGetRequest) GetLimit() optionalnullable.OptionalNullable[int64] {
+	if l == nil {
+		return nil
+	}
+	return l.Limit
+}
+
+func (l *ListTestsTestsGetRequest) GetOffset() *int64 {
+	if l == nil {
+		return nil
+	}
+	return l.Offset
 }
 
 func (l *ListTestsTestsGetRequest) GetXAPIKey() optionalnullable.OptionalNullable[string] {
@@ -22,7 +60,7 @@ func (l *ListTestsTestsGetRequest) GetXAPIKey() optionalnullable.OptionalNullabl
 type ListTestsTestsGetResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// Successful Response
-	ResponseListTestsTestsGet []components.TestListResponse
+	PaginatedResponseTestListResponse *components.PaginatedResponseTestListResponse
 }
 
 func (l ListTestsTestsGetResponse) MarshalJSON() ([]byte, error) {
@@ -43,9 +81,9 @@ func (l *ListTestsTestsGetResponse) GetHTTPMeta() components.HTTPMetadata {
 	return l.HTTPMeta
 }
 
-func (l *ListTestsTestsGetResponse) GetResponseListTestsTestsGet() []components.TestListResponse {
+func (l *ListTestsTestsGetResponse) GetPaginatedResponseTestListResponse() *components.PaginatedResponseTestListResponse {
 	if l == nil {
 		return nil
 	}
-	return l.ResponseListTestsTestsGet
+	return l.PaginatedResponseTestListResponse
 }

@@ -9,7 +9,45 @@ import (
 )
 
 type ListAnnotationTasksAnnotationTasksGetRequest struct {
+	// Case-insensitive substring search on `name`. Blank is a no-op
+	Q optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=q"`
+	// Maximum number of items to return. Omit for no limit (all items)
+	Limit optionalnullable.OptionalNullable[int64] `queryParam:"style=form,explode=true,name=limit"`
+	// Number of items to skip before returning results
+	Offset  *int64                                    `default:"0" queryParam:"style=form,explode=true,name=offset"`
 	XAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=X-API-Key"`
+}
+
+func (l ListAnnotationTasksAnnotationTasksGetRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(l, "", false)
+}
+
+func (l *ListAnnotationTasksAnnotationTasksGetRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &l, "", false, nil); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (l *ListAnnotationTasksAnnotationTasksGetRequest) GetQ() optionalnullable.OptionalNullable[string] {
+	if l == nil {
+		return nil
+	}
+	return l.Q
+}
+
+func (l *ListAnnotationTasksAnnotationTasksGetRequest) GetLimit() optionalnullable.OptionalNullable[int64] {
+	if l == nil {
+		return nil
+	}
+	return l.Limit
+}
+
+func (l *ListAnnotationTasksAnnotationTasksGetRequest) GetOffset() *int64 {
+	if l == nil {
+		return nil
+	}
+	return l.Offset
 }
 
 func (l *ListAnnotationTasksAnnotationTasksGetRequest) GetXAPIKey() optionalnullable.OptionalNullable[string] {
@@ -22,7 +60,7 @@ func (l *ListAnnotationTasksAnnotationTasksGetRequest) GetXAPIKey() optionalnull
 type ListAnnotationTasksAnnotationTasksGetResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// Successful Response
-	ResponseListAnnotationTasksAnnotationTasksGet []components.AnnotationTaskResponse
+	PaginatedResponseAnnotationTaskResponse *components.PaginatedResponseAnnotationTaskResponse
 }
 
 func (l ListAnnotationTasksAnnotationTasksGetResponse) MarshalJSON() ([]byte, error) {
@@ -43,9 +81,9 @@ func (l *ListAnnotationTasksAnnotationTasksGetResponse) GetHTTPMeta() components
 	return l.HTTPMeta
 }
 
-func (l *ListAnnotationTasksAnnotationTasksGetResponse) GetResponseListAnnotationTasksAnnotationTasksGet() []components.AnnotationTaskResponse {
+func (l *ListAnnotationTasksAnnotationTasksGetResponse) GetPaginatedResponseAnnotationTaskResponse() *components.PaginatedResponseAnnotationTaskResponse {
 	if l == nil {
 		return nil
 	}
-	return l.ResponseListAnnotationTasksAnnotationTasksGet
+	return l.PaginatedResponseAnnotationTaskResponse
 }

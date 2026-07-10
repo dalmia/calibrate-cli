@@ -16,6 +16,11 @@ import (
 
 var listRunsForAgentCmdMeta = []flagutil.FlagMeta{
 	{FlagName: "agent-uuid", Shorthand: "a", FieldPath: "AgentUUID", Kind: flagutil.FlagKindString, Required: true, Description: "Agent whose test runs to list [required]"},
+	{FlagName: "type", Shorthand: "t", FieldPath: "Type", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `queryParam:"style=form,explode=true,name=type"`, Description: "Filter by run type. Omit to return both:\n- `llm-unit-test`: single runs of an agent's tests\n- `llm-benchmark`: multi-model comparisons (options: llm-unit-test, llm-benchmark)"},
+	{FlagName: "status", Shorthand: "s", FieldPath: "Status", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `queryParam:"style=form,explode=true,name=status"`, Description: "Filter by run status. Omit for all statuses (options: queued, in_progress, cancelled, done, failed)"},
+	{FlagName: "has-failures", FieldPath: "HasFailures", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `queryParam:"style=form,explode=true,name=has_failures"`, Description: "Filter by whether the run has any failing test case or model. `true` returns only runs with failures (or errors), `false` only clean runs. Omit for both"},
+	{FlagName: "limit", Shorthand: "l", FieldPath: "Limit", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `queryParam:"style=form,explode=true,name=limit"`, Description: "Maximum number of items to return. Omit for no limit (all items)"},
+	{FlagName: "offset", FieldPath: "Offset", Kind: flagutil.FlagKindInt64, Optional: true, HasDefault: true, Description: "Number of items to skip before returning results"},
 	{FlagName: "x-api-key", Shorthand: "x", FieldPath: "XAPIKey", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `header:"style=simple,explode=false,name=X-API-Key"`, Description: "string value"},
 }
 

@@ -19,9 +19,16 @@ calibrate agent-tests list-runs-for-agent [flags]
 ### Options
 
 ```
-  -a, --agent-uuid string   Agent whose test runs to list [required]
-  -h, --help                help for list-runs-for-agent
-  -x, --x-api-key string    string value
+  -a, --agent-uuid string    Agent whose test runs to list [required]
+      --has-failures true    Filter by whether the run has any failing test case or model. true returns only runs with failures (or errors), `false` only clean runs. Omit for both
+  -h, --help                 help for list-runs-for-agent
+  -l, --limit string         Maximum number of items to return. Omit for no limit (all items)
+      --offset int           Number of items to skip before returning results
+  -s, --status string        Filter by run status. Omit for all statuses (options: queued, in_progress, cancelled, done, failed)
+  -t, --type llm-unit-test   Filter by run type. Omit to return both:
+                             - llm-unit-test: single runs of an agent's tests
+                             - `llm-benchmark`: multi-model comparisons (options: llm-unit-test, llm-benchmark)
+  -x, --x-api-key string     string value
 ```
 
 ### Options inherited from parent commands

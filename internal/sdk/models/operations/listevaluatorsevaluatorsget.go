@@ -79,8 +79,14 @@ type ListEvaluatorsEvaluatorsGetRequest struct {
 	// Filter by modality. Omit for all
 	DataType optionalnullable.OptionalNullable[DataType] `queryParam:"style=form,explode=true,name=data_type"`
 	// When `true`, include the built-in default evaluators alongside the ones you created
-	IncludeDefaults *bool                                     `default:"true" queryParam:"style=form,explode=true,name=include_defaults"`
-	XAPIKey         optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=X-API-Key"`
+	IncludeDefaults *bool `default:"true" queryParam:"style=form,explode=true,name=include_defaults"`
+	// Case-insensitive substring search on `name`. Blank is a no-op
+	Q optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=q"`
+	// Maximum number of items to return. Omit for no limit (all items)
+	Limit optionalnullable.OptionalNullable[int64] `queryParam:"style=form,explode=true,name=limit"`
+	// Number of items to skip before returning results
+	Offset  *int64                                    `default:"0" queryParam:"style=form,explode=true,name=offset"`
+	XAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=X-API-Key"`
 }
 
 func (l ListEvaluatorsEvaluatorsGetRequest) MarshalJSON() ([]byte, error) {
@@ -115,6 +121,27 @@ func (l *ListEvaluatorsEvaluatorsGetRequest) GetIncludeDefaults() *bool {
 	return l.IncludeDefaults
 }
 
+func (l *ListEvaluatorsEvaluatorsGetRequest) GetQ() optionalnullable.OptionalNullable[string] {
+	if l == nil {
+		return nil
+	}
+	return l.Q
+}
+
+func (l *ListEvaluatorsEvaluatorsGetRequest) GetLimit() optionalnullable.OptionalNullable[int64] {
+	if l == nil {
+		return nil
+	}
+	return l.Limit
+}
+
+func (l *ListEvaluatorsEvaluatorsGetRequest) GetOffset() *int64 {
+	if l == nil {
+		return nil
+	}
+	return l.Offset
+}
+
 func (l *ListEvaluatorsEvaluatorsGetRequest) GetXAPIKey() optionalnullable.OptionalNullable[string] {
 	if l == nil {
 		return nil
@@ -125,7 +152,7 @@ func (l *ListEvaluatorsEvaluatorsGetRequest) GetXAPIKey() optionalnullable.Optio
 type ListEvaluatorsEvaluatorsGetResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// Successful Response
-	ResponseListEvaluatorsEvaluatorsGet []components.RoutersEvaluatorsEvaluatorResponse
+	PaginatedResponseEvaluatorResponse *components.PaginatedResponseEvaluatorResponse
 }
 
 func (l ListEvaluatorsEvaluatorsGetResponse) MarshalJSON() ([]byte, error) {
@@ -146,9 +173,9 @@ func (l *ListEvaluatorsEvaluatorsGetResponse) GetHTTPMeta() components.HTTPMetad
 	return l.HTTPMeta
 }
 
-func (l *ListEvaluatorsEvaluatorsGetResponse) GetResponseListEvaluatorsEvaluatorsGet() []components.RoutersEvaluatorsEvaluatorResponse {
+func (l *ListEvaluatorsEvaluatorsGetResponse) GetPaginatedResponseEvaluatorResponse() *components.PaginatedResponseEvaluatorResponse {
 	if l == nil {
 		return nil
 	}
-	return l.ResponseListEvaluatorsEvaluatorsGet
+	return l.PaginatedResponseEvaluatorResponse
 }

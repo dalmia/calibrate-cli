@@ -45,6 +45,6 @@ calibrate annotation-tasks [flags]
 * [calibrate annotation-tasks get-agreement](calibrate_annotation-tasks_get-agreement.md)	 - Get task agreement
 * [calibrate annotation-tasks get-evaluator-run](calibrate_annotation-tasks_get-evaluator-run.md)	 - Get evaluator run
 * [calibrate annotation-tasks get-summary](calibrate_annotation-tasks_get-summary.md)	 - Get task summary
-* [calibrate annotation-tasks link-evaluator](calibrate_annotation-tasks_link-evaluator.md)	 - Link evaluator to task
 * [calibrate annotation-tasks list](calibrate_annotation-tasks_list.md)	 - List annotation tasks
+* [calibrate annotation-tasks set-evaluators](calibrate_annotation-tasks_set-evaluators.md)	 - Update task evaluators
 * [calibrate annotation-tasks update-items](calibrate_annotation-tasks_update-items.md)	 - Bulk update items

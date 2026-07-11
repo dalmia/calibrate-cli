@@ -1,29 +1,29 @@
-## calibrate annotation-tasks link-evaluator
+## calibrate annotation-tasks set-evaluators
 
-Link evaluator to task
+Update task evaluators
 
 ### Synopsis
 
-Link an evaluator to a task, appending it to the display order
+Replace a task's linked evaluators with the given ordered set, linking, unlinking, and reordering as needed
 
 ```
-calibrate annotation-tasks link-evaluator [flags]
+calibrate annotation-tasks set-evaluators [flags]
 ```
 
 ### Examples
 
 ```
-  calibrate annotation-tasks link-evaluator --task-uuid f47ac10b-58cc-4372-a567-0e02b2c3d479 --evaluator-id f47ac10b-58cc-4372-a567-0e02b2c3d479
+  calibrate annotation-tasks set-evaluators --task-uuid f47ac10b-58cc-4372-a567-0e02b2c3d479 --evaluator-ids '["f47ac10b-58cc-4372-a567-0e02b2c3d479"]'
 ```
 
 ### Options
 
 ```
-      --body string           Request body as JSON (alternative to individual flags). Can also be provided via stdin.
-  -e, --evaluator-id string   The evaluator to link. Must be one you created or a built-in default [required]
-  -h, --help                  help for link-evaluator
-  -t, --task-uuid string      Annotation task to act on [required]
-  -x, --x-api-key string      string value
+      --body string                 Request body as JSON (alternative to individual flags). Can also be provided via stdin.
+  -e, --evaluator-ids stringArray   The full ordered set of evaluators the task should end up linked to, in display order. Missing ones are unlinked, new ones are linked, and the order sets their position. Send an empty list to unlink all. Each must be one you created or a built-in default [required]
+  -h, --help                        help for set-evaluators
+  -t, --task-uuid string            Annotation task to act on [required]
+  -x, --x-api-key string            string value
 ```
 
 ### Options inherited from parent commands

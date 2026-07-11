@@ -27,7 +27,7 @@ func initCreateCmd(parent *cobra.Command) error {
 		Use:     "create",
 		Short:   "Create agent",
 		Long:    "Create an agent to test inside Calibrate or connect your existing agent to Calibrate",
-		Example: "  calibrate agents create --name <value>",
+		Example: "  calibrate agents create --name Support Agent",
 		RunE:    runCreateCmd,
 	}
 	flagutil.RegisterFlags(cmd, createCmdMeta)

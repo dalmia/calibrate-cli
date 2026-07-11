@@ -557,9 +557,9 @@ func (s *AnnotationTasks) Get(ctx context.Context, request operations.GetAnnotat
 
 }
 
-// LinkEvaluator - Link evaluator to task
-// Link an evaluator to a task, appending it to the display order
-func (s *AnnotationTasks) LinkEvaluator(ctx context.Context, request operations.LinkEvaluatorToTaskAnnotationTasksTaskUUIDEvaluatorsPostRequest, opts ...operations.Option) (*operations.LinkEvaluatorToTaskAnnotationTasksTaskUUIDEvaluatorsPostResponse, error) {
+// SetEvaluators - Update task evaluators
+// Replace a task's linked evaluators with the given ordered set, linking, unlinking, and reordering as needed
+func (s *AnnotationTasks) SetEvaluators(ctx context.Context, request operations.SetTaskEvaluatorsAnnotationTasksTaskUUIDEvaluatorsPutRequest, opts ...operations.Option) (*operations.SetTaskEvaluatorsAnnotationTasksTaskUUIDEvaluatorsPutResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionTimeout,
@@ -588,7 +588,7 @@ func (s *AnnotationTasks) LinkEvaluator(ctx context.Context, request operations.
 		SDKConfiguration: s.sdkConfiguration,
 		BaseURL:          baseURL,
 		Context:          ctx,
-		OperationID:      "link_evaluator_to_task_annotation_tasks__task_uuid__evaluators_post",
+		OperationID:      "set_task_evaluators_annotation_tasks__task_uuid__evaluators_put",
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Body", "json", `request:"mediaType=application/json"`)
@@ -607,7 +607,7 @@ func (s *AnnotationTasks) LinkEvaluator(ctx context.Context, request operations.
 		defer cancel()
 	}
 
-	req, err := http.NewRequestWithContext(ctx, "POST", opURL, bodyReader)
+	req, err := http.NewRequestWithContext(ctx, "PUT", opURL, bodyReader)
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
@@ -656,7 +656,7 @@ func (s *AnnotationTasks) LinkEvaluator(ctx context.Context, request operations.
 		}
 	}
 
-	res := &operations.LinkEvaluatorToTaskAnnotationTasksTaskUUIDEvaluatorsPostResponse{
+	res := &operations.SetTaskEvaluatorsAnnotationTasksTaskUUIDEvaluatorsPutResponse{
 		HTTPMeta: components.HTTPMetadata{
 			Request:  req,
 			Response: httpRes,
@@ -673,12 +673,12 @@ func (s *AnnotationTasks) LinkEvaluator(ctx context.Context, request operations.
 					return nil, err
 				}
 
-				var out components.EvaluatorLinkResponse
+				var out components.EvaluatorSetResponse
 				if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 					return nil, err
 				}
 
-				res.EvaluatorLinkResponse = &out
+				res.EvaluatorSetResponse = &out
 			}
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)

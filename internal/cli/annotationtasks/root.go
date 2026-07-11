@@ -33,7 +33,7 @@ func InitAnnotationTasksRoot(parent *cobra.Command) error {
 		return err
 	}
 
-	if err := initLinkEvaluatorCmd(AnnotationTasksCmd); err != nil {
+	if err := initSetEvaluatorsCmd(AnnotationTasksCmd); err != nil {
 		return err
 	}
 

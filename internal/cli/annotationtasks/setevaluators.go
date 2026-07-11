@@ -14,42 +14,42 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var linkEvaluatorCmdMeta = []flagutil.FlagMeta{
+var setEvaluatorsCmdMeta = []flagutil.FlagMeta{
 	{FlagName: "task-uuid", Shorthand: "t", FieldPath: "TaskUUID", Kind: flagutil.FlagKindString, Required: true, Description: "Annotation task to act on [required]"},
 	{FlagName: "x-api-key", Shorthand: "x", FieldPath: "XAPIKey", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `header:"style=simple,explode=false,name=X-API-Key"`, Description: "string value"},
-	{FlagName: "evaluator-id", Shorthand: "e", FieldPath: "Body.EvaluatorID", Kind: flagutil.FlagKindString, Required: true, Description: "The evaluator to link. Must be one you created or a built-in default [required]"},
+	{FlagName: "evaluator-ids", Shorthand: "e", FieldPath: "Body.EvaluatorIds", Kind: flagutil.FlagKindStringArray, Required: true, Description: "The full ordered set of evaluators the task should end up linked to, in display order. Missing ones are unlinked, new ones are linked, and the order sets their position. Send an empty list to unlink all. Each must be one you created or a built-in default [required]"},
 }
 
-// initLinkEvaluatorCmd initializes the link-evaluator command.
-func initLinkEvaluatorCmd(parent *cobra.Command) error {
+// initSetEvaluatorsCmd initializes the set-evaluators command.
+func initSetEvaluatorsCmd(parent *cobra.Command) error {
 	var cmd = &cobra.Command{
-		Use:     "link-evaluator",
-		Short:   "Link evaluator to task",
-		Long:    "Link an evaluator to a task, appending it to the display order",
-		Example: "  calibrate annotation-tasks link-evaluator --task-uuid f47ac10b-58cc-4372-a567-0e02b2c3d479 --evaluator-id f47ac10b-58cc-4372-a567-0e02b2c3d479",
-		RunE:    runLinkEvaluatorCmd,
-		Aliases: []string{"le"},
+		Use:     "set-evaluators",
+		Short:   "Update task evaluators",
+		Long:    "Replace a task's linked evaluators with the given ordered set, linking, unlinking, and reordering as needed",
+		Example: "  calibrate annotation-tasks set-evaluators --task-uuid f47ac10b-58cc-4372-a567-0e02b2c3d479 --evaluator-ids '[\"f47ac10b-58cc-4372-a567-0e02b2c3d479\"]'",
+		RunE:    runSetEvaluatorsCmd,
+		Aliases: []string{"se"},
 	}
-	flagutil.RegisterFlags(cmd, linkEvaluatorCmdMeta)
-	if err := flagutil.ValidateMeta[operations.LinkEvaluatorToTaskAnnotationTasksTaskUUIDEvaluatorsPostRequest](linkEvaluatorCmdMeta); err != nil {
-		return fmt.Errorf("invalid metadata for link-evaluator: %w", err)
+	flagutil.RegisterFlags(cmd, setEvaluatorsCmdMeta)
+	if err := flagutil.ValidateMeta[operations.SetTaskEvaluatorsAnnotationTasksTaskUUIDEvaluatorsPutRequest](setEvaluatorsCmdMeta); err != nil {
+		return fmt.Errorf("invalid metadata for set-evaluators: %w", err)
 	}
 	cmd.Flags().String("body", "", "Request body as JSON (alternative to individual flags). Can also be provided via stdin.")
 	parent.AddCommand(cmd)
 	return nil
 }
 
-// runLinkEvaluatorCmd executes the link-evaluator command.
-func runLinkEvaluatorCmd(cmd *cobra.Command, args []string) error {
+// runSetEvaluatorsCmd executes the set-evaluators command.
+func runSetEvaluatorsCmd(cmd *cobra.Command, args []string) error {
 	if usage.UsageRequested(cmd) {
 		return usage.EmitSchema(cmd, cmd.OutOrStdout())
 	}
-	if interactive.ShouldPrompt(cmd, linkEvaluatorCmdMeta) {
-		if err := interactive.PromptAndSetFlags(cmd, linkEvaluatorCmdMeta); err != nil {
+	if interactive.ShouldPrompt(cmd, setEvaluatorsCmdMeta) {
+		if err := interactive.PromptAndSetFlags(cmd, setEvaluatorsCmdMeta); err != nil {
 			return err
 		}
 	}
-	req, err := flagutil.BuildRequest[operations.LinkEvaluatorToTaskAnnotationTasksTaskUUIDEvaluatorsPostRequest](cmd, linkEvaluatorCmdMeta, "Body", "body")
+	req, err := flagutil.BuildRequest[operations.SetTaskEvaluatorsAnnotationTasksTaskUUIDEvaluatorsPutRequest](cmd, setEvaluatorsCmdMeta, "Body", "body")
 	if err != nil {
 		return err
 	}
@@ -72,7 +72,7 @@ func runLinkEvaluatorCmd(cmd *cobra.Command, args []string) error {
 	if output.WantsRawJSON(cmd) {
 		sdkOpts = append(sdkOpts, operations.WithSkipDeserialization())
 	}
-	res, err := s.AnnotationTasks.LinkEvaluator(cmd.Context(), *req, sdkOpts...)
+	res, err := s.AnnotationTasks.SetEvaluators(cmd.Context(), *req, sdkOpts...)
 	if err != nil {
 		return output.Error(cmd, err)
 	}

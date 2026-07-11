@@ -13,7 +13,7 @@ calibrate agents create [flags]
 ### Examples
 
 ```
-  calibrate agents create --name <value>
+  calibrate agents create --name Support Agent
 ```
 
 ### Options

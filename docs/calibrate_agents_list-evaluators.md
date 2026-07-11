@@ -1,19 +1,30 @@
-## calibrate agents
+## calibrate agents list-evaluators
 
-Operations for agents
+List agent evaluators
 
 ### Synopsis
 
-Operations for agents
+List evaluators linked to an agent
 
 ```
-calibrate agents [flags]
+calibrate agents list-evaluators [flags]
+```
+
+### Examples
+
+```
+  calibrate agents list-evaluators --agent-uuid f47ac10b-58cc-4372-a567-0e02b2c3d479
 ```
 
 ### Options
 
 ```
-  -h, --help   help for agents
+  -a, --agent-uuid string   The agent whose evaluators to list [required]
+  -h, --help                help for list-evaluators
+  -l, --limit string        Maximum number of items to return. Omit for no limit (all items)
+      --offset int          Number of items to skip before returning results
+      --q name              Case-insensitive substring search on name. Blank is a no-op
+  -x, --x-api-key string    string value
 ```
 
 ### Options inherited from parent commands
@@ -37,12 +48,4 @@ calibrate agents [flags]
 
 ### SEE ALSO
 
-* [calibrate](calibrate.md)	 - Calibrate Public API: Programmatic API for CI/automation
-* [calibrate agents create](calibrate_agents_create.md)	 - Create agent
-* [calibrate agents get](calibrate_agents_get.md)	 - Get agent
-* [calibrate agents link-evaluators](calibrate_agents_link-evaluators.md)	 - Link evaluators to agent
-* [calibrate agents list](calibrate_agents_list.md)	 - List agents
-* [calibrate agents list-evaluators](calibrate_agents_list-evaluators.md)	 - List agent evaluators
-* [calibrate agents resolve](calibrate_agents_resolve.md)	 - Resolve agent names to IDs
-* [calibrate agents update](calibrate_agents_update.md)	 - Update agent
-* [calibrate agents verify-connection](calibrate_agents_verify-connection.md)	 - Verify agent connection
+* [calibrate agents](calibrate_agents.md)	 - Operations for agents

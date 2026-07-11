@@ -1,19 +1,29 @@
-## calibrate agents
+## calibrate agents link-evaluators
 
-Operations for agents
+Link evaluators to agent
 
 ### Synopsis
 
-Operations for agents
+Link one or more existing evaluators to an agent, skipping any already linked
 
 ```
-calibrate agents [flags]
+calibrate agents link-evaluators [flags]
+```
+
+### Examples
+
+```
+  calibrate agents link-evaluators --agent-uuid f47ac10b-58cc-4372-a567-0e02b2c3d479 --evaluator-ids '["f47ac10b-58cc-4372-a567-0e02b2c3d479"]'
 ```
 
 ### Options
 
 ```
-  -h, --help   help for agents
+  -a, --agent-uuid string           The agent to link the evaluators to [required]
+      --body string                 Request body as JSON (alternative to individual flags). Can also be provided via stdin.
+  -e, --evaluator-ids stringArray   The evaluators to link to the agent. Ones that are already linked are skipped. Each must be one you created or a built-in default [required]
+  -h, --help                        help for link-evaluators
+  -x, --x-api-key string            string value
 ```
 
 ### Options inherited from parent commands
@@ -37,12 +47,4 @@ calibrate agents [flags]
 
 ### SEE ALSO
 
-* [calibrate](calibrate.md)	 - Calibrate Public API: Programmatic API for CI/automation
-* [calibrate agents create](calibrate_agents_create.md)	 - Create agent
-* [calibrate agents get](calibrate_agents_get.md)	 - Get agent
-* [calibrate agents link-evaluators](calibrate_agents_link-evaluators.md)	 - Link evaluators to agent
-* [calibrate agents list](calibrate_agents_list.md)	 - List agents
-* [calibrate agents list-evaluators](calibrate_agents_list-evaluators.md)	 - List agent evaluators
-* [calibrate agents resolve](calibrate_agents_resolve.md)	 - Resolve agent names to IDs
-* [calibrate agents update](calibrate_agents_update.md)	 - Update agent
-* [calibrate agents verify-connection](calibrate_agents_verify-connection.md)	 - Verify agent connection
+* [calibrate agents](calibrate_agents.md)	 - Operations for agents

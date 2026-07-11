@@ -44,6 +44,14 @@ func InitAgentsRoot(parent *cobra.Command) error {
 		return err
 	}
 
+	if err := initListEvaluatorsCmd(AgentsCmd); err != nil {
+		return err
+	}
+
+	if err := initLinkEvaluatorsCmd(AgentsCmd); err != nil {
+		return err
+	}
+
 	parent.AddCommand(AgentsCmd)
 	return nil
 }

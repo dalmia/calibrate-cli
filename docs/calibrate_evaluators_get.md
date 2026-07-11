@@ -19,9 +19,10 @@ calibrate evaluators get [flags]
 ### Options
 
 ```
-  -e, --evaluator-uuid string   Evaluator to retrieve [required]
-  -h, --help                    help for get
-  -x, --x-api-key string        string value
+  -c, --compact versions.system_prompt   Return a compact response that omits heavy detail fields (versions.system_prompt, `versions.output_config`, `versions.variables`), keeping only the lightweight decision fields. Omit for full detail
+  -e, --evaluator-uuid string            Evaluator to retrieve [required]
+  -h, --help                             help for get
+  -x, --x-api-key string                 string value
 ```
 
 ### Options inherited from parent commands

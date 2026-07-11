@@ -10,8 +10,21 @@ import (
 
 type GetEvaluatorEndpointEvaluatorsEvaluatorUUIDGetRequest struct {
 	// Evaluator to retrieve
-	EvaluatorUUID string                                    `pathParam:"style=simple,explode=false,name=evaluator_uuid"`
-	XAPIKey       optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=X-API-Key"`
+	EvaluatorUUID string `pathParam:"style=simple,explode=false,name=evaluator_uuid"`
+	// Return a compact response that omits heavy detail fields (`versions.system_prompt`, `versions.output_config`, `versions.variables`), keeping only the lightweight decision fields. Omit for full detail
+	Compact *bool                                     `default:"false" queryParam:"style=form,explode=true,name=compact"`
+	XAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=X-API-Key"`
+}
+
+func (g GetEvaluatorEndpointEvaluatorsEvaluatorUUIDGetRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(g, "", false)
+}
+
+func (g *GetEvaluatorEndpointEvaluatorsEvaluatorUUIDGetRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &g, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (g *GetEvaluatorEndpointEvaluatorsEvaluatorUUIDGetRequest) GetEvaluatorUUID() string {
@@ -19,6 +32,13 @@ func (g *GetEvaluatorEndpointEvaluatorsEvaluatorUUIDGetRequest) GetEvaluatorUUID
 		return ""
 	}
 	return g.EvaluatorUUID
+}
+
+func (g *GetEvaluatorEndpointEvaluatorsEvaluatorUUIDGetRequest) GetCompact() *bool {
+	if g == nil {
+		return nil
+	}
+	return g.Compact
 }
 
 func (g *GetEvaluatorEndpointEvaluatorsEvaluatorUUIDGetRequest) GetXAPIKey() optionalnullable.OptionalNullable[string] {
@@ -31,7 +51,7 @@ func (g *GetEvaluatorEndpointEvaluatorsEvaluatorUUIDGetRequest) GetXAPIKey() opt
 type GetEvaluatorEndpointEvaluatorsEvaluatorUUIDGetResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// Successful Response
-	EvaluatorDetailResponse *components.EvaluatorDetailResponse
+	EvaluatorDetailResponseCompact *components.EvaluatorDetailResponseCompact
 }
 
 func (g GetEvaluatorEndpointEvaluatorsEvaluatorUUIDGetResponse) MarshalJSON() ([]byte, error) {
@@ -52,9 +72,9 @@ func (g *GetEvaluatorEndpointEvaluatorsEvaluatorUUIDGetResponse) GetHTTPMeta() c
 	return g.HTTPMeta
 }
 
-func (g *GetEvaluatorEndpointEvaluatorsEvaluatorUUIDGetResponse) GetEvaluatorDetailResponse() *components.EvaluatorDetailResponse {
+func (g *GetEvaluatorEndpointEvaluatorsEvaluatorUUIDGetResponse) GetEvaluatorDetailResponseCompact() *components.EvaluatorDetailResponseCompact {
 	if g == nil {
 		return nil
 	}
-	return g.EvaluatorDetailResponse
+	return g.EvaluatorDetailResponseCompact
 }

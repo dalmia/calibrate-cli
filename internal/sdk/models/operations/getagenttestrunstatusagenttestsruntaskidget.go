@@ -10,8 +10,23 @@ import (
 
 type GetAgentTestRunStatusAgentTestsRunTaskIDGetRequest struct {
 	// Test run to poll for status and results
-	TaskID  string                                    `pathParam:"style=simple,explode=false,name=task_id"`
+	TaskID string `pathParam:"style=simple,explode=false,name=task_id"`
+	// Return only failing test cases. Omit to return every case
+	OnlyFailed *bool `default:"false" queryParam:"style=form,explode=true,name=only_failed"`
+	// Return a compact response that omits heavy detail fields (`results.output`, `results.test_case`, `results.judge_results`, `results.reasoning`, `evaluators.output_config`), keeping only the lightweight decision fields. Omit for full detail
+	Compact *bool                                     `default:"false" queryParam:"style=form,explode=true,name=compact"`
 	XAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=X-API-Key"`
+}
+
+func (g GetAgentTestRunStatusAgentTestsRunTaskIDGetRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(g, "", false)
+}
+
+func (g *GetAgentTestRunStatusAgentTestsRunTaskIDGetRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &g, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (g *GetAgentTestRunStatusAgentTestsRunTaskIDGetRequest) GetTaskID() string {
@@ -19,6 +34,20 @@ func (g *GetAgentTestRunStatusAgentTestsRunTaskIDGetRequest) GetTaskID() string 
 		return ""
 	}
 	return g.TaskID
+}
+
+func (g *GetAgentTestRunStatusAgentTestsRunTaskIDGetRequest) GetOnlyFailed() *bool {
+	if g == nil {
+		return nil
+	}
+	return g.OnlyFailed
+}
+
+func (g *GetAgentTestRunStatusAgentTestsRunTaskIDGetRequest) GetCompact() *bool {
+	if g == nil {
+		return nil
+	}
+	return g.Compact
 }
 
 func (g *GetAgentTestRunStatusAgentTestsRunTaskIDGetRequest) GetXAPIKey() optionalnullable.OptionalNullable[string] {

@@ -7,7 +7,7 @@ import (
 	"github.com/dalmia/calibrate-cli/internal/sdk/sdkinternal/utils"
 )
 
-type EvaluatorVersionResponse struct {
+type EvaluatorVersionCompact struct {
 	// Version ID
 	UUID string `json:"uuid"`
 	// The version's number. The first version is 1, and it goes up by one for each new version of the evaluator
@@ -15,7 +15,7 @@ type EvaluatorVersionResponse struct {
 	// The model that runs the judge, named the way its provider does, for example `openai/gpt-4.1` or `anthropic/claude-sonnet-4`
 	JudgeModel string `json:"judge_model"`
 	// Judge system prompt, with `{{variable}}` placeholders unrendered
-	SystemPrompt string `json:"system_prompt"`
+	SystemPrompt optionalnullable.OptionalNullable[string] `json:"system_prompt,omitzero"`
 	// The scale points and their labels. Required for a `rating` evaluator. A `binary` evaluator uses the default Correct/Wrong labels unless you set your own
 	OutputConfig optionalnullable.OptionalNullable[OutputConfig] `json:"output_config,omitzero"`
 	// Declared prompt variables
@@ -24,60 +24,60 @@ type EvaluatorVersionResponse struct {
 	CreatedAt string `json:"created_at"`
 }
 
-func (e EvaluatorVersionResponse) MarshalJSON() ([]byte, error) {
+func (e EvaluatorVersionCompact) MarshalJSON() ([]byte, error) {
 	return utils.MarshalJSON(e, "", false)
 }
 
-func (e *EvaluatorVersionResponse) UnmarshalJSON(data []byte) error {
+func (e *EvaluatorVersionCompact) UnmarshalJSON(data []byte) error {
 	if err := utils.UnmarshalJSON(data, &e, "", false, nil); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (e *EvaluatorVersionResponse) GetUUID() string {
+func (e *EvaluatorVersionCompact) GetUUID() string {
 	if e == nil {
 		return ""
 	}
 	return e.UUID
 }
 
-func (e *EvaluatorVersionResponse) GetVersionNumber() int64 {
+func (e *EvaluatorVersionCompact) GetVersionNumber() int64 {
 	if e == nil {
 		return 0
 	}
 	return e.VersionNumber
 }
 
-func (e *EvaluatorVersionResponse) GetJudgeModel() string {
+func (e *EvaluatorVersionCompact) GetJudgeModel() string {
 	if e == nil {
 		return ""
 	}
 	return e.JudgeModel
 }
 
-func (e *EvaluatorVersionResponse) GetSystemPrompt() string {
+func (e *EvaluatorVersionCompact) GetSystemPrompt() optionalnullable.OptionalNullable[string] {
 	if e == nil {
-		return ""
+		return nil
 	}
 	return e.SystemPrompt
 }
 
-func (e *EvaluatorVersionResponse) GetOutputConfig() optionalnullable.OptionalNullable[OutputConfig] {
+func (e *EvaluatorVersionCompact) GetOutputConfig() optionalnullable.OptionalNullable[OutputConfig] {
 	if e == nil {
 		return nil
 	}
 	return e.OutputConfig
 }
 
-func (e *EvaluatorVersionResponse) GetVariables() optionalnullable.OptionalNullable[[]VariableSpec] {
+func (e *EvaluatorVersionCompact) GetVariables() optionalnullable.OptionalNullable[[]VariableSpec] {
 	if e == nil {
 		return nil
 	}
 	return e.Variables
 }
 
-func (e *EvaluatorVersionResponse) GetCreatedAt() string {
+func (e *EvaluatorVersionCompact) GetCreatedAt() string {
 	if e == nil {
 		return ""
 	}

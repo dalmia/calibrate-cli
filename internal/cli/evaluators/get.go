@@ -16,6 +16,7 @@ import (
 
 var getCmdMeta = []flagutil.FlagMeta{
 	{FlagName: "evaluator-uuid", Shorthand: "e", FieldPath: "EvaluatorUUID", Kind: flagutil.FlagKindString, Required: true, Description: "Evaluator to retrieve [required]"},
+	{FlagName: "compact", Shorthand: "c", FieldPath: "Compact", Kind: flagutil.FlagKindBool, Optional: true, HasDefault: true, Description: "Return a compact response that omits heavy detail fields (`versions.system_prompt`, `versions.output_config`, `versions.variables`), keeping only the lightweight decision fields. Omit for full detail"},
 	{FlagName: "x-api-key", Shorthand: "x", FieldPath: "XAPIKey", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `header:"style=simple,explode=false,name=X-API-Key"`, Description: "string value"},
 }
 

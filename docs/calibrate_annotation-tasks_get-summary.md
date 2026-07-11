@@ -19,16 +19,18 @@ calibrate annotation-tasks get-summary [flags]
 ### Options
 
 ```
-  -h, --help                 help for get-summary
-  -i, --item-id annotators   Filter rows to a single item. The full task-wide annotator union is still returned in annotators
-      --limit int            Maximum number of items to return (default 50)
-      --live-only            When true, emit only one row for each (item, evaluator) pair using the evaluator's live version. Versions other than the live one that have runs are excluded
-      --offset int           Number of items to skip before returning results
-      --order string         Sort direction (options: asc, desc) (default "desc")
-      --q payload.name       Case-insensitive substring search on payload.name. Blank is a no-op
-  -s, --sort-by string       Sort key for the results (default "created_at")
-  -t, --task-uuid string     Annotation task to act on [required]
-  -x, --x-api-key string     string value
+  -c, --compact rows.payload   Return a compact response that omits heavy detail fields (rows.payload, `rows.evaluator_reasoning`, `rows.annotations.reasoning`, `evaluators.versions.system_prompt`, `evaluators.versions.output_config`, `evaluators.versions.variables`, `item_comments`), keeping only the lightweight decision fields. Omit for full detail
+      --disagreement-only      When true, keep only rows where the evaluator disagreed with at least one annotator
+  -h, --help                   help for get-summary
+  -i, --item-id annotators     Filter rows to a single item. The full task-wide annotator union is still returned in annotators
+      --limit int              Maximum number of items to return (default 50)
+      --live-only              When true, emit only one row for each (item, evaluator) pair using the evaluator's live version. Versions other than the live one that have runs are excluded
+      --offset int             Number of items to skip before returning results
+      --order string           Sort direction (options: asc, desc) (default "desc")
+      --q payload.name         Case-insensitive substring search on payload.name. Blank is a no-op
+  -s, --sort-by string         Sort key for the results (default "created_at")
+  -t, --task-uuid string       Annotation task to act on [required]
+  -x, --x-api-key string       string value
 ```
 
 ### Options inherited from parent commands

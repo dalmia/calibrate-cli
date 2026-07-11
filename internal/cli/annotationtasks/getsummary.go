@@ -18,11 +18,13 @@ var getSummaryCmdMeta = []flagutil.FlagMeta{
 	{FlagName: "task-uuid", Shorthand: "t", FieldPath: "TaskUUID", Kind: flagutil.FlagKindString, Required: true, Description: "Annotation task to act on [required]"},
 	{FlagName: "item-id", Shorthand: "i", FieldPath: "ItemID", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `queryParam:"style=form,explode=true,name=item_id"`, Description: "Filter rows to a single item. The full task-wide annotator union is still returned in `annotators`"},
 	{FlagName: "live-only", FieldPath: "LiveOnly", Kind: flagutil.FlagKindBool, Optional: true, HasDefault: true, Description: "When true, emit only one row for each (item, evaluator) pair using the evaluator's live version. Versions other than the live one that have runs are excluded"},
+	{FlagName: "disagreement-only", FieldPath: "DisagreementOnly", Kind: flagutil.FlagKindBool, Optional: true, HasDefault: true, Description: "When true, keep only rows where the evaluator disagreed with at least one annotator"},
 	{FlagName: "q", FieldPath: "Q", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `queryParam:"style=form,explode=true,name=q"`, Description: "Case-insensitive substring search on `payload.name`. Blank is a no-op"},
 	{FlagName: "sort-by", Shorthand: "s", FieldPath: "SortBy", Kind: flagutil.FlagKindString, Optional: true, HasDefault: true, DefaultStr: "created_at", Description: "Sort key for the results"},
 	{FlagName: "order", FieldPath: "Order", Kind: flagutil.FlagKindEnum, Optional: true, HasDefault: true, DefaultStr: "desc", EnumValues: []string{"asc", "desc"}, Description: "Sort direction (options: asc, desc)"},
 	{FlagName: "limit", FieldPath: "Limit", Kind: flagutil.FlagKindInt64, Optional: true, HasDefault: true, DefaultInt: 50, Description: "Maximum number of items to return"},
 	{FlagName: "offset", FieldPath: "Offset", Kind: flagutil.FlagKindInt64, Optional: true, HasDefault: true, Description: "Number of items to skip before returning results"},
+	{FlagName: "compact", Shorthand: "c", FieldPath: "Compact", Kind: flagutil.FlagKindBool, Optional: true, HasDefault: true, Description: "Return a compact response that omits heavy detail fields (`rows.payload`, `rows.evaluator_reasoning`, `rows.annotations.reasoning`, `evaluators.versions.system_prompt`, `evaluators.versions.output_config`, `evaluators.versions.variables`, `item_comments`), keeping only the lightweight decision fields. Omit for full detail"},
 	{FlagName: "x-api-key", Shorthand: "x", FieldPath: "XAPIKey", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `header:"style=simple,explode=false,name=X-API-Key"`, Description: "string value"},
 }
 

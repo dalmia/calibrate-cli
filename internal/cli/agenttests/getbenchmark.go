@@ -16,6 +16,8 @@ import (
 
 var getBenchmarkCmdMeta = []flagutil.FlagMeta{
 	{FlagName: "task-id", Shorthand: "t", FieldPath: "TaskID", Kind: flagutil.FlagKindString, Required: true, Description: "Benchmark run to poll for status and results [required]"},
+	{FlagName: "only-failed", FieldPath: "OnlyFailed", Kind: flagutil.FlagKindBool, Optional: true, HasDefault: true, Description: "Return only failing test cases for each model. Omit to return every case"},
+	{FlagName: "compact", Shorthand: "c", FieldPath: "Compact", Kind: flagutil.FlagKindBool, Optional: true, HasDefault: true, Description: "Return a compact response that omits heavy detail fields (`model_results.test_results`, `evaluators.output_config`), keeping only the lightweight decision fields. Omit for full detail"},
 	{FlagName: "x-api-key", Shorthand: "x", FieldPath: "XAPIKey", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `header:"style=simple,explode=false,name=X-API-Key"`, Description: "string value"},
 }
 

@@ -19,9 +19,11 @@ calibrate agent-tests get-run [flags]
 ### Options
 
 ```
-  -h, --help               help for get-run
-  -t, --task-id string     Test run to poll for status and results [required]
-  -x, --x-api-key string   string value
+  -c, --compact results.output   Return a compact response that omits heavy detail fields (results.output, `results.test_case`, `results.judge_results`, `results.reasoning`, `evaluators.output_config`), keeping only the lightweight decision fields. Omit for full detail
+  -h, --help                     help for get-run
+      --only-failed              Return only failing test cases. Omit to return every case
+  -t, --task-id string           Test run to poll for status and results [required]
+  -x, --x-api-key string         string value
 ```
 
 ### Options inherited from parent commands

@@ -44,6 +44,8 @@ type TaskSummaryAnnotationTasksTaskUUIDSummaryGetRequest struct {
 	ItemID optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=item_id"`
 	// When true, emit only one row for each (item, evaluator) pair using the evaluator's live version. Versions other than the live one that have runs are excluded
 	LiveOnly *bool `default:"false" queryParam:"style=form,explode=true,name=live_only"`
+	// When true, keep only rows where the evaluator disagreed with at least one annotator
+	DisagreementOnly *bool `default:"false" queryParam:"style=form,explode=true,name=disagreement_only"`
 	// Case-insensitive substring search on `payload.name`. Blank is a no-op
 	Q optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=q"`
 	// Sort key for the results
@@ -53,7 +55,9 @@ type TaskSummaryAnnotationTasksTaskUUIDSummaryGetRequest struct {
 	// Maximum number of items to return
 	Limit *int64 `default:"50" queryParam:"style=form,explode=true,name=limit"`
 	// Number of items to skip before returning results
-	Offset  *int64                                    `default:"0" queryParam:"style=form,explode=true,name=offset"`
+	Offset *int64 `default:"0" queryParam:"style=form,explode=true,name=offset"`
+	// Return a compact response that omits heavy detail fields (`rows.payload`, `rows.evaluator_reasoning`, `rows.annotations.reasoning`, `evaluators.versions.system_prompt`, `evaluators.versions.output_config`, `evaluators.versions.variables`, `item_comments`), keeping only the lightweight decision fields. Omit for full detail
+	Compact *bool                                     `default:"false" queryParam:"style=form,explode=true,name=compact"`
 	XAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=X-API-Key"`
 }
 
@@ -89,6 +93,13 @@ func (t *TaskSummaryAnnotationTasksTaskUUIDSummaryGetRequest) GetLiveOnly() *boo
 	return t.LiveOnly
 }
 
+func (t *TaskSummaryAnnotationTasksTaskUUIDSummaryGetRequest) GetDisagreementOnly() *bool {
+	if t == nil {
+		return nil
+	}
+	return t.DisagreementOnly
+}
+
 func (t *TaskSummaryAnnotationTasksTaskUUIDSummaryGetRequest) GetQ() optionalnullable.OptionalNullable[string] {
 	if t == nil {
 		return nil
@@ -122,6 +133,13 @@ func (t *TaskSummaryAnnotationTasksTaskUUIDSummaryGetRequest) GetOffset() *int64
 		return nil
 	}
 	return t.Offset
+}
+
+func (t *TaskSummaryAnnotationTasksTaskUUIDSummaryGetRequest) GetCompact() *bool {
+	if t == nil {
+		return nil
+	}
+	return t.Compact
 }
 
 func (t *TaskSummaryAnnotationTasksTaskUUIDSummaryGetRequest) GetXAPIKey() optionalnullable.OptionalNullable[string] {

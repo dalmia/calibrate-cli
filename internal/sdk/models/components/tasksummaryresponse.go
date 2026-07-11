@@ -3,6 +3,7 @@
 package components
 
 import (
+	"github.com/dalmia/calibrate-cli/internal/sdk/optionalnullable"
 	"github.com/dalmia/calibrate-cli/internal/sdk/sdkinternal/utils"
 )
 
@@ -43,9 +44,9 @@ type TaskSummaryResponse struct {
 	// One row per item, evaluator, and version on this page, with the evaluator's value and each annotator's label
 	Rows []map[string]any `json:"rows"`
 	// Annotator comments, keyed by item ID
-	ItemComments         map[string]any `json:"item_comments"`
-	Pagination           PaginationMeta `json:"pagination"`
-	AdditionalProperties map[string]any `additionalProperties:"true" json:"-"`
+	ItemComments         optionalnullable.OptionalNullable[map[string]any] `json:"item_comments,omitzero"`
+	Pagination           PaginationMeta                                    `json:"pagination"`
+	AdditionalProperties map[string]any                                    `additionalProperties:"true" json:"-"`
 }
 
 func (t TaskSummaryResponse) MarshalJSON() ([]byte, error) {
@@ -94,9 +95,9 @@ func (t *TaskSummaryResponse) GetRows() []map[string]any {
 	return t.Rows
 }
 
-func (t *TaskSummaryResponse) GetItemComments() map[string]any {
+func (t *TaskSummaryResponse) GetItemComments() optionalnullable.OptionalNullable[map[string]any] {
 	if t == nil {
-		return map[string]any{}
+		return nil
 	}
 	return t.ItemComments
 }

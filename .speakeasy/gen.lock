@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
-id: 4b790812-9da8-42d7-a5d3-c5383c491b6c
+id: d3f5a80c-fbab-4d4b-bcf2-474670e3d550
 management:
-  docChecksum: 9c193b1da02c7014e827d701d309fbcf
+  docChecksum: 843e83091459dd3106028ba08e774919
   docVersion: 0.1.0
   speakeasyVersion: 1.788.1
   generationVersion: 2.915.1
-  releaseVersion: 0.0.28
-  configChecksum: fc76bdba2f8239dba1cf544a14789129
+  releaseVersion: 0.0.29
+  configChecksum: 9c764681900cfa8dd2b7df4d0cbd1cc0
   repoURL: https://github.com/dalmia/calibrate-cli
   installationURL: https://github.com/dalmia/calibrate-cli
 persistentEdits:
-  generation_id: 33fffe85-e0f5-4d15-bc05-76b7f0b40124
-  pristine_commit_hash: bfd5f372375cb4ea436ba71746dab4edaf621f19
-  pristine_tree_hash: 2495329254f1621773ec44fd0f91ff1a0bd2225c
+  generation_id: 49d28db7-28e6-47f5-bea5-f3dc4cf9fb58
+  pristine_commit_hash: e1cd2481291355e7351e9f9097db9ceacc736c9a
+  pristine_tree_hash: bae03b8d3d926a898ef763276d417e21f499d85e
 features:
   cli:
     additionalProperties: 0.0.0
@@ -131,8 +131,8 @@ trackedFiles:
     pristine_git_object: eb4112fa8d074c6370152ac7203597b821e7581e
   internal/cli/annotationtasks/create.go:
     id: 73f8eec4084f
-    last_write_checksum: sha1:15956e08b02ae1158705361e30448527ac430f41
-    pristine_git_object: 0780ea45b3e676865b8b91a57455540587f68e77
+    last_write_checksum: sha1:afd4224fbed4fe6dbb48b2c6676577a3eb569548
+    pristine_git_object: afb27f84c6185e7979e57cc2ecf4df22a941ebc9
   internal/cli/annotationtasks/createevaluatorrun.go:
     id: 31470082f889
     last_write_checksum: sha1:a2b1174c2d9bb30e4a874143b72467aa72996689
@@ -231,8 +231,8 @@ trackedFiles:
     pristine_git_object: af01388e54114cf5d6ba171241193356e6d68ce9
   internal/cli/version.go:
     id: 7b0665492f72
-    last_write_checksum: sha1:5415ee6af08ea08c1ec82e8e92cd12c2de48d3f4
-    pristine_git_object: 35f50704784c1a5679a3272ad95aca6917030be7
+    last_write_checksum: sha1:891367cd4c40e4f91df01ec834fdb2733bc0080b
+    pristine_git_object: f43d3e6a8e5cb3c7e62418c2713ee9f970aef0ce
   internal/cli/whoami.go:
     id: c1787f2298ec
     last_write_checksum: sha1:58afb45d777f297af4a64acf26a57c46e1b556db
@@ -363,16 +363,16 @@ trackedFiles:
     pristine_git_object: 43554e511056efd1bf9d1fe561b0d12842a7bb8b
   internal/sdk/models/components/annotationtaskcreate.go:
     id: 12b646559358
-    last_write_checksum: sha1:596e9dc391f37916f745fa28a981aa2921855c49
-    pristine_git_object: 8a02ea549b9f3279b0eba2403fa6a76085a71b9e
+    last_write_checksum: sha1:cf220cf14f3ca74e651e392f47e83abc1cee6a21
+    pristine_git_object: 3a501f095261977f1879362d22038ebcd2039616
   internal/sdk/models/components/annotationtaskcreateresponse.go:
     id: 41f145035448
     last_write_checksum: sha1:c9c34ed4adcd43d3900b83b369e6775b00590886
     pristine_git_object: d2d9ec6c6dc840e539e2bf2d54751c2ed36d426d
   internal/sdk/models/components/annotationtaskresponse.go:
     id: 1f5816190adf
-    last_write_checksum: sha1:5bd09d1638d80e2fc9aaf0ba4431a4a2068cda93
-    pristine_git_object: a6850faa0749daadca361f422f496a9b5004206b
+    last_write_checksum: sha1:7e38ff6799423a584dc6b96662b1fa01de696c82
+    pristine_git_object: 3aa7435c8331a011ca7e5df39fb57dada31ea809
   internal/sdk/models/components/batchrunrequest.go:
     id: 6c5a8455bc86
     last_write_checksum: sha1:9c04f51573605900eaff356255583741b0875ed6
@@ -587,8 +587,8 @@ trackedFiles:
     pristine_git_object: 374b9b8cb84ad8a6191ab3961288dada608d0553
   internal/sdk/models/components/tasksummaryresponse.go:
     id: 82d61ed81f62
-    last_write_checksum: sha1:97adabd2ad391b24f3ed877ece888e0f363d8a53
-    pristine_git_object: ea46da3fc3142888747ff3271046dd6093d12da6
+    last_write_checksum: sha1:065b62851ab099a4ab35230ec60bd260d4f16c17
+    pristine_git_object: 745607f5ec8b182fe10fbe74a33bdfe91e5e2177
   internal/sdk/models/components/testcaseresult.go:
     id: aae0e621c85a
     last_write_checksum: sha1:d53e0706786603a6c506a26c5f0b1f25e6b82d07
@@ -907,8 +907,8 @@ trackedFiles:
     pristine_git_object: 159a87ec97aba99e4edd132f69652e123434303e
   internal/usage/schema.go:
     id: 0f40f4612437
-    last_write_checksum: sha1:e6d0a55bc457e94a1a286e9f9e7d3417545dabde
-    pristine_git_object: 78314c81c22824078b7ab4e57e87439fa0dbac5a
+    last_write_checksum: sha1:ff21f6063ff48c5c4829e6ccb5a78d935d37d23f
+    pristine_git_object: 7d284d5b701fa61130dc4566495d338ccb92776a
   scripts/install.ps1:
     id: fee0853709e9
     last_write_checksum: sha1:d8884365d7cfb218aac394e16a7d214a6f56b585
@@ -1209,7 +1209,7 @@ examples:
   create_annotation_task_endpoint_annotation_tasks_post:
     speakeasy-default-create-annotation-task-endpoint-annotation-tasks-post:
       requestBody:
-        application/json: {"name": "<value>", "type": "conversation", "evaluator_ids": ["f47ac10b-58cc-4372-a567-0e02b2c3d479"]}
+        application/json: {"name": "<value>", "type": "tts", "evaluator_ids": ["f47ac10b-58cc-4372-a567-0e02b2c3d479"]}
       responses:
         "200":
           application/json: {"uuid": "f47ac10b-58cc-4372-a567-0e02b2c3d479", "message": "<value>"}
@@ -1232,7 +1232,7 @@ examples:
           task_uuid: "f47ac10b-58cc-4372-a567-0e02b2c3d479"
       responses:
         "200":
-          application/json: {"uuid": "f47ac10b-58cc-4372-a567-0e02b2c3d479", "name": "<value>", "type": "conversation", "created_at": "1710876801234", "updated_at": "1735624058396"}
+          application/json: {"uuid": "f47ac10b-58cc-4372-a567-0e02b2c3d479", "name": "<value>", "type": "tts", "created_at": "1710876801234", "updated_at": "1735624058396"}
         "422":
           application/json: {}
   set_task_evaluators_annotation_tasks__task_uuid__evaluators_put:
@@ -1322,7 +1322,7 @@ examples:
           compact: false
       responses:
         "200":
-          application/json: {"task_id": "f47ac10b-58cc-4372-a567-0e02b2c3d479", "task_type": "conversation", "evaluators": [{"key": "<value>", "key1": "<value>"}, {"key": "<value>", "key1": "<value>"}], "annotators": [{"key": "<value>", "key1": "<value>", "key2": "<value>"}], "rows": [{"key": "<value>"}, {"key": "<value>", "key1": "<value>"}], "pagination": {"total": 576366, "limit": 631108, "offset": 830212}}
+          application/json: {"task_id": "f47ac10b-58cc-4372-a567-0e02b2c3d479", "task_type": "tts", "evaluators": [{"key": "<value>", "key1": "<value>"}, {"key": "<value>", "key1": "<value>"}], "annotators": [{"key": "<value>", "key1": "<value>", "key2": "<value>"}], "rows": [{"key": "<value>"}, {"key": "<value>", "key1": "<value>"}], "pagination": {"total": 576366, "limit": 631108, "offset": 830212}}
         "422":
           application/json: {}
 examplesVersion: 1.0.2

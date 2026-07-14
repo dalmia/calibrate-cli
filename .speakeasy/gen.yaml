@@ -32,7 +32,7 @@ generation:
     skipResponseBodyAssertions: false
   repoUrl: https://github.com/dalmia/calibrate-cli
 cli:
-  version: 0.0.28
+  version: 0.0.29
   additionalDependencies: {}
   cliName: calibrate
   distribution:

@@ -17,7 +17,7 @@ import (
 var createCmdMeta = []flagutil.FlagMeta{
 	{FlagName: "x-api-key", Shorthand: "x", FieldPath: "XAPIKey", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `header:"style=simple,explode=false,name=X-API-Key"`, Description: "string value"},
 	{FlagName: "name", Shorthand: "n", FieldPath: "Body.Name", Kind: flagutil.FlagKindString, Required: true, Description: "Task name, unique within your workspace [required]"},
-	{FlagName: "type", Shorthand: "t", FieldPath: "Body.Type", Kind: flagutil.FlagKindEnum, Required: true, EnumValues: []string{"stt", "llm", "llm-general", "conversation"}, Description: "Task type. Determines the shape of each item's payload.\n- `stt`: judge a transcript on its own\n- `llm`: judge one response with its conversation history\n- `llm-general`: judge a standalone `input -> output` pair\n- `conversation`: judge a full conversation (options: stt, llm, llm-general, conversation) [required]"},
+	{FlagName: "type", Shorthand: "t", FieldPath: "Body.Type", Kind: flagutil.FlagKindEnum, Required: true, EnumValues: []string{"stt", "llm", "llm-general", "conversation", "tts"}, Description: "Task type. Determines the shape of each item's payload.\n- `stt`: judge a transcript on its own\n- `llm`: judge one response with its conversation history\n- `llm-general`: judge a standalone `input -> output` pair\n- `conversation`: judge a full conversation (options: stt, llm, llm-general, conversation, tts) [required]"},
 	{FlagName: "description", FieldPath: "Body.Description", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"description,omitempty"`, Description: "A description for the task. Omit for none"},
 	{FlagName: "evaluator-ids", Shorthand: "e", FieldPath: "Body.EvaluatorIds", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"evaluator_ids,omitempty"`, Description: "IDs of evaluators to link when the task is created, in order. Each must be one you created or a built-in default. Omit to create with no linked evaluators"},
 }
@@ -28,7 +28,7 @@ func initCreateCmd(parent *cobra.Command) error {
 		Use:     "create",
 		Short:   "Create annotation task",
 		Long:    "Create an annotation task for annotators to label items against evaluators",
-		Example: "  calibrate annotation-tasks create --name <value> --type conversation",
+		Example: "  calibrate annotation-tasks create --name <value> --type tts",
 		RunE:    runCreateCmd,
 	}
 	flagutil.RegisterFlags(cmd, createCmdMeta)

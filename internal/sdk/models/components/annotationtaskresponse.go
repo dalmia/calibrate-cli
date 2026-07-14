@@ -19,6 +19,7 @@ const (
 	AnnotationTaskResponseTypeLlm          AnnotationTaskResponseType = "llm"
 	AnnotationTaskResponseTypeLlmGeneral   AnnotationTaskResponseType = "llm-general"
 	AnnotationTaskResponseTypeConversation AnnotationTaskResponseType = "conversation"
+	AnnotationTaskResponseTypeTts          AnnotationTaskResponseType = "tts"
 )
 
 func (e AnnotationTaskResponseType) ToPointer() *AnnotationTaskResponseType {
@@ -29,7 +30,7 @@ func (e AnnotationTaskResponseType) ToPointer() *AnnotationTaskResponseType {
 func (e *AnnotationTaskResponseType) IsExact() bool {
 	if e != nil {
 		switch *e {
-		case "stt", "llm", "llm-general", "conversation":
+		case "stt", "llm", "llm-general", "conversation", "tts":
 			return true
 		}
 	}

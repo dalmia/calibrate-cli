@@ -21,6 +21,7 @@ const (
 	AnnotationTaskCreateTypeLlm          AnnotationTaskCreateType = "llm"
 	AnnotationTaskCreateTypeLlmGeneral   AnnotationTaskCreateType = "llm-general"
 	AnnotationTaskCreateTypeConversation AnnotationTaskCreateType = "conversation"
+	AnnotationTaskCreateTypeTts          AnnotationTaskCreateType = "tts"
 )
 
 func (e AnnotationTaskCreateType) ToPointer() *AnnotationTaskCreateType {
@@ -39,6 +40,8 @@ func (e *AnnotationTaskCreateType) UnmarshalJSON(data []byte) error {
 	case "llm-general":
 		fallthrough
 	case "conversation":
+		fallthrough
+	case "tts":
 		*e = AnnotationTaskCreateType(v)
 		return nil
 	default:

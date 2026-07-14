@@ -13,7 +13,7 @@ calibrate annotation-tasks create [flags]
 ### Examples
 
 ```
-  calibrate annotation-tasks create --name <value> --type conversation
+  calibrate annotation-tasks create --name <value> --type tts
 ```
 
 ### Options
@@ -28,7 +28,7 @@ calibrate annotation-tasks create [flags]
                                - stt: judge a transcript on its own
                                - `llm`: judge one response with its conversation history
                                - `llm-general`: judge a standalone `input -> output` pair
-                               - `conversation`: judge a full conversation (options: stt, llm, llm-general, conversation) [required]
+                               - `conversation`: judge a full conversation (options: stt, llm, llm-general, conversation, tts) [required]
   -x, --x-api-key string       string value
 ```
 

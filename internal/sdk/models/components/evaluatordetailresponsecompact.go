@@ -118,10 +118,12 @@ type EvaluatorDetailResponseCompact struct {
 	// - `rating`: a numeric score, using the scale in `output_config`
 	//
 	OutputType EvaluatorDetailResponseCompactOutputType `json:"output_type"`
-	// True for a built-in default evaluator, which you can't edit. False for an evaluator you created, which you can edit and add versions to
+	// True when the evaluator is a built-in default or your workspace's editable copy of one. False for an evaluator you created yourself
 	IsDefault bool `json:"is_default"`
 	// Stable slug for a built-in default evaluator
 	Slug optionalnullable.OptionalNullable[string] `json:"slug,omitzero"`
+	// Stable slug of the built-in default this evaluator is your editable copy of. Set on your default forks so you can identify a specific default by it
+	SourceDefaultSlug optionalnullable.OptionalNullable[string] `json:"source_default_slug,omitzero"`
 	// ID of the version that is currently live
 	LiveVersionID optionalnullable.OptionalNullable[string] `json:"live_version_id,omitzero"`
 	// When the evaluator was created (ISO 8601 UTC)
@@ -186,6 +188,13 @@ func (e *EvaluatorDetailResponseCompact) GetSlug() optionalnullable.OptionalNull
 		return nil
 	}
 	return e.Slug
+}
+
+func (e *EvaluatorDetailResponseCompact) GetSourceDefaultSlug() optionalnullable.OptionalNullable[string] {
+	if e == nil {
+		return nil
+	}
+	return e.SourceDefaultSlug
 }
 
 func (e *EvaluatorDetailResponseCompact) GetLiveVersionID() optionalnullable.OptionalNullable[string] {

@@ -78,7 +78,7 @@ type ListEvaluatorsEvaluatorsGetRequest struct {
 	EvaluatorType optionalnullable.OptionalNullable[EvaluatorType] `queryParam:"style=form,explode=true,name=evaluator_type"`
 	// Filter by modality. Omit for all
 	DataType optionalnullable.OptionalNullable[DataType] `queryParam:"style=form,explode=true,name=data_type"`
-	// When `true`, include the built-in default evaluators alongside the ones you created
+	// Retained for backward compatibility and no longer filters. Your evaluators, including your editable copies of the defaults, are always returned
 	IncludeDefaults *bool `default:"true" queryParam:"style=form,explode=true,name=include_defaults"`
 	// Case-insensitive substring search on `name`. Blank is a no-op
 	Q optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=q"`

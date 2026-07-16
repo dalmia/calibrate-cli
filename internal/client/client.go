@@ -21,7 +21,7 @@ import (
 func NewClient(cmd *cobra.Command) (*sdk.SDK, error) {
 	var sdkOpts []sdk.SDKOption
 	sdkOpts = append(sdkOpts, sdk.WithSecurity(buildGlobalSecurity(cmd)))
-	if serverURL, _ := flagutil.GetStringFlag(cmd, "server-url"); serverURL != "" {
+	if serverURL := resolveStringFlag(cmd, "server-url"); serverURL != "" {
 		sdkOpts = append(sdkOpts, sdk.WithServerURL(serverURL))
 	} else if serverFlag, _ := flagutil.GetStringFlag(cmd, "server"); serverFlag != "" {
 		// Silently skip non-integer or out-of-range values — they may be intended for operation-level servers.

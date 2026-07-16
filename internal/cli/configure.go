@@ -69,6 +69,12 @@ func runConfigureCmd(cmd *cobra.Command, args []string) error {
 			changed = true
 		}
 
+		if f := cmd.Flags().Lookup("server-url"); f != nil && f.Changed {
+			v, _ := cmd.Flags().GetString("server-url")
+			cfg.ServerURL = v
+			changed = true
+		}
+
 		if !changed {
 			return fmt.Errorf("no flags provided; use flags to set values non-interactively, or remove --no-interactive")
 		}
@@ -86,6 +92,15 @@ func runConfigureCmd(cmd *cobra.Command, args []string) error {
 				Value(&authApiKeyAuth),
 		}
 		groups = append(groups, huh.NewGroup(securityFields...).Title("Authentication"))
+		var cfgServerURL string
+		serverFields := []huh.Field{
+			huh.NewInput().
+				Title("Server URL for self-hosted deployments. Leave blank to keep the current value.").
+				Description("--server-url").
+				Placeholder(cfg.ServerURL).
+				Value(&cfgServerURL),
+		}
+		groups = append(groups, huh.NewGroup(serverFields...).Title("Server"))
 
 		// Preference fields use huh.Select which loops forever on EOF in
 		// accessible mode (non-TTY). Only show them when truly interactive.
@@ -126,6 +141,9 @@ func runConfigureCmd(cmd *cobra.Command, args []string) error {
 			} else {
 				cfg.Security.ApiKeyAuth = authApiKeyAuth // no keyring, store in config
 			}
+		}
+		if cfgServerURL != "" {
+			cfg.ServerURL = cfgServerURL
 		}
 		if !accessible {
 			switch cfgOutputFormat {

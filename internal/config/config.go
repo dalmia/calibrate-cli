@@ -38,6 +38,7 @@ type Config struct {
 	Security     SecurityConfig `yaml:"security,omitempty"`
 	OutputFormat string         `yaml:"output_format,omitempty"`
 	Timeout      string         `yaml:"timeout,omitempty"`
+	ServerURL    string         `yaml:"server_url,omitempty"`
 }
 
 var (
@@ -143,6 +144,8 @@ func GetConfigValue(key string) string {
 		return cfg.OutputFormat
 	case "timeout":
 		return cfg.Timeout
+	case "server-url":
+		return cfg.ServerURL
 	}
 	return ""
 }

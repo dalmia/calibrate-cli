@@ -50,5 +50,14 @@ func runWhoamiCmd(cmd *cobra.Command, args []string) error {
 		fmt.Fprintf(out, "  --%-25s [%-7s] %s\n", "api-key-auth", source, maskSecret(value))
 	}
 
+	fmt.Fprintln(out)
+	fmt.Fprintln(out, "Server:")
+	{
+		value, source := config.ResolveCredential(cmd, "server-url")
+		if value == "" {
+			value = "(default)"
+		}
+		fmt.Fprintf(out, "  --%-25s [%-7s] %s\n", "server-url", source, value)
+	}
 	return nil
 }

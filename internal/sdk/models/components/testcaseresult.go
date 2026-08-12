@@ -20,6 +20,8 @@ type TestCaseResult struct {
 	Output optionalnullable.OptionalNullable[TestOutput] `json:"output,omitzero"`
 	// The test case definition that was run
 	TestCase optionalnullable.OptionalNullable[map[string]any] `json:"test_case,omitzero"`
+	// Extra request fields sent to the agent for this case, the agent's `default_inputs` with this case's overrides applied
+	Inputs optionalnullable.OptionalNullable[map[string]any] `json:"inputs,omitzero"`
 	// One verdict for each evaluator
 	JudgeResults optionalnullable.OptionalNullable[[]JudgeResult] `json:"judge_results,omitzero"`
 	// How long the agent took to respond, in milliseconds
@@ -79,6 +81,13 @@ func (t *TestCaseResult) GetTestCase() optionalnullable.OptionalNullable[map[str
 		return nil
 	}
 	return t.TestCase
+}
+
+func (t *TestCaseResult) GetInputs() optionalnullable.OptionalNullable[map[string]any] {
+	if t == nil {
+		return nil
+	}
+	return t.Inputs
 }
 
 func (t *TestCaseResult) GetJudgeResults() optionalnullable.OptionalNullable[[]JudgeResult] {

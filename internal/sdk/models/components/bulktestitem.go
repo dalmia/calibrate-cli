@@ -16,6 +16,8 @@ type BulkTestItem struct {
 	Evaluators optionalnullable.OptionalNullable[[]RoutersTestsEvaluatorRef] `json:"evaluators,omitzero"`
 	// Expected tool calls. **Required for `tool_call` batches**
 	ToolCalls optionalnullable.OptionalNullable[[]ExpectedToolCall] `json:"tool_calls,omitzero"`
+	// Extra request fields for this test, overriding the agent's `default_inputs` per key
+	Inputs optionalnullable.OptionalNullable[map[string]any] `json:"inputs,omitzero"`
 }
 
 func (b BulkTestItem) MarshalJSON() ([]byte, error) {
@@ -55,4 +57,11 @@ func (b *BulkTestItem) GetToolCalls() optionalnullable.OptionalNullable[[]Expect
 		return nil
 	}
 	return b.ToolCalls
+}
+
+func (b *BulkTestItem) GetInputs() optionalnullable.OptionalNullable[map[string]any] {
+	if b == nil {
+		return nil
+	}
+	return b.Inputs
 }

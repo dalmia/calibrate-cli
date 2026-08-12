@@ -11,6 +11,8 @@ type TestRunStatusResponse struct {
 	// Test run job ID
 	TaskID string     `json:"task_id"`
 	Status TaskStatus `json:"status"`
+	// IDs of the tests this run executed, in run order
+	TestUuids optionalnullable.OptionalNullable[[]string] `json:"test_uuids,omitzero"`
 	// Total number of test cases
 	TotalTests optionalnullable.OptionalNullable[int64] `json:"total_tests,omitzero"`
 	// Number of test cases that passed
@@ -58,6 +60,13 @@ func (t *TestRunStatusResponse) GetStatus() TaskStatus {
 		return TaskStatus("")
 	}
 	return t.Status
+}
+
+func (t *TestRunStatusResponse) GetTestUuids() optionalnullable.OptionalNullable[[]string] {
+	if t == nil {
+		return nil
+	}
+	return t.TestUuids
 }
 
 func (t *TestRunStatusResponse) GetTotalTests() optionalnullable.OptionalNullable[int64] {

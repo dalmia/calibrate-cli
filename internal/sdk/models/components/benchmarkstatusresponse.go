@@ -11,6 +11,8 @@ type BenchmarkStatusResponse struct {
 	// Benchmark run job ID
 	TaskID string     `json:"task_id"`
 	Status TaskStatus `json:"status"`
+	// IDs of the tests this benchmark executed, in run order
+	TestUuids optionalnullable.OptionalNullable[[]string] `json:"test_uuids,omitzero"`
 	// The evaluators used in this run. Each verdict in `judge_results` links to one of these by `evaluator_uuid`
 	Evaluators optionalnullable.OptionalNullable[[]TestRunEvaluator] `json:"evaluators,omitzero"`
 	// Results for each model
@@ -48,6 +50,13 @@ func (b *BenchmarkStatusResponse) GetStatus() TaskStatus {
 		return TaskStatus("")
 	}
 	return b.Status
+}
+
+func (b *BenchmarkStatusResponse) GetTestUuids() optionalnullable.OptionalNullable[[]string] {
+	if b == nil {
+		return nil
+	}
+	return b.TestUuids
 }
 
 func (b *BenchmarkStatusResponse) GetEvaluators() optionalnullable.OptionalNullable[[]TestRunEvaluator] {

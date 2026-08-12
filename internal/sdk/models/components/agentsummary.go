@@ -42,6 +42,8 @@ type AgentSummary struct {
 	UpdatedAt string `json:"updated_at"`
 	// Whether the agent's connection has been verified, for a `type=connection` agent
 	ConnectionVerified optionalnullable.OptionalNullable[bool] `json:"connection_verified,omitzero"`
+	// Whether the agent has custom request fields configured
+	HasDefaultInputs bool `json:"has_default_inputs"`
 }
 
 func (a *AgentSummary) GetUUID() string {
@@ -77,4 +79,11 @@ func (a *AgentSummary) GetConnectionVerified() optionalnullable.OptionalNullable
 		return nil
 	}
 	return a.ConnectionVerified
+}
+
+func (a *AgentSummary) GetHasDefaultInputs() bool {
+	if a == nil {
+		return false
+	}
+	return a.HasDefaultInputs
 }

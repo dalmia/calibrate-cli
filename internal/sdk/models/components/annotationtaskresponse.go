@@ -58,6 +58,8 @@ type AnnotationTaskResponse struct {
 	Evaluators []map[string]any `json:"evaluators,omitzero"`
 	// Number of items in the task
 	ItemCount optionalnullable.OptionalNullable[int64] `json:"item_count,omitzero"`
+	// Whether the task has at least one comparable human-vs-human or human-vs-evaluator pair, computed over all time
+	HasAgreement *bool `default:"false" json:"has_agreement"`
 	// The task's items, each with its agreement stats. You get these when you fetch one task by ID, not when you list tasks
 	Items []map[string]any `json:"items,omitzero"`
 	// The task's labelling jobs. You get these when you fetch one task by ID, not when you list tasks
@@ -129,6 +131,13 @@ func (a *AnnotationTaskResponse) GetItemCount() optionalnullable.OptionalNullabl
 		return nil
 	}
 	return a.ItemCount
+}
+
+func (a *AnnotationTaskResponse) GetHasAgreement() *bool {
+	if a == nil {
+		return nil
+	}
+	return a.HasAgreement
 }
 
 func (a *AnnotationTaskResponse) GetItems() []map[string]any {

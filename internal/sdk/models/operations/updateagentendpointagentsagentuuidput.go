@@ -39,7 +39,7 @@ func (u *UpdateAgentEndpointAgentsAgentUUIDPutRequest) GetBody() components.Agen
 type UpdateAgentEndpointAgentsAgentUUIDPutResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// Successful Response
-	RoutersAgentsAgentResponse *components.RoutersAgentsAgentResponse
+	AgentResponse *components.AgentResponse
 }
 
 func (u UpdateAgentEndpointAgentsAgentUUIDPutResponse) MarshalJSON() ([]byte, error) {
@@ -60,9 +60,9 @@ func (u *UpdateAgentEndpointAgentsAgentUUIDPutResponse) GetHTTPMeta() components
 	return u.HTTPMeta
 }
 
-func (u *UpdateAgentEndpointAgentsAgentUUIDPutResponse) GetRoutersAgentsAgentResponse() *components.RoutersAgentsAgentResponse {
+func (u *UpdateAgentEndpointAgentsAgentUUIDPutResponse) GetAgentResponse() *components.AgentResponse {
 	if u == nil {
 		return nil
 	}
-	return u.RoutersAgentsAgentResponse
+	return u.AgentResponse
 }

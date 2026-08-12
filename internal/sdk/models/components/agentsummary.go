@@ -38,6 +38,8 @@ type AgentSummary struct {
 	// - `agent`: built inside Calibrate
 	// - `connection`: your existing agent connected to Calibrate
 	Type AgentSummaryType `json:"type"`
+	// When the agent was created (ISO 8601 UTC)
+	CreatedAt string `json:"created_at"`
 	// When the agent was last updated (ISO 8601 UTC)
 	UpdatedAt string `json:"updated_at"`
 	// Whether the agent's connection has been verified, for a `type=connection` agent
@@ -65,6 +67,13 @@ func (a *AgentSummary) GetType() AgentSummaryType {
 		return AgentSummaryType("")
 	}
 	return a.Type
+}
+
+func (a *AgentSummary) GetCreatedAt() string {
+	if a == nil {
+		return ""
+	}
+	return a.CreatedAt
 }
 
 func (a *AgentSummary) GetUpdatedAt() string {

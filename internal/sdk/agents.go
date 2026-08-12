@@ -852,12 +852,12 @@ func (s *Agents) Get(ctx context.Context, request operations.GetAgentEndpointAge
 					return nil, err
 				}
 
-				var out components.RoutersAgentsAgentResponse
+				var out components.AgentResponse
 				if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 					return nil, err
 				}
 
-				res.RoutersAgentsAgentResponse = &out
+				res.AgentResponse = &out
 			}
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1031,12 +1031,12 @@ func (s *Agents) Update(ctx context.Context, request operations.UpdateAgentEndpo
 					return nil, err
 				}
 
-				var out components.RoutersAgentsAgentResponse
+				var out components.AgentResponse
 				if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 					return nil, err
 				}
 
-				res.RoutersAgentsAgentResponse = &out
+				res.AgentResponse = &out
 			}
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)

@@ -1,16 +1,32 @@
-## calibrate
+## calibrate annotators update
 
-Calibrate Public API: Programmatic API for CI/automation
+Update annotator
 
 ### Synopsis
 
-Calibrate Public API: Programmatic API for CI/automation. Pass your key in the `X-API-Key` header.
+Update an annotator's name
 
 ```
-calibrate [flags]
+calibrate annotators update [flags]
+```
+
+### Examples
+
+```
+  calibrate annotators update --annotator-uuid f47ac10b-58cc-4372-a567-0e02b2c3d479
 ```
 
 ### Options
+
+```
+  -a, --annotator-uuid string   Annotator to update [required]
+      --body string             Request body as JSON (alternative to individual flags). Can also be provided via stdin.
+  -h, --help                    help for update
+  -n, --name string             New annotator name, unique within your workspace. Omit to leave unchanged
+  -x, --x-api-key string        string value
+```
+
+### Options inherited from parent commands
 
 ```
       --agent-mode             Enable structured errors and default TOON output for AI coding agents. Automatically enabled when a known agent environment is detected (CLAUDE_CODE, CURSOR_AGENT, etc.). Use --agent-mode=false to disable.
@@ -19,7 +35,6 @@ calibrate [flags]
   -d, --debug                  Log request and response diagnostics to stderr
       --dry-run                Preview the request that would be sent without executing it (output to stderr)
   -H, --header stringArray     Set a custom HTTP request header (format: "Key: Value"). Can be specified multiple times.
-  -h, --help                   help for calibrate
       --include-headers        Include HTTP response headers in the output
   -q, --jq string              Filter and transform output using a jq expression (e.g., '.name', '.items[] | .id')
       --no-interactive         Disable all interactive features (auto-prompting, explorer auto-launch, TUI forms)
@@ -32,14 +47,4 @@ calibrate [flags]
 
 ### SEE ALSO
 
-* [calibrate agent-tests](calibrate_agent-tests.md)	 - Operations for agent-tests
-* [calibrate agents](calibrate_agents.md)	 - Operations for agents
-* [calibrate annotation-tasks](calibrate_annotation-tasks.md)	 - Operations for annotation-tasks
 * [calibrate annotators](calibrate_annotators.md)	 - Operations for annotators
-* [calibrate auth](calibrate_auth.md)	 - Manage authentication credentials
-* [calibrate configure](calibrate_configure.md)	 - Configure authentication credentials and preferences
-* [calibrate evaluators](calibrate_evaluators.md)	 - Operations for evaluators
-* [calibrate explore](calibrate_explore.md)	 - Interactively browse and run commands
-* [calibrate tests](calibrate_tests.md)	 - Operations for tests
-* [calibrate version](calibrate_version.md)	 - Print the CLI version
-* [calibrate whoami](calibrate_whoami.md)	 - Display current authentication configuration

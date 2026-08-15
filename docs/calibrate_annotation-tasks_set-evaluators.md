@@ -19,11 +19,12 @@ calibrate annotation-tasks set-evaluators [flags]
 ### Options
 
 ```
-      --body string                 Request body as JSON (alternative to individual flags). Can also be provided via stdin.
-  -e, --evaluator-ids stringArray   The full ordered set of evaluators the task should end up linked to, in display order. Missing ones are unlinked, new ones are linked, and the order sets their position. Send an empty list to unlink all. Each must be one you created or a built-in default [required]
-  -h, --help                        help for set-evaluators
-  -t, --task-uuid string            Annotation task to act on [required]
-  -x, --x-api-key string            string value
+      --body string                            Request body as JSON (alternative to individual flags). Can also be provided via stdin.
+  -e, --evaluator-ids stringArray              The full ordered set of evaluators the task should end up linked to, in display order. Missing ones are unlinked, new ones are linked, and the order sets their position. Send an empty list to unlink all. Each must be one you created or a built-in default [required]
+  -h, --help                                   help for set-evaluators
+      --optional-evaluator-ids evaluator_ids   Which of evaluator_ids annotators may leave blank. Applied as a whole set, so an ID left out becomes required again. Optional evaluators do not hold a labelling job back from completing. Omit to leave every evaluator as it is
+  -t, --task-uuid string                       Annotation task to act on [required]
+  -x, --x-api-key string                       string value
 ```
 
 ### Options inherited from parent commands

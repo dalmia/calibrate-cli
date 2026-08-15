@@ -18,6 +18,7 @@ var setEvaluatorsCmdMeta = []flagutil.FlagMeta{
 	{FlagName: "task-uuid", Shorthand: "t", FieldPath: "TaskUUID", Kind: flagutil.FlagKindString, Required: true, Description: "Annotation task to act on [required]"},
 	{FlagName: "x-api-key", Shorthand: "x", FieldPath: "XAPIKey", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `header:"style=simple,explode=false,name=X-API-Key"`, Description: "string value"},
 	{FlagName: "evaluator-ids", Shorthand: "e", FieldPath: "Body.EvaluatorIds", Kind: flagutil.FlagKindStringArray, Required: true, Description: "The full ordered set of evaluators the task should end up linked to, in display order. Missing ones are unlinked, new ones are linked, and the order sets their position. Send an empty list to unlink all. Each must be one you created or a built-in default [required]"},
+	{FlagName: "optional-evaluator-ids", FieldPath: "Body.OptionalEvaluatorIds", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"optional_evaluator_ids,omitempty"`, Description: "Which of `evaluator_ids` annotators may leave blank. Applied as a whole set, so an ID left out becomes required again. Optional evaluators do not hold a labelling job back from completing. Omit to leave every evaluator as it is"},
 }
 
 // initSetEvaluatorsCmd initializes the set-evaluators command.

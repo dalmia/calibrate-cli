@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
-id: d0fea308-c61b-474b-9ab1-7ffae2b30018
+id: 36afc820-c4d7-413b-a5dd-bb917e076727
 management:
-  docChecksum: 1a3ea7dced888f8c977f676568876dca
+  docChecksum: f544655cd35029d8e8a118a3427c3ef1
   docVersion: 0.1.0
   speakeasyVersion: 1.788.1
   generationVersion: 2.915.1
-  releaseVersion: 0.0.35
-  configChecksum: 0fc8fa49b2feb31ff5fded0f49d0ad52
+  releaseVersion: 0.0.36
+  configChecksum: 806b490a907c579057ae86f0b1f53aa2
   repoURL: https://github.com/dalmia/calibrate-cli
   installationURL: https://github.com/dalmia/calibrate-cli
 persistentEdits:
-  generation_id: 257e090b-d702-46f1-94d1-d4246a6c1d89
-  pristine_commit_hash: 35c549e6af586ddf7a74dbe49ad1a1577d34053f
-  pristine_tree_hash: b7692160b7a85f331e4d062d14d314364c0b326b
+  generation_id: 8d6b7bfe-172b-4690-a0b3-dbc72e2fe97f
+  pristine_commit_hash: b0bdd3fb5153aee2cce7cf2cc73212a0a570fced
+  pristine_tree_hash: 19589b0dd981987a80c473a6ceda2f43abc1456e
 features:
   cli:
     additionalProperties: 0.0.0
@@ -163,8 +163,8 @@ trackedFiles:
     pristine_git_object: cfc8b1af461d912d85651813029c130759c83f85
   internal/cli/annotationtasks/setevaluators.go:
     id: 7c4a95513e78
-    last_write_checksum: sha1:5be952cc8285e6a647fcf98824dbb27f122f6c54
-    pristine_git_object: 0fdd8843186e4e075c32ba2d8bce64f4f2bd6292
+    last_write_checksum: sha1:670762fe5766ae83b4db6b18083e804321e0fc8c
+    pristine_git_object: 2a69327ba3268b22c27d6375426f84dba3f53703
   internal/cli/annotationtasks/updateitems.go:
     id: 8b91b2456ff0
     last_write_checksum: sha1:d9d626bda423e86b3ebd177c704a7aa29c248f73
@@ -255,8 +255,8 @@ trackedFiles:
     pristine_git_object: fc38b830626d0c5fef0732edc60683524dda3524
   internal/cli/version.go:
     id: 7b0665492f72
-    last_write_checksum: sha1:0b7d4572dfb4b227188eeaab7989c37695f3d8e4
-    pristine_git_object: db078a56f4e33de5dcf773d291098a94ca6362af
+    last_write_checksum: sha1:e602dabde6049ed7ade721e3370eae6ed3a4cc28
+    pristine_git_object: 2638cdc4693c5af5b3477219b3f7fbb377756816
   internal/cli/whoami.go:
     id: c1787f2298ec
     last_write_checksum: sha1:58afb45d777f297af4a64acf26a57c46e1b556db
@@ -511,8 +511,8 @@ trackedFiles:
     pristine_git_object: efa0eff86bcce06017b8fb399ecfc6fa4256842c
   internal/sdk/models/components/evaluatorsetrequest.go:
     id: b2cbf1cc081d
-    last_write_checksum: sha1:e885652308854c7321262ba5e87c7c4abc2ca673
-    pristine_git_object: 91e081bdad186f768a4ab9e9ae2178470bca73f8
+    last_write_checksum: sha1:3436f689546150549ff5231458ef514f534cc7d6
+    pristine_git_object: 7c88241cbee5ab8bbaeba5f6a197ffc1f3b15c86
   internal/sdk/models/components/evaluatorsetresponse.go:
     id: 3944cde37e94
     last_write_checksum: sha1:bf549e573aab9c3adac5d3999c50fb2dddd4c6bb
@@ -995,8 +995,8 @@ trackedFiles:
     pristine_git_object: 159a87ec97aba99e4edd132f69652e123434303e
   internal/usage/schema.go:
     id: 0f40f4612437
-    last_write_checksum: sha1:f80a3f0055c44051ef393f69ed791ab4160c7658
-    pristine_git_object: 9f188a32f73edabb8ce8b42bc6f1dc672da42819
+    last_write_checksum: sha1:0a6c0e5c1d3f982d6b1c23f14cc755f82fffce12
+    pristine_git_object: 8cec9c10910d6c2ad621bbe1364433f4a66f7e74
   scripts/install.ps1:
     id: fee0853709e9
     last_write_checksum: sha1:d8884365d7cfb218aac394e16a7d214a6f56b585
@@ -1329,7 +1329,7 @@ examples:
         path:
           task_uuid: "f47ac10b-58cc-4372-a567-0e02b2c3d479"
       requestBody:
-        application/json: {"evaluator_ids": ["f47ac10b-58cc-4372-a567-0e02b2c3d479"]}
+        application/json: {"evaluator_ids": ["f47ac10b-58cc-4372-a567-0e02b2c3d479"], "optional_evaluator_ids": ["f47ac10b-58cc-4372-a567-0e02b2c3d479"]}
       responses:
         "200":
           application/json: {"message": "Task evaluators updated", "evaluator_ids": ["<value 1>", "<value 2>"], "linked": ["<value 1>"], "unlinked": ["<value 1>", "<value 2>"]}

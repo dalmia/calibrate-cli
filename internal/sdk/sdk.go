@@ -57,6 +57,7 @@ type SDK struct {
 	Evaluators      *Evaluators
 	AnnotationTasks *AnnotationTasks
 	Annotators      *Annotators
+	Traces          *Traces
 
 	sdkConfiguration config.SDKConfiguration
 	hooks            *hooks.Hooks
@@ -156,6 +157,7 @@ func New(opts ...SDKOption) *SDK {
 	sdk.Evaluators = newEvaluators(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.AnnotationTasks = newAnnotationTasks(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Annotators = newAnnotators(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.Traces = newTraces(sdk, sdk.sdkConfiguration, sdk.hooks)
 
 	return sdk
 }

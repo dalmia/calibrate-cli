@@ -1,16 +1,36 @@
-## calibrate
+## calibrate traces create
 
-Calibrate Public API: Programmatic API for CI/automation
+Create trace
 
 ### Synopsis
 
-Calibrate Public API: Programmatic API for CI/automation. Pass your key in the `X-API-Key` header.
+Store a production agent turn and its conversation history for later review
 
 ```
-calibrate [flags]
+calibrate traces create [flags]
+```
+
+### Examples
+
+```
+  calibrate traces create --agent-id <id> --input '[{"role":"<value>"}]' --output-param '{}'
 ```
 
 ### Options
+
+```
+  -a, --agent-id string          ID of the agent that produced the turn. Must be an agent in your workspace [required]
+      --body string              Request body as JSON (alternative to individual flags). Can also be provided via stdin.
+  -c, --conversation-id string   Your own ID for the conversation this turn belongs to, stored for reference only. Omit if you have none
+  -h, --help                     help for create
+  -i, --input string             Conversation history up to the reported output, oldest turn first, in OpenAI chat format [required]
+      --message-id input         Your own ID for the last user message in input, stored for reference only. Omit if you have none
+      --metadata gen_ai.*        Key-value pairs stored with the trace. Prefer OTel gen_ai.* key names where they fit. Omit if you have none
+      --output-param string      [required]
+  -x, --x-api-key string         string value
+```
+
+### Options inherited from parent commands
 
 ```
       --agent-mode             Enable structured errors and default TOON output for AI coding agents. Automatically enabled when a known agent environment is detected (CLAUDE_CODE, CURSOR_AGENT, etc.). Use --agent-mode=false to disable.
@@ -19,7 +39,6 @@ calibrate [flags]
   -d, --debug                  Log request and response diagnostics to stderr
       --dry-run                Preview the request that would be sent without executing it (output to stderr)
   -H, --header stringArray     Set a custom HTTP request header (format: "Key: Value"). Can be specified multiple times.
-  -h, --help                   help for calibrate
       --include-headers        Include HTTP response headers in the output
   -q, --jq string              Filter and transform output using a jq expression (e.g., '.name', '.items[] | .id')
       --no-interactive         Disable all interactive features (auto-prompting, explorer auto-launch, TUI forms)
@@ -32,15 +51,4 @@ calibrate [flags]
 
 ### SEE ALSO
 
-* [calibrate agent-tests](calibrate_agent-tests.md)	 - Operations for agent-tests
-* [calibrate agents](calibrate_agents.md)	 - Operations for agents
-* [calibrate annotation-tasks](calibrate_annotation-tasks.md)	 - Operations for annotation-tasks
-* [calibrate annotators](calibrate_annotators.md)	 - Operations for annotators
-* [calibrate auth](calibrate_auth.md)	 - Manage authentication credentials
-* [calibrate configure](calibrate_configure.md)	 - Configure authentication credentials and preferences
-* [calibrate evaluators](calibrate_evaluators.md)	 - Operations for evaluators
-* [calibrate explore](calibrate_explore.md)	 - Interactively browse and run commands
-* [calibrate tests](calibrate_tests.md)	 - Operations for tests
 * [calibrate traces](calibrate_traces.md)	 - Operations for traces
-* [calibrate version](calibrate_version.md)	 - Print the CLI version
-* [calibrate whoami](calibrate_whoami.md)	 - Display current authentication configuration

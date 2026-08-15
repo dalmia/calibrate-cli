@@ -1386,12 +1386,12 @@ func (s *Agents) LinkEvaluators(ctx context.Context, request operations.LinkEval
 					return nil, err
 				}
 
-				var out components.RoutersAgentsEvaluatorLinkResponse
+				var out components.EvaluatorLinkResponse
 				if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 					return nil, err
 				}
 
-				res.RoutersAgentsEvaluatorLinkResponse = &out
+				res.EvaluatorLinkResponse = &out
 			}
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)

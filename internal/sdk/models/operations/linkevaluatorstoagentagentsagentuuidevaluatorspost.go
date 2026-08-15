@@ -10,9 +10,9 @@ import (
 
 type LinkEvaluatorsToAgentAgentsAgentUUIDEvaluatorsPostRequest struct {
 	// The agent to link the evaluators to
-	AgentUUID string                                       `pathParam:"style=simple,explode=false,name=agent_uuid"`
-	XAPIKey   optionalnullable.OptionalNullable[string]    `header:"style=simple,explode=false,name=X-API-Key"`
-	Body      components.RoutersAgentsEvaluatorLinkRequest `request:"mediaType=application/json"`
+	AgentUUID string                                    `pathParam:"style=simple,explode=false,name=agent_uuid"`
+	XAPIKey   optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=X-API-Key"`
+	Body      components.EvaluatorLinkRequest           `request:"mediaType=application/json"`
 }
 
 func (l *LinkEvaluatorsToAgentAgentsAgentUUIDEvaluatorsPostRequest) GetAgentUUID() string {
@@ -29,9 +29,9 @@ func (l *LinkEvaluatorsToAgentAgentsAgentUUIDEvaluatorsPostRequest) GetXAPIKey()
 	return l.XAPIKey
 }
 
-func (l *LinkEvaluatorsToAgentAgentsAgentUUIDEvaluatorsPostRequest) GetBody() components.RoutersAgentsEvaluatorLinkRequest {
+func (l *LinkEvaluatorsToAgentAgentsAgentUUIDEvaluatorsPostRequest) GetBody() components.EvaluatorLinkRequest {
 	if l == nil {
-		return components.RoutersAgentsEvaluatorLinkRequest{}
+		return components.EvaluatorLinkRequest{}
 	}
 	return l.Body
 }
@@ -39,7 +39,7 @@ func (l *LinkEvaluatorsToAgentAgentsAgentUUIDEvaluatorsPostRequest) GetBody() co
 type LinkEvaluatorsToAgentAgentsAgentUUIDEvaluatorsPostResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// Successful Response
-	RoutersAgentsEvaluatorLinkResponse *components.RoutersAgentsEvaluatorLinkResponse
+	EvaluatorLinkResponse *components.EvaluatorLinkResponse
 }
 
 func (l LinkEvaluatorsToAgentAgentsAgentUUIDEvaluatorsPostResponse) MarshalJSON() ([]byte, error) {
@@ -60,9 +60,9 @@ func (l *LinkEvaluatorsToAgentAgentsAgentUUIDEvaluatorsPostResponse) GetHTTPMeta
 	return l.HTTPMeta
 }
 
-func (l *LinkEvaluatorsToAgentAgentsAgentUUIDEvaluatorsPostResponse) GetRoutersAgentsEvaluatorLinkResponse() *components.RoutersAgentsEvaluatorLinkResponse {
+func (l *LinkEvaluatorsToAgentAgentsAgentUUIDEvaluatorsPostResponse) GetEvaluatorLinkResponse() *components.EvaluatorLinkResponse {
 	if l == nil {
 		return nil
 	}
-	return l.RoutersAgentsEvaluatorLinkResponse
+	return l.EvaluatorLinkResponse
 }

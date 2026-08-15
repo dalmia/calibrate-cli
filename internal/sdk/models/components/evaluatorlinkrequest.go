@@ -2,14 +2,14 @@
 
 package components
 
-type RoutersAgentsEvaluatorLinkRequest struct {
+type EvaluatorLinkRequest struct {
 	// The evaluators to link to the agent. Ones that are already linked are skipped. Each must be one you created or a built-in default
 	EvaluatorIds []string `json:"evaluator_ids"`
 }
 
-func (r *RoutersAgentsEvaluatorLinkRequest) GetEvaluatorIds() []string {
-	if r == nil {
+func (e *EvaluatorLinkRequest) GetEvaluatorIds() []string {
+	if e == nil {
 		return []string{}
 	}
-	return r.EvaluatorIds
+	return e.EvaluatorIds
 }

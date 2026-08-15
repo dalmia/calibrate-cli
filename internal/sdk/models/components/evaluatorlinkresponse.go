@@ -2,7 +2,7 @@
 
 package components
 
-type RoutersAgentsEvaluatorLinkResponse struct {
+type EvaluatorLinkResponse struct {
 	// Confirmation that the evaluators were linked
 	Message string `json:"message"`
 	// Evaluator IDs newly linked by this request
@@ -11,23 +11,23 @@ type RoutersAgentsEvaluatorLinkResponse struct {
 	AlreadyLinked []string `json:"already_linked"`
 }
 
-func (r *RoutersAgentsEvaluatorLinkResponse) GetMessage() string {
-	if r == nil {
+func (e *EvaluatorLinkResponse) GetMessage() string {
+	if e == nil {
 		return ""
 	}
-	return r.Message
+	return e.Message
 }
 
-func (r *RoutersAgentsEvaluatorLinkResponse) GetLinked() []string {
-	if r == nil {
+func (e *EvaluatorLinkResponse) GetLinked() []string {
+	if e == nil {
 		return []string{}
 	}
-	return r.Linked
+	return e.Linked
 }
 
-func (r *RoutersAgentsEvaluatorLinkResponse) GetAlreadyLinked() []string {
-	if r == nil {
+func (e *EvaluatorLinkResponse) GetAlreadyLinked() []string {
+	if e == nil {
 		return []string{}
 	}
-	return r.AlreadyLinked
+	return e.AlreadyLinked
 }

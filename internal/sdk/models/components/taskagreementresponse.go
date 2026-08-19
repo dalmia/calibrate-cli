@@ -14,7 +14,7 @@ type TaskAgreementResponse struct {
 	// Length of the trailing window in days
 	Days       int64               `json:"days"`
 	HumanHuman HumanAgreementBlock `json:"human_human"`
-	// Agreement between each evaluator and the annotators, plus that evaluator's own results, one entry per linked evaluator
+	// Agreement between each evaluator and the annotators, plus that evaluator's own results and the human results, one entry per linked evaluator
 	Evaluators           []map[string]any `json:"evaluators"`
 	AdditionalProperties map[string]any   `additionalProperties:"true" json:"-"`
 }

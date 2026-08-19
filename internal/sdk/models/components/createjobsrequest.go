@@ -3,9 +3,41 @@
 package components
 
 import (
+	"encoding/json"
+	"fmt"
 	"github.com/dalmia/calibrate-cli/internal/sdk/optionalnullable"
 	"github.com/dalmia/calibrate-cli/internal/sdk/sdkinternal/utils"
 )
+
+// ReasoningMode - How the labelling form treats the reasoning box on each judgement. `optional` shows it, `required` shows it and asks the annotator to fill it in, `hidden` leaves it out
+type ReasoningMode string
+
+const (
+	ReasoningModeOptional ReasoningMode = "optional"
+	ReasoningModeRequired ReasoningMode = "required"
+	ReasoningModeHidden   ReasoningMode = "hidden"
+)
+
+func (e ReasoningMode) ToPointer() *ReasoningMode {
+	return &e
+}
+func (e *ReasoningMode) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "optional":
+		fallthrough
+	case "required":
+		fallthrough
+	case "hidden":
+		*e = ReasoningMode(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for ReasoningMode: %v", v)
+	}
+}
 
 type CreateJobsRequest struct {
 	// Annotator IDs to assign, creating one labelling job for each annotator. Must be in your workspace
@@ -18,6 +50,10 @@ type CreateJobsRequest struct {
 	Q optionalnullable.OptionalNullable[string] `json:"q,omitzero"`
 	// Subset of the task's linked evaluators to show in these jobs. Must be a subset of the current links, an empty list gives a 400. Applies to every annotator's job. Omit (`None`) to snapshot every linked evaluator
 	EvaluatorIds optionalnullable.OptionalNullable[[]string] `json:"evaluator_ids,omitzero"`
+	// When `true`, the labelling form lets the annotator leave a comment on each item
+	CommentsEnabled *bool `default:"true" json:"comments_enabled"`
+	// How the labelling form treats the reasoning box on each judgement. `optional` shows it, `required` shows it and asks the annotator to fill it in, `hidden` leaves it out
+	ReasoningMode *ReasoningMode `default:"optional" json:"reasoning_mode"`
 }
 
 func (c CreateJobsRequest) MarshalJSON() ([]byte, error) {
@@ -64,4 +100,18 @@ func (c *CreateJobsRequest) GetEvaluatorIds() optionalnullable.OptionalNullable[
 		return nil
 	}
 	return c.EvaluatorIds
+}
+
+func (c *CreateJobsRequest) GetCommentsEnabled() *bool {
+	if c == nil {
+		return nil
+	}
+	return c.CommentsEnabled
+}
+
+func (c *CreateJobsRequest) GetReasoningMode() *ReasoningMode {
+	if c == nil {
+		return nil
+	}
+	return c.ReasoningMode
 }

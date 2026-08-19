@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
-id: 2552409b-d347-4a71-8875-cb466329133c
+id: 4e239869-7a2b-4605-83b8-15338d997dd0
 management:
-  docChecksum: dc762f251ddfd40d796410773bedaaca
+  docChecksum: 40a875d453cbb1640f19709b35250213
   docVersion: 0.1.0
   speakeasyVersion: 1.788.1
   generationVersion: 2.915.1
-  releaseVersion: 0.0.38
-  configChecksum: 6b14e1f55b5b2b84f0def820966e5a76
+  releaseVersion: 0.0.39
+  configChecksum: e0ed426a216ffbcafcb5016ebe5126fd
   repoURL: https://github.com/dalmia/calibrate-cli
   installationURL: https://github.com/dalmia/calibrate-cli
 persistentEdits:
-  generation_id: b97361a9-77c6-41b0-9eab-ba0075b6178c
-  pristine_commit_hash: 4bc8e9e795dff6a9ba88cced1bb90893de7241d3
-  pristine_tree_hash: 9abb52446e774a1cfc2c1621ee6d162362639413
+  generation_id: 02dd799e-0b3f-48d3-a621-d25941b5a74c
+  pristine_commit_hash: df7ed2dc713b724561cb93f4ada6f73e2ad4852f
+  pristine_tree_hash: 0373978bd91cee08a882cc810de1c74edf58df0d
 features:
   cli:
     additionalProperties: 0.0.0
@@ -139,8 +139,8 @@ trackedFiles:
     pristine_git_object: c4a9e164ae062a09848ed5f0a46860db6de5452e
   internal/cli/annotationtasks/createlabellingjobs.go:
     id: 3134b50d055c
-    last_write_checksum: sha1:36c25042ad76b26f8e8236141b4bb4230f6e03a5
-    pristine_git_object: dfd5f938f90f1f292d16a95f3db92090b30432fa
+    last_write_checksum: sha1:739e9abb4e3419f449078c9a8735366578a68d8e
+    pristine_git_object: 7d4ee41159d1646a98c0e623886c1683a4ef7f9e
   internal/cli/annotationtasks/get.go:
     id: 046287296d55
     last_write_checksum: sha1:3ea2d12d81477d83ec34ffedbe44895ebaa1d254
@@ -259,8 +259,8 @@ trackedFiles:
     pristine_git_object: fc38b830626d0c5fef0732edc60683524dda3524
   internal/cli/version.go:
     id: 7b0665492f72
-    last_write_checksum: sha1:19a14a8f3e7c42c11805a00a17392464f9018a55
-    pristine_git_object: 4f7517255bc2cee67210a1f41f9efe5c7bb0bfa8
+    last_write_checksum: sha1:57e5be1e108da98be4f79f8c67dfa55764651c79
+    pristine_git_object: 401b72f44cad2274062ac8738682a53ab2505fba
   internal/cli/whoami.go:
     id: c1787f2298ec
     last_write_checksum: sha1:58afb45d777f297af4a64acf26a57c46e1b556db
@@ -483,8 +483,8 @@ trackedFiles:
     pristine_git_object: 1cf1502ee236e61b4842c39acd71d506ddcc6738
   internal/sdk/models/components/createjobsrequest.go:
     id: 7f00ca8b6468
-    last_write_checksum: sha1:2de7ffb8befbf103dd3db66a463393a635c827c7
-    pristine_git_object: 57c861cf8a05a3a837a977316a52467280ed19f3
+    last_write_checksum: sha1:952f5c31dd7f17562d56d047cadc587477216ec3
+    pristine_git_object: d4d8455f437e3986ba3663ba7fcfd809708352ec
   internal/sdk/models/components/createjobsresponse.go:
     id: 57bc79fb8d3c
     last_write_checksum: sha1:356449af5bee685ebae44519382c72ffe2ee1490
@@ -1015,8 +1015,8 @@ trackedFiles:
     pristine_git_object: 159a87ec97aba99e4edd132f69652e123434303e
   internal/usage/schema.go:
     id: 0f40f4612437
-    last_write_checksum: sha1:33ea6c1c331085336a40baa99d4b2c8a519f51d4
-    pristine_git_object: a4f48093e4dc84372219f2b65aeb83021d1a72ff
+    last_write_checksum: sha1:4f002a065dad7ace6bedcf32355b846d8248ac09
+    pristine_git_object: bbf28174dd930e024df0ebd667a73f717448a875
   scripts/install.ps1:
     id: fee0853709e9
     last_write_checksum: sha1:d8884365d7cfb218aac394e16a7d214a6f56b585
@@ -1385,7 +1385,7 @@ examples:
         path:
           task_uuid: "f47ac10b-58cc-4372-a567-0e02b2c3d479"
       requestBody:
-        application/json: {"annotator_ids": ["f47ac10b-58cc-4372-a567-0e02b2c3d479"], "select_all": false, "evaluator_ids": ["f47ac10b-58cc-4372-a567-0e02b2c3d479"]}
+        application/json: {"annotator_ids": ["f47ac10b-58cc-4372-a567-0e02b2c3d479"], "select_all": false, "evaluator_ids": ["f47ac10b-58cc-4372-a567-0e02b2c3d479"], "comments_enabled": true, "reasoning_mode": "optional"}
       responses:
         "200":
           application/json: {"jobs": [], "count": 51291}

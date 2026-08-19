@@ -22,6 +22,8 @@ var createLabellingJobsCmdMeta = []flagutil.FlagMeta{
 	{FlagName: "select-all", Shorthand: "s", FieldPath: "Body.SelectAll", Kind: flagutil.FlagKindBool, Optional: true, HasDefault: true, Description: "When `true`, assign every item in the task and ignore `item_ids`. Set `q` to assign only items whose name matches it"},
 	{FlagName: "q", FieldPath: "Body.Q", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"q,omitempty"`, Description: "Case-insensitive substring filter on `payload.name`. Applies only when `select_all=true`"},
 	{FlagName: "evaluator-ids", Shorthand: "e", FieldPath: "Body.EvaluatorIds", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"evaluator_ids,omitempty"`, Description: "Subset of the task's linked evaluators to show in these jobs. Must be a subset of the current links, an empty list gives a 400. Applies to every annotator's job. Omit (`None`) to snapshot every linked evaluator"},
+	{FlagName: "comments-enabled", Shorthand: "c", FieldPath: "Body.CommentsEnabled", Kind: flagutil.FlagKindBool, Optional: true, HasDefault: true, DefaultBool: true, Description: "When `true`, the labelling form lets the annotator leave a comment on each item"},
+	{FlagName: "reasoning-mode", Shorthand: "r", FieldPath: "Body.ReasoningMode", Kind: flagutil.FlagKindEnum, Optional: true, HasDefault: true, DefaultStr: "optional", EnumValues: []string{"optional", "required", "hidden"}, Description: "How the labelling form treats the reasoning box on each judgement. `optional` shows it, `required` shows it and asks the annotator to fill it in, `hidden` leaves it out (options: optional, required, hidden)"},
 }
 
 // initCreateLabellingJobsCmd initializes the create-labelling-jobs command.

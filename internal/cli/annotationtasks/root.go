@@ -45,6 +45,10 @@ func InitAnnotationTasksRoot(parent *cobra.Command) error {
 		return err
 	}
 
+	if err := initCreateLabellingJobsCmd(AnnotationTasksCmd); err != nil {
+		return err
+	}
+
 	if err := initCreateEvaluatorRunCmd(AnnotationTasksCmd); err != nil {
 		return err
 	}

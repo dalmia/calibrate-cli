@@ -1,19 +1,33 @@
-## calibrate annotation-tasks
+## calibrate annotation-tasks create-labelling-jobs
 
-Operations for annotation-tasks
+Create labelling jobs
 
 ### Synopsis
 
-Operations for annotation-tasks
+Assign items to annotators, creating one labelling job per annotator
 
 ```
-calibrate annotation-tasks [flags]
+calibrate annotation-tasks create-labelling-jobs [flags]
+```
+
+### Examples
+
+```
+  calibrate annotation-tasks create-labelling-jobs --task-uuid f47ac10b-58cc-4372-a567-0e02b2c3d479 --annotator-ids '["f47ac10b-58cc-4372-a567-0e02b2c3d479"]'
 ```
 
 ### Options
 
 ```
-  -h, --help   help for annotation-tasks
+  -a, --annotator-ids stringArray   Annotator IDs to assign, creating one labelling job for each annotator. Must be in your workspace [required]
+      --body string                 Request body as JSON (alternative to individual flags). Can also be provided via stdin.
+  -e, --evaluator-ids None          Subset of the task's linked evaluators to show in these jobs. Must be a subset of the current links, an empty list gives a 400. Applies to every annotator's job. Omit (None) to snapshot every linked evaluator
+  -h, --help                        help for create-labelling-jobs
+  -i, --item-ids select_all=false   Item IDs to assign. **Required when select_all=false**. Ignored when `select_all=true`
+      --q payload.name              Case-insensitive substring filter on payload.name. Applies only when `select_all=true`
+  -s, --select-all true             When true, assign every item in the task and ignore `item_ids`. Set `q` to assign only items whose name matches it
+  -t, --task-uuid string            Annotation task to act on [required]
+  -x, --x-api-key string            string value
 ```
 
 ### Options inherited from parent commands
@@ -37,15 +51,4 @@ calibrate annotation-tasks [flags]
 
 ### SEE ALSO
 
-* [calibrate](calibrate.md)	 - Calibrate Public API: Programmatic API for CI/automation
-* [calibrate annotation-tasks add-items](calibrate_annotation-tasks_add-items.md)	 - Bulk create items
-* [calibrate annotation-tasks create](calibrate_annotation-tasks_create.md)	 - Create annotation task
-* [calibrate annotation-tasks create-evaluator-run](calibrate_annotation-tasks_create-evaluator-run.md)	 - Run evaluators on items
-* [calibrate annotation-tasks create-labelling-jobs](calibrate_annotation-tasks_create-labelling-jobs.md)	 - Create labelling jobs
-* [calibrate annotation-tasks get](calibrate_annotation-tasks_get.md)	 - Get annotation task
-* [calibrate annotation-tasks get-agreement](calibrate_annotation-tasks_get-agreement.md)	 - Get task agreement
-* [calibrate annotation-tasks get-evaluator-run](calibrate_annotation-tasks_get-evaluator-run.md)	 - Get evaluator run
-* [calibrate annotation-tasks get-summary](calibrate_annotation-tasks_get-summary.md)	 - Get task summary
-* [calibrate annotation-tasks list](calibrate_annotation-tasks_list.md)	 - List annotation tasks
-* [calibrate annotation-tasks set-evaluators](calibrate_annotation-tasks_set-evaluators.md)	 - Update task evaluators
-* [calibrate annotation-tasks update-items](calibrate_annotation-tasks_update-items.md)	 - Bulk update items
+* [calibrate annotation-tasks](calibrate_annotation-tasks.md)	 - Operations for annotation-tasks

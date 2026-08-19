@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
-id: aceaf1e1-406f-4de5-a0c3-7b145a6d12d2
+id: 2552409b-d347-4a71-8875-cb466329133c
 management:
-  docChecksum: 238970c9a8c925d91dbefd7235501309
+  docChecksum: dc762f251ddfd40d796410773bedaaca
   docVersion: 0.1.0
   speakeasyVersion: 1.788.1
   generationVersion: 2.915.1
-  releaseVersion: 0.0.37
-  configChecksum: 7436320f41904d84350f77288a6ba450
+  releaseVersion: 0.0.38
+  configChecksum: 6b14e1f55b5b2b84f0def820966e5a76
   repoURL: https://github.com/dalmia/calibrate-cli
   installationURL: https://github.com/dalmia/calibrate-cli
 persistentEdits:
-  generation_id: cb008eb7-418d-44d6-ad4b-865fc91a9cb5
-  pristine_commit_hash: 0312c4b416e62491058b0204908355be07612ca9
-  pristine_tree_hash: 146e107d4e677a3b3192d3e843021a5a40f06823
+  generation_id: b97361a9-77c6-41b0-9eab-ba0075b6178c
+  pristine_commit_hash: 4bc8e9e795dff6a9ba88cced1bb90893de7241d3
+  pristine_tree_hash: 9abb52446e774a1cfc2c1621ee6d162362639413
 features:
   cli:
     additionalProperties: 0.0.0
@@ -137,6 +137,10 @@ trackedFiles:
     id: 31470082f889
     last_write_checksum: sha1:a2b1174c2d9bb30e4a874143b72467aa72996689
     pristine_git_object: c4a9e164ae062a09848ed5f0a46860db6de5452e
+  internal/cli/annotationtasks/createlabellingjobs.go:
+    id: 3134b50d055c
+    last_write_checksum: sha1:36c25042ad76b26f8e8236141b4bb4230f6e03a5
+    pristine_git_object: dfd5f938f90f1f292d16a95f3db92090b30432fa
   internal/cli/annotationtasks/get.go:
     id: 046287296d55
     last_write_checksum: sha1:3ea2d12d81477d83ec34ffedbe44895ebaa1d254
@@ -159,8 +163,8 @@ trackedFiles:
     pristine_git_object: 46105ea707e4522c352ce725628203681d3888de
   internal/cli/annotationtasks/root.go:
     id: 1327e5f60fa4
-    last_write_checksum: sha1:2e969d104a26087606e03b56942326cf258ee7e1
-    pristine_git_object: cfc8b1af461d912d85651813029c130759c83f85
+    last_write_checksum: sha1:679115974956adba055fba26226a683cb2f3eb66
+    pristine_git_object: 44c3d10f26f18409b21d79e75506ed97ef042169
   internal/cli/annotationtasks/setevaluators.go:
     id: 7c4a95513e78
     last_write_checksum: sha1:670762fe5766ae83b4db6b18083e804321e0fc8c
@@ -255,8 +259,8 @@ trackedFiles:
     pristine_git_object: fc38b830626d0c5fef0732edc60683524dda3524
   internal/cli/version.go:
     id: 7b0665492f72
-    last_write_checksum: sha1:51ff07a15e1c0d86cbf84c1415a067344b2ae9b0
-    pristine_git_object: 4669203d37894430acc6e1f9b3efdbb82846daca
+    last_write_checksum: sha1:19a14a8f3e7c42c11805a00a17392464f9018a55
+    pristine_git_object: 4f7517255bc2cee67210a1f41f9efe5c7bb0bfa8
   internal/cli/whoami.go:
     id: c1787f2298ec
     last_write_checksum: sha1:58afb45d777f297af4a64acf26a57c46e1b556db
@@ -339,8 +343,8 @@ trackedFiles:
     pristine_git_object: b00f857c88cb4fe2280334b7ef19f2254b9b9f4f
   internal/sdk/annotationtasks.go:
     id: 854b405ff171
-    last_write_checksum: sha1:236785a6734707123c6f50dda032f673e71fbeee
-    pristine_git_object: 268893c1c822b0a99736d0cb8c5eec4b2e065de8
+    last_write_checksum: sha1:39078548ada49993417d469170b608caf90d76f6
+    pristine_git_object: 212982d34f91856bc1ee9b296ad7de2763bd0b15
   internal/sdk/annotators.go:
     id: b240f5bfa38a
     last_write_checksum: sha1:138f2229a0346408ad9417d8611b36e470e16ecf
@@ -477,6 +481,14 @@ trackedFiles:
     id: 06a1e72e3f1f
     last_write_checksum: sha1:d73a66b63d4728eeb5d1f0e03cd8c8f9ca57a78b
     pristine_git_object: 1cf1502ee236e61b4842c39acd71d506ddcc6738
+  internal/sdk/models/components/createjobsrequest.go:
+    id: 7f00ca8b6468
+    last_write_checksum: sha1:2de7ffb8befbf103dd3db66a463393a635c827c7
+    pristine_git_object: 57c861cf8a05a3a837a977316a52467280ed19f3
+  internal/sdk/models/components/createjobsresponse.go:
+    id: 57bc79fb8d3c
+    last_write_checksum: sha1:356449af5bee685ebae44519382c72ffe2ee1490
+    pristine_git_object: 247d8085eeefbb82f9bbe724b6163cf472d7bfc4
   internal/sdk/models/components/evaluatorcreate.go:
     id: 1f010f914755
     last_write_checksum: sha1:ff587235d3e339850e36b5fe752e78fb8eaca42b
@@ -557,6 +569,10 @@ trackedFiles:
     id: deee11f86107
     last_write_checksum: sha1:2aadea620bb26ff4f13e9df9aa3b8fdec395b827
     pristine_git_object: 890dd41d1674090a9cc00af3279624c3682ade23
+  internal/sdk/models/components/labellingjobcreated.go:
+    id: be2820a9400c
+    last_write_checksum: sha1:0aefade171a3bc2d7386a23bc05a0e11b6eb97a6
+    pristine_git_object: a25f99689b4c4b215a3d76912b0fd38dc4875127
   internal/sdk/models/components/modelresult.go:
     id: 4ecf1badc0f3
     last_write_checksum: sha1:ab4790564f4de43921156bda6262ff865991c975
@@ -753,6 +769,10 @@ trackedFiles:
     id: 4a8278cfcb62
     last_write_checksum: sha1:b6f0b5e6f327f485755b463ca73e3bc50e2b7d89
     pristine_git_object: a6fe38892a982b06809a868d2d779204694e9cb7
+  internal/sdk/models/operations/createjobsannotationtaskstaskuuidjobspost.go:
+    id: 3924e75e252b
+    last_write_checksum: sha1:497ca58c53c4269fb0b0d1e4703ce86b40d8a79b
+    pristine_git_object: 1a40b63a34e492449659c3804423cb9585b34ffe
   internal/sdk/models/operations/createtestendpointtestspost.go:
     id: 3295b1addb42
     last_write_checksum: sha1:e8f2eac96fedc7403fa565ea7e02ea0acd329ef6
@@ -995,8 +1015,8 @@ trackedFiles:
     pristine_git_object: 159a87ec97aba99e4edd132f69652e123434303e
   internal/usage/schema.go:
     id: 0f40f4612437
-    last_write_checksum: sha1:ea3ddf172eb3fae89c3ef7d94dd9c4ec34005273
-    pristine_git_object: 78f9200c4aaff9fc28df2d9cd832b17e8b151bea
+    last_write_checksum: sha1:33ea6c1c331085336a40baa99d4b2c8a519f51d4
+    pristine_git_object: a4f48093e4dc84372219f2b65aeb83021d1a72ff
   scripts/install.ps1:
     id: fee0853709e9
     last_write_checksum: sha1:d8884365d7cfb218aac394e16a7d214a6f56b585
@@ -1357,6 +1377,18 @@ examples:
       responses:
         "200":
           application/json: {"updated_count": 455120}
+        "422":
+          application/json: {}
+  create_jobs_annotation_tasks__task_uuid__jobs_post:
+    speakeasy-default-create-jobs-annotation-tasks-task-uuid-jobs-post:
+      parameters:
+        path:
+          task_uuid: "f47ac10b-58cc-4372-a567-0e02b2c3d479"
+      requestBody:
+        application/json: {"annotator_ids": ["f47ac10b-58cc-4372-a567-0e02b2c3d479"], "select_all": false, "evaluator_ids": ["f47ac10b-58cc-4372-a567-0e02b2c3d479"]}
+      responses:
+        "200":
+          application/json: {"jobs": [], "count": 51291}
         "422":
           application/json: {}
   start_evaluator_run_annotation_tasks__task_uuid__evaluator_runs_post:

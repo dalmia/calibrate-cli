@@ -19,7 +19,8 @@ calibrate agent-tests list-runs-for-agent [flags]
 ### Options
 
 ```
-  -a, --agent-uuid string    Agent whose test runs to list [required]
+      --agent-uuid string    Agent whose test runs to list [required]
+      --around offset        ID of a run to jump to, returning the page that contains it instead of the page at offset
       --has-failures true    Filter by whether the run has any failing test case or model. true returns only runs with failures (or errors), `false` only clean runs. Omit for both
   -h, --help                 help for list-runs-for-agent
   -l, --limit string         Maximum number of items to return. Omit for no limit (all items)

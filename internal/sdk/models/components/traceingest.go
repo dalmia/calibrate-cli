@@ -3,9 +3,101 @@
 package components
 
 import (
+	"errors"
+	"fmt"
 	"github.com/dalmia/calibrate-cli/internal/sdk/optionalnullable"
 	"github.com/dalmia/calibrate-cli/internal/sdk/sdkinternal/utils"
 )
+
+type InputType string
+
+const (
+	InputTypeStr              InputType = "str"
+	InputTypeArrayOfTraceTurn InputType = "arrayOfTraceTurn"
+)
+
+// Input - What the agent was given for this turn. For a `general` agent, the standalone prompt as a string. For a `conversation` agent, the history up to the reported output, oldest turn first, in OpenAI chat format
+type Input struct {
+	Str              *string     `queryParam:"inline" union:"member"`
+	ArrayOfTraceTurn []TraceTurn `queryParam:"inline" union:"member"`
+
+	Type InputType
+}
+
+func CreateInputStr(str string) Input {
+	typ := InputTypeStr
+
+	return Input{
+		Str:  &str,
+		Type: typ,
+	}
+}
+
+func CreateInputArrayOfTraceTurn(arrayOfTraceTurn []TraceTurn) Input {
+	typ := InputTypeArrayOfTraceTurn
+
+	return Input{
+		ArrayOfTraceTurn: arrayOfTraceTurn,
+		Type:             typ,
+	}
+}
+
+func (u *Input) UnmarshalJSON(data []byte) error {
+
+	var candidates []utils.UnionCandidate
+
+	// Collect all valid candidates
+	var str string = ""
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  InputTypeStr,
+			Value: &str,
+		})
+	}
+
+	var arrayOfTraceTurn []TraceTurn = []TraceTurn{}
+	if err := utils.UnmarshalJSON(data, &arrayOfTraceTurn, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  InputTypeArrayOfTraceTurn,
+			Value: arrayOfTraceTurn,
+		})
+	}
+
+	if len(candidates) == 0 {
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for Input", string(data))
+	}
+
+	// Pick the best candidate using multi-stage filtering
+	best := utils.PickBestUnionCandidate(candidates, data)
+	if best == nil {
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for Input", string(data))
+	}
+
+	// Set the union type and value based on the best candidate
+	u.Type = best.Type.(InputType)
+	switch best.Type {
+	case InputTypeStr:
+		u.Str = best.Value.(*string)
+		return nil
+	case InputTypeArrayOfTraceTurn:
+		u.ArrayOfTraceTurn = best.Value.([]TraceTurn)
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for Input", string(data))
+}
+
+func (u Input) MarshalJSON() ([]byte, error) {
+	if u.Str != nil {
+		return utils.MarshalJSON(u.Str, "", true)
+	}
+
+	if u.ArrayOfTraceTurn != nil {
+		return utils.MarshalJSON(u.ArrayOfTraceTurn, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type Input: all fields are null")
+}
 
 type TraceIngest struct {
 	// ID of the agent that produced the turn. Must be an agent in your workspace
@@ -14,8 +106,8 @@ type TraceIngest struct {
 	MessageID optionalnullable.OptionalNullable[string] `json:"message_id,omitzero"`
 	// Your own ID for the conversation this turn belongs to, stored for reference only. Omit if you have none
 	ConversationID optionalnullable.OptionalNullable[string] `json:"conversation_id,omitzero"`
-	// Conversation history up to the reported output, oldest turn first, in OpenAI chat format
-	Input  []TraceTurn `json:"input"`
+	// What the agent was given for this turn. For a `general` agent, the standalone prompt as a string. For a `conversation` agent, the history up to the reported output, oldest turn first, in OpenAI chat format
+	Input  Input       `json:"input"`
 	Output TraceOutput `json:"output"`
 	// Key-value pairs stored with the trace. Prefer OTel `gen_ai.*` key names where they fit. Omit if you have none
 	Metadata optionalnullable.OptionalNullable[[]TraceMetadataEntry] `json:"metadata,omitzero"`
@@ -53,9 +145,9 @@ func (t *TraceIngest) GetConversationID() optionalnullable.OptionalNullable[stri
 	return t.ConversationID
 }
 
-func (t *TraceIngest) GetInput() []TraceTurn {
+func (t *TraceIngest) GetInput() Input {
 	if t == nil {
-		return []TraceTurn{}
+		return Input{}
 	}
 	return t.Input
 }

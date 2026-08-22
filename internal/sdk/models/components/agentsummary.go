@@ -30,6 +30,32 @@ func (e *AgentSummaryType) IsExact() bool {
 	return false
 }
 
+// AgentSummaryInteractionType - What the agent expects in the request body:
+//
+// - `conversation`: a normal back-and-forth agent, answers within an ongoing conversation. Receives `{"messages": [...]}`
+// - `general`: a one-shot agent, takes a single plain input and produces a single plain output, no conversation. Receives `{"input": "..."}`
+type AgentSummaryInteractionType string
+
+const (
+	AgentSummaryInteractionTypeConversation AgentSummaryInteractionType = "conversation"
+	AgentSummaryInteractionTypeGeneral      AgentSummaryInteractionType = "general"
+)
+
+func (e AgentSummaryInteractionType) ToPointer() *AgentSummaryInteractionType {
+	return &e
+}
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *AgentSummaryInteractionType) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "conversation", "general":
+			return true
+		}
+	}
+	return false
+}
+
 type AgentSummary struct {
 	// ID of the agent
 	UUID string `json:"uuid"`
@@ -38,6 +64,11 @@ type AgentSummary struct {
 	// - `agent`: built inside Calibrate
 	// - `connection`: your existing agent connected to Calibrate
 	Type AgentSummaryType `json:"type"`
+	// What the agent expects in the request body:
+	//
+	// - `conversation`: a normal back-and-forth agent, answers within an ongoing conversation. Receives `{"messages": [...]}`
+	// - `general`: a one-shot agent, takes a single plain input and produces a single plain output, no conversation. Receives `{"input": "..."}`
+	InteractionType AgentSummaryInteractionType `json:"interaction_type"`
 	// When the agent was created (ISO 8601 UTC)
 	CreatedAt string `json:"created_at"`
 	// When the agent was last updated (ISO 8601 UTC)
@@ -67,6 +98,13 @@ func (a *AgentSummary) GetType() AgentSummaryType {
 		return AgentSummaryType("")
 	}
 	return a.Type
+}
+
+func (a *AgentSummary) GetInteractionType() AgentSummaryInteractionType {
+	if a == nil {
+		return AgentSummaryInteractionType("")
+	}
+	return a.InteractionType
 }
 
 func (a *AgentSummary) GetCreatedAt() string {

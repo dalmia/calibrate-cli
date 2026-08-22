@@ -10,9 +10,11 @@ import (
 type BulkTestItem struct {
 	// Name of the test, unique within the workspace and within the batch
 	Name string `json:"name"`
-	// Ordered messages ending at the user turn the agent should answer
-	ConversationHistory []ChatMessage `json:"conversation_history"`
-	// Evaluators to link. Used by `response` and `conversation` tests
+	// Ordered messages ending at the user turn the agent should answer. **Required for `response` and `conversation` batches**, and for `tool_call` batches aimed at a conversational agent
+	ConversationHistory optionalnullable.OptionalNullable[[]ChatMessage] `json:"conversation_history,omitzero"`
+	// Standalone prompt with no conversation around it. **Required for `general` batches**, and for `tool_call` batches aimed at a general agent
+	Input optionalnullable.OptionalNullable[string] `json:"input,omitzero"`
+	// Evaluators to link. Used by `response`, `conversation`, and `general` tests
 	Evaluators optionalnullable.OptionalNullable[[]RoutersTestsEvaluatorRef] `json:"evaluators,omitzero"`
 	// Expected tool calls. **Required for `tool_call` batches**
 	ToolCalls optionalnullable.OptionalNullable[[]ExpectedToolCall] `json:"tool_calls,omitzero"`
@@ -38,11 +40,18 @@ func (b *BulkTestItem) GetName() string {
 	return b.Name
 }
 
-func (b *BulkTestItem) GetConversationHistory() []ChatMessage {
+func (b *BulkTestItem) GetConversationHistory() optionalnullable.OptionalNullable[[]ChatMessage] {
 	if b == nil {
-		return []ChatMessage{}
+		return nil
 	}
 	return b.ConversationHistory
+}
+
+func (b *BulkTestItem) GetInput() optionalnullable.OptionalNullable[string] {
+	if b == nil {
+		return nil
+	}
+	return b.Input
 }
 
 func (b *BulkTestItem) GetEvaluators() optionalnullable.OptionalNullable[[]RoutersTestsEvaluatorRef] {

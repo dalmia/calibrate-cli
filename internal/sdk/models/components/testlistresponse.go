@@ -12,12 +12,14 @@ import (
 // - `response`: judges the generated reply
 // - `tool_call`: diffs the generated tool calls
 // - `conversation`: judges the full conversation
+// - `general`: judges a single plain-text input/output pair with no conversation involved (e.g. summarization, extraction, classification)
 type TestListResponseType string
 
 const (
 	TestListResponseTypeResponse     TestListResponseType = "response"
 	TestListResponseTypeToolCall     TestListResponseType = "tool_call"
 	TestListResponseTypeConversation TestListResponseType = "conversation"
+	TestListResponseTypeGeneral      TestListResponseType = "general"
 )
 
 func (e TestListResponseType) ToPointer() *TestListResponseType {
@@ -28,7 +30,7 @@ func (e TestListResponseType) ToPointer() *TestListResponseType {
 func (e *TestListResponseType) IsExact() bool {
 	if e != nil {
 		switch *e {
-		case "response", "tool_call", "conversation":
+		case "response", "tool_call", "conversation", "general":
 			return true
 		}
 	}
@@ -48,6 +50,7 @@ type TestListResponse struct {
 	// - `response`: judges the generated reply
 	// - `tool_call`: diffs the generated tool calls
 	// - `conversation`: judges the full conversation
+	// - `general`: judges a single plain-text input/output pair with no conversation involved (e.g. summarization, extraction, classification)
 	//
 	Type TestListResponseType `json:"type"`
 	// Trimmed config carrying only the test's description. Fetch the test by ID for the full config and evaluators

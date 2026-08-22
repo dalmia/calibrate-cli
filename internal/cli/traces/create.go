@@ -19,7 +19,7 @@ var createCmdMeta = []flagutil.FlagMeta{
 	{FlagName: "agent-id", Shorthand: "a", FieldPath: "Body.AgentID", Kind: flagutil.FlagKindString, Required: true, Description: "ID of the agent that produced the turn. Must be an agent in your workspace [required]"},
 	{FlagName: "message-id", FieldPath: "Body.MessageID", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"message_id,omitempty"`, Description: "Your own ID for the last user message in `input`, stored for reference only. Omit if you have none"},
 	{FlagName: "conversation-id", Shorthand: "c", FieldPath: "Body.ConversationID", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"conversation_id,omitempty"`, Description: "Your own ID for the conversation this turn belongs to, stored for reference only. Omit if you have none"},
-	{FlagName: "input", Shorthand: "i", FieldPath: "Body.Input", Kind: flagutil.FlagKindJSON, Required: true, Annotations: `json:"input"`, Description: "Conversation history up to the reported output, oldest turn first, in OpenAI chat format [required]"},
+	{FlagName: "input", Shorthand: "i", FieldPath: "Body.Input", Kind: flagutil.FlagKindUnion, Union: &flagutil.UnionMeta{Discriminated: false, TypeDescription: "JSON value (one of: string | array of { role: string, content: string, AdditionalProperties: object })"}},
 	{FlagName: "output-param", FieldPath: "Body.Output", Kind: flagutil.FlagKindJSON, Required: true, Annotations: `json:"output"`, Description: "[required]"},
 	{FlagName: "metadata", FieldPath: "Body.Metadata", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"metadata,omitempty"`, Description: "Key-value pairs stored with the trace. Prefer OTel `gen_ai.*` key names where they fit. Omit if you have none"},
 }
@@ -30,7 +30,7 @@ func initCreateCmd(parent *cobra.Command) error {
 		Use:     "create",
 		Short:   "Create trace",
 		Long:    "Store a production agent turn and its conversation history for later review",
-		Example: "  calibrate traces create --agent-id <id> --input '[{\"role\":\"<value>\"}]' --output-param '{}'",
+		Example: "  calibrate traces create --agent-id <id> --input '[]' --output-param '{}'",
 		RunE:    runCreateCmd,
 	}
 	flagutil.RegisterFlags(cmd, createCmdMeta)

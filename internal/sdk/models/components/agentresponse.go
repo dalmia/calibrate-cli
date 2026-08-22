@@ -31,6 +31,32 @@ func (e *AgentResponseType) IsExact() bool {
 	return false
 }
 
+// AgentResponseInteractionType - What the agent expects in the request body:
+//
+// - `conversation`: a normal back-and-forth agent, answers within an ongoing conversation. Receives `{"messages": [...]}`
+// - `general`: a one-shot agent, takes a single plain input and produces a single plain output, no conversation. Receives `{"input": "..."}`
+type AgentResponseInteractionType string
+
+const (
+	AgentResponseInteractionTypeConversation AgentResponseInteractionType = "conversation"
+	AgentResponseInteractionTypeGeneral      AgentResponseInteractionType = "general"
+)
+
+func (e AgentResponseInteractionType) ToPointer() *AgentResponseInteractionType {
+	return &e
+}
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *AgentResponseInteractionType) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "conversation", "general":
+			return true
+		}
+	}
+	return false
+}
+
 type AgentResponse struct {
 	// ID of the agent
 	UUID string `json:"uuid"`
@@ -39,6 +65,11 @@ type AgentResponse struct {
 	// - `agent`: built inside Calibrate
 	// - `connection`: your existing agent connected to Calibrate
 	Type AgentResponseType `json:"type"`
+	// What the agent expects in the request body:
+	//
+	// - `conversation`: a normal back-and-forth agent, answers within an ongoing conversation. Receives `{"messages": [...]}`
+	// - `general`: a one-shot agent, takes a single plain input and produces a single plain output, no conversation. Receives `{"input": "..."}`
+	InteractionType AgentResponseInteractionType `json:"interaction_type"`
 	// Agent configuration
 	Config optionalnullable.OptionalNullable[map[string]any] `json:"config,omitzero"`
 	// When the agent was created (ISO 8601 UTC)
@@ -77,6 +108,13 @@ func (a *AgentResponse) GetType() AgentResponseType {
 		return AgentResponseType("")
 	}
 	return a.Type
+}
+
+func (a *AgentResponse) GetInteractionType() AgentResponseInteractionType {
+	if a == nil {
+		return AgentResponseInteractionType("")
+	}
+	return a.InteractionType
 }
 
 func (a *AgentResponse) GetConfig() optionalnullable.OptionalNullable[map[string]any] {

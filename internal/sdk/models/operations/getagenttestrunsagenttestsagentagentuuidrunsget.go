@@ -50,6 +50,8 @@ type GetAgentTestRunsAgentTestsAgentAgentUUIDRunsGetRequest struct {
 	Status optionalnullable.OptionalNullable[components.TaskStatus] `queryParam:"style=form,explode=true,name=status"`
 	// Filter by whether the run has any failing test case or model. `true` returns only runs with failures (or errors), `false` only clean runs. Omit for both
 	HasFailures optionalnullable.OptionalNullable[bool] `queryParam:"style=form,explode=true,name=has_failures"`
+	// ID of a run to jump to, returning the page that contains it instead of the page at `offset`
+	Around optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=around"`
 	// Maximum number of items to return. Omit for no limit (all items)
 	Limit optionalnullable.OptionalNullable[int64] `queryParam:"style=form,explode=true,name=limit"`
 	// Number of items to skip before returning results
@@ -94,6 +96,13 @@ func (g *GetAgentTestRunsAgentTestsAgentAgentUUIDRunsGetRequest) GetHasFailures(
 		return nil
 	}
 	return g.HasFailures
+}
+
+func (g *GetAgentTestRunsAgentTestsAgentAgentUUIDRunsGetRequest) GetAround() optionalnullable.OptionalNullable[string] {
+	if g == nil {
+		return nil
+	}
+	return g.Around
 }
 
 func (g *GetAgentTestRunsAgentTestsAgentAgentUUIDRunsGetRequest) GetLimit() optionalnullable.OptionalNullable[int64] {

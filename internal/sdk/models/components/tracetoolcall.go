@@ -12,6 +12,8 @@ type TraceToolCall struct {
 	Tool string `json:"tool"`
 	// Argument values the agent passed to the tool. Omit when the call had none
 	Arguments optionalnullable.OptionalNullable[map[string]any] `json:"arguments,omitzero"`
+	// What the tool returned for this call. Any JSON value. Omit when you do not record it
+	Output any `json:"output,omitzero"`
 }
 
 func (t TraceToolCall) MarshalJSON() ([]byte, error) {
@@ -37,4 +39,11 @@ func (t *TraceToolCall) GetArguments() optionalnullable.OptionalNullable[map[str
 		return nil
 	}
 	return t.Arguments
+}
+
+func (t *TraceToolCall) GetOutput() any {
+	if t == nil {
+		return nil
+	}
+	return t.Output
 }

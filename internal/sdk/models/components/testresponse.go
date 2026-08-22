@@ -12,12 +12,14 @@ import (
 // - `response`: judges the generated reply
 // - `tool_call`: diffs the generated tool calls
 // - `conversation`: judges the full conversation
+// - `general`: judges a single plain-text input/output pair with no conversation involved (e.g. summarization, extraction, classification)
 type TestResponseType string
 
 const (
 	TestResponseTypeResponse     TestResponseType = "response"
 	TestResponseTypeToolCall     TestResponseType = "tool_call"
 	TestResponseTypeConversation TestResponseType = "conversation"
+	TestResponseTypeGeneral      TestResponseType = "general"
 )
 
 func (e TestResponseType) ToPointer() *TestResponseType {
@@ -28,7 +30,7 @@ func (e TestResponseType) ToPointer() *TestResponseType {
 func (e *TestResponseType) IsExact() bool {
 	if e != nil {
 		switch *e {
-		case "response", "tool_call", "conversation":
+		case "response", "tool_call", "conversation", "general":
 			return true
 		}
 	}
@@ -45,6 +47,7 @@ type TestResponse struct {
 	// - `response`: judges the generated reply
 	// - `tool_call`: diffs the generated tool calls
 	// - `conversation`: judges the full conversation
+	// - `general`: judges a single plain-text input/output pair with no conversation involved (e.g. summarization, extraction, classification)
 	//
 	Type TestResponseType `json:"type"`
 	// The stored config: `history`, `evaluation`, and an optional `settings`

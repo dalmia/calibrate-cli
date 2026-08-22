@@ -42,6 +42,8 @@ type AgentTestRunListItem struct {
 	// - `llm-unit-test`: a single run of the agent's tests
 	// - `llm-benchmark`: a multi-model comparison
 	Type AgentTestRunListItemType `json:"type"`
+	// When the run was created (ISO 8601 UTC)
+	CreatedAt string `json:"created_at"`
 	// When the run was last updated (ISO 8601 UTC)
 	UpdatedAt string `json:"updated_at"`
 	// Total number of test cases
@@ -50,6 +52,8 @@ type AgentTestRunListItem struct {
 	Passed optionalnullable.OptionalNullable[int64] `json:"passed,omitzero"`
 	// Number of test cases that failed
 	Failed optionalnullable.OptionalNullable[int64] `json:"failed,omitzero"`
+	// Names of the evaluators that judged this run, deduplicated and in display order. `Tool call` is appended when any test in the run was a tool-call test. Empty when the run had no evaluators
+	Evaluators []string `json:"evaluators,omitzero"`
 	// Flat pass/fail summary for each test case (fetch the run detail for full results)
 	Results optionalnullable.OptionalNullable[[]TestRunCaseSummary] `json:"results,omitzero"`
 	// Aggregated latency in milliseconds, as `{p50, p95, p99, count}`
@@ -107,6 +111,13 @@ func (a *AgentTestRunListItem) GetType() AgentTestRunListItemType {
 	return a.Type
 }
 
+func (a *AgentTestRunListItem) GetCreatedAt() string {
+	if a == nil {
+		return ""
+	}
+	return a.CreatedAt
+}
+
 func (a *AgentTestRunListItem) GetUpdatedAt() string {
 	if a == nil {
 		return ""
@@ -133,6 +144,13 @@ func (a *AgentTestRunListItem) GetFailed() optionalnullable.OptionalNullable[int
 		return nil
 	}
 	return a.Failed
+}
+
+func (a *AgentTestRunListItem) GetEvaluators() []string {
+	if a == nil {
+		return nil
+	}
+	return a.Evaluators
 }
 
 func (a *AgentTestRunListItem) GetResults() optionalnullable.OptionalNullable[[]TestRunCaseSummary] {

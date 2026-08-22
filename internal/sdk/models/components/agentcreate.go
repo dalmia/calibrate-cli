@@ -37,12 +37,47 @@ func (e *AgentCreateType) UnmarshalJSON(data []byte) error {
 	}
 }
 
+// AgentCreateInteractionType - What the agent expects in the request body:
+//
+// - `conversation`: a normal back-and-forth agent, answers within an ongoing conversation. Receives `{"messages": [...]}`
+// - `general`: a one-shot agent, takes a single plain input and produces a single plain output, no conversation. Receives `{"input": "..."}`
+type AgentCreateInteractionType string
+
+const (
+	AgentCreateInteractionTypeConversation AgentCreateInteractionType = "conversation"
+	AgentCreateInteractionTypeGeneral      AgentCreateInteractionType = "general"
+)
+
+func (e AgentCreateInteractionType) ToPointer() *AgentCreateInteractionType {
+	return &e
+}
+func (e *AgentCreateInteractionType) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "conversation":
+		fallthrough
+	case "general":
+		*e = AgentCreateInteractionType(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for AgentCreateInteractionType: %v", v)
+	}
+}
+
 type AgentCreate struct {
 	// Agent name, unique within the workspace
 	Name string `json:"name"`
 	// - `agent`: built inside Calibrate
 	// - `connection`: your existing agent connected to Calibrate
 	Type *AgentCreateType `default:"agent" json:"type"`
+	// What the agent expects in the request body:
+	//
+	// - `conversation`: a normal back-and-forth agent, answers within an ongoing conversation. Receives `{"messages": [...]}`
+	// - `general`: a one-shot agent, takes a single plain input and produces a single plain output, no conversation. Receives `{"input": "..."}`
+	InteractionType *AgentCreateInteractionType `default:"conversation" json:"interaction_type"`
 	// Agent behavioral config. The keys depend on `type`.
 	//
 	// **`type=agent`**, built inside Calibrate:
@@ -104,6 +139,13 @@ func (a *AgentCreate) GetType() *AgentCreateType {
 		return nil
 	}
 	return a.Type
+}
+
+func (a *AgentCreate) GetInteractionType() *AgentCreateInteractionType {
+	if a == nil {
+		return nil
+	}
+	return a.InteractionType
 }
 
 func (a *AgentCreate) GetConfig() optionalnullable.OptionalNullable[map[string]any] {

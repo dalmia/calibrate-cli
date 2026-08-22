@@ -13,7 +13,7 @@ calibrate traces create [flags]
 ### Examples
 
 ```
-  calibrate traces create --agent-id <id> --input '[{"role":"<value>"}]' --output-param '{}'
+  calibrate traces create --agent-id <id> --input '[]' --output-param '{}'
 ```
 
 ### Options
@@ -23,7 +23,7 @@ calibrate traces create [flags]
       --body string              Request body as JSON (alternative to individual flags). Can also be provided via stdin.
   -c, --conversation-id string   Your own ID for the conversation this turn belongs to, stored for reference only. Omit if you have none
   -h, --help                     help for create
-  -i, --input string             Conversation history up to the reported output, oldest turn first, in OpenAI chat format [required]
+  -i, --input string             JSON value (one of: string | array of { role: string, content: string, AdditionalProperties: object })
       --message-id input         Your own ID for the last user message in input, stored for reference only. Omit if you have none
       --metadata gen_ai.*        Key-value pairs stored with the trace. Prefer OTel gen_ai.* key names where they fit. Omit if you have none
       --output-param string      [required]

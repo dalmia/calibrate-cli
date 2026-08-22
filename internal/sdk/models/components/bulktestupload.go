@@ -14,6 +14,7 @@ import (
 // - `response`: judges the generated reply
 // - `tool_call`: diffs the generated tool calls
 // - `conversation`: judges the full conversation
+// - `general`: judges a single plain-text input/output pair with no conversation involved (e.g. summarization, extraction, classification)
 //
 // Applied to every test in the batch
 type BulkTestUploadType string
@@ -22,6 +23,7 @@ const (
 	BulkTestUploadTypeResponse     BulkTestUploadType = "response"
 	BulkTestUploadTypeToolCall     BulkTestUploadType = "tool_call"
 	BulkTestUploadTypeConversation BulkTestUploadType = "conversation"
+	BulkTestUploadTypeGeneral      BulkTestUploadType = "general"
 )
 
 func (e BulkTestUploadType) ToPointer() *BulkTestUploadType {
@@ -38,6 +40,8 @@ func (e *BulkTestUploadType) UnmarshalJSON(data []byte) error {
 	case "tool_call":
 		fallthrough
 	case "conversation":
+		fallthrough
+	case "general":
 		*e = BulkTestUploadType(v)
 		return nil
 	default:
@@ -51,6 +55,7 @@ type BulkTestUpload struct {
 	// - `response`: judges the generated reply
 	// - `tool_call`: diffs the generated tool calls
 	// - `conversation`: judges the full conversation
+	// - `general`: judges a single plain-text input/output pair with no conversation involved (e.g. summarization, extraction, classification)
 	//
 	//
 	// Applied to every test in the batch

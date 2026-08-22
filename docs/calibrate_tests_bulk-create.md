@@ -13,7 +13,7 @@ calibrate tests bulk-create [flags]
 ### Examples
 
 ```
-  calibrate tests bulk-create --type tool_call --tests '[{"name":"<value>","conversation_history":[{"role":"tool"}],"evaluators":[{"evaluator_uuid":"f47ac10b-58cc-4372-a567-0e02b2c3d479","variable_values":{"criteria":"The reply must cite the refund window"} }]}]'
+  calibrate tests bulk-create --type tool_call --tests '[{"name":"<value>","evaluators":[{"evaluator_uuid":"f47ac10b-58cc-4372-a567-0e02b2c3d479","variable_values":{"criteria":"The reply must cite the refund window"} }]}]'
 ```
 
 ### Options
@@ -29,9 +29,10 @@ calibrate tests bulk-create [flags]
                                             - response: judges the generated reply
                                             - `tool_call`: diffs the generated tool calls
                                             - `conversation`: judges the full conversation
+                                            - `general`: judges a single plain-text input/output pair with no conversation involved (e.g. summarization, extraction, classification)
                                             
                                             
-                                            Applied to every test in the batch (options: response, tool_call, conversation) [required]
+                                            Applied to every test in the batch (options: response, tool_call, conversation, general) [required]
   -x, --x-api-key string                    string value
 ```
 

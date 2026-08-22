@@ -20,16 +20,20 @@ calibrate tests update [flags]
 
 ```
       --body string               Request body as JSON (alternative to individual flags). Can also be provided via stdin.
-  -c, --config-param history      The calibrate test config. Three top-level keys.
+  -c, --config-param history      The calibrate test config.
                                   
-                                  - history: the required conversation up to the agent's turn. Each item is `{role, content}` with `role` one of `user`, `assistant`, `tool`. A `tool` message also carries `tool_call_id` and `name`.
+                                  - history: the conversation up to the agent's turn, required for `response` and `conversation` tests and for a `tool_call` test aimed at a conversational agent. Each item is `{role, content}` with `role` one of `user`, `assistant`, `tool`. A `tool` message also carries `tool_call_id` and `name`.
+                                  - `input`: a standalone prompt with no conversation around it, required for `general` tests and for a `tool_call` test aimed at a `general` agent. A string, not a conversation.
                                   - `evaluation`: the required `{type, ...}`, where `type` matches the test's `type` below.
                                   - `settings`: an optional object, e.g. `{"language": "en"}`.
+                                  
+                                  A `tool_call` test carries exactly one of `history` or `input`, and which one it carries decides the agent it can be linked to.
                                   
                                   `evaluation` by test type:
                                   - `response`: judge the agent's reply, graded by the linked evaluators. `{"type": "response"}`
                                   - `conversation`: append the reply and judge the whole conversation. `{"type": "conversation"}`
                                   - `tool_call`: diff the agent's tool calls against expected ones. Add `tool_calls`, a list of `{tool, arguments, accept_any_arguments?}`.
+                                  - `general`: judge a standalone, non-conversational input/output pair, graded by the linked evaluators. `{"type": "general"}`
                                   
                                   For `tool_call`, each expected argument value is one of:
                                   - `{"match_type": "exact", "value": <any>}`: must equal `value`
@@ -45,7 +49,7 @@ calibrate tests update [flags]
                                   }
                                   ```
                                   
-                                  `tool_call` example:
+                                  `tool_call` example, for a conversational agent. Swap `history` for `input` to aim it at a `general` agent:
                                   ```json
                                   {
                                     "history": [{"role": "user", "content": "Book room 101 for tomorrow"}],
@@ -65,6 +69,15 @@ calibrate tests update [flags]
                                   }
                                   ```
                                   
+                                  `general` example:
+                                  ```json
+                                  {
+                                    "input": "Summarize this article: ...",
+                                    "evaluation": {"type": "general"},
+                                    "settings": {"language": "en"}
+                                  }
+                                  ```
+                                  
                                   Evaluators are linked via the separate `evaluators` field, not inside `config`.
                                   
                                   Replaces the stored config. Omit to leave unchanged
@@ -77,9 +90,10 @@ calibrate tests update [flags]
                                   - response: judges the generated reply
                                   - `tool_call`: diffs the generated tool calls
                                   - `conversation`: judges the full conversation
+                                  - `general`: judges a single plain-text input/output pair with no conversation involved (e.g. summarization, extraction, classification)
                                   
                                   
-                                  Immutable. Omit it, or send the current value (options: response, tool_call, conversation)
+                                  Immutable. Omit it, or send the current value (options: response, tool_call, conversation, general)
   -x, --x-api-key string          string value
 ```
 

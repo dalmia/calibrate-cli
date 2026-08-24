@@ -16,6 +16,7 @@ import (
 // - `llm`: a reply with its conversation history
 // - `llm-general`: a standalone input and output pair
 // - `conversation`: a full conversation
+// - `tool-call`: whether the agent called the right tool, labelled by a person
 type EvaluatorCreateEvaluatorType string
 
 const (
@@ -24,6 +25,7 @@ const (
 	EvaluatorCreateEvaluatorTypeLlm          EvaluatorCreateEvaluatorType = "llm"
 	EvaluatorCreateEvaluatorTypeLlmGeneral   EvaluatorCreateEvaluatorType = "llm-general"
 	EvaluatorCreateEvaluatorTypeConversation EvaluatorCreateEvaluatorType = "conversation"
+	EvaluatorCreateEvaluatorTypeToolCall     EvaluatorCreateEvaluatorType = "tool-call"
 )
 
 func (e EvaluatorCreateEvaluatorType) ToPointer() *EvaluatorCreateEvaluatorType {
@@ -44,6 +46,8 @@ func (e *EvaluatorCreateEvaluatorType) UnmarshalJSON(data []byte) error {
 	case "llm-general":
 		fallthrough
 	case "conversation":
+		fallthrough
+	case "tool-call":
 		*e = EvaluatorCreateEvaluatorType(v)
 		return nil
 	default:
@@ -123,6 +127,7 @@ type EvaluatorCreate struct {
 	// - `llm`: a reply with its conversation history
 	// - `llm-general`: a standalone input and output pair
 	// - `conversation`: a full conversation
+	// - `tool-call`: whether the agent called the right tool, labelled by a person
 	//
 	EvaluatorType *EvaluatorCreateEvaluatorType `default:"llm" json:"evaluator_type"`
 	// The modality the judge reads:

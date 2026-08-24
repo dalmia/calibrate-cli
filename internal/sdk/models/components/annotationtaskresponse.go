@@ -60,7 +60,7 @@ type AnnotationTaskResponse struct {
 	ItemCount optionalnullable.OptionalNullable[int64] `json:"item_count,omitzero"`
 	// Whether the task has at least one comparable human-vs-human or human-vs-evaluator pair, computed over all time
 	HasAgreement *bool `default:"false" json:"has_agreement"`
-	// The task's items, each with its agreement stats. You get these when you fetch one task by ID, not when you list tasks
+	// The task's items, each with its agreement stats and an `is_tool_call` flag marking the rows a person labels on the tool call rather than a text reply. You get these when you fetch one task by ID, not when you list tasks
 	Items []map[string]any `json:"items,omitzero"`
 	// The task's labelling jobs. You get these when you fetch one task by ID, not when you list tasks
 	Jobs []map[string]any `json:"jobs,omitzero"`

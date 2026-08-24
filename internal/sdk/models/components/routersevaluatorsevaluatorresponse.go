@@ -14,6 +14,7 @@ import (
 // - `llm`: a reply with its conversation history
 // - `llm-general`: a standalone input and output pair
 // - `conversation`: a full conversation
+// - `tool-call`: whether the agent called the right tool, labelled by a person
 type RoutersEvaluatorsEvaluatorResponseEvaluatorType string
 
 const (
@@ -22,6 +23,7 @@ const (
 	RoutersEvaluatorsEvaluatorResponseEvaluatorTypeLlm          RoutersEvaluatorsEvaluatorResponseEvaluatorType = "llm"
 	RoutersEvaluatorsEvaluatorResponseEvaluatorTypeLlmGeneral   RoutersEvaluatorsEvaluatorResponseEvaluatorType = "llm-general"
 	RoutersEvaluatorsEvaluatorResponseEvaluatorTypeConversation RoutersEvaluatorsEvaluatorResponseEvaluatorType = "conversation"
+	RoutersEvaluatorsEvaluatorResponseEvaluatorTypeToolCall     RoutersEvaluatorsEvaluatorResponseEvaluatorType = "tool-call"
 )
 
 func (e RoutersEvaluatorsEvaluatorResponseEvaluatorType) ToPointer() *RoutersEvaluatorsEvaluatorResponseEvaluatorType {
@@ -32,7 +34,7 @@ func (e RoutersEvaluatorsEvaluatorResponseEvaluatorType) ToPointer() *RoutersEva
 func (e *RoutersEvaluatorsEvaluatorResponseEvaluatorType) IsExact() bool {
 	if e != nil {
 		switch *e {
-		case "tts", "stt", "llm", "llm-general", "conversation":
+		case "tts", "stt", "llm", "llm-general", "conversation", "tool-call":
 			return true
 		}
 	}
@@ -105,6 +107,7 @@ type RoutersEvaluatorsEvaluatorResponse struct {
 	// - `llm`: a reply with its conversation history
 	// - `llm-general`: a standalone input and output pair
 	// - `conversation`: a full conversation
+	// - `tool-call`: whether the agent called the right tool, labelled by a person
 	//
 	EvaluatorType RoutersEvaluatorsEvaluatorResponseEvaluatorType `json:"evaluator_type"`
 	// The modality the judge reads:
@@ -121,6 +124,8 @@ type RoutersEvaluatorsEvaluatorResponse struct {
 	OutputType RoutersEvaluatorsEvaluatorResponseOutputType `json:"output_type"`
 	// True when the evaluator is a built-in default or your workspace's editable copy of one. False for an evaluator you created yourself
 	IsDefault bool `json:"is_default"`
+	// True when the evaluator is locked. A locked evaluator cannot be deleted, and only its name, description and rubric can change
+	IsProtected bool `json:"is_protected"`
 	// Stable slug for a built-in default evaluator
 	Slug optionalnullable.OptionalNullable[string] `json:"slug,omitzero"`
 	// Stable slug of the built-in default this evaluator is your editable copy of. Set on your default forks so you can identify a specific default by it
@@ -193,6 +198,13 @@ func (r *RoutersEvaluatorsEvaluatorResponse) GetIsDefault() bool {
 		return false
 	}
 	return r.IsDefault
+}
+
+func (r *RoutersEvaluatorsEvaluatorResponse) GetIsProtected() bool {
+	if r == nil {
+		return false
+	}
+	return r.IsProtected
 }
 
 func (r *RoutersEvaluatorsEvaluatorResponse) GetSlug() optionalnullable.OptionalNullable[string] {

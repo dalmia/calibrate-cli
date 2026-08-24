@@ -20,7 +20,7 @@ calibrate evaluators list [flags]
 
 ```
       --data-type string        Filter by modality. Omit for all (options: text, audio)
-  -e, --evaluator-type string   Filter by what the evaluator judges. Omit for all types (options: tts, stt, llm, llm-general, conversation)
+  -e, --evaluator-type string   Filter by what the evaluator judges. Omit for all types (options: tts, stt, llm, llm-general, conversation, tool-call)
   -h, --help                    help for list
   -i, --include-defaults        Retained for backward compatibility and no longer filters. Your evaluators, including your editable copies of the defaults, are always returned (default true)
   -l, --limit string            Maximum number of items to return. Omit for no limit (all items)

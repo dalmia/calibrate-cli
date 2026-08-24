@@ -15,7 +15,7 @@ import (
 )
 
 var listCmdMeta = []flagutil.FlagMeta{
-	{FlagName: "evaluator-type", Shorthand: "e", FieldPath: "EvaluatorType", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `queryParam:"style=form,explode=true,name=evaluator_type"`, Description: "Filter by what the evaluator judges. Omit for all types (options: tts, stt, llm, llm-general, conversation)"},
+	{FlagName: "evaluator-type", Shorthand: "e", FieldPath: "EvaluatorType", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `queryParam:"style=form,explode=true,name=evaluator_type"`, Description: "Filter by what the evaluator judges. Omit for all types (options: tts, stt, llm, llm-general, conversation, tool-call)"},
 	{FlagName: "data-type", FieldPath: "DataType", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `queryParam:"style=form,explode=true,name=data_type"`, Description: "Filter by modality. Omit for all (options: text, audio)"},
 	{FlagName: "include-defaults", Shorthand: "i", FieldPath: "IncludeDefaults", Kind: flagutil.FlagKindBool, Optional: true, HasDefault: true, DefaultBool: true, Description: "Retained for backward compatibility and no longer filters. Your evaluators, including your editable copies of the defaults, are always returned"},
 	{FlagName: "q", FieldPath: "Q", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `queryParam:"style=form,explode=true,name=q"`, Description: "Case-insensitive substring search on `name`. Blank is a no-op"},

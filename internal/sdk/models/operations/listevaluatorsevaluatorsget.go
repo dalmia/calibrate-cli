@@ -19,6 +19,7 @@ const (
 	EvaluatorTypeLlm          EvaluatorType = "llm"
 	EvaluatorTypeLlmGeneral   EvaluatorType = "llm-general"
 	EvaluatorTypeConversation EvaluatorType = "conversation"
+	EvaluatorTypeToolCall     EvaluatorType = "tool-call"
 )
 
 func (e EvaluatorType) ToPointer() *EvaluatorType {
@@ -39,6 +40,8 @@ func (e *EvaluatorType) UnmarshalJSON(data []byte) error {
 	case "llm-general":
 		fallthrough
 	case "conversation":
+		fallthrough
+	case "tool-call":
 		*e = EvaluatorType(v)
 		return nil
 	default:

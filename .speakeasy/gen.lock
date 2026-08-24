@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
-id: 622b8366-26e8-41e6-a0b1-acccbc4af875
+id: ae7a6c5f-2f75-4e32-88f5-8c4de3c0b08b
 management:
-  docChecksum: 39bc5ace9d5db899d1c9957854dcf913
+  docChecksum: ef60aecb39a7968dd9e75687d0882eb1
   docVersion: 0.1.0
   speakeasyVersion: 1.788.1
   generationVersion: 2.915.1
-  releaseVersion: 0.0.41
-  configChecksum: 2176b8925e55a5874167cee6ffac64c4
+  releaseVersion: 0.0.42
+  configChecksum: 330de62dc8798047c161949005eae34c
   repoURL: https://github.com/dalmia/calibrate-cli
   installationURL: https://github.com/dalmia/calibrate-cli
 persistentEdits:
-  generation_id: 5abe7987-d687-4518-9281-c652e49f4a00
-  pristine_commit_hash: 9ba82f9e580265731de659a35c7f138b0452ddb9
-  pristine_tree_hash: e9bb8aa0f6ce51902013f422fede554cc8b9ffda
+  generation_id: 99d8833b-c341-4ed1-ba02-942ca9eb8a22
+  pristine_commit_hash: c380bdf52a2d52b89ecae82a3ec3e2ab40a953e2
+  pristine_tree_hash: 612b38a8aa08f69eeafcc8efcf78af886a6cc41f
 features:
   cli:
     additionalProperties: 0.0.0
@@ -199,8 +199,8 @@ trackedFiles:
     pristine_git_object: 713a32ba9404669e8d02c30d99c9da495116ff6d
   internal/cli/evaluators/create.go:
     id: 474a1bfd2157
-    last_write_checksum: sha1:48f497d9e45ac38a6e04da0b500034f039f79c31
-    pristine_git_object: c0c0d17a0910eaa5337eb41954e313fcffc53393
+    last_write_checksum: sha1:458ad411ef49482c993a42eff99038f674e1064a
+    pristine_git_object: d361104c3fce6ee8bdc2add4655581dade87fbca
   internal/cli/evaluators/createversion.go:
     id: 88fdc1154d7b
     last_write_checksum: sha1:10a901ffa74a334dbd5e2d3713d93cbad940e717
@@ -211,8 +211,8 @@ trackedFiles:
     pristine_git_object: 69c78bb0cba3106478b590340dc38d66b2f33715
   internal/cli/evaluators/list.go:
     id: 562091257d40
-    last_write_checksum: sha1:22a79fad4586d87fb80d849adb4c7aa98a9de91d
-    pristine_git_object: 279c8d3421e00edf3f59a45a16e920c3d006b094
+    last_write_checksum: sha1:a1bfab8105790c24155954dc3f8839662f9e488f
+    pristine_git_object: bfcb9b1654043498dd065c0354fd0e13cf7f037d
   internal/cli/evaluators/root.go:
     id: e4dd7a3a7fb8
     last_write_checksum: sha1:e5ee2d91d6935fa51a1e6cbe153eb20b350492be
@@ -259,8 +259,8 @@ trackedFiles:
     pristine_git_object: fc38b830626d0c5fef0732edc60683524dda3524
   internal/cli/version.go:
     id: 7b0665492f72
-    last_write_checksum: sha1:306e93ff154688837255510b2aba5b124e5ca545
-    pristine_git_object: eca6b87a01130df34f21bb7feb13787d2e51dd06
+    last_write_checksum: sha1:f1b5db2017f6461d4220e84fd35e7331b564f5b4
+    pristine_git_object: 232e0049ecb9373a601efac8d8e2a430ac363192
   internal/cli/whoami.go:
     id: c1787f2298ec
     last_write_checksum: sha1:58afb45d777f297af4a64acf26a57c46e1b556db
@@ -407,8 +407,8 @@ trackedFiles:
     pristine_git_object: d2d9ec6c6dc840e539e2bf2d54751c2ed36d426d
   internal/sdk/models/components/annotationtaskresponse.go:
     id: 1f5816190adf
-    last_write_checksum: sha1:56bd0a8fdd51dd50ae29cb48156afca9b07fb331
-    pristine_git_object: 031f1bd39e0107b705d71cc05d4c4f9e0bc09c95
+    last_write_checksum: sha1:82bd3671904661abe381008be65d0bbb870ca6d6
+    pristine_git_object: af730b05e1e8a3d01b643ee357ce6ab901f9685e
   internal/sdk/models/components/annotatorcreate.go:
     id: 577c1f8db512
     last_write_checksum: sha1:db72a186439b2cd496e5e77b108ae26e0b6cdc17
@@ -491,16 +491,16 @@ trackedFiles:
     pristine_git_object: 247d8085eeefbb82f9bbe724b6163cf472d7bfc4
   internal/sdk/models/components/evaluatorcreate.go:
     id: 1f010f914755
-    last_write_checksum: sha1:ff587235d3e339850e36b5fe752e78fb8eaca42b
-    pristine_git_object: 453194cb1a59c8fe65dabc33e95edd5d833008be
+    last_write_checksum: sha1:ef0204560eb688f57ca091bb345bc0283f6952d8
+    pristine_git_object: 0920a43b775671acffe978f0c59901289c1ed985
   internal/sdk/models/components/evaluatorcreateresponse.go:
     id: 4ea6790e2233
     last_write_checksum: sha1:1a91b1fa7f20fd8e7c02a231d41915b6696996e9
     pristine_git_object: 2db43eefb6e56877db223a78beb96491acfdda11
   internal/sdk/models/components/evaluatordetailresponsecompact.go:
     id: c947e568ecbe
-    last_write_checksum: sha1:db752c5c0419dc337c7aea6ffd40c9fa1dfd6e83
-    pristine_git_object: 2bbcdde9e245943281808277bdb723028312ac89
+    last_write_checksum: sha1:5ff6554c575d7b3f92bdee2dd3bfded7b8ad18ca
+    pristine_git_object: 9ff8a34a64f5db4fee9617e76fa841f4ea2ea0ec
   internal/sdk/models/components/evaluatorlinkrequest.go:
     id: 5ed8aba78664
     last_write_checksum: sha1:87b4b1515934352eb655001169783a7dd9382c56
@@ -623,8 +623,8 @@ trackedFiles:
     pristine_git_object: bf387c74a9b8e8165cec4c09490cce42a5061724
   internal/sdk/models/components/routersevaluatorsevaluatorresponse.go:
     id: 764038f1241f
-    last_write_checksum: sha1:0ff62ecd019909204efb510babbcc4e6f4b047ef
-    pristine_git_object: a64c8a19961648c60a800b3a57e4ac8f571021cd
+    last_write_checksum: sha1:6c3907a297238b88727e8b4a323329e9c68f7482
+    pristine_git_object: be5cc112040473077dd57f9c5d1f7b88df288842
   internal/sdk/models/components/routerstestsevaluatorref.go:
     id: 9f2e620171b7
     last_write_checksum: sha1:d7b5b22eff24571a0333140d0d4c03ef8e846263
@@ -843,8 +843,8 @@ trackedFiles:
     pristine_git_object: a372b54c81a4b95822e951869c6140b0c15bda32
   internal/sdk/models/operations/listevaluatorsevaluatorsget.go:
     id: 3c0e02fcaa80
-    last_write_checksum: sha1:960ca75d15b1299880f3542156951451d6e9569d
-    pristine_git_object: fb65b893a6e58ea9eefebc5ad9710cc5481dbfd0
+    last_write_checksum: sha1:da1822d35c4767588a29e7735fb9f0b525244301
+    pristine_git_object: 26da453e2ece8fbe6acfcbacb6bf0a017a35bbda
   internal/sdk/models/operations/listteststestsget.go:
     id: a94ab5c5d3d4
     last_write_checksum: sha1:b5773e11f619cc20fa0f5305223b1193fe74a3c7
@@ -1015,8 +1015,8 @@ trackedFiles:
     pristine_git_object: 159a87ec97aba99e4edd132f69652e123434303e
   internal/usage/schema.go:
     id: 0f40f4612437
-    last_write_checksum: sha1:c769742d5d9c66cb936177b00ae73652cba64911
-    pristine_git_object: b30d2d539e035f7bbbfa27bd73a4f755cc63f335
+    last_write_checksum: sha1:01ab23279c34a82ef32aa26340f382b9477933d5
+    pristine_git_object: 18de3c85c76707b240ed86d000b76e9f268c3688
   scripts/install.ps1:
     id: fee0853709e9
     last_write_checksum: sha1:d8884365d7cfb218aac394e16a7d214a6f56b585
@@ -1113,7 +1113,7 @@ examples:
           offset: 0
       responses:
         "200":
-          application/json: {"items": [{"uuid": "f47ac10b-58cc-4372-a567-0e02b2c3d479", "name": "<value>", "evaluator_type": "conversation", "data_type": "audio", "output_type": "binary", "is_default": false, "live_version_id": "6ba7b810-9dad-11d1-80b4-00c04fd430c8", "created_at": "1724242281034", "updated_at": "1735646838186", "live_version": {"uuid": "6ba7b810-9dad-11d1-80b4-00c04fd430c8", "version_number": 256307, "judge_model": "<value>"}}], "total": 316292, "offset": 0}
+          application/json: {"items": [{"uuid": "f47ac10b-58cc-4372-a567-0e02b2c3d479", "name": "<value>", "evaluator_type": "tool-call", "data_type": "audio", "output_type": "binary", "is_default": false, "is_protected": false, "live_version_id": "6ba7b810-9dad-11d1-80b4-00c04fd430c8", "created_at": "1720081721755", "updated_at": "1735685897863", "live_version": {"uuid": "6ba7b810-9dad-11d1-80b4-00c04fd430c8", "version_number": 316292, "judge_model": "<value>"}}], "total": 557561, "offset": 0}
         "422":
           application/json: {}
   link_evaluators_to_agent_agents__agent_uuid__evaluators_post:
@@ -1299,7 +1299,7 @@ examples:
           compact: false
       responses:
         "200":
-          application/json: {"uuid": "f47ac10b-58cc-4372-a567-0e02b2c3d479", "name": "<value>", "evaluator_type": "tts", "data_type": "audio", "output_type": "binary", "is_default": false, "live_version_id": "6ba7b810-9dad-11d1-80b4-00c04fd430c8", "created_at": "1729449777017", "updated_at": "1735655200804", "versions": [{"uuid": "6ba7b810-9dad-11d1-80b4-00c04fd430c8", "version_number": 375583, "judge_model": "<value>", "created_at": "1729701421657"}]}
+          application/json: {"uuid": "f47ac10b-58cc-4372-a567-0e02b2c3d479", "name": "<value>", "evaluator_type": "tts", "data_type": "audio", "output_type": "binary", "is_default": false, "is_protected": false, "live_version_id": "6ba7b810-9dad-11d1-80b4-00c04fd430c8", "created_at": "1723134112360", "updated_at": "1735675582929", "versions": []}
         "422":
           application/json: {}
   create_version_evaluators__evaluator_uuid__versions_post:

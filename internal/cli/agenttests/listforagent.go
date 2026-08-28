@@ -16,7 +16,9 @@ import (
 
 var listForAgentCmdMeta = []flagutil.FlagMeta{
 	{FlagName: "agent-uuid", Shorthand: "a", FieldPath: "AgentUUID", Kind: flagutil.FlagKindString, Required: true, Description: "Agent whose linked tests to list [required]"},
-	{FlagName: "q", FieldPath: "Q", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `queryParam:"style=form,explode=true,name=q"`, Description: "Case-insensitive substring search on `name`. Blank is a no-op"},
+	{FlagName: "type", Shorthand: "t", FieldPath: "Type", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `queryParam:"style=form,explode=true,name=type"`, Description: "Keep only tests of these types. Repeat the parameter or pass one comma-separated value. Accepts `response`, `tool_call`, `conversation`, `general`"},
+	{FlagName: "q", FieldPath: "Q", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `queryParam:"style=form,explode=true,name=q"`, Description: "Case-insensitive search on `name`. Blank is a no-op"},
+	{FlagName: "q-mode", FieldPath: "QMode", Kind: flagutil.FlagKindEnum, Optional: true, HasDefault: true, DefaultStr: "contains", EnumValues: []string{"contains", "starts_with", "ends_with", "exact"}, Description: "How to match `q` against the searched fields (options: contains, starts_with, ends_with, exact)"},
 	{FlagName: "limit", Shorthand: "l", FieldPath: "Limit", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `queryParam:"style=form,explode=true,name=limit"`, Description: "Maximum number of items to return. Omit for no limit (all items)"},
 	{FlagName: "offset", FieldPath: "Offset", Kind: flagutil.FlagKindInt64, Optional: true, HasDefault: true, Description: "Number of items to skip before returning results"},
 	{FlagName: "x-api-key", Shorthand: "x", FieldPath: "XAPIKey", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `header:"style=simple,explode=false,name=X-API-Key"`, Description: "string value"},

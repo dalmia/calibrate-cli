@@ -1,19 +1,29 @@
-## calibrate agent-tests
+## calibrate agent-tests bulk-unlink
 
-Operations for agent-tests
+Bulk unlink tests from agent
 
 ### Synopsis
 
-Operations for agent-tests
+Unlink one or more tests from an agent. Tests that are not linked are skipped.
 
 ```
-calibrate agent-tests [flags]
+calibrate agent-tests bulk-unlink [flags]
+```
+
+### Examples
+
+```
+  calibrate agent-tests bulk-unlink --agent-uuid f47ac10b-58cc-4372-a567-0e02b2c3d479 --test-uuids '["b1c2d3e4-f5a6-7890-bcde-f12345678901"]'
 ```
 
 ### Options
 
 ```
-  -h, --help   help for agent-tests
+  -a, --agent-uuid string        Agent to unlink tests from [required]
+      --body string              Request body as JSON (alternative to individual flags). Can also be provided via stdin.
+  -h, --help                     help for bulk-unlink
+  -t, --test-uuids stringArray   Tests to unlink from the agent [required]
+  -x, --x-api-key string         string value
 ```
 
 ### Options inherited from parent commands
@@ -37,13 +47,4 @@ calibrate agent-tests [flags]
 
 ### SEE ALSO
 
-* [calibrate](calibrate.md)	 - Calibrate Public API: Programmatic API for CI/automation
-* [calibrate agent-tests benchmark](calibrate_agent-tests_benchmark.md)	 - Run agent benchmark
-* [calibrate agent-tests bulk-unlink](calibrate_agent-tests_bulk-unlink.md)	 - Bulk unlink tests from agent
-* [calibrate agent-tests get-benchmark](calibrate_agent-tests_get-benchmark.md)	 - Get benchmark status
-* [calibrate agent-tests get-run](calibrate_agent-tests_get-run.md)	 - Get test run status
-* [calibrate agent-tests link](calibrate_agent-tests_link.md)	 - Link tests to agent
-* [calibrate agent-tests list-for-agent](calibrate_agent-tests_list-for-agent.md)	 - List tests for agent
-* [calibrate agent-tests list-runs-for-agent](calibrate_agent-tests_list-runs-for-agent.md)	 - List test runs for agent
-* [calibrate agent-tests run](calibrate_agent-tests_run.md)	 - Run agent tests
-* [calibrate agent-tests run-batch](calibrate_agent-tests_run-batch.md)	 - Run agent tests in batch
+* [calibrate agent-tests](calibrate_agent-tests.md)	 - Operations for agent-tests

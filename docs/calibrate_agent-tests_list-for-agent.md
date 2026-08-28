@@ -23,7 +23,9 @@ calibrate agent-tests list-for-agent [flags]
   -h, --help                help for list-for-agent
   -l, --limit string        Maximum number of items to return. Omit for no limit (all items)
       --offset int          Number of items to skip before returning results
-      --q name              Case-insensitive substring search on name. Blank is a no-op
+      --q name              Case-insensitive search on name. Blank is a no-op
+      --q-mode q            How to match q against the searched fields (options: contains, starts_with, ends_with, exact) (default "contains")
+  -t, --type response       Keep only tests of these types. Repeat the parameter or pass one comma-separated value. Accepts response, `tool_call`, `conversation`, `general`
   -x, --x-api-key string    string value
 ```
 

@@ -3,16 +3,55 @@
 package operations
 
 import (
+	"encoding/json"
+	"fmt"
 	"github.com/dalmia/calibrate-cli/internal/sdk/models/components"
 	"github.com/dalmia/calibrate-cli/internal/sdk/optionalnullable"
 	"github.com/dalmia/calibrate-cli/internal/sdk/sdkinternal/utils"
 )
 
+// QMode - How to match `q` against the searched fields
+type QMode string
+
+const (
+	QModeContains   QMode = "contains"
+	QModeStartsWith QMode = "starts_with"
+	QModeEndsWith   QMode = "ends_with"
+	QModeExact      QMode = "exact"
+)
+
+func (e QMode) ToPointer() *QMode {
+	return &e
+}
+func (e *QMode) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "contains":
+		fallthrough
+	case "starts_with":
+		fallthrough
+	case "ends_with":
+		fallthrough
+	case "exact":
+		*e = QMode(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for QMode: %v", v)
+	}
+}
+
 type GetAgentTestsEndpointAgentTestsAgentAgentUUIDTestsGetRequest struct {
 	// Agent whose linked tests to list
 	AgentUUID string `pathParam:"style=simple,explode=false,name=agent_uuid"`
-	// Case-insensitive substring search on `name`. Blank is a no-op
+	// Keep only tests of these types. Repeat the parameter or pass one comma-separated value. Accepts `response`, `tool_call`, `conversation`, `general`
+	Type optionalnullable.OptionalNullable[[]string] `queryParam:"style=form,explode=true,name=type"`
+	// Case-insensitive search on `name`. Blank is a no-op
 	Q optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=q"`
+	// How to match `q` against the searched fields
+	QMode *QMode `default:"contains" queryParam:"style=form,explode=true,name=q_mode"`
 	// Maximum number of items to return. Omit for no limit (all items)
 	Limit optionalnullable.OptionalNullable[int64] `queryParam:"style=form,explode=true,name=limit"`
 	// Number of items to skip before returning results
@@ -38,11 +77,25 @@ func (g *GetAgentTestsEndpointAgentTestsAgentAgentUUIDTestsGetRequest) GetAgentU
 	return g.AgentUUID
 }
 
+func (g *GetAgentTestsEndpointAgentTestsAgentAgentUUIDTestsGetRequest) GetType() optionalnullable.OptionalNullable[[]string] {
+	if g == nil {
+		return nil
+	}
+	return g.Type
+}
+
 func (g *GetAgentTestsEndpointAgentTestsAgentAgentUUIDTestsGetRequest) GetQ() optionalnullable.OptionalNullable[string] {
 	if g == nil {
 		return nil
 	}
 	return g.Q
+}
+
+func (g *GetAgentTestsEndpointAgentTestsAgentAgentUUIDTestsGetRequest) GetQMode() *QMode {
+	if g == nil {
+		return nil
+	}
+	return g.QMode
 }
 
 func (g *GetAgentTestsEndpointAgentTestsAgentAgentUUIDTestsGetRequest) GetLimit() optionalnullable.OptionalNullable[int64] {

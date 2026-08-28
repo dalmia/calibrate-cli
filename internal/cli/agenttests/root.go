@@ -33,6 +33,10 @@ func InitAgentTestsRoot(parent *cobra.Command) error {
 		return err
 	}
 
+	if err := initBulkUnlinkCmd(AgentTestsCmd); err != nil {
+		return err
+	}
+
 	if err := initRunCmd(AgentTestsCmd); err != nil {
 		return err
 	}

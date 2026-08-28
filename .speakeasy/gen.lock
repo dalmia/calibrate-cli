@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
-id: 055e8478-19b7-460a-be26-2a7cd60a44df
+id: 9276bb4b-de62-43d8-aeaa-a461ba828c80
 management:
-  docChecksum: 926d91538b59eb6e64edc60136f86d4c
+  docChecksum: dd87f8924ec6cd20d820906245b002ba
   docVersion: 0.1.0
   speakeasyVersion: 1.788.1
   generationVersion: 2.915.1
-  releaseVersion: 0.0.45
-  configChecksum: 8dbedb63b9c9a924a59466c72aa5dfbf
+  releaseVersion: 0.0.46
+  configChecksum: ad8137ffa4d0162979ed58dcaf9c96c6
   repoURL: https://github.com/dalmia/calibrate-cli
   installationURL: https://github.com/dalmia/calibrate-cli
 persistentEdits:
-  generation_id: 8b5c70fa-5e46-48c8-9732-530e0f2497be
-  pristine_commit_hash: bf4f339570f8352c7a0264a26ab28f189912b6ca
-  pristine_tree_hash: d06d99e708391c529266d93fa617a2785a77f317
+  generation_id: 0707c057-55df-4601-80fe-12292ac4f9a1
+  pristine_commit_hash: 8a5d78930b311dc5bbd20072852e99c303a0eda4
+  pristine_tree_hash: 1b74daa9092d63a0ad9737fb8ec7d90b67a3f8f3
 features:
   cli:
     additionalProperties: 0.0.0
@@ -263,8 +263,8 @@ trackedFiles:
     pristine_git_object: fc38b830626d0c5fef0732edc60683524dda3524
   internal/cli/version.go:
     id: 7b0665492f72
-    last_write_checksum: sha1:bea8955c6e2167c539a57612fc2dbba7b41b2908
-    pristine_git_object: e7ef3629a2cb493adfb77dbbdbacf6e00a90c289
+    last_write_checksum: sha1:fcfdfb25396f7271b017b149f40198285bfbd9b2
+    pristine_git_object: 8f17e1be4013e4fc5f1e1df4cb0bd02f52808fa0
   internal/cli/whoami.go:
     id: c1787f2298ec
     last_write_checksum: sha1:58afb45d777f297af4a64acf26a57c46e1b556db
@@ -407,8 +407,8 @@ trackedFiles:
     pristine_git_object: 6b04342bba7987e8d42bdff413cd92b32fce68aa
   internal/sdk/models/components/annotationitempayload.go:
     id: aae92e2a8aa2
-    last_write_checksum: sha1:801e1f6f1816b7bbea53b8bfe7d8e0a698261b2c
-    pristine_git_object: 43554e511056efd1bf9d1fe561b0d12842a7bb8b
+    last_write_checksum: sha1:c24e8cf82a7c4f1ad5dccb6af6ba8b66a59dae02
+    pristine_git_object: cb863f2fd060780c0dc30d6d1961bcecaa4c6d1f
   internal/sdk/models/components/annotationtaskcreate.go:
     id: 12b646559358
     last_write_checksum: sha1:cf220cf14f3ca74e651e392f47e83abc1cee6a21
@@ -463,8 +463,8 @@ trackedFiles:
     pristine_git_object: 0a3eed2a1a76f94fd8fc9185963843aa7da951dd
   internal/sdk/models/components/bulkcreateitemsresponse.go:
     id: 5bbab65238f5
-    last_write_checksum: sha1:c678885a28d72d6e95b4e55add64ffb5a9ada96b
-    pristine_git_object: d1274e6f93447b48e74a3ff59e136523bc1bf224
+    last_write_checksum: sha1:0e0e3a5552416d2b97d00a984ebd74d4b6e0f06a
+    pristine_git_object: f4d94046cae7d52416a597fa5af79a3dfd35171c
   internal/sdk/models/components/bulkitemsrequest.go:
     id: 0ea4cb1b7de9
     last_write_checksum: sha1:bfe2346f82b8ad311dece454a6ef32a7e5fad42a
@@ -1035,8 +1035,8 @@ trackedFiles:
     pristine_git_object: 159a87ec97aba99e4edd132f69652e123434303e
   internal/usage/schema.go:
     id: 0f40f4612437
-    last_write_checksum: sha1:f3e10fdfc8fee34c9e50ca2541cfc0c31753b857
-    pristine_git_object: 545f9de81b24da0cfae2de4e6dc87e4643578474
+    last_write_checksum: sha1:14041b7cf1902965977c78708e13681c6742db99
+    pristine_git_object: a71fd157d1aa4c01c8c793f2c78242e5bc10e7fd
   scripts/install.ps1:
     id: fee0853709e9
     last_write_checksum: sha1:d8884365d7cfb218aac394e16a7d214a6f56b585

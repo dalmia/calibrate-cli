@@ -18,6 +18,10 @@ type BulkCreateItemsResponse struct {
 	ExistingItemIds optionalnullable.OptionalNullable[[]string] `json:"existing_item_ids,omitzero"`
 	// ID of the labelling job that holds the annotations you provided, present only when you send annotations with the items
 	AnnotationJobID optionalnullable.OptionalNullable[string] `json:"annotation_job_id,omitzero"`
+	// How many evaluator scores were stored, present only when you send `evaluator_results` with the items
+	EvaluatorResultCount optionalnullable.OptionalNullable[int64] `json:"evaluator_result_count,omitzero"`
+	// ID of the evaluator-run job that holds the scores you provided, present only when you send `evaluator_results` with the items
+	EvaluatorRunJobID optionalnullable.OptionalNullable[string] `json:"evaluator_run_job_id,omitzero"`
 }
 
 func (b BulkCreateItemsResponse) MarshalJSON() ([]byte, error) {
@@ -64,4 +68,18 @@ func (b *BulkCreateItemsResponse) GetAnnotationJobID() optionalnullable.Optional
 		return nil
 	}
 	return b.AnnotationJobID
+}
+
+func (b *BulkCreateItemsResponse) GetEvaluatorResultCount() optionalnullable.OptionalNullable[int64] {
+	if b == nil {
+		return nil
+	}
+	return b.EvaluatorResultCount
+}
+
+func (b *BulkCreateItemsResponse) GetEvaluatorRunJobID() optionalnullable.OptionalNullable[string] {
+	if b == nil {
+		return nil
+	}
+	return b.EvaluatorRunJobID
 }

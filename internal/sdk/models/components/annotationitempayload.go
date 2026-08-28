@@ -19,6 +19,8 @@ type AnnotationItemPayload struct {
 	Payload any `json:"payload"`
 	// Human annotations to seed, keyed by evaluator ID. Each evaluator ID must be linked to the task. Put the judgement in `value`, a bool for binary or a number for rating, with optional `reasoning`. Requires `annotator_id`
 	Annotations optionalnullable.OptionalNullable[map[string]any] `json:"annotations,omitzero"`
+	// Evaluator scores to record, keyed by evaluator ID. Each evaluator ID must be linked to the task. Put the score in `value`, a bool for binary or a number within the scale for rating, with optional `reasoning` and `version_number`. Omit `version_number` to record against the evaluator's live version. An item recording a tool call takes the tool-call evaluator and no other, and every other item takes any evaluator except that one
+	EvaluatorResults optionalnullable.OptionalNullable[map[string]any] `json:"evaluator_results,omitzero"`
 }
 
 func (a AnnotationItemPayload) MarshalJSON() ([]byte, error) {
@@ -44,4 +46,11 @@ func (a *AnnotationItemPayload) GetAnnotations() optionalnullable.OptionalNullab
 		return nil
 	}
 	return a.Annotations
+}
+
+func (a *AnnotationItemPayload) GetEvaluatorResults() optionalnullable.OptionalNullable[map[string]any] {
+	if a == nil {
+		return nil
+	}
+	return a.EvaluatorResults
 }

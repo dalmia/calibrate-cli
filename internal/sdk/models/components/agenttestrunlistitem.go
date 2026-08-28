@@ -52,8 +52,8 @@ type AgentTestRunListItem struct {
 	Passed optionalnullable.OptionalNullable[int64] `json:"passed,omitzero"`
 	// Number of test cases that failed
 	Failed optionalnullable.OptionalNullable[int64] `json:"failed,omitzero"`
-	// Names of the evaluators that judged this run, deduplicated and in display order. `Tool call` is appended when any test in the run was a tool-call test. Empty when the run had no evaluators
-	Evaluators []string `json:"evaluators,omitzero"`
+	// The evaluators that judged this run, deduplicated and in display order. A `Tool call` entry is appended when any test in the run was a tool-call test. That entry has no `uuid`, because it is not an evaluator in the library. Empty when the run had no evaluators
+	Evaluators []RunListEvaluator `json:"evaluators,omitzero"`
 	// Flat pass/fail summary for each test case (fetch the run detail for full results)
 	Results optionalnullable.OptionalNullable[[]TestRunCaseSummary] `json:"results,omitzero"`
 	// Aggregated latency in milliseconds, as `{p50, p95, p99, count}`
@@ -146,7 +146,7 @@ func (a *AgentTestRunListItem) GetFailed() optionalnullable.OptionalNullable[int
 	return a.Failed
 }
 
-func (a *AgentTestRunListItem) GetEvaluators() []string {
+func (a *AgentTestRunListItem) GetEvaluators() []RunListEvaluator {
 	if a == nil {
 		return nil
 	}

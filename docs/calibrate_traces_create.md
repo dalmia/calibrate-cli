@@ -24,6 +24,7 @@ calibrate traces create [flags]
   -c, --conversation-id string   Your own ID for the conversation this turn belongs to, stored for reference only. Omit if you have none
   -h, --help                     help for create
   -i, --input string             JSON value (one of: string | array of { role: string, content: string, AdditionalProperties: object })
+  -l, --labels stringArray       Your own tags for this turn, such as an environment or a release. Matched exactly when filtering, so keep the spelling stable. Omit if you have none
       --message-id input         Your own ID for the last user message in input, stored for reference only. Omit if you have none
       --metadata gen_ai.*        Key-value pairs stored with the trace. Prefer OTel gen_ai.* key names where they fit. Omit if you have none
       --output-param string      [required]

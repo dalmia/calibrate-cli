@@ -54,6 +54,10 @@ calibrate agents create [flags]
                                         }
                                         ```
                                         
+                                        Every request Calibrate makes to your endpoint carries the header
+                                        `X-Calibrate-Eval: 1`. Read it to tell a test run from a real user, for example
+                                        to tag the trace you send back or to skip sending one.
+                                        
                                         For `type=agent`, omitted keys inherit managed defaults. Omit `config` entirely to use all defaults. For `type=connection`, `config` is stored as-is and must contain `agent_url`
   -h, --help                            help for create
   -i, --interaction-type conversation   What the agent expects in the request body:

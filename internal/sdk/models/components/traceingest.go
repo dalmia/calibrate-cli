@@ -111,6 +111,8 @@ type TraceIngest struct {
 	Output TraceOutput `json:"output"`
 	// Key-value pairs stored with the trace. Prefer OTel `gen_ai.*` key names where they fit. Omit if you have none
 	Metadata optionalnullable.OptionalNullable[[]TraceMetadataEntry] `json:"metadata,omitzero"`
+	// Your own tags for this turn, such as an environment or a release. Matched exactly when filtering, so keep the spelling stable. Omit if you have none
+	Labels []string `json:"labels,omitzero"`
 }
 
 func (t TraceIngest) MarshalJSON() ([]byte, error) {
@@ -164,4 +166,11 @@ func (t *TraceIngest) GetMetadata() optionalnullable.OptionalNullable[[]TraceMet
 		return nil
 	}
 	return t.Metadata
+}
+
+func (t *TraceIngest) GetLabels() []string {
+	if t == nil {
+		return nil
+	}
+	return t.Labels
 }

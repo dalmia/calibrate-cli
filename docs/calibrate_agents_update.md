@@ -55,6 +55,10 @@ calibrate agents update [flags]
                             }
                             ```
                             
+                            Every request Calibrate makes to your endpoint carries the header
+                            `X-Calibrate-Eval: 1`. Read it to tell a test run from a real user, for example
+                            to tag the trace you send back or to skip sending one.
+                            
                             Replaces the stored config. Omit to leave unchanged
                             
                             For `type=connection`, changing `agent_url` or `agent_headers` resets the connection and benchmark verification flags

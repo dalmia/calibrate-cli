@@ -22,6 +22,7 @@ var createCmdMeta = []flagutil.FlagMeta{
 	{FlagName: "input", Shorthand: "i", FieldPath: "Body.Input", Kind: flagutil.FlagKindUnion, Union: &flagutil.UnionMeta{Discriminated: false, TypeDescription: "JSON value (one of: string | array of { role: string, content: string, AdditionalProperties: object })"}},
 	{FlagName: "output-param", FieldPath: "Body.Output", Kind: flagutil.FlagKindJSON, Required: true, Annotations: `json:"output"`, Description: "[required]"},
 	{FlagName: "metadata", FieldPath: "Body.Metadata", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"metadata,omitempty"`, Description: "Key-value pairs stored with the trace. Prefer OTel `gen_ai.*` key names where they fit. Omit if you have none"},
+	{FlagName: "labels", Shorthand: "l", FieldPath: "Body.Labels", Kind: flagutil.FlagKindStringArray, Optional: true, Description: "Your own tags for this turn, such as an environment or a release. Matched exactly when filtering, so keep the spelling stable. Omit if you have none"},
 }
 
 // initCreateCmd initializes the create command.

@@ -5,11 +5,13 @@ package components
 // Reason - Why this agent was not run:
 // - `no_linked_tests`: the agent has no tests linked
 // - `connection_not_verified`: the agent's connection is not verified
+// - `over_row_limit`: the agent has more linked tests than this workspace allows in one run
 type Reason string
 
 const (
 	ReasonNoLinkedTests         Reason = "no_linked_tests"
 	ReasonConnectionNotVerified Reason = "connection_not_verified"
+	ReasonOverRowLimit          Reason = "over_row_limit"
 )
 
 func (e Reason) ToPointer() *Reason {
@@ -20,7 +22,7 @@ func (e Reason) ToPointer() *Reason {
 func (e *Reason) IsExact() bool {
 	if e != nil {
 		switch *e {
-		case "no_linked_tests", "connection_not_verified":
+		case "no_linked_tests", "connection_not_verified", "over_row_limit":
 			return true
 		}
 	}
@@ -35,6 +37,7 @@ type BatchTestSkip struct {
 	// Why this agent was not run:
 	// - `no_linked_tests`: the agent has no tests linked
 	// - `connection_not_verified`: the agent's connection is not verified
+	// - `over_row_limit`: the agent has more linked tests than this workspace allows in one run
 	Reason Reason `json:"reason"`
 }
 

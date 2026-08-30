@@ -33,6 +33,8 @@ type TestRunStatusResponse struct {
 	UnansweredTests optionalnullable.OptionalNullable[int64] `json:"unanswered_tests,omitzero"`
 	// Whether the run stopped before starting every test case, after too many failed in a row
 	StoppedEarly *bool `default:"false" json:"stopped_early"`
+	// Whether a user stopped this run before it finished. The results collected up to that point are kept, and test cases that never ran are counted neither as passed nor as failed
+	Aborted *bool `default:"false" json:"aborted"`
 	// True if the run failed
 	Error *bool `default:"false" json:"error"`
 	// Whether the run is shared publicly
@@ -141,6 +143,13 @@ func (t *TestRunStatusResponse) GetStoppedEarly() *bool {
 		return nil
 	}
 	return t.StoppedEarly
+}
+
+func (t *TestRunStatusResponse) GetAborted() *bool {
+	if t == nil {
+		return nil
+	}
+	return t.Aborted
 }
 
 func (t *TestRunStatusResponse) GetError() *bool {

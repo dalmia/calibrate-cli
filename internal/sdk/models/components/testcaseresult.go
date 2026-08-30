@@ -30,6 +30,8 @@ type TestCaseResult struct {
 	Cost optionalnullable.OptionalNullable[float64] `json:"cost,omitzero"`
 	// Whether this case produced no answer because the agent or the judge could not be reached, in which case `reasoning` carries the error and `passed` is not a verdict on the agent
 	Unanswered *bool `default:"false" json:"unanswered"`
+	// Whether this case never started, because a user stopped the run first. It is counted neither as passed nor as failed
+	NotRun *bool `default:"false" json:"not_run"`
 }
 
 func (t TestCaseResult) MarshalJSON() ([]byte, error) {
@@ -118,4 +120,11 @@ func (t *TestCaseResult) GetUnanswered() *bool {
 		return nil
 	}
 	return t.Unanswered
+}
+
+func (t *TestCaseResult) GetNotRun() *bool {
+	if t == nil {
+		return nil
+	}
+	return t.NotRun
 }

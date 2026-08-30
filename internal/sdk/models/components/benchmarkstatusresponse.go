@@ -19,6 +19,8 @@ type BenchmarkStatusResponse struct {
 	ModelResults optionalnullable.OptionalNullable[[]ModelResult] `json:"model_results,omitzero"`
 	// Leaderboard comparing the models, one row per model. Columns vary by benchmark: a `model` column plus pass/fail counts, latency, cost, and one score column per evaluator, keyed by evaluator name
 	LeaderboardSummary optionalnullable.OptionalNullable[[]map[string]any] `json:"leaderboard_summary,omitzero"`
+	// Whether a user stopped this run before it finished. The results collected up to that point are kept, and test cases that never ran are counted neither as passed nor as failed
+	Aborted *bool `default:"false" json:"aborted"`
 	// True if the run failed
 	Error *bool `default:"false" json:"error"`
 	// Whether the run is shared publicly
@@ -78,6 +80,13 @@ func (b *BenchmarkStatusResponse) GetLeaderboardSummary() optionalnullable.Optio
 		return nil
 	}
 	return b.LeaderboardSummary
+}
+
+func (b *BenchmarkStatusResponse) GetAborted() *bool {
+	if b == nil {
+		return nil
+	}
+	return b.Aborted
 }
 
 func (b *BenchmarkStatusResponse) GetError() *bool {

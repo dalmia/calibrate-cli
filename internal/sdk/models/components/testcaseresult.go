@@ -28,6 +28,8 @@ type TestCaseResult struct {
 	LatencyMs optionalnullable.OptionalNullable[float64] `json:"latency_ms,omitzero"`
 	// Cost of this case (USD)
 	Cost optionalnullable.OptionalNullable[float64] `json:"cost,omitzero"`
+	// Whether this case produced no answer because the agent or the judge could not be reached, in which case `reasoning` carries the error and `passed` is not a verdict on the agent
+	Unanswered *bool `default:"false" json:"unanswered"`
 }
 
 func (t TestCaseResult) MarshalJSON() ([]byte, error) {
@@ -109,4 +111,11 @@ func (t *TestCaseResult) GetCost() optionalnullable.OptionalNullable[float64] {
 		return nil
 	}
 	return t.Cost
+}
+
+func (t *TestCaseResult) GetUnanswered() *bool {
+	if t == nil {
+		return nil
+	}
+	return t.Unanswered
 }

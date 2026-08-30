@@ -14,7 +14,7 @@ import (
 type TestRunCaseSummary struct {
 	// Name of the test case
 	Name optionalnullable.OptionalNullable[string] `json:"name,omitzero"`
-	// Whether the case passed (null if it errored or is still running)
+	// Whether the case passed (null while the case is still running)
 	Passed optionalnullable.OptionalNullable[bool] `json:"passed,omitzero"`
 }
 

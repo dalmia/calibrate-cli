@@ -29,6 +29,10 @@ type TestRunStatusResponse struct {
 	Evaluators optionalnullable.OptionalNullable[[]TestRunEvaluator] `json:"evaluators,omitzero"`
 	// Results for each test case
 	Results optionalnullable.OptionalNullable[[]TestCaseResult] `json:"results,omitzero"`
+	// Number of test cases that produced no answer because the agent or the judge could not be reached, which makes the pass rate an unfair measure of the agent
+	UnansweredTests optionalnullable.OptionalNullable[int64] `json:"unanswered_tests,omitzero"`
+	// Whether the run stopped before starting every test case, after too many failed in a row
+	StoppedEarly *bool `default:"false" json:"stopped_early"`
 	// True if the run failed
 	Error *bool `default:"false" json:"error"`
 	// Whether the run is shared publicly
@@ -123,6 +127,20 @@ func (t *TestRunStatusResponse) GetResults() optionalnullable.OptionalNullable[[
 		return nil
 	}
 	return t.Results
+}
+
+func (t *TestRunStatusResponse) GetUnansweredTests() optionalnullable.OptionalNullable[int64] {
+	if t == nil {
+		return nil
+	}
+	return t.UnansweredTests
+}
+
+func (t *TestRunStatusResponse) GetStoppedEarly() *bool {
+	if t == nil {
+		return nil
+	}
+	return t.StoppedEarly
 }
 
 func (t *TestRunStatusResponse) GetError() *bool {

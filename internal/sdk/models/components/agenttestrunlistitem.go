@@ -64,6 +64,8 @@ type AgentTestRunListItem struct {
 	TotalTokens optionalnullable.OptionalNullable[map[string]any] `json:"total_tokens,omitzero"`
 	// Flat summary for each model in a benchmark run (fetch the benchmark detail for full results)
 	ModelResults optionalnullable.OptionalNullable[[]ModelRunSummary] `json:"model_results,omitzero"`
+	// Number of test cases that produced no answer because the agent or the judge could not be reached, which makes the pass rate an unfair measure of the agent
+	UnansweredTests optionalnullable.OptionalNullable[int64] `json:"unanswered_tests,omitzero"`
 	// True if the run failed
 	Error *bool `default:"false" json:"error"`
 	// Whether the run is shared publicly
@@ -186,6 +188,13 @@ func (a *AgentTestRunListItem) GetModelResults() optionalnullable.OptionalNullab
 		return nil
 	}
 	return a.ModelResults
+}
+
+func (a *AgentTestRunListItem) GetUnansweredTests() optionalnullable.OptionalNullable[int64] {
+	if a == nil {
+		return nil
+	}
+	return a.UnansweredTests
 }
 
 func (a *AgentTestRunListItem) GetError() *bool {

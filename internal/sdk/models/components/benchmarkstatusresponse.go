@@ -9,7 +9,9 @@ import (
 
 type BenchmarkStatusResponse struct {
 	// Benchmark run job ID
-	TaskID string     `json:"task_id"`
+	TaskID string `json:"task_id"`
+	// Name of the run. A run nobody has renamed shows its number instead, such as `Run 1` for a test run or `Benchmark 1` for a benchmark
+	Name   string     `json:"name"`
 	Status TaskStatus `json:"status"`
 	// IDs of the tests this benchmark executed, in run order
 	TestUuids optionalnullable.OptionalNullable[[]string] `json:"test_uuids,omitzero"`
@@ -45,6 +47,13 @@ func (b *BenchmarkStatusResponse) GetTaskID() string {
 		return ""
 	}
 	return b.TaskID
+}
+
+func (b *BenchmarkStatusResponse) GetName() string {
+	if b == nil {
+		return ""
+	}
+	return b.Name
 }
 
 func (b *BenchmarkStatusResponse) GetStatus() TaskStatus {

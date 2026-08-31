@@ -9,7 +9,9 @@ import (
 
 type TestRunStatusResponse struct {
 	// Test run job ID
-	TaskID string     `json:"task_id"`
+	TaskID string `json:"task_id"`
+	// Name of the run. A run nobody has renamed shows its number instead, such as `Run 1` for a test run or `Benchmark 1` for a benchmark
+	Name   string     `json:"name"`
 	Status TaskStatus `json:"status"`
 	// IDs of the tests this run executed, in run order
 	TestUuids optionalnullable.OptionalNullable[[]string] `json:"test_uuids,omitzero"`
@@ -59,6 +61,13 @@ func (t *TestRunStatusResponse) GetTaskID() string {
 		return ""
 	}
 	return t.TaskID
+}
+
+func (t *TestRunStatusResponse) GetName() string {
+	if t == nil {
+		return ""
+	}
+	return t.Name
 }
 
 func (t *TestRunStatusResponse) GetStatus() TaskStatus {

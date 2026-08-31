@@ -35,7 +35,7 @@ func (e *AgentTestRunListItemType) IsExact() bool {
 type AgentTestRunListItem struct {
 	// Test run job ID
 	UUID string `json:"uuid"`
-	// Display name, such as `Run 1` for a unit test or `Benchmark 1` for a benchmark
+	// Name of the run. A run nobody has renamed shows its number instead, such as `Run 1` for a test run or `Benchmark 1` for a benchmark
 	Name   string     `json:"name"`
 	Status TaskStatus `json:"status"`
 	// What kind of run this is:

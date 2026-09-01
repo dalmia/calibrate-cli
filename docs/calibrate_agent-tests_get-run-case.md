@@ -1,30 +1,29 @@
-## calibrate agent-tests get-benchmark
+## calibrate agent-tests get-run-case
 
-Get benchmark status
+Get test case result
 
 ### Synopsis
 
-Get the results of a benchmark run
+Get the full result of one test case in a run
 
 ```
-calibrate agent-tests get-benchmark [flags]
+calibrate agent-tests get-run-case [flags]
 ```
 
 ### Examples
 
 ```
-  calibrate agent-tests get-benchmark --task-id a3b2c1d0-e5f4-3210-abcd-ef1234567890
+  calibrate agent-tests get-run-case --task-id a3b2c1d0-e5f4-3210-abcd-ef1234567890 --test-uuid b1c2d3e4-f5a6-7890-bcde-f12345678901
 ```
 
 ### Options
 
 ```
-  -c, --compact model_results.test_results   Return a compact response that omits heavy detail fields (model_results.test_results, `evaluators.output_config`), keeping only the lightweight decision fields. Omit for full detail
-  -h, --help                                 help for get-benchmark
-  -m, --mode full                            How much of each test case to return. full returns every field of every case. `summary` returns one light row per case, with its ID, name, verdict and short reason, leaving out the conversation, the agent's output and the evaluator verdicts. Read those one case at a time from `GET /agent-tests/run/{task_id}/results/{test_uuid}` (options: full, summary) (default "full")
-      --only-failed                          Return only failing test cases for each model. Omit to return every case
-  -t, --task-id string                       Benchmark run to poll for status and results [required]
-  -x, --x-api-key string                     string value
+  -h, --help                  help for get-run-case
+  -m, --model string          Which model's answer to read. Required for a benchmark, which runs every test once per model
+      --task-id string        Test run or benchmark the case was run in [required]
+      --test-uuid test_uuid   The test whose result to read, as test_uuid on the case [required]
+  -x, --x-api-key string      string value
 ```
 
 ### Options inherited from parent commands

@@ -42,6 +42,7 @@ calibrate agent-tests [flags]
 * [calibrate agent-tests bulk-unlink](calibrate_agent-tests_bulk-unlink.md)	 - Bulk unlink tests from agent
 * [calibrate agent-tests get-benchmark](calibrate_agent-tests_get-benchmark.md)	 - Get benchmark status
 * [calibrate agent-tests get-run](calibrate_agent-tests_get-run.md)	 - Get test run status
+* [calibrate agent-tests get-run-case](calibrate_agent-tests_get-run-case.md)	 - Get test case result
 * [calibrate agent-tests link](calibrate_agent-tests_link.md)	 - Link tests to agent
 * [calibrate agent-tests list-for-agent](calibrate_agent-tests_list-for-agent.md)	 - List tests for agent
 * [calibrate agent-tests list-runs-for-agent](calibrate_agent-tests_list-runs-for-agent.md)	 - List test runs for agent

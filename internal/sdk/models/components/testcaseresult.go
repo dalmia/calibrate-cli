@@ -7,11 +7,39 @@ import (
 	"github.com/dalmia/calibrate-cli/internal/sdk/sdkinternal/utils"
 )
 
+type TestType string
+
+const (
+	TestTypeResponse     TestType = "response"
+	TestTypeToolCall     TestType = "tool_call"
+	TestTypeConversation TestType = "conversation"
+	TestTypeGeneral      TestType = "general"
+)
+
+func (e TestType) ToPointer() *TestType {
+	return &e
+}
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *TestType) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "response", "tool_call", "conversation", "general":
+			return true
+		}
+	}
+	return false
+}
+
 type TestCaseResult struct {
 	// ID of the test case within the run
 	TestCaseID optionalnullable.OptionalNullable[string] `json:"test_case_id,omitzero"`
 	// Name of the test
 	Name optionalnullable.OptionalNullable[string] `json:"name,omitzero"`
+	// ID of the test this case ran, which is what you pass to read the case on its own
+	TestUUID optionalnullable.OptionalNullable[string] `json:"test_uuid,omitzero"`
+	// What the test asks of the agent, which decides how a reader draws the case
+	TestType optionalnullable.OptionalNullable[TestType] `json:"test_type,omitzero"`
 	// Whether the case passed
 	Passed optionalnullable.OptionalNullable[bool] `json:"passed,omitzero"`
 	// The judge's reasoning, or the tool-call diff for a tool-call test
@@ -57,6 +85,20 @@ func (t *TestCaseResult) GetName() optionalnullable.OptionalNullable[string] {
 		return nil
 	}
 	return t.Name
+}
+
+func (t *TestCaseResult) GetTestUUID() optionalnullable.OptionalNullable[string] {
+	if t == nil {
+		return nil
+	}
+	return t.TestUUID
+}
+
+func (t *TestCaseResult) GetTestType() optionalnullable.OptionalNullable[TestType] {
+	if t == nil {
+		return nil
+	}
+	return t.TestType
 }
 
 func (t *TestCaseResult) GetPassed() optionalnullable.OptionalNullable[bool] {

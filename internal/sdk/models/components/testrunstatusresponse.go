@@ -29,6 +29,8 @@ type TestRunStatusResponse struct {
 	TotalTokens optionalnullable.OptionalNullable[map[string]any] `json:"total_tokens,omitzero"`
 	// The evaluators used in this run. Each verdict in `judge_results` links to one of these by `evaluator_uuid`
 	Evaluators optionalnullable.OptionalNullable[[]TestRunEvaluator] `json:"evaluators,omitzero"`
+	// Totals for each evaluator over the whole run, matching the shape a benchmark reports for each model. Only evaluators that returned a verdict appear
+	EvaluatorSummary optionalnullable.OptionalNullable[[]map[string]any] `json:"evaluator_summary,omitzero"`
 	// Results for each test case
 	Results optionalnullable.OptionalNullable[[]TestCaseResult] `json:"results,omitzero"`
 	// Number of test cases that produced no answer because the agent or the judge could not be reached, which makes the pass rate an unfair measure of the agent
@@ -131,6 +133,13 @@ func (t *TestRunStatusResponse) GetEvaluators() optionalnullable.OptionalNullabl
 		return nil
 	}
 	return t.Evaluators
+}
+
+func (t *TestRunStatusResponse) GetEvaluatorSummary() optionalnullable.OptionalNullable[[]map[string]any] {
+	if t == nil {
+		return nil
+	}
+	return t.EvaluatorSummary
 }
 
 func (t *TestRunStatusResponse) GetResults() optionalnullable.OptionalNullable[[]TestCaseResult] {

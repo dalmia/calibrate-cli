@@ -21,6 +21,7 @@ calibrate agent-tests get-run [flags]
 ```
   -c, --compact results.output   Return a compact response that omits heavy detail fields (results.output, `results.test_case`, `results.judge_results`, `results.reasoning`, `evaluators.output_config`), keeping only the lightweight decision fields. Omit for full detail
   -h, --help                     help for get-run
+  -m, --mode full                How much of each test case to return. full returns every field of every case. `summary` returns one light row per case, with its ID, name, verdict and short reason, leaving out the conversation, the agent's output and the evaluator verdicts. Read those one case at a time from `GET /agent-tests/run/{task_id}/results/{test_uuid}` (options: full, summary) (default "full")
       --only-failed              Return only failing test cases. Omit to return every case
   -t, --task-id string           Test run to poll for status and results [required]
   -x, --x-api-key string         string value

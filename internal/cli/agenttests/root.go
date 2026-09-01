@@ -49,6 +49,10 @@ func InitAgentTestsRoot(parent *cobra.Command) error {
 		return err
 	}
 
+	if err := initGetRunCaseCmd(AgentTestsCmd); err != nil {
+		return err
+	}
+
 	if err := initBenchmarkCmd(AgentTestsCmd); err != nil {
 		return err
 	}

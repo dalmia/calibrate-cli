@@ -3,16 +3,47 @@
 package operations
 
 import (
+	"encoding/json"
+	"fmt"
 	"github.com/dalmia/calibrate-cli/internal/sdk/models/components"
 	"github.com/dalmia/calibrate-cli/internal/sdk/optionalnullable"
 	"github.com/dalmia/calibrate-cli/internal/sdk/sdkinternal/utils"
 )
+
+// GetBenchmarkStatusAgentTestsBenchmarkTaskIDGetMode - How much of each test case to return. `full` returns every field of every case. `summary` returns one light row per case, with its ID, name, verdict and short reason, leaving out the conversation, the agent's output and the evaluator verdicts. Read those one case at a time from `GET /agent-tests/run/{task_id}/results/{test_uuid}`
+type GetBenchmarkStatusAgentTestsBenchmarkTaskIDGetMode string
+
+const (
+	GetBenchmarkStatusAgentTestsBenchmarkTaskIDGetModeFull    GetBenchmarkStatusAgentTestsBenchmarkTaskIDGetMode = "full"
+	GetBenchmarkStatusAgentTestsBenchmarkTaskIDGetModeSummary GetBenchmarkStatusAgentTestsBenchmarkTaskIDGetMode = "summary"
+)
+
+func (e GetBenchmarkStatusAgentTestsBenchmarkTaskIDGetMode) ToPointer() *GetBenchmarkStatusAgentTestsBenchmarkTaskIDGetMode {
+	return &e
+}
+func (e *GetBenchmarkStatusAgentTestsBenchmarkTaskIDGetMode) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "full":
+		fallthrough
+	case "summary":
+		*e = GetBenchmarkStatusAgentTestsBenchmarkTaskIDGetMode(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for GetBenchmarkStatusAgentTestsBenchmarkTaskIDGetMode: %v", v)
+	}
+}
 
 type GetBenchmarkStatusAgentTestsBenchmarkTaskIDGetRequest struct {
 	// Benchmark run to poll for status and results
 	TaskID string `pathParam:"style=simple,explode=false,name=task_id"`
 	// Return only failing test cases for each model. Omit to return every case
 	OnlyFailed *bool `default:"false" queryParam:"style=form,explode=true,name=only_failed"`
+	// How much of each test case to return. `full` returns every field of every case. `summary` returns one light row per case, with its ID, name, verdict and short reason, leaving out the conversation, the agent's output and the evaluator verdicts. Read those one case at a time from `GET /agent-tests/run/{task_id}/results/{test_uuid}`
+	Mode *GetBenchmarkStatusAgentTestsBenchmarkTaskIDGetMode `default:"full" queryParam:"style=form,explode=true,name=mode"`
 	// Return a compact response that omits heavy detail fields (`model_results.test_results`, `evaluators.output_config`), keeping only the lightweight decision fields. Omit for full detail
 	Compact *bool                                     `default:"false" queryParam:"style=form,explode=true,name=compact"`
 	XAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=X-API-Key"`
@@ -41,6 +72,13 @@ func (g *GetBenchmarkStatusAgentTestsBenchmarkTaskIDGetRequest) GetOnlyFailed() 
 		return nil
 	}
 	return g.OnlyFailed
+}
+
+func (g *GetBenchmarkStatusAgentTestsBenchmarkTaskIDGetRequest) GetMode() *GetBenchmarkStatusAgentTestsBenchmarkTaskIDGetMode {
+	if g == nil {
+		return nil
+	}
+	return g.Mode
 }
 
 func (g *GetBenchmarkStatusAgentTestsBenchmarkTaskIDGetRequest) GetCompact() *bool {

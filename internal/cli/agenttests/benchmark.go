@@ -19,7 +19,7 @@ var benchmarkCmdMeta = []flagutil.FlagMeta{
 	{FlagName: "x-api-key", Shorthand: "x", FieldPath: "XAPIKey", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `header:"style=simple,explode=false,name=X-API-Key"`, Description: "string value"},
 	{FlagName: "models", Shorthand: "m", FieldPath: "Body.Models", Kind: flagutil.FlagKindStringArray, Required: true, Description: "Model names to benchmark [required]"},
 	{FlagName: "test-uuids", Shorthand: "t", FieldPath: "Body.TestUuids", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `json:"test_uuids,omitempty"`, Description: "A subset of the agent's linked tests to benchmark. Each ID must be linked to the agent. Omit to run all linked tests"},
-	{FlagName: "parallel-models", Shorthand: "p", FieldPath: "Body.ParallelModels", Kind: flagutil.FlagKindBool, Optional: true, HasDefault: true, DefaultBool: true, Description: "Whether to run the models at the same time. Set false to run them one after another"},
+	{FlagName: "parallel-models", Shorthand: "p", FieldPath: "Body.ParallelModels", Kind: flagutil.FlagKindBool, Optional: true, HasDefault: true, DefaultBool: true, Description: "How to run the models. `true` runs several at a time, `false` runs each one only after the one before it has finished. Use `false` to keep the load on your own agent down"},
 }
 
 // initBenchmarkCmd initializes the benchmark command.

@@ -15,6 +15,8 @@ type BenchmarkStatusResponse struct {
 	Status TaskStatus `json:"status"`
 	// IDs of the tests this benchmark executed, in run order
 	TestUuids optionalnullable.OptionalNullable[[]string] `json:"test_uuids,omitzero"`
+	// How the models were run. `true` means several ran at a time, `false` means each one ran only after the one before it had finished
+	ParallelModels optionalnullable.OptionalNullable[bool] `json:"parallel_models,omitzero"`
 	// The evaluators used in this run. Each verdict in `judge_results` links to one of these by `evaluator_uuid`
 	Evaluators optionalnullable.OptionalNullable[[]TestRunEvaluator] `json:"evaluators,omitzero"`
 	// Results for each model
@@ -70,6 +72,13 @@ func (b *BenchmarkStatusResponse) GetTestUuids() optionalnullable.OptionalNullab
 		return nil
 	}
 	return b.TestUuids
+}
+
+func (b *BenchmarkStatusResponse) GetParallelModels() optionalnullable.OptionalNullable[bool] {
+	if b == nil {
+		return nil
+	}
+	return b.ParallelModels
 }
 
 func (b *BenchmarkStatusResponse) GetEvaluators() optionalnullable.OptionalNullable[[]TestRunEvaluator] {

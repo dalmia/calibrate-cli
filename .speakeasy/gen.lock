@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
-id: 46afd6f5-15ac-4eef-88ec-d5e26c25dbd3
+id: 789ec920-5eea-40b7-b20e-549f436bed10
 management:
-  docChecksum: 651a84319ebd981cdd9f46bb5f36b949
+  docChecksum: 61a095df8ddea0171eeaf2592c3adf5c
   docVersion: 0.1.0
   speakeasyVersion: 1.788.1
   generationVersion: 2.915.1
-  releaseVersion: 0.0.58
-  configChecksum: dc92d9f2f62b19ebe288893fd9a9c2a3
+  releaseVersion: 0.0.59
+  configChecksum: 0904ab0bdd8c350226d04a08f6086852
   repoURL: https://github.com/dalmia/calibrate-cli
   installationURL: https://github.com/dalmia/calibrate-cli
 persistentEdits:
-  generation_id: 5fa37ccf-3cae-4bae-84ff-59658265227a
-  pristine_commit_hash: fe30573a0933fb2d75aa368a3d3d91e508e830c2
-  pristine_tree_hash: 41442ccb4d12cb960a53322edb06894b49e73819
+  generation_id: ea301f9f-af95-49b2-b4db-288e4d541bfc
+  pristine_commit_hash: cf549b8abedd75127128e2fce3e14e936672b187
+  pristine_tree_hash: 6b5d051b1dc38d7b67e4a746324c3c99567f870e
 features:
   cli:
     additionalProperties: 0.0.0
@@ -267,8 +267,8 @@ trackedFiles:
     pristine_git_object: fc38b830626d0c5fef0732edc60683524dda3524
   internal/cli/version.go:
     id: 7b0665492f72
-    last_write_checksum: sha1:cd6ded768a670796e5dabb580fda932fa979653b
-    pristine_git_object: 3e4cd4e70fd4a1be3563a112bbd79f51747a35b0
+    last_write_checksum: sha1:057175c9a49a018489d4d34e9798da60ab39fe94
+    pristine_git_object: 61d447e807ee5cc5832e51270867c5996bbdadbe
   internal/cli/whoami.go:
     id: c1787f2298ec
     last_write_checksum: sha1:58afb45d777f297af4a64acf26a57c46e1b556db
@@ -387,8 +387,8 @@ trackedFiles:
     pristine_git_object: 4a8a6050cfd96fee6d634e48896be1eb65bd4d38
   internal/sdk/models/components/agenttestrunlistitem.go:
     id: 41e8645f147c
-    last_write_checksum: sha1:017862c2801c624abeea1160314b6cacfc03e754
-    pristine_git_object: af2613c52b108dddd2478432648ffc44b7f0adf4
+    last_write_checksum: sha1:e38b6c0ffdba283cf72defb3b23dfeb03b64092d
+    pristine_git_object: 9f8bb0115b7ed876fe3d1a739e97d4a00899cf06
   internal/sdk/models/components/agenttestsbulkunlinkresponse.go:
     id: 3d579da9156b
     last_write_checksum: sha1:c696f31db4c1df1dfb41045029fea7f128130f7a
@@ -463,8 +463,8 @@ trackedFiles:
     pristine_git_object: c67d8522e9c6bc3fd86f5892d83250096cd15a01
   internal/sdk/models/components/benchmarkstatusresponse.go:
     id: cca3d989415d
-    last_write_checksum: sha1:72ce9ab49adc8dbd81f10037bb1fbf2b07687e10
-    pristine_git_object: 3d2ea22be0a0abf02508a71d31801ad9ca49a18a
+    last_write_checksum: sha1:ec7adcd7a2fd41ac21cf2efa269eaba8d53fd52b
+    pristine_git_object: 51e4c99fe7ad369850cb63a71182304c6a96398a
   internal/sdk/models/components/bulkcreateitemsresponse.go:
     id: 5bbab65238f5
     last_write_checksum: sha1:0e0e3a5552416d2b97d00a984ebd74d4b6e0f06a
@@ -591,8 +591,8 @@ trackedFiles:
     pristine_git_object: a25f99689b4c4b215a3d76912b0fd38dc4875127
   internal/sdk/models/components/modelresult.go:
     id: 4ecf1badc0f3
-    last_write_checksum: sha1:ab4790564f4de43921156bda6262ff865991c975
-    pristine_git_object: e64bc25aa93e3996502c456f46a562144a28a9db
+    last_write_checksum: sha1:575cf24e24272fcd6b1d13654587d5e91ce865a1
+    pristine_git_object: 523faeedb5a081184e771e3790eff2141054d84a
   internal/sdk/models/components/modelrunsummary.go:
     id: 8b2bcf4d89ba
     last_write_checksum: sha1:1e3ec3c108b2c61fe6025c33789d1b2a3c99fb5b
@@ -707,8 +707,8 @@ trackedFiles:
     pristine_git_object: fbae1f73b3ef6c0e6303f8f4cfe9df3a430ec4db
   internal/sdk/models/components/testrunstatusresponse.go:
     id: a9fd5f229c52
-    last_write_checksum: sha1:5d2cadd38026873ec83b835fddbb5a1cfc168d13
-    pristine_git_object: 6707b9c25731be3f38edb50bb599638b02aff8ff
+    last_write_checksum: sha1:ace082fbbfb898e66f6ae456fa93ab5fa007a046
+    pristine_git_object: 7fdf3a7f58d042abc9f0653bbb97fe8ce86ab27c
   internal/sdk/models/components/testupdate.go:
     id: 8692d1d8a0f6
     last_write_checksum: sha1:faa055e7a6086181083d3e6d19d1854a5828fb10
@@ -1043,8 +1043,8 @@ trackedFiles:
     pristine_git_object: 159a87ec97aba99e4edd132f69652e123434303e
   internal/usage/schema.go:
     id: 0f40f4612437
-    last_write_checksum: sha1:d952d4ddcdaef5fda38bcb4e5e8777fedb196087
-    pristine_git_object: df7513613d3f52fea05d3acf2379134c5ec9d7d1
+    last_write_checksum: sha1:67e58e717a8c1525698c623f83463d5a4c53b457
+    pristine_git_object: 410cc0b7b94c7d7516a371aaaa9a9b09629be7f6
   scripts/install.ps1:
     id: fee0853709e9
     last_write_checksum: sha1:d8884365d7cfb218aac394e16a7d214a6f56b585
@@ -1237,7 +1237,7 @@ examples:
           offset: 0
       responses:
         "200":
-          application/json: {"items": [{"uuid": "a3b2c1d0-e5f4-3210-abcd-ef1234567890", "name": "<value>", "status": "done", "type": "llm-unit-test", "created_at": "1718134075390", "updated_at": "1735607430250", "model_results": [{"model": "openai/gpt-4.1", "message": ""}], "aborted": false, "error": false, "is_public": false}], "total": 269462, "offset": 0}
+          application/json: {"items": [{"uuid": "a3b2c1d0-e5f4-3210-abcd-ef1234567890", "name": "<value>", "status": "done", "type": "llm-unit-test", "created_at": "1718134075390", "updated_at": "1735607430250", "model_results": [{"model": "openai/gpt-4.1", "message": ""}], "stopped_early": false, "aborted": false, "error": false, "is_public": false}], "total": 269462, "offset": 0}
         "422":
           application/json: {}
   bulk_delete_agent_test_links_agent_tests_bulk_unlink_post:
@@ -1281,7 +1281,7 @@ examples:
           compact: false
       responses:
         "200":
-          application/json: {"task_id": "a3b2c1d0-e5f4-3210-abcd-ef1234567890", "name": "<value>", "status": "in_progress", "evaluators": [{"output_config": {"scale": [{"color": "#e5484d", "name": "Wrong", "value": false}, {"color": "#30a46c", "name": "Correct", "value": true}]}}], "results": [{"test_uuid": "b1c2d3e4-f5a6-7890-bcde-f12345678901", "output": {"tool_calls": [{"tool": "<value>", "arguments": {"city": "Paris"}}]}, "judge_results": [{"variable_values": {"criteria": "Is the reply correct and helpful?"}}], "unanswered": false, "not_run": false}], "stopped_early": false, "aborted": false, "error": false, "is_public": false}
+          application/json: {"task_id": "a3b2c1d0-e5f4-3210-abcd-ef1234567890", "name": "<value>", "status": "in_progress", "evaluators": [{"output_config": {"scale": [{"color": "#e5484d", "name": "Wrong", "value": false}, {"color": "#30a46c", "name": "Correct", "value": true}]}}], "results": [{"test_uuid": "b1c2d3e4-f5a6-7890-bcde-f12345678901", "output": {"tool_calls": [{"tool": "<value>", "arguments": {"city": "Paris"}}]}, "judge_results": [{"variable_values": {"criteria": "Is the reply correct and helpful?"}}], "unanswered": false, "not_run": false}], "stopped_early": false, "aborted": false, "is_public": false}
         "422":
           application/json: {}
   get_agent_test_case_result_agent_tests_run__task_id__results__test_uuid__get:
@@ -1320,7 +1320,7 @@ examples:
           compact: false
       responses:
         "200":
-          application/json: {"task_id": "a3b2c1d0-e5f4-3210-abcd-ef1234567890", "name": "<value>", "status": "cancelled", "evaluators": [{"output_config": {"scale": [{"color": "#e5484d", "name": "Wrong", "value": false}, {"color": "#30a46c", "name": "Correct", "value": true}]}}], "model_results": [{"model": "openai/gpt-4.1", "message": "<value>", "test_results": [{"test_uuid": "b1c2d3e4-f5a6-7890-bcde-f12345678901", "output": {"tool_calls": [{"tool": "<value>", "arguments": {"city": "Paris"}}]}, "judge_results": [{"variable_values": {"criteria": "Is the reply correct and helpful?"}}], "unanswered": false, "not_run": false}]}], "leaderboard_summary": [{"cost": 0.0021, "failed": 2, "helpfulness": 0.92, "latency_p50": 480, "model": "openai/gpt-4.1", "passed": 8, "safety": 1}, {"cost": 0.0034, "failed": 1, "helpfulness": 0.95, "latency_p50": 520, "model": "anthropic/claude-sonnet-4", "passed": 9, "safety": 1}], "aborted": false, "error": false, "is_public": false}
+          application/json: {"task_id": "a3b2c1d0-e5f4-3210-abcd-ef1234567890", "name": "<value>", "status": "cancelled", "evaluators": [{"output_config": {"scale": [{"color": "#e5484d", "name": "Wrong", "value": false}, {"color": "#30a46c", "name": "Correct", "value": true}]}}], "model_results": [{"model": "openai/gpt-4.1", "message": "<value>", "test_results": [{"test_uuid": "b1c2d3e4-f5a6-7890-bcde-f12345678901", "output": {"tool_calls": [{"tool": "<value>", "arguments": {"city": "Paris"}}]}, "judge_results": [{"variable_values": {"criteria": "Is the reply correct and helpful?"}}], "unanswered": false, "not_run": false}], "stopped_early": false}], "leaderboard_summary": [{"cost": 0.0021, "failed": 2, "helpfulness": 0.92, "latency_p50": 480, "model": "openai/gpt-4.1", "passed": 8, "safety": 1}, {"cost": 0.0034, "failed": 1, "helpfulness": 0.95, "latency_p50": 520, "model": "anthropic/claude-sonnet-4", "passed": 9, "safety": 1}], "stopped_early": false, "aborted": false, "is_public": false}
         "422":
           application/json: {}
   create_evaluator_endpoint_evaluators_post:

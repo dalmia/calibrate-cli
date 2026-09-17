@@ -66,6 +66,8 @@ type AgentTestRunListItem struct {
 	ModelResults optionalnullable.OptionalNullable[[]ModelRunSummary] `json:"model_results,omitzero"`
 	// Number of test cases that produced no answer because the agent or the judge could not be reached, which makes the pass rate an unfair measure of the agent
 	UnansweredTests optionalnullable.OptionalNullable[int64] `json:"unanswered_tests,omitzero"`
+	// Whether the run stopped before starting every test case, after too many failed in a row
+	StoppedEarly *bool `default:"false" json:"stopped_early"`
 	// Whether a user stopped this run before it finished. The results collected up to that point are kept, and test cases that never ran are counted neither as passed nor as failed
 	Aborted *bool `default:"false" json:"aborted"`
 	// True if the run failed
@@ -197,6 +199,13 @@ func (a *AgentTestRunListItem) GetUnansweredTests() optionalnullable.OptionalNul
 		return nil
 	}
 	return a.UnansweredTests
+}
+
+func (a *AgentTestRunListItem) GetStoppedEarly() *bool {
+	if a == nil {
+		return nil
+	}
+	return a.StoppedEarly
 }
 
 func (a *AgentTestRunListItem) GetAborted() *bool {

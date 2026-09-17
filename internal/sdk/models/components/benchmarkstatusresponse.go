@@ -21,10 +21,12 @@ type BenchmarkStatusResponse struct {
 	ModelResults optionalnullable.OptionalNullable[[]ModelResult] `json:"model_results,omitzero"`
 	// Leaderboard comparing the models, one row per model. Columns vary by benchmark: a `model` column plus pass/fail counts, latency, cost, and one score column per evaluator, keyed by evaluator name
 	LeaderboardSummary optionalnullable.OptionalNullable[[]map[string]any] `json:"leaderboard_summary,omitzero"`
+	// Whether any model's run stopped before starting every test case, after too many failed in a row
+	StoppedEarly *bool `default:"false" json:"stopped_early"`
 	// Whether a user stopped this run before it finished. The results collected up to that point are kept, and test cases that never ran are counted neither as passed nor as failed
 	Aborted *bool `default:"false" json:"aborted"`
-	// True if the run failed
-	Error *bool `default:"false" json:"error"`
+	// Why the run could not be carried out, when it failed before producing any result
+	Error optionalnullable.OptionalNullable[string] `json:"error,omitzero"`
 	// Whether the run is shared publicly
 	IsPublic *bool `default:"false" json:"is_public"`
 	// Token for building the public share URL
@@ -91,6 +93,13 @@ func (b *BenchmarkStatusResponse) GetLeaderboardSummary() optionalnullable.Optio
 	return b.LeaderboardSummary
 }
 
+func (b *BenchmarkStatusResponse) GetStoppedEarly() *bool {
+	if b == nil {
+		return nil
+	}
+	return b.StoppedEarly
+}
+
 func (b *BenchmarkStatusResponse) GetAborted() *bool {
 	if b == nil {
 		return nil
@@ -98,7 +107,7 @@ func (b *BenchmarkStatusResponse) GetAborted() *bool {
 	return b.Aborted
 }
 
-func (b *BenchmarkStatusResponse) GetError() *bool {
+func (b *BenchmarkStatusResponse) GetError() optionalnullable.OptionalNullable[string] {
 	if b == nil {
 		return nil
 	}

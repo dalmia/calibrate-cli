@@ -30,6 +30,10 @@ type ModelResult struct {
 	Cost optionalnullable.OptionalNullable[map[string]any] `json:"cost,omitzero"`
 	// Aggregated token usage as `{mean, min, max, count}`
 	TotalTokens optionalnullable.OptionalNullable[map[string]any] `json:"total_tokens,omitzero"`
+	// Number of test cases that produced no answer because the agent or the judge could not be reached, which makes the pass rate an unfair measure of the agent
+	UnansweredTests optionalnullable.OptionalNullable[int64] `json:"unanswered_tests,omitzero"`
+	// Whether this model's run stopped before starting every test case, after too many failed in a row
+	StoppedEarly *bool `default:"false" json:"stopped_early"`
 }
 
 func (m ModelResult) MarshalJSON() ([]byte, error) {
@@ -118,4 +122,18 @@ func (m *ModelResult) GetTotalTokens() optionalnullable.OptionalNullable[map[str
 		return nil
 	}
 	return m.TotalTokens
+}
+
+func (m *ModelResult) GetUnansweredTests() optionalnullable.OptionalNullable[int64] {
+	if m == nil {
+		return nil
+	}
+	return m.UnansweredTests
+}
+
+func (m *ModelResult) GetStoppedEarly() *bool {
+	if m == nil {
+		return nil
+	}
+	return m.StoppedEarly
 }

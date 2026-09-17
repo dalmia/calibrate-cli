@@ -39,8 +39,8 @@ type TestRunStatusResponse struct {
 	StoppedEarly *bool `default:"false" json:"stopped_early"`
 	// Whether a user stopped this run before it finished. The results collected up to that point are kept, and test cases that never ran are counted neither as passed nor as failed
 	Aborted *bool `default:"false" json:"aborted"`
-	// True if the run failed
-	Error *bool `default:"false" json:"error"`
+	// Why the run could not be carried out, when it failed before producing any result
+	Error optionalnullable.OptionalNullable[string] `json:"error,omitzero"`
 	// Whether the run is shared publicly
 	IsPublic *bool `default:"false" json:"is_public"`
 	// Token for building the public share URL
@@ -170,7 +170,7 @@ func (t *TestRunStatusResponse) GetAborted() *bool {
 	return t.Aborted
 }
 
-func (t *TestRunStatusResponse) GetError() *bool {
+func (t *TestRunStatusResponse) GetError() optionalnullable.OptionalNullable[string] {
 	if t == nil {
 		return nil
 	}

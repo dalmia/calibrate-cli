@@ -23,6 +23,7 @@ calibrate agent-tests benchmark [flags]
       --body string          Request body as JSON (alternative to individual flags). Can also be provided via stdin.
   -h, --help                 help for benchmark
   -m, --models stringArray   Model names to benchmark [required]
+  -p, --parallel-models      Whether to run the models at the same time. Set false to run them one after another (default true)
   -t, --test-uuids string    A subset of the agent's linked tests to benchmark. Each ID must be linked to the agent. Omit to run all linked tests
   -x, --x-api-key string     string value
 ```

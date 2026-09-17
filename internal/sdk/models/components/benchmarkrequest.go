@@ -12,6 +12,8 @@ type BenchmarkRequest struct {
 	Models []string `json:"models"`
 	// A subset of the agent's linked tests to benchmark. Each ID must be linked to the agent. Omit to run all linked tests
 	TestUuids optionalnullable.OptionalNullable[[]string] `json:"test_uuids,omitzero"`
+	// Whether to run the models at the same time. Set false to run them one after another
+	ParallelModels *bool `default:"true" json:"parallel_models"`
 }
 
 func (b BenchmarkRequest) MarshalJSON() ([]byte, error) {
@@ -37,4 +39,11 @@ func (b *BenchmarkRequest) GetTestUuids() optionalnullable.OptionalNullable[[]st
 		return nil
 	}
 	return b.TestUuids
+}
+
+func (b *BenchmarkRequest) GetParallelModels() *bool {
+	if b == nil {
+		return nil
+	}
+	return b.ParallelModels
 }

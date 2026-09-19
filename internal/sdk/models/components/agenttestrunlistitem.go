@@ -50,7 +50,7 @@ type AgentTestRunListItem struct {
 	TotalTests optionalnullable.OptionalNullable[int64] `json:"total_tests,omitzero"`
 	// Number of test cases that passed
 	Passed optionalnullable.OptionalNullable[int64] `json:"passed,omitzero"`
-	// Number of test cases that failed
+	// Number of test cases that did not pass, which includes the ones that produced no answer
 	Failed optionalnullable.OptionalNullable[int64] `json:"failed,omitzero"`
 	// The evaluators that judged this run, deduplicated and in display order. A `Tool call` entry is appended when any test in the run was a tool-call test. That entry has no `uuid`, because it is not an evaluator in the library. Empty when the run had no evaluators
 	Evaluators []RunListEvaluator `json:"evaluators,omitzero"`

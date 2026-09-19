@@ -18,7 +18,7 @@ type ModelResult struct {
 	TotalTests optionalnullable.OptionalNullable[int64] `json:"total_tests,omitzero"`
 	// Number of test cases that passed
 	Passed optionalnullable.OptionalNullable[int64] `json:"passed,omitzero"`
-	// Number of test cases that failed
+	// Number of test cases that did not pass, which includes the ones that produced no answer
 	Failed optionalnullable.OptionalNullable[int64] `json:"failed,omitzero"`
 	// Aggregate summary for each evaluator for this model
 	EvaluatorSummary optionalnullable.OptionalNullable[[]map[string]any] `json:"evaluator_summary,omitzero"`

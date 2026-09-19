@@ -21,8 +21,10 @@ type ModelRunSummary struct {
 	TotalTests optionalnullable.OptionalNullable[int64] `json:"total_tests,omitzero"`
 	// Number of test cases that passed for this model
 	Passed optionalnullable.OptionalNullable[int64] `json:"passed,omitzero"`
-	// Number of test cases that failed for this model
+	// Number of test cases that did not pass for this model, which includes the ones that produced no answer
 	Failed optionalnullable.OptionalNullable[int64] `json:"failed,omitzero"`
+	// Number of this model's test cases that produced no answer, already counted in `failed`
+	UnansweredTests optionalnullable.OptionalNullable[int64] `json:"unanswered_tests,omitzero"`
 }
 
 func (m ModelRunSummary) MarshalJSON() ([]byte, error) {
@@ -76,4 +78,11 @@ func (m *ModelRunSummary) GetFailed() optionalnullable.OptionalNullable[int64] {
 		return nil
 	}
 	return m.Failed
+}
+
+func (m *ModelRunSummary) GetUnansweredTests() optionalnullable.OptionalNullable[int64] {
+	if m == nil {
+		return nil
+	}
+	return m.UnansweredTests
 }

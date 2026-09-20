@@ -44,6 +44,13 @@ type AgentUpdate struct {
 	// }
 	// ```
 	//
+	// **Either type**:
+	// - `traces.scoring.enabled`: whether the traces you send for this agent are scored by its linked evaluators. On unless you set it to `false`. Turning it back on needs at least one linked evaluator that can score traces
+	//
+	// ```json
+	// {"traces": {"scoring": {"enabled": false}}}
+	// ```
+	//
 	// Every request Calibrate makes to your endpoint carries the header
 	// `X-Calibrate-Eval: 1`. Read it to tell a test run from a real user, for example
 	// to tag the trace you send back or to skip sending one.

@@ -2,11 +2,29 @@
 
 package components
 
+import (
+	"github.com/dalmia/calibrate-cli/internal/sdk/optionalnullable"
+	"github.com/dalmia/calibrate-cli/internal/sdk/sdkinternal/utils"
+)
+
 type ItemUpdatePayload struct {
 	// ID of the item to update
 	UUID string `json:"uuid"`
-	// The item's new payload. `payload['name']` is still required and must be unique within the task
-	Payload any `json:"payload"`
+	// What an annotation item holds. Which fields apply depends on the task type
+	Payload ItemPayload `json:"payload"`
+	// Key-value pairs stored with the item and shown beside it on the labelling form. Omit to leave the stored pairs as they are. Send an empty list to clear them
+	Metadata optionalnullable.OptionalNullable[[]ItemMetadataEntry] `json:"metadata,omitzero"`
+}
+
+func (i ItemUpdatePayload) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(i, "", false)
+}
+
+func (i *ItemUpdatePayload) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &i, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (i *ItemUpdatePayload) GetUUID() string {
@@ -16,9 +34,16 @@ func (i *ItemUpdatePayload) GetUUID() string {
 	return i.UUID
 }
 
-func (i *ItemUpdatePayload) GetPayload() any {
+func (i *ItemUpdatePayload) GetPayload() ItemPayload {
+	if i == nil {
+		return ItemPayload{}
+	}
+	return i.Payload
+}
+
+func (i *ItemUpdatePayload) GetMetadata() optionalnullable.OptionalNullable[[]ItemMetadataEntry] {
 	if i == nil {
 		return nil
 	}
-	return i.Payload
+	return i.Metadata
 }

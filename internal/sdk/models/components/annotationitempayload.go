@@ -8,15 +8,10 @@ import (
 )
 
 type AnnotationItemPayload struct {
-	// The item's payload. `name` is required and unique within the task for every type. The other fields depend on the task `type`:
-	//
-	// - `stt`: `name`, `reference_transcript`, `predicted_transcript`
-	// - `llm`: `name`, `chat_history` (list of `{role, content}` turns ending at the user turn), `agent_response` (the reply to judge), optional `evaluator_variables`
-	// - `llm-general`: `name`, `input`, `output`, optional `evaluator_variables`
-	// - `conversation`: `name`, `transcript` (list of `{role, content}` turns), optional `evaluator_variables`
-	//
-	// `evaluator_variables` maps an evaluator ID to that evaluator's `{{variable}}` values for this item
-	Payload any `json:"payload"`
+	// What an annotation item holds. Which fields apply depends on the task type
+	Payload ItemPayload `json:"payload"`
+	// Key-value pairs stored with the item and shown beside it on the labelling form. Omit if you have none
+	Metadata optionalnullable.OptionalNullable[[]ItemMetadataEntry] `json:"metadata,omitzero"`
 	// Human annotations to seed, keyed by evaluator ID. Each evaluator ID must be linked to the task. Put the judgement in `value`, a bool for binary or a number for rating, with optional `reasoning`. Requires `annotator_id`
 	Annotations optionalnullable.OptionalNullable[map[string]any] `json:"annotations,omitzero"`
 	// Evaluator scores to record, keyed by evaluator ID. Each evaluator ID must be linked to the task. Put the score in `value`, a bool for binary or a number within the scale for rating, with optional `reasoning` and `version_number`. Omit `version_number` to record against the evaluator's live version. An item recording a tool call takes the tool-call evaluator and no other, and every other item takes any evaluator except that one
@@ -34,11 +29,18 @@ func (a *AnnotationItemPayload) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (a *AnnotationItemPayload) GetPayload() any {
+func (a *AnnotationItemPayload) GetPayload() ItemPayload {
+	if a == nil {
+		return ItemPayload{}
+	}
+	return a.Payload
+}
+
+func (a *AnnotationItemPayload) GetMetadata() optionalnullable.OptionalNullable[[]ItemMetadataEntry] {
 	if a == nil {
 		return nil
 	}
-	return a.Payload
+	return a.Metadata
 }
 
 func (a *AnnotationItemPayload) GetAnnotations() optionalnullable.OptionalNullable[map[string]any] {

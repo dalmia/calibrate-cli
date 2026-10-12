@@ -26,7 +26,7 @@ func initUpdateItemsCmd(parent *cobra.Command) error {
 		Use:     "update-items",
 		Short:   "Bulk update items",
 		Long:    "Bulk-update item payloads in a task",
-		Example: "  calibrate annotation-tasks update-items --task-uuid f47ac10b-58cc-4372-a567-0e02b2c3d479 --updates '[{\"uuid\":\"f47ac10b-58cc-4372-a567-0e02b2c3d479\",\"payload\":\"<value>\"}]'",
+		Example: "  calibrate annotation-tasks update-items --task-uuid f47ac10b-58cc-4372-a567-0e02b2c3d479 --updates '[{\"uuid\":\"f47ac10b-58cc-4372-a567-0e02b2c3d479\",\"payload\":{\"name\":\"<value>\"} }]'",
 		RunE:    runUpdateItemsCmd,
 		Aliases: []string{"ui"},
 	}

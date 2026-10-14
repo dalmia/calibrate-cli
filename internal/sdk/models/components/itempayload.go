@@ -3,9 +3,281 @@
 package components
 
 import (
+	"errors"
+	"fmt"
 	"github.com/dalmia/calibrate-cli/internal/sdk/optionalnullable"
 	"github.com/dalmia/calibrate-cli/internal/sdk/sdkinternal/utils"
 )
+
+type AgentResponseUnionType string
+
+const (
+	AgentResponseUnionTypeStr      AgentResponseUnionType = "str"
+	AgentResponseUnionTypeTurnText AgentResponseUnionType = "TurnText"
+)
+
+// AgentResponseUnion - The reply to judge. An empty string when the reply was a tool call. For `llm` tasks
+type AgentResponseUnion struct {
+	Str      *string   `queryParam:"inline" union:"member"`
+	TurnText *TurnText `queryParam:"inline" union:"member"`
+
+	Type AgentResponseUnionType
+}
+
+func CreateAgentResponseUnionStr(str string) AgentResponseUnion {
+	typ := AgentResponseUnionTypeStr
+
+	return AgentResponseUnion{
+		Str:  &str,
+		Type: typ,
+	}
+}
+
+func CreateAgentResponseUnionTurnText(turnText TurnText) AgentResponseUnion {
+	typ := AgentResponseUnionTypeTurnText
+
+	return AgentResponseUnion{
+		TurnText: &turnText,
+		Type:     typ,
+	}
+}
+
+func (u *AgentResponseUnion) UnmarshalJSON(data []byte) error {
+
+	var candidates []utils.UnionCandidate
+
+	// Collect all valid candidates
+	var str string = ""
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  AgentResponseUnionTypeStr,
+			Value: &str,
+		})
+	}
+
+	var turnText TurnText = TurnText{}
+	if err := utils.UnmarshalJSON(data, &turnText, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  AgentResponseUnionTypeTurnText,
+			Value: &turnText,
+		})
+	}
+
+	if len(candidates) == 0 {
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for AgentResponseUnion", string(data))
+	}
+
+	// Pick the best candidate using multi-stage filtering
+	best := utils.PickBestUnionCandidate(candidates, data)
+	if best == nil {
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for AgentResponseUnion", string(data))
+	}
+
+	// Set the union type and value based on the best candidate
+	u.Type = best.Type.(AgentResponseUnionType)
+	switch best.Type {
+	case AgentResponseUnionTypeStr:
+		u.Str = best.Value.(*string)
+		return nil
+	case AgentResponseUnionTypeTurnText:
+		u.TurnText = best.Value.(*TurnText)
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for AgentResponseUnion", string(data))
+}
+
+func (u AgentResponseUnion) MarshalJSON() ([]byte, error) {
+	if u.Str != nil {
+		return utils.MarshalJSON(u.Str, "", true)
+	}
+
+	if u.TurnText != nil {
+		return utils.MarshalJSON(u.TurnText, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type AgentResponseUnion: all fields are null")
+}
+
+type ItemPayloadInputType string
+
+const (
+	ItemPayloadInputTypeStr      ItemPayloadInputType = "str"
+	ItemPayloadInputTypeTurnText ItemPayloadInputType = "TurnText"
+)
+
+// ItemPayloadInput - The standalone input the agent was given. For `llm-general` tasks
+type ItemPayloadInput struct {
+	Str      *string   `queryParam:"inline" union:"member"`
+	TurnText *TurnText `queryParam:"inline" union:"member"`
+
+	Type ItemPayloadInputType
+}
+
+func CreateItemPayloadInputStr(str string) ItemPayloadInput {
+	typ := ItemPayloadInputTypeStr
+
+	return ItemPayloadInput{
+		Str:  &str,
+		Type: typ,
+	}
+}
+
+func CreateItemPayloadInputTurnText(turnText TurnText) ItemPayloadInput {
+	typ := ItemPayloadInputTypeTurnText
+
+	return ItemPayloadInput{
+		TurnText: &turnText,
+		Type:     typ,
+	}
+}
+
+func (u *ItemPayloadInput) UnmarshalJSON(data []byte) error {
+
+	var candidates []utils.UnionCandidate
+
+	// Collect all valid candidates
+	var str string = ""
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  ItemPayloadInputTypeStr,
+			Value: &str,
+		})
+	}
+
+	var turnText TurnText = TurnText{}
+	if err := utils.UnmarshalJSON(data, &turnText, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  ItemPayloadInputTypeTurnText,
+			Value: &turnText,
+		})
+	}
+
+	if len(candidates) == 0 {
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for ItemPayloadInput", string(data))
+	}
+
+	// Pick the best candidate using multi-stage filtering
+	best := utils.PickBestUnionCandidate(candidates, data)
+	if best == nil {
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for ItemPayloadInput", string(data))
+	}
+
+	// Set the union type and value based on the best candidate
+	u.Type = best.Type.(ItemPayloadInputType)
+	switch best.Type {
+	case ItemPayloadInputTypeStr:
+		u.Str = best.Value.(*string)
+		return nil
+	case ItemPayloadInputTypeTurnText:
+		u.TurnText = best.Value.(*TurnText)
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for ItemPayloadInput", string(data))
+}
+
+func (u ItemPayloadInput) MarshalJSON() ([]byte, error) {
+	if u.Str != nil {
+		return utils.MarshalJSON(u.Str, "", true)
+	}
+
+	if u.TurnText != nil {
+		return utils.MarshalJSON(u.TurnText, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type ItemPayloadInput: all fields are null")
+}
+
+type OutputType string
+
+const (
+	OutputTypeStr      OutputType = "str"
+	OutputTypeTurnText OutputType = "TurnText"
+)
+
+// Output - The output to judge. For `llm-general` tasks
+type Output struct {
+	Str      *string   `queryParam:"inline" union:"member"`
+	TurnText *TurnText `queryParam:"inline" union:"member"`
+
+	Type OutputType
+}
+
+func CreateOutputStr(str string) Output {
+	typ := OutputTypeStr
+
+	return Output{
+		Str:  &str,
+		Type: typ,
+	}
+}
+
+func CreateOutputTurnText(turnText TurnText) Output {
+	typ := OutputTypeTurnText
+
+	return Output{
+		TurnText: &turnText,
+		Type:     typ,
+	}
+}
+
+func (u *Output) UnmarshalJSON(data []byte) error {
+
+	var candidates []utils.UnionCandidate
+
+	// Collect all valid candidates
+	var str string = ""
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  OutputTypeStr,
+			Value: &str,
+		})
+	}
+
+	var turnText TurnText = TurnText{}
+	if err := utils.UnmarshalJSON(data, &turnText, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  OutputTypeTurnText,
+			Value: &turnText,
+		})
+	}
+
+	if len(candidates) == 0 {
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for Output", string(data))
+	}
+
+	// Pick the best candidate using multi-stage filtering
+	best := utils.PickBestUnionCandidate(candidates, data)
+	if best == nil {
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for Output", string(data))
+	}
+
+	// Set the union type and value based on the best candidate
+	u.Type = best.Type.(OutputType)
+	switch best.Type {
+	case OutputTypeStr:
+		u.Str = best.Value.(*string)
+		return nil
+	case OutputTypeTurnText:
+		u.TurnText = best.Value.(*TurnText)
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for Output", string(data))
+}
+
+func (u Output) MarshalJSON() ([]byte, error) {
+	if u.Str != nil {
+		return utils.MarshalJSON(u.Str, "", true)
+	}
+
+	if u.TurnText != nil {
+		return utils.MarshalJSON(u.TurnText, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type Output: all fields are null")
+}
 
 // ItemPayload - What an annotation item holds. Which fields apply depends on the task type
 type ItemPayload struct {
@@ -24,11 +296,11 @@ type ItemPayload struct {
 	// The conversation up to the reply being judged, ending at the user turn. For `llm` tasks
 	ChatHistory optionalnullable.OptionalNullable[[]ChatTurn] `json:"chat_history,omitzero"`
 	// The reply to judge. An empty string when the reply was a tool call. For `llm` tasks
-	AgentResponse optionalnullable.OptionalNullable[string] `json:"agent_response,omitzero"`
+	AgentResponse optionalnullable.OptionalNullable[AgentResponseUnion] `json:"agent_response,omitzero"`
 	// The standalone input the agent was given. For `llm-general` tasks
-	Input optionalnullable.OptionalNullable[string] `json:"input,omitzero"`
+	Input optionalnullable.OptionalNullable[ItemPayloadInput] `json:"input,omitzero"`
 	// The output to judge. For `llm-general` tasks
-	Output optionalnullable.OptionalNullable[string] `json:"output,omitzero"`
+	Output optionalnullable.OptionalNullable[Output] `json:"output,omitzero"`
 	// The full conversation to judge. For `conversation` tasks
 	Transcript optionalnullable.OptionalNullable[[]ChatTurn] `json:"transcript,omitzero"`
 	// Tool calls the agent made in place of a text reply. With no text reply, sending this marks the item as a tool call for a person to judge. For `llm` and `llm-general` tasks
@@ -101,21 +373,21 @@ func (i *ItemPayload) GetChatHistory() optionalnullable.OptionalNullable[[]ChatT
 	return i.ChatHistory
 }
 
-func (i *ItemPayload) GetAgentResponse() optionalnullable.OptionalNullable[string] {
+func (i *ItemPayload) GetAgentResponse() optionalnullable.OptionalNullable[AgentResponseUnion] {
 	if i == nil {
 		return nil
 	}
 	return i.AgentResponse
 }
 
-func (i *ItemPayload) GetInput() optionalnullable.OptionalNullable[string] {
+func (i *ItemPayload) GetInput() optionalnullable.OptionalNullable[ItemPayloadInput] {
 	if i == nil {
 		return nil
 	}
 	return i.Input
 }
 
-func (i *ItemPayload) GetOutput() optionalnullable.OptionalNullable[string] {
+func (i *ItemPayload) GetOutput() optionalnullable.OptionalNullable[Output] {
 	if i == nil {
 		return nil
 	}

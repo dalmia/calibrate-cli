@@ -9,40 +9,40 @@ import (
 	"github.com/dalmia/calibrate-cli/internal/sdk/sdkinternal/utils"
 )
 
-type InputType string
+type TraceIngestInputType string
 
 const (
-	InputTypeStr              InputType = "str"
-	InputTypeArrayOfTraceTurn InputType = "arrayOfTraceTurn"
+	TraceIngestInputTypeStr              TraceIngestInputType = "str"
+	TraceIngestInputTypeArrayOfTraceTurn TraceIngestInputType = "arrayOfTraceTurn"
 )
 
-// Input - What the agent was given for this turn. For a `general` agent, the standalone prompt as a string. For a `conversation` agent, the history up to the reported output, oldest turn first, in OpenAI chat format
-type Input struct {
+// TraceIngestInput - What the agent was given for this turn. For a `general` agent, the standalone prompt as a string. For a `conversation` agent, the history up to the reported output, oldest turn first, in OpenAI chat format
+type TraceIngestInput struct {
 	Str              *string     `queryParam:"inline" union:"member"`
 	ArrayOfTraceTurn []TraceTurn `queryParam:"inline" union:"member"`
 
-	Type InputType
+	Type TraceIngestInputType
 }
 
-func CreateInputStr(str string) Input {
-	typ := InputTypeStr
+func CreateTraceIngestInputStr(str string) TraceIngestInput {
+	typ := TraceIngestInputTypeStr
 
-	return Input{
+	return TraceIngestInput{
 		Str:  &str,
 		Type: typ,
 	}
 }
 
-func CreateInputArrayOfTraceTurn(arrayOfTraceTurn []TraceTurn) Input {
-	typ := InputTypeArrayOfTraceTurn
+func CreateTraceIngestInputArrayOfTraceTurn(arrayOfTraceTurn []TraceTurn) TraceIngestInput {
+	typ := TraceIngestInputTypeArrayOfTraceTurn
 
-	return Input{
+	return TraceIngestInput{
 		ArrayOfTraceTurn: arrayOfTraceTurn,
 		Type:             typ,
 	}
 }
 
-func (u *Input) UnmarshalJSON(data []byte) error {
+func (u *TraceIngestInput) UnmarshalJSON(data []byte) error {
 
 	var candidates []utils.UnionCandidate
 
@@ -50,7 +50,7 @@ func (u *Input) UnmarshalJSON(data []byte) error {
 	var str string = ""
 	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
 		candidates = append(candidates, utils.UnionCandidate{
-			Type:  InputTypeStr,
+			Type:  TraceIngestInputTypeStr,
 			Value: &str,
 		})
 	}
@@ -58,36 +58,36 @@ func (u *Input) UnmarshalJSON(data []byte) error {
 	var arrayOfTraceTurn []TraceTurn = []TraceTurn{}
 	if err := utils.UnmarshalJSON(data, &arrayOfTraceTurn, "", true, nil); err == nil {
 		candidates = append(candidates, utils.UnionCandidate{
-			Type:  InputTypeArrayOfTraceTurn,
+			Type:  TraceIngestInputTypeArrayOfTraceTurn,
 			Value: arrayOfTraceTurn,
 		})
 	}
 
 	if len(candidates) == 0 {
-		return fmt.Errorf("could not unmarshal `%s` into any supported union types for Input", string(data))
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for TraceIngestInput", string(data))
 	}
 
 	// Pick the best candidate using multi-stage filtering
 	best := utils.PickBestUnionCandidate(candidates, data)
 	if best == nil {
-		return fmt.Errorf("could not unmarshal `%s` into any supported union types for Input", string(data))
+		return fmt.Errorf("could not unmarshal `%s` into any supported union types for TraceIngestInput", string(data))
 	}
 
 	// Set the union type and value based on the best candidate
-	u.Type = best.Type.(InputType)
+	u.Type = best.Type.(TraceIngestInputType)
 	switch best.Type {
-	case InputTypeStr:
+	case TraceIngestInputTypeStr:
 		u.Str = best.Value.(*string)
 		return nil
-	case InputTypeArrayOfTraceTurn:
+	case TraceIngestInputTypeArrayOfTraceTurn:
 		u.ArrayOfTraceTurn = best.Value.([]TraceTurn)
 		return nil
 	}
 
-	return fmt.Errorf("could not unmarshal `%s` into any supported union types for Input", string(data))
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for TraceIngestInput", string(data))
 }
 
-func (u Input) MarshalJSON() ([]byte, error) {
+func (u TraceIngestInput) MarshalJSON() ([]byte, error) {
 	if u.Str != nil {
 		return utils.MarshalJSON(u.Str, "", true)
 	}
@@ -96,7 +96,7 @@ func (u Input) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.ArrayOfTraceTurn, "", true)
 	}
 
-	return nil, errors.New("could not marshal union type Input: all fields are null")
+	return nil, errors.New("could not marshal union type TraceIngestInput: all fields are null")
 }
 
 type TraceIngest struct {
@@ -107,8 +107,8 @@ type TraceIngest struct {
 	// Your own ID for the conversation this turn belongs to, stored for reference only. Omit if you have none
 	ConversationID optionalnullable.OptionalNullable[string] `json:"conversation_id,omitzero"`
 	// What the agent was given for this turn. For a `general` agent, the standalone prompt as a string. For a `conversation` agent, the history up to the reported output, oldest turn first, in OpenAI chat format
-	Input  Input       `json:"input"`
-	Output TraceOutput `json:"output"`
+	Input  TraceIngestInput `json:"input"`
+	Output TraceOutput      `json:"output"`
 	// Key-value pairs stored with the trace. Prefer OTel `gen_ai.*` key names where they fit. Omit if you have none
 	Metadata optionalnullable.OptionalNullable[[]TraceMetadataEntry] `json:"metadata,omitzero"`
 	// Your own tags for this turn, such as an environment or a release. Matched exactly when filtering, so keep the spelling stable. Omit if you have none
@@ -147,9 +147,9 @@ func (t *TraceIngest) GetConversationID() optionalnullable.OptionalNullable[stri
 	return t.ConversationID
 }
 
-func (t *TraceIngest) GetInput() Input {
+func (t *TraceIngest) GetInput() TraceIngestInput {
 	if t == nil {
-		return Input{}
+		return TraceIngestInput{}
 	}
 	return t.Input
 }

@@ -15,7 +15,7 @@ type ChatTurn struct {
 	Content optionalnullable.OptionalNullable[string] `json:"content,omitzero"`
 	// Display name for the text in `content`, shown to annotators
 	Label optionalnullable.OptionalNullable[string] `json:"label,omitzero"`
-	// Other forms of the same text, such as a translation or a human rewrite, keyed by the name annotators see for each. Shown to annotators only
+	// Other forms of the same text, such as a translation or a human rewrite, keyed by the name annotators see for each. Shown to annotators only. Requires text in `content`
 	Versions             optionalnullable.OptionalNullable[map[string]string] `json:"versions,omitzero"`
 	AdditionalProperties map[string]any                                       `additionalProperties:"true" json:"-"`
 }

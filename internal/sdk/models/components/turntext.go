@@ -13,7 +13,7 @@ type TurnText struct {
 	Content string `json:"content"`
 	// Display name for the text in `content`, shown to annotators
 	Label optionalnullable.OptionalNullable[string] `json:"label,omitzero"`
-	// Other forms of the same text, such as a translation or a human rewrite, keyed by the name annotators see for each. Shown to annotators only
+	// Other forms of the same text, such as a translation or a human rewrite, keyed by the name annotators see for each. Shown to annotators only. Requires text in `content`
 	Versions optionalnullable.OptionalNullable[map[string]string] `json:"versions,omitzero"`
 }
 

@@ -21,7 +21,7 @@ calibrate traces create [flags]
 ```
   -a, --agent-id string          ID of the agent that produced the turn. Must be an agent in your workspace [required]
       --body string              Request body as JSON (alternative to individual flags). Can also be provided via stdin.
-  -c, --conversation-id string   Your own ID for the conversation this turn belongs to, stored for reference only. Omit if you have none
+  -c, --conversation-id string   Your own ID for the conversation this turn belongs to. Turns sharing it are grouped into one conversation. Omit if you have none
   -h, --help                     help for create
   -i, --input string             JSON value (one of: string | array of { role: string, content: string, AdditionalProperties: object })
   -l, --labels stringArray       Your own tags for this turn, such as an environment or a release. Matched exactly when filtering, so keep the spelling stable. Omit if you have none

@@ -104,7 +104,7 @@ type TraceIngest struct {
 	AgentID string `json:"agent_id"`
 	// Your own ID for the last user message in `input`, stored for reference only. Omit if you have none
 	MessageID optionalnullable.OptionalNullable[string] `json:"message_id,omitzero"`
-	// Your own ID for the conversation this turn belongs to, stored for reference only. Omit if you have none
+	// Your own ID for the conversation this turn belongs to. Turns sharing it are grouped into one conversation. Omit if you have none
 	ConversationID optionalnullable.OptionalNullable[string] `json:"conversation_id,omitzero"`
 	// What the agent was given for this turn. For a `general` agent, the standalone prompt as a string. For a `conversation` agent, the history up to the reported output, oldest turn first, in OpenAI chat format
 	Input  TraceIngestInput `json:"input"`

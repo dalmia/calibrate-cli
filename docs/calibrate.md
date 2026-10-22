@@ -38,6 +38,7 @@ calibrate [flags]
 * [calibrate annotators](calibrate_annotators.md)	 - Operations for annotators
 * [calibrate auth](calibrate_auth.md)	 - Manage authentication credentials
 * [calibrate configure](calibrate_configure.md)	 - Configure authentication credentials and preferences
+* [calibrate datasets](calibrate_datasets.md)	 - Operations for datasets
 * [calibrate evaluators](calibrate_evaluators.md)	 - Operations for evaluators
 * [calibrate explore](calibrate_explore.md)	 - Interactively browse and run commands
 * [calibrate tests](calibrate_tests.md)	 - Operations for tests

@@ -55,6 +55,7 @@ type SDK struct {
 	Tests           *Tests
 	AgentTests      *AgentTests
 	Evaluators      *Evaluators
+	Datasets        *Datasets
 	AnnotationTasks *AnnotationTasks
 	Annotators      *Annotators
 	Traces          *Traces
@@ -155,6 +156,7 @@ func New(opts ...SDKOption) *SDK {
 	sdk.Tests = newTests(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.AgentTests = newAgentTests(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Evaluators = newEvaluators(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.Datasets = newDatasets(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.AnnotationTasks = newAnnotationTasks(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Annotators = newAnnotators(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Traces = newTraces(sdk, sdk.sdkConfiguration, sdk.hooks)

@@ -8,6 +8,7 @@ import (
 	"github.com/dalmia/calibrate-cli/internal/cli/agenttests"
 	"github.com/dalmia/calibrate-cli/internal/cli/annotationtasks"
 	"github.com/dalmia/calibrate-cli/internal/cli/annotators"
+	"github.com/dalmia/calibrate-cli/internal/cli/datasets"
 	"github.com/dalmia/calibrate-cli/internal/cli/evaluators"
 	"github.com/dalmia/calibrate-cli/internal/cli/tests"
 	"github.com/dalmia/calibrate-cli/internal/cli/traces"
@@ -64,6 +65,9 @@ func NewRootCommand() (*cobra.Command, error) {
 	}
 	if err := evaluators.InitEvaluatorsRoot(rootCmd); err != nil {
 		return nil, fmt.Errorf("init evaluators: %w", err)
+	}
+	if err := datasets.InitDatasetsRoot(rootCmd); err != nil {
+		return nil, fmt.Errorf("init datasets: %w", err)
 	}
 	if err := annotationtasks.InitAnnotationTasksRoot(rootCmd); err != nil {
 		return nil, fmt.Errorf("init annotation-tasks: %w", err)

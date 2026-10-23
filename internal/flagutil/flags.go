@@ -186,5 +186,17 @@ func HasStdinInput(cmd *cobra.Command) bool {
 	if err != nil {
 		return false
 	}
-	return (stat.Mode() & os.ModeCharDevice) == 0
+	mode := stat.Mode()
+	// A pipe (producer | calibrate) carries a body and is closed by its writer.
+	if mode&os.ModeNamedPipe != 0 {
+		return true
+	}
+	// A regular file (calibrate < body.json) carries one when it holds something.
+	if mode.IsRegular() {
+		return stat.Size() > 0
+	}
+	// Anything else — a terminal, /dev/null, or the socket a coding agent or CI
+	// runner attaches — carries no body. Reading a socket nobody writes to and
+	// nobody closes blocks forever, so never read it.
+	return false
 }

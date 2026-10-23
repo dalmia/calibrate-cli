@@ -45,3 +45,4 @@ calibrate [flags]
 * [calibrate traces](calibrate_traces.md)	 - Operations for traces
 * [calibrate version](calibrate_version.md)	 - Print the CLI version
 * [calibrate whoami](calibrate_whoami.md)	 - Display current authentication configuration
+* [calibrate workspace](calibrate_workspace.md)	 - Operations for workspace

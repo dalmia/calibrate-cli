@@ -58,6 +58,7 @@ type SDK struct {
 	Datasets        *Datasets
 	AnnotationTasks *AnnotationTasks
 	Annotators      *Annotators
+	Workspace       *Workspace
 	Traces          *Traces
 
 	sdkConfiguration config.SDKConfiguration
@@ -159,6 +160,7 @@ func New(opts ...SDKOption) *SDK {
 	sdk.Datasets = newDatasets(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.AnnotationTasks = newAnnotationTasks(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Annotators = newAnnotators(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.Workspace = newWorkspace(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Traces = newTraces(sdk, sdk.sdkConfiguration, sdk.hooks)
 
 	return sdk

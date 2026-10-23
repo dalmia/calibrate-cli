@@ -12,6 +12,7 @@ import (
 	"github.com/dalmia/calibrate-cli/internal/cli/evaluators"
 	"github.com/dalmia/calibrate-cli/internal/cli/tests"
 	"github.com/dalmia/calibrate-cli/internal/cli/traces"
+	"github.com/dalmia/calibrate-cli/internal/cli/workspace"
 	"github.com/dalmia/calibrate-cli/internal/config"
 	"github.com/dalmia/calibrate-cli/internal/explorer"
 	"github.com/dalmia/calibrate-cli/internal/output"
@@ -74,6 +75,9 @@ func NewRootCommand() (*cobra.Command, error) {
 	}
 	if err := annotators.InitAnnotatorsRoot(rootCmd); err != nil {
 		return nil, fmt.Errorf("init annotators: %w", err)
+	}
+	if err := workspace.InitWorkspaceRoot(rootCmd); err != nil {
+		return nil, fmt.Errorf("init workspace: %w", err)
 	}
 	if err := traces.InitTracesRoot(rootCmd); err != nil {
 		return nil, fmt.Errorf("init traces: %w", err)

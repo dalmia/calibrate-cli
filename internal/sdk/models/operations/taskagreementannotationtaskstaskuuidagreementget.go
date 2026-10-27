@@ -3,62 +3,15 @@
 package operations
 
 import (
-	"encoding/json"
-	"fmt"
 	"github.com/dalmia/calibrate-cli/internal/sdk/models/components"
 	"github.com/dalmia/calibrate-cli/internal/sdk/optionalnullable"
 	"github.com/dalmia/calibrate-cli/internal/sdk/sdkinternal/utils"
 )
 
-// Bucket - How to bucket points in the trend series
-type Bucket string
-
-const (
-	BucketWeek  Bucket = "week"
-	BucketMonth Bucket = "month"
-	BucketYear  Bucket = "year"
-)
-
-func (e Bucket) ToPointer() *Bucket {
-	return &e
-}
-func (e *Bucket) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "week":
-		fallthrough
-	case "month":
-		fallthrough
-	case "year":
-		*e = Bucket(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for Bucket: %v", v)
-	}
-}
-
 type TaskAgreementAnnotationTasksTaskUUIDAgreementGetRequest struct {
 	// Annotation task to act on
-	TaskUUID string `pathParam:"style=simple,explode=false,name=task_uuid"`
-	// How to bucket points in the trend series
-	Bucket *Bucket `default:"week" queryParam:"style=form,explode=true,name=bucket"`
-	// Trailing window in days for the trend series
-	Days    *int64                                    `default:"90" queryParam:"style=form,explode=true,name=days"`
-	XAPIKey optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=X-API-Key"`
-}
-
-func (t TaskAgreementAnnotationTasksTaskUUIDAgreementGetRequest) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(t, "", false)
-}
-
-func (t *TaskAgreementAnnotationTasksTaskUUIDAgreementGetRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &t, "", false, nil); err != nil {
-		return err
-	}
-	return nil
+	TaskUUID string                                    `pathParam:"style=simple,explode=false,name=task_uuid"`
+	XAPIKey  optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=X-API-Key"`
 }
 
 func (t *TaskAgreementAnnotationTasksTaskUUIDAgreementGetRequest) GetTaskUUID() string {
@@ -66,20 +19,6 @@ func (t *TaskAgreementAnnotationTasksTaskUUIDAgreementGetRequest) GetTaskUUID() 
 		return ""
 	}
 	return t.TaskUUID
-}
-
-func (t *TaskAgreementAnnotationTasksTaskUUIDAgreementGetRequest) GetBucket() *Bucket {
-	if t == nil {
-		return nil
-	}
-	return t.Bucket
-}
-
-func (t *TaskAgreementAnnotationTasksTaskUUIDAgreementGetRequest) GetDays() *int64 {
-	if t == nil {
-		return nil
-	}
-	return t.Days
 }
 
 func (t *TaskAgreementAnnotationTasksTaskUUIDAgreementGetRequest) GetXAPIKey() optionalnullable.OptionalNullable[string] {

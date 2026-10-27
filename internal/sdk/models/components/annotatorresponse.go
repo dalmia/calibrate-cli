@@ -4,6 +4,7 @@ package components
 
 import (
 	"github.com/dalmia/calibrate-cli/internal/sdk/optionalnullable"
+	"github.com/dalmia/calibrate-cli/internal/sdk/sdkinternal/utils"
 )
 
 type AnnotatorResponse struct {
@@ -21,6 +22,19 @@ type AnnotatorResponse struct {
 	CurrentAgreement optionalnullable.OptionalNullable[float64] `json:"current_agreement,omitzero"`
 	// Number of comparable annotation pairs behind the current agreement score
 	PairCount optionalnullable.OptionalNullable[int64] `json:"pair_count,omitzero"`
+	// Agreement with the other annotators and its kappa, one entry for each kind of answer compared, binary answers first. The kinds are never combined into one kappa
+	KappaByKind optionalnullable.OptionalNullable[[]KappaOfAnswerKind] `json:"kappa_by_kind,omitzero"`
+}
+
+func (a AnnotatorResponse) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(a, "", false)
+}
+
+func (a *AnnotatorResponse) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &a, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (a *AnnotatorResponse) GetUUID() string {
@@ -70,4 +84,11 @@ func (a *AnnotatorResponse) GetPairCount() optionalnullable.OptionalNullable[int
 		return nil
 	}
 	return a.PairCount
+}
+
+func (a *AnnotatorResponse) GetKappaByKind() optionalnullable.OptionalNullable[[]KappaOfAnswerKind] {
+	if a == nil {
+		return nil
+	}
+	return a.KappaByKind
 }

@@ -10,10 +10,8 @@ type HumanAgreementBlock struct {
 	// Current mean pairwise agreement among annotators
 	Current *float64 `json:"current"`
 	// How many annotator pairs the current value averages over
-	PairCount int64 `json:"pair_count"`
-	// Agreement over time, one point per time bucket
-	Series               []map[string]any `json:"series"`
-	AdditionalProperties map[string]any   `additionalProperties:"true" json:"-"`
+	PairCount            int64          `json:"pair_count"`
+	AdditionalProperties map[string]any `additionalProperties:"true" json:"-"`
 }
 
 func (h HumanAgreementBlock) MarshalJSON() ([]byte, error) {
@@ -39,13 +37,6 @@ func (h *HumanAgreementBlock) GetPairCount() int64 {
 		return 0
 	}
 	return h.PairCount
-}
-
-func (h *HumanAgreementBlock) GetSeries() []map[string]any {
-	if h == nil {
-		return []map[string]any{}
-	}
-	return h.Series
 }
 
 func (h *HumanAgreementBlock) GetAdditionalProperties() map[string]any {

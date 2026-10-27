@@ -8,15 +8,12 @@ import (
 
 type TaskAgreementResponse struct {
 	// ID of the task
-	TaskID string `json:"task_id"`
-	// Time bucket used for the trend series
-	Bucket string `json:"bucket"`
-	// Length of the trailing window in days
-	Days       int64               `json:"days"`
-	HumanHuman HumanAgreementBlock `json:"human_human"`
+	TaskID               string                    `json:"task_id"`
+	HumanHuman           HumanAgreementBlock       `json:"human_human"`
+	EvaluatorsWithHumans EvaluatorsWithHumansBlock `json:"evaluators_with_humans"`
 	// Agreement between each evaluator and the annotators, plus that evaluator's own results and the human results, one entry per linked evaluator
-	Evaluators           []map[string]any `json:"evaluators"`
-	AdditionalProperties map[string]any   `additionalProperties:"true" json:"-"`
+	Evaluators           []EvaluatorAgreement `json:"evaluators"`
+	AdditionalProperties map[string]any       `additionalProperties:"true" json:"-"`
 }
 
 func (t TaskAgreementResponse) MarshalJSON() ([]byte, error) {
@@ -37,20 +34,6 @@ func (t *TaskAgreementResponse) GetTaskID() string {
 	return t.TaskID
 }
 
-func (t *TaskAgreementResponse) GetBucket() string {
-	if t == nil {
-		return ""
-	}
-	return t.Bucket
-}
-
-func (t *TaskAgreementResponse) GetDays() int64 {
-	if t == nil {
-		return 0
-	}
-	return t.Days
-}
-
 func (t *TaskAgreementResponse) GetHumanHuman() HumanAgreementBlock {
 	if t == nil {
 		return HumanAgreementBlock{}
@@ -58,9 +41,16 @@ func (t *TaskAgreementResponse) GetHumanHuman() HumanAgreementBlock {
 	return t.HumanHuman
 }
 
-func (t *TaskAgreementResponse) GetEvaluators() []map[string]any {
+func (t *TaskAgreementResponse) GetEvaluatorsWithHumans() EvaluatorsWithHumansBlock {
 	if t == nil {
-		return []map[string]any{}
+		return EvaluatorsWithHumansBlock{}
+	}
+	return t.EvaluatorsWithHumans
+}
+
+func (t *TaskAgreementResponse) GetEvaluators() []EvaluatorAgreement {
+	if t == nil {
+		return []EvaluatorAgreement{}
 	}
 	return t.Evaluators
 }

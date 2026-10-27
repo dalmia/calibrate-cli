@@ -16,8 +16,6 @@ import (
 
 var getAgreementCmdMeta = []flagutil.FlagMeta{
 	{FlagName: "task-uuid", Shorthand: "t", FieldPath: "TaskUUID", Kind: flagutil.FlagKindString, Required: true, Description: "Annotation task to act on [required]"},
-	{FlagName: "bucket", Shorthand: "b", FieldPath: "Bucket", Kind: flagutil.FlagKindEnum, Optional: true, HasDefault: true, DefaultStr: "week", EnumValues: []string{"week", "month", "year"}, Description: "How to bucket points in the trend series (options: week, month, year)"},
-	{FlagName: "days", FieldPath: "Days", Kind: flagutil.FlagKindInt64, Optional: true, HasDefault: true, DefaultInt: 90, Description: "Trailing window in days for the trend series"},
 	{FlagName: "x-api-key", Shorthand: "x", FieldPath: "XAPIKey", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `header:"style=simple,explode=false,name=X-API-Key"`, Description: "string value"},
 }
 

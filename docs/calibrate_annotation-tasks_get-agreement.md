@@ -19,8 +19,6 @@ calibrate annotation-tasks get-agreement [flags]
 ### Options
 
 ```
-  -b, --bucket string      How to bucket points in the trend series (options: week, month, year) (default "week")
-      --days int           Trailing window in days for the trend series (default 90)
   -h, --help               help for get-agreement
   -t, --task-uuid string   Annotation task to act on [required]
   -x, --x-api-key string   string value

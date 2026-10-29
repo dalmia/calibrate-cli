@@ -1,4 +1,4 @@
-## calibrate workspace current
+## calibrate organizations current
 
 Get the current workspace
 
@@ -7,13 +7,13 @@ Get the current workspace
 Get the workspace your API key belongs to
 
 ```
-calibrate workspace current [flags]
+calibrate organizations current [flags]
 ```
 
 ### Examples
 
 ```
-  calibrate workspace current
+  calibrate organizations current
 ```
 
 ### Options
@@ -44,4 +44,4 @@ calibrate workspace current [flags]
 
 ### SEE ALSO
 
-* [calibrate workspace](calibrate_workspace.md)	 - Operations for workspace
+* [calibrate organizations](calibrate_organizations.md)	 - Operations for organizations

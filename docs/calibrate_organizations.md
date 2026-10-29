@@ -1,19 +1,19 @@
-## calibrate workspace
+## calibrate organizations
 
-Operations for workspace
+Operations for organizations
 
 ### Synopsis
 
-Operations for workspace
+Operations for organizations
 
 ```
-calibrate workspace [flags]
+calibrate organizations [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help   help for workspace
+  -h, --help   help for organizations
 ```
 
 ### Options inherited from parent commands
@@ -38,4 +38,4 @@ calibrate workspace [flags]
 ### SEE ALSO
 
 * [calibrate](calibrate.md)	 - Calibrate Public API: Programmatic API for CI/automation
-* [calibrate workspace current](calibrate_workspace_current.md)	 - Get the current workspace
+* [calibrate organizations current](calibrate_organizations_current.md)	 - Get the current workspace

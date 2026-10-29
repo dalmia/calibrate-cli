@@ -16,14 +16,14 @@ import (
 	"net/url"
 )
 
-type Workspace struct {
+type Organizations struct {
 	rootSDK          *SDK
 	sdkConfiguration config.SDKConfiguration
 	hooks            *hooks.Hooks
 }
 
-func newWorkspace(rootSDK *SDK, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *Workspace {
-	return &Workspace{
+func newOrganizations(rootSDK *SDK, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *Organizations {
+	return &Organizations{
 		rootSDK:          rootSDK,
 		sdkConfiguration: sdkConfig,
 		hooks:            hooks,
@@ -32,7 +32,7 @@ func newWorkspace(rootSDK *SDK, sdkConfig config.SDKConfiguration, hooks *hooks.
 
 // Current - Get the current workspace
 // Get the workspace your API key belongs to
-func (s *Workspace) Current(ctx context.Context, request *operations.GetCurrentWorkspaceOrganizationsCurrentGetRequest, opts ...operations.Option) (*operations.GetCurrentWorkspaceOrganizationsCurrentGetResponse, error) {
+func (s *Organizations) Current(ctx context.Context, request *operations.GetCurrentWorkspaceOrganizationsCurrentGetRequest, opts ...operations.Option) (*operations.GetCurrentWorkspaceOrganizationsCurrentGetResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionTimeout,

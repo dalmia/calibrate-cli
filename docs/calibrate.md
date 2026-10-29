@@ -41,8 +41,8 @@ calibrate [flags]
 * [calibrate datasets](calibrate_datasets.md)	 - Operations for datasets
 * [calibrate evaluators](calibrate_evaluators.md)	 - Operations for evaluators
 * [calibrate explore](calibrate_explore.md)	 - Interactively browse and run commands
+* [calibrate organizations](calibrate_organizations.md)	 - Operations for organizations
 * [calibrate tests](calibrate_tests.md)	 - Operations for tests
 * [calibrate traces](calibrate_traces.md)	 - Operations for traces
 * [calibrate version](calibrate_version.md)	 - Print the CLI version
 * [calibrate whoami](calibrate_whoami.md)	 - Display current authentication configuration
-* [calibrate workspace](calibrate_workspace.md)	 - Operations for workspace

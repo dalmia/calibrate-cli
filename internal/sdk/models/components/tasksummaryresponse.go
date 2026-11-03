@@ -42,7 +42,7 @@ type TaskSummaryResponse struct {
 	Evaluators []map[string]any `json:"evaluators"`
 	// The annotators who labelled or commented on items in the task, stable across pages
 	Annotators []map[string]any `json:"annotators"`
-	// One row per item, evaluator, and version on this page, with the evaluator's value and each annotator's label
+	// One row per item, evaluator, and version on this page, with the evaluator's value and each annotator's label. `item_added_at` is when the row was added (ISO 8601 UTC). Each label's `answered_at` is when the annotator first gave it in their latest labelling job, and editing does not change it
 	Rows []map[string]any `json:"rows"`
 	// Annotator comments, keyed by item ID
 	ItemComments         optionalnullable.OptionalNullable[map[string]any] `json:"item_comments,omitzero"`

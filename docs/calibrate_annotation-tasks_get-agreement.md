@@ -19,7 +19,15 @@ calibrate annotation-tasks get-agreement [flags]
 ### Options
 
 ```
+      --date-field start   Which date start and `end` apply to:
+                           
+                           - `row_added`: when the row was added to the task
+                           - `annotator_answered`: when the annotator first gave the answer in their latest labelling job. Editing does not change this date
+                           
+                           Omit to use `row_added` (options: row_added, annotator_answered) (default "row_added")
+  -e, --end string         Return only rows or answers dated before this time (ISO 8601). A time with no timezone is read as UTC. Omit for no latest date
   -h, --help               help for get-agreement
+  -s, --start string       Return only rows or answers dated at or after this time (ISO 8601). A time with no timezone is read as UTC. Omit for no earliest date
   -t, --task-uuid string   Annotation task to act on [required]
   -x, --x-api-key string   string value
 ```

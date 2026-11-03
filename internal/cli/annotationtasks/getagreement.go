@@ -16,6 +16,9 @@ import (
 
 var getAgreementCmdMeta = []flagutil.FlagMeta{
 	{FlagName: "task-uuid", Shorthand: "t", FieldPath: "TaskUUID", Kind: flagutil.FlagKindString, Required: true, Description: "Annotation task to act on [required]"},
+	{FlagName: "date-field", FieldPath: "DateField", Kind: flagutil.FlagKindEnum, Optional: true, HasDefault: true, DefaultStr: "row_added", EnumValues: []string{"row_added", "annotator_answered"}, Description: "Which date `start` and `end` apply to:\n\n- `row_added`: when the row was added to the task\n- `annotator_answered`: when the annotator first gave the answer in their latest labelling job. Editing does not change this date\n\nOmit to use `row_added` (options: row_added, annotator_answered)"},
+	{FlagName: "start", Shorthand: "s", FieldPath: "Start", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `queryParam:"style=form,explode=true,name=start"`, Description: "Return only rows or answers dated at or after this time (ISO 8601). A time with no timezone is read as UTC. Omit for no earliest date"},
+	{FlagName: "end", Shorthand: "e", FieldPath: "End", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `queryParam:"style=form,explode=true,name=end"`, Description: "Return only rows or answers dated before this time (ISO 8601). A time with no timezone is read as UTC. Omit for no latest date"},
 	{FlagName: "x-api-key", Shorthand: "x", FieldPath: "XAPIKey", Kind: flagutil.FlagKindJSON, Optional: true, Annotations: `header:"style=simple,explode=false,name=X-API-Key"`, Description: "string value"},
 }
 

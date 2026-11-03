@@ -20,7 +20,14 @@ calibrate annotation-tasks get-summary [flags]
 
 ```
   -c, --compact rows.payload   Return a compact response that omits heavy detail fields (rows.payload, `rows.evaluator_reasoning`, `rows.annotations.reasoning`, `evaluators.versions.system_prompt`, `evaluators.versions.output_config`, `evaluators.versions.variables`, `item_comments`), keeping only the lightweight decision fields. Omit for full detail
+      --date-field start       Which date start and `end` apply to:
+                               
+                               - `row_added`: when the row was added to the task
+                               - `annotator_answered`: when the annotator first gave the answer in their latest labelling job. Editing does not change this date
+                               
+                               Omit to use `row_added` (options: row_added, annotator_answered) (default "row_added")
       --disagreement-only      When true, keep only rows where the evaluator disagreed with at least one annotator
+  -e, --end string             Return only rows or answers dated before this time (ISO 8601). A time with no timezone is read as UTC. Omit for no latest date
   -h, --help                   help for get-summary
   -i, --item-id annotators     Filter rows to a single item. The full task-wide annotator union is still returned in annotators
       --limit int              Maximum number of items to return (default 50)
@@ -28,7 +35,8 @@ calibrate annotation-tasks get-summary [flags]
       --offset int             Number of items to skip before returning results
       --order string           Sort direction (options: asc, desc) (default "desc")
       --q payload.name         Case-insensitive substring search on payload.name. Blank is a no-op
-  -s, --sort-by string         Sort key for the results (default "created_at")
+      --sort-by string         Sort key for the results (default "created_at")
+      --start string           Return only rows or answers dated at or after this time (ISO 8601). A time with no timezone is read as UTC. Omit for no earliest date
   -t, --task-uuid string       Annotation task to act on [required]
   -x, --x-api-key string       string value
 ```

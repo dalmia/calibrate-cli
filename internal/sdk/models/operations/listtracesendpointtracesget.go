@@ -78,9 +78,9 @@ type ListTracesEndpointTracesGetRequest struct {
 	Labels optionalnullable.OptionalNullable[[]string] `queryParam:"style=form,explode=true,name=labels"`
 	// Return only traces whose latest scoring run matches this condition. Each is written as `<evaluator ID>:<condition>`, where the condition is `passed`, `failed`, or one of `=`, `!=`, `<`, `<=`, `>`, `>=` followed by a number, such as `>=4`. Repeat the parameter to require every condition at once
 	Score optionalnullable.OptionalNullable[[]string] `queryParam:"style=form,explode=true,name=score"`
-	// Return only traces created at or after this time (ISO 8601). A time with no timezone is read as UTC
+	// Return only traces created at or after this time (ISO 8601). A time with no timezone is read as UTC. Omit for no earliest date
 	CreatedAfter optionalnullable.OptionalNullable[time.Time] `queryParam:"style=form,explode=true,name=created_after"`
-	// Return only traces created before this time (ISO 8601). A time with no timezone is read as UTC
+	// Return only traces created before this time (ISO 8601). A time with no timezone is read as UTC. Omit for no latest date
 	CreatedBefore optionalnullable.OptionalNullable[time.Time] `queryParam:"style=form,explode=true,name=created_before"`
 	// Order traces by this evaluator's score on each trace's latest scoring run. Traces it has not scored come last whichever direction you pick
 	SortByEvaluator optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=sort_by_evaluator"`

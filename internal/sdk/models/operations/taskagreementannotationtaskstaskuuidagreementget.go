@@ -3,15 +3,72 @@
 package operations
 
 import (
+	"encoding/json"
+	"fmt"
 	"github.com/dalmia/calibrate-cli/internal/sdk/models/components"
 	"github.com/dalmia/calibrate-cli/internal/sdk/optionalnullable"
 	"github.com/dalmia/calibrate-cli/internal/sdk/sdkinternal/utils"
+	"time"
 )
+
+// TaskAgreementAnnotationTasksTaskUUIDAgreementGetDateField - Which date `start` and `end` apply to:
+//
+// - `row_added`: when the row was added to the task
+// - `annotator_answered`: when the annotator first gave the answer in their latest labelling job. Editing does not change this date
+//
+// Omit to use `row_added`
+type TaskAgreementAnnotationTasksTaskUUIDAgreementGetDateField string
+
+const (
+	TaskAgreementAnnotationTasksTaskUUIDAgreementGetDateFieldRowAdded          TaskAgreementAnnotationTasksTaskUUIDAgreementGetDateField = "row_added"
+	TaskAgreementAnnotationTasksTaskUUIDAgreementGetDateFieldAnnotatorAnswered TaskAgreementAnnotationTasksTaskUUIDAgreementGetDateField = "annotator_answered"
+)
+
+func (e TaskAgreementAnnotationTasksTaskUUIDAgreementGetDateField) ToPointer() *TaskAgreementAnnotationTasksTaskUUIDAgreementGetDateField {
+	return &e
+}
+func (e *TaskAgreementAnnotationTasksTaskUUIDAgreementGetDateField) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "row_added":
+		fallthrough
+	case "annotator_answered":
+		*e = TaskAgreementAnnotationTasksTaskUUIDAgreementGetDateField(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for TaskAgreementAnnotationTasksTaskUUIDAgreementGetDateField: %v", v)
+	}
+}
 
 type TaskAgreementAnnotationTasksTaskUUIDAgreementGetRequest struct {
 	// Annotation task to act on
-	TaskUUID string                                    `pathParam:"style=simple,explode=false,name=task_uuid"`
-	XAPIKey  optionalnullable.OptionalNullable[string] `header:"style=simple,explode=false,name=X-API-Key"`
+	TaskUUID string `pathParam:"style=simple,explode=false,name=task_uuid"`
+	// Which date `start` and `end` apply to:
+	//
+	// - `row_added`: when the row was added to the task
+	// - `annotator_answered`: when the annotator first gave the answer in their latest labelling job. Editing does not change this date
+	//
+	// Omit to use `row_added`
+	DateField *TaskAgreementAnnotationTasksTaskUUIDAgreementGetDateField `default:"row_added" queryParam:"style=form,explode=true,name=date_field"`
+	// Return only rows or answers dated at or after this time (ISO 8601). A time with no timezone is read as UTC. Omit for no earliest date
+	Start optionalnullable.OptionalNullable[time.Time] `queryParam:"style=form,explode=true,name=start"`
+	// Return only rows or answers dated before this time (ISO 8601). A time with no timezone is read as UTC. Omit for no latest date
+	End     optionalnullable.OptionalNullable[time.Time] `queryParam:"style=form,explode=true,name=end"`
+	XAPIKey optionalnullable.OptionalNullable[string]    `header:"style=simple,explode=false,name=X-API-Key"`
+}
+
+func (t TaskAgreementAnnotationTasksTaskUUIDAgreementGetRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(t, "", false)
+}
+
+func (t *TaskAgreementAnnotationTasksTaskUUIDAgreementGetRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &t, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (t *TaskAgreementAnnotationTasksTaskUUIDAgreementGetRequest) GetTaskUUID() string {
@@ -19,6 +76,27 @@ func (t *TaskAgreementAnnotationTasksTaskUUIDAgreementGetRequest) GetTaskUUID() 
 		return ""
 	}
 	return t.TaskUUID
+}
+
+func (t *TaskAgreementAnnotationTasksTaskUUIDAgreementGetRequest) GetDateField() *TaskAgreementAnnotationTasksTaskUUIDAgreementGetDateField {
+	if t == nil {
+		return nil
+	}
+	return t.DateField
+}
+
+func (t *TaskAgreementAnnotationTasksTaskUUIDAgreementGetRequest) GetStart() optionalnullable.OptionalNullable[time.Time] {
+	if t == nil {
+		return nil
+	}
+	return t.Start
+}
+
+func (t *TaskAgreementAnnotationTasksTaskUUIDAgreementGetRequest) GetEnd() optionalnullable.OptionalNullable[time.Time] {
+	if t == nil {
+		return nil
+	}
+	return t.End
 }
 
 func (t *TaskAgreementAnnotationTasksTaskUUIDAgreementGetRequest) GetXAPIKey() optionalnullable.OptionalNullable[string] {

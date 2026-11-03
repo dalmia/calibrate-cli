@@ -8,7 +8,40 @@ import (
 	"github.com/dalmia/calibrate-cli/internal/sdk/models/components"
 	"github.com/dalmia/calibrate-cli/internal/sdk/optionalnullable"
 	"github.com/dalmia/calibrate-cli/internal/sdk/sdkinternal/utils"
+	"time"
 )
+
+// TaskSummaryAnnotationTasksTaskUUIDSummaryGetDateField - Which date `start` and `end` apply to:
+//
+// - `row_added`: when the row was added to the task
+// - `annotator_answered`: when the annotator first gave the answer in their latest labelling job. Editing does not change this date
+//
+// Omit to use `row_added`
+type TaskSummaryAnnotationTasksTaskUUIDSummaryGetDateField string
+
+const (
+	TaskSummaryAnnotationTasksTaskUUIDSummaryGetDateFieldRowAdded          TaskSummaryAnnotationTasksTaskUUIDSummaryGetDateField = "row_added"
+	TaskSummaryAnnotationTasksTaskUUIDSummaryGetDateFieldAnnotatorAnswered TaskSummaryAnnotationTasksTaskUUIDSummaryGetDateField = "annotator_answered"
+)
+
+func (e TaskSummaryAnnotationTasksTaskUUIDSummaryGetDateField) ToPointer() *TaskSummaryAnnotationTasksTaskUUIDSummaryGetDateField {
+	return &e
+}
+func (e *TaskSummaryAnnotationTasksTaskUUIDSummaryGetDateField) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "row_added":
+		fallthrough
+	case "annotator_answered":
+		*e = TaskSummaryAnnotationTasksTaskUUIDSummaryGetDateField(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for TaskSummaryAnnotationTasksTaskUUIDSummaryGetDateField: %v", v)
+	}
+}
 
 // Order - Sort direction
 type Order string
@@ -46,6 +79,17 @@ type TaskSummaryAnnotationTasksTaskUUIDSummaryGetRequest struct {
 	LiveOnly *bool `default:"false" queryParam:"style=form,explode=true,name=live_only"`
 	// When true, keep only rows where the evaluator disagreed with at least one annotator
 	DisagreementOnly *bool `default:"false" queryParam:"style=form,explode=true,name=disagreement_only"`
+	// Which date `start` and `end` apply to:
+	//
+	// - `row_added`: when the row was added to the task
+	// - `annotator_answered`: when the annotator first gave the answer in their latest labelling job. Editing does not change this date
+	//
+	// Omit to use `row_added`
+	DateField *TaskSummaryAnnotationTasksTaskUUIDSummaryGetDateField `default:"row_added" queryParam:"style=form,explode=true,name=date_field"`
+	// Return only rows or answers dated at or after this time (ISO 8601). A time with no timezone is read as UTC. Omit for no earliest date
+	Start optionalnullable.OptionalNullable[time.Time] `queryParam:"style=form,explode=true,name=start"`
+	// Return only rows or answers dated before this time (ISO 8601). A time with no timezone is read as UTC. Omit for no latest date
+	End optionalnullable.OptionalNullable[time.Time] `queryParam:"style=form,explode=true,name=end"`
 	// Case-insensitive substring search on `payload.name`. Blank is a no-op
 	Q optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=q"`
 	// Sort key for the results
@@ -98,6 +142,27 @@ func (t *TaskSummaryAnnotationTasksTaskUUIDSummaryGetRequest) GetDisagreementOnl
 		return nil
 	}
 	return t.DisagreementOnly
+}
+
+func (t *TaskSummaryAnnotationTasksTaskUUIDSummaryGetRequest) GetDateField() *TaskSummaryAnnotationTasksTaskUUIDSummaryGetDateField {
+	if t == nil {
+		return nil
+	}
+	return t.DateField
+}
+
+func (t *TaskSummaryAnnotationTasksTaskUUIDSummaryGetRequest) GetStart() optionalnullable.OptionalNullable[time.Time] {
+	if t == nil {
+		return nil
+	}
+	return t.Start
+}
+
+func (t *TaskSummaryAnnotationTasksTaskUUIDSummaryGetRequest) GetEnd() optionalnullable.OptionalNullable[time.Time] {
+	if t == nil {
+		return nil
+	}
+	return t.End
 }
 
 func (t *TaskSummaryAnnotationTasksTaskUUIDSummaryGetRequest) GetQ() optionalnullable.OptionalNullable[string] {

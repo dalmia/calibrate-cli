@@ -32,7 +32,7 @@ calibrate traces list [flags]
       --output-type response               Return only traces whose output is of this kind. response covers every trace carrying a reply, including one that also issued tool calls. `tool_call` covers traces that only issued tool calls (options: response, tool_call)
       --q string                           Return only traces containing this text in their message ID, conversation ID, conversation history, output, or metadata
       --score <evaluator ID>:<condition>   Return only traces whose latest scoring run matches this condition. Each is written as <evaluator ID>:<condition>, where the condition is `passed`, `failed`, or one of `=`, `!=`, `<`, `<=`, `>`, `>=` followed by a number, such as `>=4`. Repeat the parameter to require every condition at once
-      --sort-by-evaluator string           Order traces by this evaluator's score on each trace's latest scoring run. Traces it has not scored come last whichever direction you pick
+      --sort-by-evaluator string           Order traces by this evaluator's score on each trace's latest scoring run. Traces this evaluator has not scored come last whichever direction you pick, and an evaluator not linked to the agent counts as having scored none
       --sort-order sort_by_evaluator       Whether sort_by_evaluator puts the highest scores first or the lowest. Ignored without it (options: asc, desc) (default "desc")
   -x, --x-api-key string                   string value
 ```

@@ -162,7 +162,7 @@ type TraceSummary struct {
 	LatestRunStatus optionalnullable.OptionalNullable[TraceEvalRunStatus] `json:"latest_run_status,omitzero"`
 	// Why the latest scoring run was skipped or failed
 	LatestRunError optionalnullable.OptionalNullable[string] `json:"latest_run_error,omitzero"`
-	// Results for each evaluator on the latest scoring run
+	// Results on the latest scoring run from the evaluators linked to the agent
 	Results []TraceScoreResult `json:"results,omitzero"`
 }
 

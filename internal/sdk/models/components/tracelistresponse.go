@@ -17,7 +17,7 @@ type TraceListResponse struct {
 	Limit optionalnullable.OptionalNullable[int64] `json:"limit,omitzero"`
 	// The applied `offset`
 	Offset *int64 `default:"0" json:"offset"`
-	// One entry per evaluator that scored at least one matching trace, averaged over every matching trace rather than this page. Ask for it with `include_score_averages`
+	// One average for each evaluator linked to the agent that scored at least one trace matching the filters, covering all the matching traces it scored rather than this page. Ask for it with `include_score_averages`
 	ScoreAverages optionalnullable.OptionalNullable[[]TraceScoreAverage] `json:"score_averages,omitzero"`
 }
 

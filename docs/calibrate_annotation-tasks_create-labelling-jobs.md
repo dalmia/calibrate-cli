@@ -19,17 +19,18 @@ calibrate annotation-tasks create-labelling-jobs [flags]
 ### Options
 
 ```
-  -a, --annotator-ids stringArray   Annotator IDs to assign, creating one labelling job for each annotator. Must be in your workspace [required]
-      --body string                 Request body as JSON (alternative to individual flags). Can also be provided via stdin.
-  -c, --comments-enabled true       When true, the labelling form lets the annotator leave a comment on each item (default true)
-  -e, --evaluator-ids None          Subset of the task's linked evaluators to show in these jobs. Must be a subset of the current links, an empty list gives a 400. Applies to every annotator's job. Omit (None) to snapshot every linked evaluator
-  -h, --help                        help for create-labelling-jobs
-  -i, --item-ids select_all=false   Item IDs to assign. **Required when select_all=false**. Ignored when `select_all=true`
-      --q payload.name              Case-insensitive substring filter on payload.name. Applies only when `select_all=true`
-  -r, --reasoning-mode optional     How the labelling form treats the reasoning box on each judgement. optional shows it, `required` shows it and asks the annotator to fill it in, `hidden` leaves it out (options: optional, required, hidden) (default "optional")
-  -s, --select-all true             When true, assign every item in the task and ignore `item_ids`. Set `q` to assign only items whose name matches it
-  -t, --task-uuid string            Annotation task to act on [required]
-  -x, --x-api-key string            string value
+  -a, --annotator-ids stringArray                  Annotator IDs to assign, creating one labelling job for each annotator. Must be in your workspace [required]
+      --body string                                Request body as JSON (alternative to individual flags). Can also be provided via stdin.
+  -c, --comments-enabled true                      When true, the labelling form lets the annotator leave a comment on each item (default true)
+      --evaluator-ids None                         Subset of the task's linked evaluators to show in these jobs. Must be a subset of the current links, an empty list gives a 400. Applies to every annotator's job. Omit (None) to snapshot every linked evaluator
+      --evaluator-reasoning-modes reasoning_mode   Map of evaluator ID to how the labelling form treats the reasoning box for that evaluator, with the same values as reasoning_mode. Every ID must be an evaluator on these jobs, otherwise you get a 400. An evaluator left out uses `reasoning_mode`
+  -h, --help                                       help for create-labelling-jobs
+  -i, --item-ids select_all=false                  Item IDs to assign. **Required when select_all=false**. Ignored when `select_all=true`
+      --q payload.name                             Case-insensitive substring filter on payload.name. Applies only when `select_all=true`
+  -r, --reasoning-mode optional                    How the labelling form treats the reasoning box on each judgement. optional shows it, `required` shows it and asks the annotator to fill it in, `hidden` leaves it out (options: optional, required, hidden) (default "optional")
+  -s, --select-all true                            When true, assign every item in the task and ignore `item_ids`. Set `q` to assign only items whose name matches it
+  -t, --task-uuid string                           Annotation task to act on [required]
+  -x, --x-api-key string                           string value
 ```
 
 ### Options inherited from parent commands

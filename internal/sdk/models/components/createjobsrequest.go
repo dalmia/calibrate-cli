@@ -39,6 +39,35 @@ func (e *ReasoningMode) UnmarshalJSON(data []byte) error {
 	}
 }
 
+type EvaluatorReasoningModes string
+
+const (
+	EvaluatorReasoningModesOptional EvaluatorReasoningModes = "optional"
+	EvaluatorReasoningModesRequired EvaluatorReasoningModes = "required"
+	EvaluatorReasoningModesHidden   EvaluatorReasoningModes = "hidden"
+)
+
+func (e EvaluatorReasoningModes) ToPointer() *EvaluatorReasoningModes {
+	return &e
+}
+func (e *EvaluatorReasoningModes) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "optional":
+		fallthrough
+	case "required":
+		fallthrough
+	case "hidden":
+		*e = EvaluatorReasoningModes(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for EvaluatorReasoningModes: %v", v)
+	}
+}
+
 type CreateJobsRequest struct {
 	// Annotator IDs to assign, creating one labelling job for each annotator. Must be in your workspace
 	AnnotatorIds []string `json:"annotator_ids"`
@@ -54,6 +83,8 @@ type CreateJobsRequest struct {
 	CommentsEnabled *bool `default:"true" json:"comments_enabled"`
 	// How the labelling form treats the reasoning box on each judgement. `optional` shows it, `required` shows it and asks the annotator to fill it in, `hidden` leaves it out
 	ReasoningMode *ReasoningMode `default:"optional" json:"reasoning_mode"`
+	// Map of evaluator ID to how the labelling form treats the reasoning box for that evaluator, with the same values as `reasoning_mode`. Every ID must be an evaluator on these jobs, otherwise you get a 400. An evaluator left out uses `reasoning_mode`
+	EvaluatorReasoningModes optionalnullable.OptionalNullable[map[string]EvaluatorReasoningModes] `json:"evaluator_reasoning_modes,omitzero"`
 }
 
 func (c CreateJobsRequest) MarshalJSON() ([]byte, error) {
@@ -114,4 +145,11 @@ func (c *CreateJobsRequest) GetReasoningMode() *ReasoningMode {
 		return nil
 	}
 	return c.ReasoningMode
+}
+
+func (c *CreateJobsRequest) GetEvaluatorReasoningModes() optionalnullable.OptionalNullable[map[string]EvaluatorReasoningModes] {
+	if c == nil {
+		return nil
+	}
+	return c.EvaluatorReasoningModes
 }

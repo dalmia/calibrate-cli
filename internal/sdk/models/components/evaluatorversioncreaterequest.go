@@ -13,7 +13,7 @@ type EvaluatorVersionCreateRequest struct {
 	JudgeModel string `json:"judge_model"`
 	// Judge system prompt. May contain `{{variable}}` placeholders
 	SystemPrompt string `json:"system_prompt"`
-	// The scale points and their labels. Required for a `rating` evaluator. A `binary` evaluator uses the default Correct/Wrong labels unless you set your own
+	// The rows of the rating scale, each a number and its label. Required for a `rating` evaluator. For a rating evaluator, give the label for the worst result the lowest number and the label for the best result the highest number. A `binary` evaluator uses the default Correct/Wrong labels unless you set your own
 	OutputConfig optionalnullable.OptionalNullable[OutputConfig] `json:"output_config,omitzero"`
 	// Declared prompt variables. Omit if the prompt has none. After the first version the variable names are fixed. You can change a variable's description or default, but not add, remove, or rename one
 	Variables optionalnullable.OptionalNullable[[]VariableSpec] `json:"variables,omitzero"`

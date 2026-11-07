@@ -8,7 +8,7 @@ import (
 )
 
 type OutputConfig struct {
-	// The ordered scale points that make up the rubric, each with its label
+	// The rows of the rating scale, each a number and its label. For a rating evaluator, give the label for the worst result the lowest number and the label for the best result the highest number
 	Scale optionalnullable.OptionalNullable[[]OutputScaleEntry] `json:"scale,omitzero"`
 }
 

@@ -9,13 +9,13 @@ import (
 // OutputScaleEntry - One entry in an evaluator's output_config.scale. `value` is bool|number|string
 // depending on output_type.
 type OutputScaleEntry struct {
-	// The value for this scale point. Use a boolean for a `binary` evaluator, a number for a `rating` one
+	// The value for this row. Use a boolean for a `binary` evaluator, a number for a `rating` one. For a rating evaluator, give the label for the worst result the lowest number and the label for the best result the highest number
 	Value any `json:"value"`
-	// Short label for this scale point
+	// Short label for this row
 	Name string `json:"name"`
-	// Rubric text for this level, added to the judge prompt. Omit to leave this level undescribed
+	// Rubric text for this row, added to the judge prompt. Omit to leave this row undescribed
 	Description optionalnullable.OptionalNullable[string] `json:"description,omitzero"`
-	// Color to show for this level. Omit for the default
+	// Color to show for this row. Omit for the default
 	Color optionalnullable.OptionalNullable[string] `json:"color,omitzero"`
 }
 

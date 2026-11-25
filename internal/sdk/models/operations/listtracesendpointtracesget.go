@@ -38,6 +38,70 @@ func (e *OutputType) UnmarshalJSON(data []byte) error {
 	}
 }
 
+// Source - Return only traces from this source:
+//
+// - `api`: sent to `POST /traces`
+// - `chat`: a reply the agent gave on its chat link
+type Source string
+
+const (
+	SourceAPI  Source = "api"
+	SourceChat Source = "chat"
+)
+
+func (e Source) ToPointer() *Source {
+	return &e
+}
+func (e *Source) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "api":
+		fallthrough
+	case "chat":
+		*e = Source(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for Source: %v", v)
+	}
+}
+
+// Feedback - Return only traces with this feedback:
+//
+// - `correct`: marked correct
+// - `wrong`: marked wrong
+// - `any`: marked either way
+type Feedback string
+
+const (
+	FeedbackCorrect Feedback = "correct"
+	FeedbackWrong   Feedback = "wrong"
+	FeedbackAny     Feedback = "any"
+)
+
+func (e Feedback) ToPointer() *Feedback {
+	return &e
+}
+func (e *Feedback) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "correct":
+		fallthrough
+	case "wrong":
+		fallthrough
+	case "any":
+		*e = Feedback(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for Feedback: %v", v)
+	}
+}
+
 // SortOrder - Whether `sort_by_evaluator` puts the highest scores first or the lowest. Ignored without it
 type SortOrder string
 
@@ -82,6 +146,17 @@ type ListTracesEndpointTracesGetRequest struct {
 	CreatedAfter optionalnullable.OptionalNullable[time.Time] `queryParam:"style=form,explode=true,name=created_after"`
 	// Return only traces created before this time (ISO 8601). A time with no timezone is read as UTC. Omit for no latest date
 	CreatedBefore optionalnullable.OptionalNullable[time.Time] `queryParam:"style=form,explode=true,name=created_before"`
+	// Return only traces from this source:
+	//
+	// - `api`: sent to `POST /traces`
+	// - `chat`: a reply the agent gave on its chat link
+	Source optionalnullable.OptionalNullable[Source] `queryParam:"style=form,explode=true,name=source"`
+	// Return only traces with this feedback:
+	//
+	// - `correct`: marked correct
+	// - `wrong`: marked wrong
+	// - `any`: marked either way
+	Feedback optionalnullable.OptionalNullable[Feedback] `queryParam:"style=form,explode=true,name=feedback"`
 	// Order traces by this evaluator's score on each trace's latest scoring run. Traces this evaluator has not scored come last whichever direction you pick, and an evaluator not linked to the agent counts as having scored none
 	SortByEvaluator optionalnullable.OptionalNullable[string] `queryParam:"style=form,explode=true,name=sort_by_evaluator"`
 	// Whether `sort_by_evaluator` puts the highest scores first or the lowest. Ignored without it
@@ -162,6 +237,20 @@ func (l *ListTracesEndpointTracesGetRequest) GetCreatedBefore() optionalnullable
 		return nil
 	}
 	return l.CreatedBefore
+}
+
+func (l *ListTracesEndpointTracesGetRequest) GetSource() optionalnullable.OptionalNullable[Source] {
+	if l == nil {
+		return nil
+	}
+	return l.Source
+}
+
+func (l *ListTracesEndpointTracesGetRequest) GetFeedback() optionalnullable.OptionalNullable[Feedback] {
+	if l == nil {
+		return nil
+	}
+	return l.Feedback
 }
 
 func (l *ListTracesEndpointTracesGetRequest) GetSortByEvaluator() optionalnullable.OptionalNullable[string] {

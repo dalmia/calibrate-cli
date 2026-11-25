@@ -23,6 +23,11 @@ calibrate traces list [flags]
       --conversation-id agent_id           Return only the turns of this conversation. Requires agent_id
       --created-after string               Return only traces created at or after this time (ISO 8601). A time with no timezone is read as UTC. Omit for no earliest date
       --created-before string              Return only traces created before this time (ISO 8601). A time with no timezone is read as UTC. Omit for no latest date
+  -f, --feedback correct                   Return only traces with this feedback:
+                                           
+                                           - correct: marked correct
+                                           - `wrong`: marked wrong
+                                           - `any`: marked either way (options: correct, wrong, any)
   -h, --help                               help for list
       --include-content limit              Also return each trace's full input, output and metadata. Use limit and `offset` to page through them
       --include-score-averages             Also return each evaluator's mean score over every matching trace, not just this page. Costs a pass over those traces, so ask for it when the filters change rather than on every page
@@ -34,6 +39,10 @@ calibrate traces list [flags]
       --score <evaluator ID>:<condition>   Return only traces whose latest scoring run matches this condition. Each is written as <evaluator ID>:<condition>, where the condition is `passed`, `failed`, or one of `=`, `!=`, `<`, `<=`, `>`, `>=` followed by a number, such as `>=4`. Repeat the parameter to require every condition at once
       --sort-by-evaluator string           Order traces by this evaluator's score on each trace's latest scoring run. Traces this evaluator has not scored come last whichever direction you pick, and an evaluator not linked to the agent counts as having scored none
       --sort-order sort_by_evaluator       Whether sort_by_evaluator puts the highest scores first or the lowest. Ignored without it (options: asc, desc) (default "desc")
+      --source api                         Return only traces from this source:
+                                           
+                                           - api: sent to `POST /traces`
+                                           - `chat`: a reply the agent gave on its chat link (options: api, chat)
   -x, --x-api-key string                   string value
 ```
 

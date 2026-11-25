@@ -113,6 +113,8 @@ type TraceIngest struct {
 	Metadata optionalnullable.OptionalNullable[[]TraceMetadataEntry] `json:"metadata,omitzero"`
 	// Your own tags for this turn, such as an environment or a release. Matched exactly when filtering, so keep the spelling stable. Omit if you have none
 	Labels []string `json:"labels,omitzero"`
+	// A verdict on the agent's output, if you already have one. Omit if you have none
+	Feedback optionalnullable.OptionalNullable[TraceFeedbackIngest] `json:"feedback,omitzero"`
 }
 
 func (t TraceIngest) MarshalJSON() ([]byte, error) {
@@ -173,4 +175,11 @@ func (t *TraceIngest) GetLabels() []string {
 		return nil
 	}
 	return t.Labels
+}
+
+func (t *TraceIngest) GetFeedback() optionalnullable.OptionalNullable[TraceFeedbackIngest] {
+	if t == nil {
+		return nil
+	}
+	return t.Feedback
 }

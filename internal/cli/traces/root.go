@@ -28,6 +28,10 @@ func InitTracesRoot(parent *cobra.Command) error {
 		return err
 	}
 
+	if err := initSetFeedbackCmd(TracesCmd); err != nil {
+		return err
+	}
+
 	parent.AddCommand(TracesCmd)
 	return nil
 }

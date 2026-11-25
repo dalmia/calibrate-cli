@@ -12,6 +12,8 @@ type TraceOutput struct {
 	Response optionalnullable.OptionalNullable[string] `json:"response,omitzero"`
 	// Tool calls the agent issued for this turn. Omit for plain text replies
 	ToolCalls optionalnullable.OptionalNullable[[]TraceToolCall] `json:"tool_calls,omitzero"`
+	// True when the agent was stopped after calling tools as many times in a row as it may, before it replied
+	StoppedEarly optionalnullable.OptionalNullable[bool] `json:"stopped_early,omitzero"`
 }
 
 func (t TraceOutput) MarshalJSON() ([]byte, error) {
@@ -37,4 +39,11 @@ func (t *TraceOutput) GetToolCalls() optionalnullable.OptionalNullable[[]TraceTo
 		return nil
 	}
 	return t.ToolCalls
+}
+
+func (t *TraceOutput) GetStoppedEarly() optionalnullable.OptionalNullable[bool] {
+	if t == nil {
+		return nil
+	}
+	return t.StoppedEarly
 }

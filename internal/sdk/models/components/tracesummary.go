@@ -9,6 +9,32 @@ import (
 	"github.com/dalmia/calibrate-cli/internal/sdk/sdkinternal/utils"
 )
 
+// Source - Where the trace came from:
+//
+// - `api`: sent to `POST /traces`
+// - `chat`: a reply the agent gave on its chat link
+type Source string
+
+const (
+	SourceAPI  Source = "api"
+	SourceChat Source = "chat"
+)
+
+func (e Source) ToPointer() *Source {
+	return &e
+}
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *Source) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "api", "chat":
+			return true
+		}
+	}
+	return false
+}
+
 type TraceSummaryInputType string
 
 const (
@@ -150,6 +176,13 @@ type TraceSummary struct {
 	MetadataCount int64 `json:"metadata_count"`
 	// Your own tags for this turn, such as an environment or a release. Matched exactly when filtering, so keep the spelling stable
 	Labels []string `json:"labels"`
+	// Where the trace came from:
+	//
+	// - `api`: sent to `POST /traces`
+	// - `chat`: a reply the agent gave on its chat link
+	Source Source `json:"source"`
+	// The verdict and comment given on the trace, through the API or on the chat link
+	Feedback optionalnullable.OptionalNullable[TraceFeedback] `json:"feedback,omitzero"`
 	// What the agent was given for this turn. For a `general` agent, the standalone prompt as a string. For a `conversation` agent, the history up to the reported output, oldest turn first, in OpenAI chat format. Sent only with `include_content`
 	Input optionalnullable.OptionalNullable[TraceSummaryInput] `json:"input,omitzero"`
 	// What the agent produced for this turn. Sent only with `include_content`
@@ -259,6 +292,20 @@ func (t *TraceSummary) GetLabels() []string {
 		return []string{}
 	}
 	return t.Labels
+}
+
+func (t *TraceSummary) GetSource() Source {
+	if t == nil {
+		return Source("")
+	}
+	return t.Source
+}
+
+func (t *TraceSummary) GetFeedback() optionalnullable.OptionalNullable[TraceFeedback] {
+	if t == nil {
+		return nil
+	}
+	return t.Feedback
 }
 
 func (t *TraceSummary) GetInput() optionalnullable.OptionalNullable[TraceSummaryInput] {

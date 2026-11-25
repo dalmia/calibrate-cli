@@ -40,3 +40,4 @@ calibrate traces [flags]
 * [calibrate](calibrate.md)	 - Calibrate Public API: Programmatic API for CI/automation
 * [calibrate traces create](calibrate_traces_create.md)	 - Create trace
 * [calibrate traces list](calibrate_traces_list.md)	 - List traces
+* [calibrate traces set-feedback](calibrate_traces_set-feedback.md)	 - Set trace feedback

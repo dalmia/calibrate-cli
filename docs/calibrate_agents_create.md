@@ -24,7 +24,7 @@ calibrate agents create [flags]
                                         
                                         **`type=agent`**, built inside Calibrate:
                                         - `system_prompt`: the agent's instructions
-                                        - `llm.model`: `provider/model`, e.g. `openai/gpt-4.1` or `google/gemini-2.5-flash`
+                                        - `llm.model`: `provider/model`, e.g. `openai/gpt-4.1` or `google/gemini-3.5-flash-lite`
                                         - `stt.provider`: `deepgram`, `openai`, `cartesia`, `elevenlabs`, `google`, `sarvam`, or `smallest`
                                         - `tts.provider`: `cartesia`, `openai`, `google`, `elevenlabs`, `sarvam`, or `smallest`
                                         - `settings.agent_speaks_first`, `settings.max_assistant_turns`

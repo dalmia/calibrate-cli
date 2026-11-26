@@ -8,7 +8,7 @@ import (
 )
 
 type EvaluatorRunStartRequest struct {
-	// The evaluators to run. Each must be linked to the task
+	// The evaluators to run. Each must be linked to the task. Items that none of the chosen evaluators can judge are left out, and so are evaluators that can judge none of the chosen items, so `item_count` and `evaluator_count` can be lower than what you sent
 	Evaluators []EvaluatorRunRequestEntry `json:"evaluators"`
 	// Item IDs to run on. **Required when `select_all=false`**. Ignored when `select_all=true`
 	ItemIds []string `json:"item_ids,omitzero"`

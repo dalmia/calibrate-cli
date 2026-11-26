@@ -303,11 +303,11 @@ type ItemPayload struct {
 	Output optionalnullable.OptionalNullable[Output] `json:"output,omitzero"`
 	// The full conversation to judge. For `conversation` tasks
 	Transcript optionalnullable.OptionalNullable[[]ChatTurn] `json:"transcript,omitzero"`
-	// Tool calls the agent made in place of a text reply. With no text reply, sending this marks the item as a tool call for a person to judge. For `llm` and `llm-general` tasks
+	// Tool calls the agent made. With no text reply, sending at least one marks the item as a tool call, which only a tool-call evaluator scores. Omit when the agent made no tool calls. For `llm` and `llm-general` tasks
 	ToolCalls optionalnullable.OptionalNullable[[]ToolCall] `json:"tool_calls,omitzero"`
-	// Tool calls the agent should have made. Sending this marks the item as a tool call for a person to judge. For `llm` and `llm-general` tasks
+	// Tool calls the agent should have made, shown to the judge beside the calls the agent made. Omit to judge without expected calls. Sending this marks the item as a tool call, which only a tool-call evaluator scores. For `llm` and `llm-general` tasks
 	ExpectedToolCalls optionalnullable.OptionalNullable[[]ToolCall] `json:"expected_tool_calls,omitzero"`
-	// Tool calls the agent made. Sending this marks the item as a tool call for a person to judge. For `llm` and `llm-general` tasks
+	// Tool calls the agent made. Sending this marks the item as a tool call, which only a tool-call evaluator scores. Omit for an item judged on its text reply. For `llm` and `llm-general` tasks
 	ActualToolCalls optionalnullable.OptionalNullable[[]ToolCall] `json:"actual_tool_calls,omitzero"`
 	// Values for each evaluator's `{{variable}}` placeholders, keyed by evaluator ID. For `llm`, `llm-general` and `conversation` tasks
 	EvaluatorVariables optionalnullable.OptionalNullable[map[string]map[string]any] `json:"evaluator_variables,omitzero"`

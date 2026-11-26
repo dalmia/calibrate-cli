@@ -20,7 +20,7 @@ calibrate annotation-tasks create-evaluator-run [flags]
 
 ```
       --body string                 Request body as JSON (alternative to individual flags). Can also be provided via stdin.
-  -e, --evaluators string           The evaluators to run. Each must be linked to the task [required]
+  -e, --evaluators item_count       The evaluators to run. Each must be linked to the task. Items that none of the chosen evaluators can judge are left out, and so are evaluators that can judge none of the chosen items, so item_count and `evaluator_count` can be lower than what you sent [required]
   -h, --help                        help for create-evaluator-run
   -i, --item-ids select_all=false   Item IDs to run on. **Required when select_all=false**. Ignored when `select_all=true`
       --q payload.name              Case-insensitive substring filter on payload.name. Applies only when `select_all=true`

@@ -8,7 +8,7 @@ import (
 )
 
 type EvaluatorSetRequest struct {
-	// The full ordered set of evaluators the task should end up linked to, in display order. Missing ones are unlinked, new ones are linked, and the order sets their position. Send an empty list to unlink all. Each must be one you created or a built-in default
+	// The full ordered set of evaluators the task should end up linked to, in display order. Missing ones are unlinked, new ones are linked, and the order sets their position. Send an empty list to unlink all. A task holding tool-call items always keeps one tool-call evaluator, so Tool call correctness is linked back if none is left. Each must be one you created or a built-in default
 	EvaluatorIds []string `json:"evaluator_ids"`
 	// Which of `evaluator_ids` annotators may leave blank. Applied as a whole set, so an ID left out becomes required again. Optional evaluators do not hold a labelling job back from completing. Omit to leave every evaluator as it is
 	OptionalEvaluatorIds optionalnullable.OptionalNullable[[]string] `json:"optional_evaluator_ids,omitzero"`

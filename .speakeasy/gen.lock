@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
-id: aef635a9-5b5f-4595-b953-4699143a9801
+id: e2a21abf-0bfb-4415-97eb-e18a43fdf5f8
 management:
   docChecksum: dae1ca9640b70e393509049eab6b03f1
   docVersion: 0.1.0
   speakeasyVersion: 1.788.1
   generationVersion: 2.915.1
-  releaseVersion: 0.0.99
-  configChecksum: cbac693dc3635eb2d2ae9a74aa572781
+  releaseVersion: 0.0.100
+  configChecksum: 34c060f122094e63eb41cd2aca79326c
   repoURL: https://github.com/dalmia/calibrate-cli
   installationURL: https://github.com/dalmia/calibrate-cli
 persistentEdits:
-  generation_id: 51bc75dd-8013-41d2-84cf-6ac42319c58c
-  pristine_commit_hash: 94682325e9ef05230e573e781765e259db9e07cd
-  pristine_tree_hash: a72c59d64268901bbe9054a5da855da3781a7b24
+  generation_id: 40bd3edd-f5dd-4fa4-8e46-58282c5f8be2
+  pristine_commit_hash: 050e374a10ed627be63ae2ea8ddee9d29fb592a9
+  pristine_tree_hash: 8dbe1f554e93c0bef33547f0f02740aefbaa9357
 features:
   cli:
     additionalProperties: 0.0.0
@@ -299,8 +299,8 @@ trackedFiles:
     pristine_git_object: cf2de46994314496179e64ec9a1da7f9d9ff4a01
   internal/cli/version.go:
     id: 7b0665492f72
-    last_write_checksum: sha1:95639c6bb8b499f790976db28c25eb62a30d2e77
-    pristine_git_object: d299818f1c7b7003de6dcd20b11c97306f978726
+    last_write_checksum: sha1:fa44457d20b201bc4fc7093b1c5d35890691d400
+    pristine_git_object: a1a5a49da7459abfde47133223d860dc947c0338
   internal/cli/whoami.go:
     id: c1787f2298ec
     last_write_checksum: sha1:58afb45d777f297af4a64acf26a57c46e1b556db
@@ -1207,8 +1207,8 @@ trackedFiles:
     pristine_git_object: 159a87ec97aba99e4edd132f69652e123434303e
   internal/usage/schema.go:
     id: 0f40f4612437
-    last_write_checksum: sha1:7091a2e35bc12c596d8245abbad671ddce0dc95b
-    pristine_git_object: d9266d9cdd34a2a958dd5e1e18eee025430f017b
+    last_write_checksum: sha1:9e77f883b7c4495133d46fee9affdf977aa56b07
+    pristine_git_object: 06f349944085235dd569f3eb4775d6ae1380a294
   scripts/install.ps1:
     id: fee0853709e9
     last_write_checksum: sha1:d8884365d7cfb218aac394e16a7d214a6f56b585

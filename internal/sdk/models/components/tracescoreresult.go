@@ -4,6 +4,7 @@ package components
 
 import (
 	"github.com/dalmia/calibrate-cli/internal/sdk/optionalnullable"
+	"github.com/dalmia/calibrate-cli/internal/sdk/sdkinternal/utils"
 )
 
 type TraceScoreResultEvaluatorType string
@@ -89,8 +90,21 @@ type TraceScoreResult struct {
 	Reasoning optionalnullable.OptionalNullable[string] `json:"reasoning,omitzero"`
 	// ID of the evaluator version that produced this result
 	EvaluatorVersionID string `json:"evaluator_version_id"`
+	// The value each variable of the evaluator was given for this trace, by variable name. Kept as it was when the trace was scored, even if the agent later fills the variable from another part of the trace
+	VariableValues optionalnullable.OptionalNullable[map[string]string] `json:"variable_values,omitzero"`
 	// Whether this evaluator passed. A binary result passes on 1. A rating passes at the top of its scale
 	Passed bool `json:"passed"`
+}
+
+func (t TraceScoreResult) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(t, "", false)
+}
+
+func (t *TraceScoreResult) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &t, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (t *TraceScoreResult) GetEvaluatorUUID() string {
@@ -154,6 +168,13 @@ func (t *TraceScoreResult) GetEvaluatorVersionID() string {
 		return ""
 	}
 	return t.EvaluatorVersionID
+}
+
+func (t *TraceScoreResult) GetVariableValues() optionalnullable.OptionalNullable[map[string]string] {
+	if t == nil {
+		return nil
+	}
+	return t.VariableValues
 }
 
 func (t *TraceScoreResult) GetPassed() bool {

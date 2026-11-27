@@ -11,6 +11,7 @@ type TraceVariablesRequest struct {
 	// - `labels`: the trace's labels
 	// - `conversation_id`: the conversation ID sent with the trace
 	// - `message_id`: the message ID sent with the trace
+	// - `feedback.comment`: the comment given by the user along with the feedback for the trace
 	// - `metadata.<key>`: the metadata entry with that key
 	//
 	// Every variable needs a value. Replaces the stored choices, and an empty object clears them

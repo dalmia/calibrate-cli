@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
-id: f7840cbb-d490-41cc-9ab9-f949566a8da6
+id: a1e56244-7d3c-4240-8109-20bf9599d0ab
 management:
-  docChecksum: dc164c77caac04f407138cd217bab69d
+  docChecksum: 13d48c88b3bfdba884e77ab4f37f3caf
   docVersion: 0.1.0
   speakeasyVersion: 1.788.1
   generationVersion: 2.915.1
-  releaseVersion: 0.0.108
-  configChecksum: 3ecebb9e147ca163a3682d088f4c2280
+  releaseVersion: 0.0.109
+  configChecksum: 30b317d7bae8f251ff813ad8a5959982
   repoURL: https://github.com/dalmia/calibrate-cli
   installationURL: https://github.com/dalmia/calibrate-cli
 persistentEdits:
-  generation_id: 18830ff6-7930-43ce-b1ef-e434be61076b
-  pristine_commit_hash: cc53fc2b04d87cfb741d188e0dbae9e26f6ffafd
-  pristine_tree_hash: 9e83dbfaf4b863523e198635a7b9249c703536d6
+  generation_id: 3b480c8a-320a-4fb8-a803-2e9873cb433c
+  pristine_commit_hash: 24c8588613979c4c943906295b5b706e80668406
+  pristine_tree_hash: eb8b3f4448eacb31f55fdf57278cfb67192814d9
 features:
   cli:
     additionalProperties: 0.0.0
@@ -87,8 +87,8 @@ trackedFiles:
     pristine_git_object: e7d663cc3ba9ca482c68c8a100a784f235c60de4
   internal/cli/agents/updateevaluatortracevariables.go:
     id: 545fff9a1f3f
-    last_write_checksum: sha1:e28e8e01b94d710d5785345a2c80af6d6fd474b9
-    pristine_git_object: 0725a7760cb1e98aa0b7b182e2febfd940dd6d24
+    last_write_checksum: sha1:53edc0f4d3bca3bc31062e78e51962c3762302e4
+    pristine_git_object: 4eefe1e8abbe21fbfaa9ce68719fb5fddeaf9e6b
   internal/cli/agents/verifyconnection.go:
     id: e7ad03e737de
     last_write_checksum: sha1:e9f805d3960bc751715964986fdd856c555192bb
@@ -303,8 +303,8 @@ trackedFiles:
     pristine_git_object: cf2de46994314496179e64ec9a1da7f9d9ff4a01
   internal/cli/version.go:
     id: 7b0665492f72
-    last_write_checksum: sha1:868cffe199c3bba56f817cd1122694e29e1e3449
-    pristine_git_object: 62997c5754a98b1634e860143162a6f3c20a0aba
+    last_write_checksum: sha1:f21144e0e2310bf6e4b73bc57cfa41d968d37865
+    pristine_git_object: c514e968af524949d148bf2435ed283c37d7c5d1
   internal/cli/whoami.go:
     id: c1787f2298ec
     last_write_checksum: sha1:58afb45d777f297af4a64acf26a57c46e1b556db
@@ -871,8 +871,8 @@ trackedFiles:
     pristine_git_object: b058355afe225186457f9757c6466c55ba48c77c
   internal/sdk/models/components/tracescoreresult.go:
     id: 29df5f09effd
-    last_write_checksum: sha1:43f618dec97134d1dbee86333c97aa362b108866
-    pristine_git_object: 8ffb52f7d8a46d1750cd435b1d6feece31458b20
+    last_write_checksum: sha1:103635ee6832748142b61e9db58b40b8efd45ec3
+    pristine_git_object: 0b3db2d8d650493218664600a53d8e4fecb10c9a
   internal/sdk/models/components/tracesummary.go:
     id: 088f6e6e31a3
     last_write_checksum: sha1:5b9d6a18e1a59d8debd1a36060ad8a23c302404e
@@ -887,8 +887,8 @@ trackedFiles:
     pristine_git_object: afa58559e743cc4ce0607a05aa507dde0d790708
   internal/sdk/models/components/tracevariablesrequest.go:
     id: 63f5c618a975
-    last_write_checksum: sha1:d0bc923960f92301b83dc2d7926f0677e4541aca
-    pristine_git_object: 55f43bef05d58d91a0b491abb8a052f65f47ae0e
+    last_write_checksum: sha1:edef1c578cc41463bd9679bfa96516e5f7dd64aa
+    pristine_git_object: 182c67a08425c5cf7d28107c2dcaab371b97e00a
   internal/sdk/models/components/tracevariablesresponse.go:
     id: e76c85212b45
     last_write_checksum: sha1:589d271a817cb34fb9dc1a0c516c7481842ca1a4
@@ -1231,8 +1231,8 @@ trackedFiles:
     pristine_git_object: 159a87ec97aba99e4edd132f69652e123434303e
   internal/usage/schema.go:
     id: 0f40f4612437
-    last_write_checksum: sha1:b27ea8152b105ddb0d8ca3b0eddb08e07400d39b
-    pristine_git_object: 0db73161de9f0fd06b06aba7d75cdb4bbf250f85
+    last_write_checksum: sha1:55fba772252dedde48746d683e6e70d4848ea87c
+    pristine_git_object: 6590bfbd9044331136354bbdb92ac234c7315c7c
   scripts/install.ps1:
     id: fee0853709e9
     last_write_checksum: sha1:d8884365d7cfb218aac394e16a7d214a6f56b585
@@ -1785,7 +1785,7 @@ examples:
           offset: 0
       responses:
         "200":
-          application/json: {"items": [{"uuid": "f47ac10b-58cc-4372-a567-0e02b2c3d479", "agent_id": "<id>", "tool_names": ["<value 1>"], "tool_calls": [{"tool": "<value>"}], "turn_count": 34987, "tool_call_count": 3990, "metadata_count": 423826, "labels": ["<value 1>", "<value 2>"], "source": "api", "created_at": "1725534200209", "results": [{"evaluator_uuid": "f47ac10b-58cc-4372-a567-0e02b2c3d479", "name": "<value>", "output_type": "binary", "value": 5121.13, "evaluator_version_id": "f47ac10b-58cc-4372-a567-0e02b2c3d479", "passed": false}]}], "total": 451456, "offset": 0, "score_averages": [{"evaluator_uuid": "f47ac10b-58cc-4372-a567-0e02b2c3d479", "name": "<value>", "output_type": "rating", "traces_scored": 569803, "average": 5718.04}]}
+          application/json: {"items": [{"uuid": "f47ac10b-58cc-4372-a567-0e02b2c3d479", "agent_id": "<id>", "tool_names": ["<value 1>"], "tool_calls": [{"tool": "<value>"}], "turn_count": 34987, "tool_call_count": 3990, "metadata_count": 423826, "labels": ["<value 1>", "<value 2>"], "source": "api", "created_at": "1725534200209", "results": [{"evaluator_uuid": "f47ac10b-58cc-4372-a567-0e02b2c3d479", "name": "<value>", "output_type": "binary", "value": 5121.13, "evaluator_version_id": "f47ac10b-58cc-4372-a567-0e02b2c3d479", "variable_values": {"language": "Hindi"}, "passed": false}]}], "total": 451456, "offset": 0, "score_averages": [{"evaluator_uuid": "f47ac10b-58cc-4372-a567-0e02b2c3d479", "name": "<value>", "output_type": "rating", "traces_scored": 569803, "average": 5718.04}]}
         "422":
           application/json: {}
   set_trace_feedback_endpoint_traces__trace_uuid__feedback_put:

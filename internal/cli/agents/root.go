@@ -52,6 +52,10 @@ func InitAgentsRoot(parent *cobra.Command) error {
 		return err
 	}
 
+	if err := initUpdateEvaluatorTraceVariablesCmd(AgentsCmd); err != nil {
+		return err
+	}
+
 	parent.AddCommand(AgentsCmd)
 	return nil
 }

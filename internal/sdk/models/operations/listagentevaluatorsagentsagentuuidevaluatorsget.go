@@ -69,7 +69,7 @@ func (l *ListAgentEvaluatorsAgentsAgentUUIDEvaluatorsGetRequest) GetXAPIKey() op
 type ListAgentEvaluatorsAgentsAgentUUIDEvaluatorsGetResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// Successful Response
-	PaginatedResponseEvaluatorResponse *components.PaginatedResponseEvaluatorResponse
+	PaginatedResponseAgentEvaluatorResponse *components.PaginatedResponseAgentEvaluatorResponse
 }
 
 func (l ListAgentEvaluatorsAgentsAgentUUIDEvaluatorsGetResponse) MarshalJSON() ([]byte, error) {
@@ -90,9 +90,9 @@ func (l *ListAgentEvaluatorsAgentsAgentUUIDEvaluatorsGetResponse) GetHTTPMeta() 
 	return l.HTTPMeta
 }
 
-func (l *ListAgentEvaluatorsAgentsAgentUUIDEvaluatorsGetResponse) GetPaginatedResponseEvaluatorResponse() *components.PaginatedResponseEvaluatorResponse {
+func (l *ListAgentEvaluatorsAgentsAgentUUIDEvaluatorsGetResponse) GetPaginatedResponseAgentEvaluatorResponse() *components.PaginatedResponseAgentEvaluatorResponse {
 	if l == nil {
 		return nil
 	}
-	return l.PaginatedResponseEvaluatorResponse
+	return l.PaginatedResponseAgentEvaluatorResponse
 }

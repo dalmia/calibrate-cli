@@ -45,4 +45,5 @@ calibrate agents [flags]
 * [calibrate agents list-evaluators](calibrate_agents_list-evaluators.md)	 - List agent evaluators
 * [calibrate agents resolve](calibrate_agents_resolve.md)	 - Resolve agent names to IDs
 * [calibrate agents update](calibrate_agents_update.md)	 - Update agent
+* [calibrate agents update-evaluator-trace-variables](calibrate_agents_update-evaluator-trace-variables.md)	 - Update evaluator trace variables
 * [calibrate agents verify-connection](calibrate_agents_verify-connection.md)	 - Verify agent connection
